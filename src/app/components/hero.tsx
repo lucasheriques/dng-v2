@@ -105,7 +105,7 @@ export default function Hero() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl w-full">
           <AnimatedStat
-            value={1150}
+            value={1300}
             label="inscritos na newsletter"
             color="text-primary"
           />
@@ -115,7 +115,7 @@ export default function Hero() {
             color="text-yellow-400"
           />
           <AnimatedStat
-            value={20}
+            value={25}
             label="assinantes da mentoria"
             color="text-[#FF4B8C]"
           />
