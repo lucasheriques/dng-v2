@@ -13,7 +13,7 @@ export default function NotFound() {
         <Image
           src={Image404}
           alt="Cosmic cat in a crescent bowl"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover pointer-events-none select-none"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/50 to-slate-950/90" />
       </div>
