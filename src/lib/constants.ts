@@ -1,5 +1,6 @@
 import {
   SiDiscord,
+  SiInstagram,
   SiLinkedin,
   SiX,
   SiYoutube,
@@ -8,7 +9,7 @@ import {
   Calendar,
   FileText,
   History as HistoryIcon,
-  Newspaper,
+  Mail,
   Target,
   UserPlus,
 } from "lucide-react";
@@ -41,7 +42,7 @@ export const SOCIAL_LINKS = {
   newsletter: {
     title: "Newsletter",
     href: SOCIALS.newsletter,
-    icon: Newspaper,
+    icon: Mail,
   },
   discord: {
     title: "Discord",
@@ -67,6 +68,11 @@ export const SOCIAL_LINKS = {
     title: "X/Twitter",
     href: SOCIALS.twitter,
     icon: SiX,
+  },
+  instagram: {
+    title: "Instagram",
+    href: SOCIALS.instagram,
+    icon: SiInstagram,
   },
 };
 

@@ -1,6 +1,221 @@
 {
   "posts": [
     {
+      "id": 152466695,
+      "uuid": "d6d9a543-6c12-4c1c-82ed-e1447e074e60",
+      "editor_v2": false,
+      "publication_id": 2617704,
+      "type": "newsletter",
+      "post_date": "2024-12-02T21:24:05.440Z",
+      "draft_created_at": "2024-12-02T21:06:48.660Z",
+      "email_sent_at": "2024-12-02T21:24:05.559Z",
+      "is_published": true,
+      "title": "Processos seletivos e ofertas que recebi na gringa desde 2020",
+      "draft_title": "Processos seletivos e ofertas que recebi na gringa desde 2020",
+      "draft_updated_at": "2024-12-02T21:24:04.211Z",
+      "draft_video_upload_id": null,
+      "audience": "only_paid",
+      "slug": "processos-seletivos-e-ofertas-de-vagas-na-gringa",
+      "should_send_email": true,
+      "write_comment_permissions": "only_paid",
+      "default_comment_sort": null,
+      "section_id": null,
+      "cover_image": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1933927b-c3f7-475d-9fde-83ab50ec07bb_2610x2616.png",
+      "should_send_free_preview": true,
+      "video_upload_id": null,
+      "is_metered": false,
+      "section_slug": null,
+      "section_name": null,
+      "draft_section_name": null,
+      "is_section_pinned": false,
+      "reactions": { "❤": 2 },
+      "reaction": null,
+      "top_exclusions": [],
+      "pins": [],
+      "draftBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 2,
+      "comment_count": 2,
+      "child_comment_count": 1,
+      "bylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "stats": {
+        "views": 903,
+        "opens": 865,
+        "opened": 557,
+        "open_rate": 0.436179,
+        "clicked": 16,
+        "clicks": 24,
+        "sent": 1277,
+        "delivered": 1242,
+        "downloads": 0,
+        "downloads_day7": 0,
+        "downloads_day30": 0,
+        "downloads_day90": 0,
+        "podcast_preview_downloads": 0,
+        "podcast_preview_downloads_day30": 0,
+        "video_viewers": 0,
+        "video_views": 0,
+        "video_minutes_watched": 0,
+        "signups_within_1_day": 4,
+        "disables_within_1_day": 0,
+        "subscriptions_within_1_day": 3,
+        "unsubscribes_within_1_day": 0,
+        "signups": 0,
+        "subscribes": 2,
+        "shares": 0,
+        "estimated_value": 118.44903076802707,
+        "post_id": 152466695,
+        "first_published_at": 1733174645671,
+        "audience": 0,
+        "queued": 1277,
+        "dropped": 1,
+        "click_through_rate": 0.028725,
+        "preview_downloads": 0,
+        "founding_subscribes": 0,
+        "annual_subscribes": 0,
+        "monthly_subscribes": 0,
+        "free_trial_subscribes": 2,
+        "free_to_paid_upgrades": 2,
+        "unsubscribes": 0,
+        "comments": 2,
+        "likes": 3,
+        "restacks": 0,
+        "subscribers_finished_post": 27,
+        "engaged": 41,
+        "engagement_rate": 0.073609,
+        "md5": 0,
+        "data_updated_at": 1733239383181
+      }
+    },
+    {
+      "id": 152051773,
+      "uuid": "00182d5b-8bfe-4933-8236-228a6c99cbbe",
+      "editor_v2": false,
+      "publication_id": 2617704,
+      "type": "newsletter",
+      "post_date": "2024-11-25T13:01:06.113Z",
+      "draft_created_at": "2024-11-23T06:16:20.418Z",
+      "email_sent_at": "2024-11-25T13:01:06.183Z",
+      "is_published": true,
+      "title": "Como fazer um excelente onboarding em empresas de tecnologia",
+      "draft_title": "Como fazer um excelente onboarding em empresas de tecnologia",
+      "draft_updated_at": "2024-12-02T13:51:19.765Z",
+      "draft_video_upload_id": null,
+      "audience": "everyone",
+      "slug": "como-fazer-um-excelente-onboarding",
+      "should_send_email": false,
+      "write_comment_permissions": "everyone",
+      "default_comment_sort": null,
+      "section_id": null,
+      "cover_image": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F944b2361-4d1b-492b-a958-3d057d2e8c76_1299x940.png",
+      "should_send_free_preview": false,
+      "video_upload_id": null,
+      "is_metered": false,
+      "section_slug": null,
+      "section_name": null,
+      "draft_section_name": null,
+      "is_section_pinned": false,
+      "reactions": { "❤": 7 },
+      "reaction": null,
+      "top_exclusions": [],
+      "pins": [],
+      "draftBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 7,
+      "comment_count": 0,
+      "child_comment_count": 0,
+      "bylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "stats": {
+        "views": 1131,
+        "opens": 1052,
+        "opened": 512,
+        "open_rate": 0.420707,
+        "clicked": 23,
+        "clicks": 56,
+        "sent": 1217,
+        "delivered": 1188,
+        "downloads": 0,
+        "downloads_day7": 0,
+        "downloads_day30": 0,
+        "downloads_day90": 0,
+        "podcast_preview_downloads": 0,
+        "podcast_preview_downloads_day30": 0,
+        "video_viewers": 0,
+        "video_views": 0,
+        "video_minutes_watched": 0,
+        "signups_within_1_day": 10,
+        "disables_within_1_day": 6,
+        "subscriptions_within_1_day": 0,
+        "unsubscribes_within_1_day": 0,
+        "signups": 0,
+        "subscribes": 0,
+        "shares": 4,
+        "estimated_value": 0,
+        "click_through_rate": 0.044922,
+        "engagement_rate": 0.068359
+      }
+    },
+    {
       "id": 151940882,
       "uuid": "180ede29-e13d-41e1-a37a-d2132a55697e",
       "editor_v2": false,
@@ -28,21 +243,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 2 },
+      "reactions": { "❤": 7 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -54,7 +258,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 2,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 7,
       "comment_count": 0,
       "child_comment_count": 0,
       "bylines": [
@@ -69,14 +284,14 @@
         }
       ],
       "stats": {
-        "views": 642,
-        "opens": 636,
-        "opened": 419,
-        "open_rate": 0.358733,
+        "views": 1032,
+        "opens": 989,
+        "opened": 545,
+        "open_rate": 0.46661,
         "clicked": 0,
         "clicks": 0,
         "sent": 1168,
-        "delivered": 1135,
+        "delivered": 1138,
         "downloads": 0,
         "downloads_day7": 0,
         "downloads_day30": 0,
@@ -86,35 +301,16 @@
         "video_viewers": 0,
         "video_views": 0,
         "video_minutes_watched": 0,
-        "signups_within_1_day": 4,
-        "disables_within_1_day": 0,
+        "signups_within_1_day": 13,
+        "disables_within_1_day": 3,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 0,
+        "signups": 1,
         "subscribes": 0,
-        "shares": 0,
+        "shares": 1,
         "estimated_value": 0,
-        "post_id": 151940882,
-        "first_published_at": 1732133731885,
-        "audience": 0,
-        "queued": 1168,
-        "dropped": 1,
         "click_through_rate": 0,
-        "preview_downloads": 0,
-        "founding_subscribes": 0,
-        "annual_subscribes": 0,
-        "monthly_subscribes": 0,
-        "free_trial_subscribes": 0,
-        "free_to_paid_upgrades": 0,
-        "unsubscribes": 0,
-        "comments": 0,
-        "likes": 2,
-        "restacks": 0,
-        "subscribers_finished_post": 5,
-        "engaged": 6,
-        "engagement_rate": 0.01432,
-        "md5": 0,
-        "data_updated_at": 1732189766214
+        "engagement_rate": 0.031193
       }
     },
     {
@@ -145,21 +341,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 11 },
+      "reactions": { "❤": 13 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -171,7 +356,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 11,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 13,
       "comment_count": 0,
       "child_comment_count": 0,
       "bylines": [
@@ -186,12 +382,12 @@
         }
       ],
       "stats": {
-        "views": 1020,
-        "opens": 848,
-        "opened": 426,
-        "open_rate": 0.417238,
-        "clicked": 47,
-        "clicks": 122,
+        "views": 1297,
+        "opens": 900,
+        "opened": 430,
+        "open_rate": 0.421156,
+        "clicked": 50,
+        "clicks": 128,
         "sent": 1021,
         "delivered": 1000,
         "downloads": 0,
@@ -207,12 +403,12 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 3,
+        "signups": 10,
         "subscribes": 0,
-        "shares": 4,
+        "shares": 5,
         "estimated_value": 0,
-        "click_through_rate": 0.110329,
-        "engagement_rate": 0.13615
+        "click_through_rate": 0.116279,
+        "engagement_rate": 0.144186
       }
     },
     {
@@ -243,21 +439,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 5 },
+      "reactions": { "❤": 6 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -269,9 +454,20 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 5,
-      "comment_count": 0,
-      "child_comment_count": 0,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 6,
+      "comment_count": 5,
+      "child_comment_count": 1,
       "bylines": [
         {
           "id": 27397137,
@@ -284,12 +480,12 @@
         }
       ],
       "stats": {
-        "views": 909,
-        "opens": 813,
-        "opened": 388,
-        "open_rate": 0.455934,
-        "clicked": 11,
-        "clicks": 15,
+        "views": 987,
+        "opens": 845,
+        "opened": 392,
+        "open_rate": 0.460635,
+        "clicked": 14,
+        "clicks": 18,
         "sent": 851,
         "delivered": 830,
         "downloads": 0,
@@ -305,12 +501,12 @@
         "disables_within_1_day": 4,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 2,
+        "signups": 3,
         "subscribes": 0,
         "shares": 1,
         "estimated_value": 0,
-        "click_through_rate": 0.028351,
-        "engagement_rate": 0.043814
+        "click_through_rate": 0.035714,
+        "engagement_rate": 0.058673
       }
     },
     {
@@ -325,7 +521,7 @@
       "is_published": true,
       "title": "🎁 Recursos para assinantes pagos",
       "draft_title": "🎁 Recursos para assinantes pagos",
-      "draft_updated_at": "2024-10-31T19:02:39.164Z",
+      "draft_updated_at": "2024-12-02T21:54:35.022Z",
       "draft_video_upload_id": null,
       "audience": "only_paid",
       "slug": "recursos-para-assinantes-pagos",
@@ -345,7 +541,7 @@
       "reaction": null,
       "top_exclusions": [2617704],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -356,7 +552,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -382,7 +578,7 @@
         }
       ],
       "stats": {
-        "views": 53,
+        "views": 63,
         "opens": 0,
         "opened": 0,
         "open_rate": 0,
@@ -404,9 +600,9 @@
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
         "signups": 1,
-        "subscribes": 0,
+        "subscribes": 1,
         "shares": 0,
-        "estimated_value": 0,
+        "estimated_value": 59.088009185319954,
         "click_through_rate": 0,
         "engagement_rate": 0
       }
@@ -443,7 +639,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -454,7 +650,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -480,12 +676,12 @@
         }
       ],
       "stats": {
-        "views": 771,
-        "opens": 610,
+        "views": 811,
+        "opens": 611,
         "opened": 317,
         "open_rate": 0.47741,
-        "clicked": 9,
-        "clicks": 14,
+        "clicked": 10,
+        "clicks": 15,
         "sent": 664,
         "delivered": 645,
         "downloads": 0,
@@ -501,12 +697,12 @@
         "disables_within_1_day": 1,
         "subscriptions_within_1_day": 1,
         "unsubscribes_within_1_day": 1,
-        "signups": 2,
-        "subscribes": 0,
+        "signups": 3,
+        "subscribes": 1,
         "shares": 2,
-        "estimated_value": 0,
-        "click_through_rate": 0.028391,
-        "engagement_rate": 0.044164
+        "estimated_value": 51.54247315266346,
+        "click_through_rate": 0.031546,
+        "engagement_rate": 0.047319
       }
     },
     {
@@ -541,7 +737,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -552,7 +748,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -578,7 +774,7 @@
         }
       ],
       "stats": {
-        "views": 1024,
+        "views": 1041,
         "opens": 586,
         "opened": 282,
         "open_rate": 0.444795,
@@ -635,21 +831,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 10 },
+      "reactions": { "❤": 11 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -661,7 +846,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 10,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 11,
       "comment_count": 4,
       "child_comment_count": 2,
       "bylines": [
@@ -676,12 +872,12 @@
         }
       ],
       "stats": {
-        "views": 2442,
+        "views": 2524,
         "opens": 1179,
         "opened": 302,
         "open_rate": 0.509275,
-        "clicked": 36,
-        "clicks": 67,
+        "clicked": 39,
+        "clicks": 71,
         "sent": 593,
         "delivered": 577,
         "downloads": 0,
@@ -697,12 +893,12 @@
         "disables_within_1_day": 5,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 18,
+        "signups": 19,
         "subscribes": 2,
         "shares": 3,
-        "estimated_value": 104.445341654609,
-        "click_through_rate": 0.119205,
-        "engagement_rate": 0.139073
+        "estimated_value": 104.44534165460884,
+        "click_through_rate": 0.129139,
+        "engagement_rate": 0.142384
       }
     },
     {
@@ -737,7 +933,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -748,7 +944,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -774,12 +970,12 @@
         }
       ],
       "stats": {
-        "views": 443,
+        "views": 461,
         "opens": 339,
         "opened": 211,
         "open_rate": 0.366319,
-        "clicked": 4,
-        "clicks": 4,
+        "clicked": 5,
+        "clicks": 5,
         "sent": 576,
         "delivered": 561,
         "downloads": 0,
@@ -798,9 +994,9 @@
         "signups": 1,
         "subscribes": 1,
         "shares": 1,
-        "estimated_value": 61.9592381431293,
-        "click_through_rate": 0.018957,
-        "engagement_rate": 0.109005
+        "estimated_value": 61.959238143129284,
+        "click_through_rate": 0.023697,
+        "engagement_rate": 0.113744
       }
     },
     {
@@ -835,7 +1031,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -846,7 +1042,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -872,7 +1068,7 @@
         }
       ],
       "stats": {
-        "views": 1908,
+        "views": 1992,
         "opens": 574,
         "opened": 293,
         "open_rate": 0.542593,
@@ -896,7 +1092,7 @@
         "signups": 12,
         "subscribes": 2,
         "shares": 5,
-        "estimated_value": 87.7722548541102,
+        "estimated_value": 87.77225485411017,
         "click_through_rate": 0.191126,
         "engagement_rate": 0.197952
       }
@@ -933,7 +1129,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -944,7 +1140,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -970,12 +1166,12 @@
         }
       ],
       "stats": {
-        "views": 365,
+        "views": 376,
         "opens": 277,
         "opened": 150,
         "open_rate": 0.4,
-        "clicked": 13,
-        "clicks": 27,
+        "clicked": 14,
+        "clicks": 28,
         "sent": 375,
         "delivered": 367,
         "downloads": 0,
@@ -994,9 +1190,9 @@
         "signups": 0,
         "subscribes": 1,
         "shares": 0,
-        "estimated_value": 55.880282083664,
-        "click_through_rate": 0.086667,
-        "engagement_rate": 0.106667
+        "estimated_value": 55.88028208366396,
+        "click_through_rate": 0.093333,
+        "engagement_rate": 0.113333
       }
     },
     {
@@ -1031,7 +1227,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1042,7 +1238,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1068,7 +1264,7 @@
         }
       ],
       "stats": {
-        "views": 531,
+        "views": 541,
         "opens": 298,
         "opened": 144,
         "open_rate": 0.396694,
@@ -1129,7 +1325,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1140,7 +1336,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1166,12 +1362,12 @@
         }
       ],
       "stats": {
-        "views": 953,
+        "views": 1017,
         "opens": 288,
         "opened": 152,
         "open_rate": 0.460606,
-        "clicked": 38,
-        "clicks": 58,
+        "clicked": 41,
+        "clicks": 62,
         "sent": 330,
         "delivered": 322,
         "downloads": 0,
@@ -1187,12 +1383,12 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 1,
         "unsubscribes_within_1_day": 0,
-        "signups": 6,
-        "subscribes": 4,
+        "signups": 7,
+        "subscribes": 5,
         "shares": 3,
-        "estimated_value": 228.815692619443,
-        "click_through_rate": 0.25,
-        "engagement_rate": 0.217105
+        "estimated_value": 289.2308905103665,
+        "click_through_rate": 0.269737,
+        "engagement_rate": 0.230263
       }
     },
     {
@@ -1223,21 +1419,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 12 },
+      "reactions": { "❤": 13 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -1249,7 +1434,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 12,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 13,
       "comment_count": 5,
       "child_comment_count": 2,
       "bylines": [
@@ -1264,12 +1460,12 @@
         }
       ],
       "stats": {
-        "views": 1447,
+        "views": 1497,
         "opens": 265,
         "opened": 138,
         "open_rate": 0.424615,
-        "clicked": 23,
-        "clicks": 34,
+        "clicked": 24,
+        "clicks": 35,
         "sent": 325,
         "delivered": 314,
         "downloads": 0,
@@ -1285,11 +1481,11 @@
         "disables_within_1_day": 1,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 11,
+        "signups": 12,
         "subscribes": 1,
         "shares": 11,
-        "estimated_value": 36.6786538897159,
-        "click_through_rate": 0.166667,
+        "estimated_value": 36.678653889715946,
+        "click_through_rate": 0.173913,
         "engagement_rate": 0.130435
       }
     },
@@ -1321,21 +1517,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 21 },
+      "reactions": { "❤": 22 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -1347,7 +1532,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 21,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 22,
       "comment_count": 0,
       "child_comment_count": 0,
       "bylines": [
@@ -1362,12 +1558,12 @@
         }
       ],
       "stats": {
-        "views": 4278,
+        "views": 4444,
         "opens": 192,
         "opened": 106,
         "open_rate": 0.445378,
-        "clicked": 25,
-        "clicks": 38,
+        "clicked": 27,
+        "clicks": 40,
         "sent": 238,
         "delivered": 228,
         "downloads": 0,
@@ -1383,11 +1579,11 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 98,
+        "signups": 101,
         "subscribes": 0,
         "shares": 19,
         "estimated_value": 0,
-        "click_through_rate": 0.235849,
+        "click_through_rate": 0.254717,
         "engagement_rate": 0.150943
       }
     },
@@ -1419,21 +1615,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 9 },
+      "reactions": { "❤": 10 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -1445,7 +1630,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 9,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 10,
       "comment_count": 2,
       "child_comment_count": 1,
       "bylines": [
@@ -1460,12 +1656,12 @@
         }
       ],
       "stats": {
-        "views": 1450,
+        "views": 1795,
         "opens": 200,
         "opened": 91,
         "open_rate": 0.47644,
-        "clicked": 23,
-        "clicks": 49,
+        "clicked": 25,
+        "clicks": 55,
         "sent": 191,
         "delivered": 188,
         "downloads": 0,
@@ -1481,11 +1677,11 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 26,
+        "signups": 28,
         "subscribes": 1,
-        "shares": 1,
-        "estimated_value": 21.8850306390429,
-        "click_through_rate": 0.252747,
+        "shares": 4,
+        "estimated_value": 21.885030639042892,
+        "click_through_rate": 0.274725,
         "engagement_rate": 0.197802
       }
     },
@@ -1517,21 +1713,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 3 },
+      "reactions": { "❤": 4 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -1543,7 +1728,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 3,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 4,
       "comment_count": 0,
       "child_comment_count": 0,
       "bylines": [
@@ -1558,7 +1754,7 @@
         }
       ],
       "stats": {
-        "views": 263,
+        "views": 272,
         "opens": 124,
         "opened": 79,
         "open_rate": 0.420213,
@@ -1584,7 +1780,7 @@
         "shares": 1,
         "estimated_value": 0,
         "click_through_rate": 0.088608,
-        "engagement_rate": 0.088608
+        "engagement_rate": 0.101266
       }
     },
     {
@@ -1619,7 +1815,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1630,7 +1826,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1656,7 +1852,7 @@
         }
       ],
       "stats": {
-        "views": 333,
+        "views": 351,
         "opens": 167,
         "opened": 67,
         "open_rate": 0.385057,
@@ -1697,7 +1893,7 @@
       "is_published": true,
       "title": "Como funciona a mentoria do Dev na Gringa",
       "draft_title": "Como funciona a mentoria do Dev na Gringa",
-      "draft_updated_at": "2024-11-01T18:54:53.576Z",
+      "draft_updated_at": "2024-11-23T06:37:54.783Z",
       "draft_video_upload_id": null,
       "audience": "only_paid",
       "slug": "como-funciona-a-mentoria",
@@ -1717,7 +1913,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1728,7 +1924,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1754,7 +1950,7 @@
         }
       ],
       "stats": {
-        "views": 248,
+        "views": 264,
         "opens": 95,
         "opened": 67,
         "open_rate": 0.458904,
@@ -1778,7 +1974,7 @@
         "signups": 0,
         "subscribes": 3,
         "shares": 0,
-        "estimated_value": 123.729419622492,
+        "estimated_value": 123.72941962249229,
         "click_through_rate": 0.238806,
         "engagement_rate": 0.208955
       }
@@ -1815,7 +2011,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1826,7 +2022,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1852,7 +2048,7 @@
         }
       ],
       "stats": {
-        "views": 227,
+        "views": 229,
         "opens": 142,
         "opened": 51,
         "open_rate": 0.364286,
@@ -1913,7 +2109,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1924,7 +2120,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -1950,12 +2146,12 @@
         }
       ],
       "stats": {
-        "views": 1033,
+        "views": 1110,
         "opens": 173,
         "opened": 56,
         "open_rate": 0.440945,
-        "clicked": 36,
-        "clicks": 79,
+        "clicked": 38,
+        "clicks": 82,
         "sent": 127,
         "delivered": 123,
         "downloads": 0,
@@ -1971,11 +2167,11 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 22,
+        "signups": 23,
         "subscribes": 0,
         "shares": 4,
         "estimated_value": 0,
-        "click_through_rate": 0.642857,
+        "click_through_rate": 0.678571,
         "engagement_rate": 0.196429
       }
     },
@@ -2011,7 +2207,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2022,7 +2218,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2048,12 +2244,12 @@
         }
       ],
       "stats": {
-        "views": 194,
+        "views": 196,
         "opens": 86,
         "opened": 58,
         "open_rate": 0.47541,
-        "clicked": 5,
-        "clicks": 15,
+        "clicked": 6,
+        "clicks": 19,
         "sent": 122,
         "delivered": 120,
         "downloads": 0,
@@ -2073,7 +2269,7 @@
         "subscribes": 0,
         "shares": 0,
         "estimated_value": 0,
-        "click_through_rate": 0.086207,
+        "click_through_rate": 0.103448,
         "engagement_rate": 0.086207
       }
     },
@@ -2109,7 +2305,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2120,7 +2316,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2146,12 +2342,12 @@
         }
       ],
       "stats": {
-        "views": 203,
+        "views": 234,
         "opens": 101,
         "opened": 55,
         "open_rate": 0.458333,
-        "clicked": 5,
-        "clicks": 8,
+        "clicked": 6,
+        "clicks": 10,
         "sent": 120,
         "delivered": 117,
         "downloads": 0,
@@ -2167,11 +2363,11 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 4,
+        "signups": 6,
         "subscribes": 0,
         "shares": 0,
         "estimated_value": 0,
-        "click_through_rate": 0.090909,
+        "click_through_rate": 0.109091,
         "engagement_rate": 0.109091
       }
     },
@@ -2207,7 +2403,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2218,7 +2414,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2244,7 +2440,7 @@
         }
       ],
       "stats": {
-        "views": 285,
+        "views": 291,
         "opens": 151,
         "opened": 45,
         "open_rate": 0.424528,
@@ -2268,7 +2464,7 @@
         "signups": 4,
         "subscribes": 1,
         "shares": 0,
-        "estimated_value": 21.4577079305543,
+        "estimated_value": 21.45770793055427,
         "click_through_rate": 0.222222,
         "engagement_rate": 0.2
       }
@@ -2301,21 +2497,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 13 },
+      "reactions": { "❤": 14 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -2327,7 +2512,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 13,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 14,
       "comment_count": 0,
       "child_comment_count": 0,
       "bylines": [
@@ -2342,7 +2538,7 @@
         }
       ],
       "stats": {
-        "views": 1689,
+        "views": 1941,
         "opens": 404,
         "opened": 39,
         "open_rate": 0.464286,
@@ -2363,12 +2559,12 @@
         "disables_within_1_day": 1,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 40,
+        "signups": 44,
         "subscribes": 1,
         "shares": 4,
-        "estimated_value": 43.8159751063611,
+        "estimated_value": 43.81597510636108,
         "click_through_rate": 0.307692,
-        "engagement_rate": 0.153846
+        "engagement_rate": 0.179487
       }
     },
     {
@@ -2403,7 +2599,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2414,7 +2610,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2440,7 +2636,7 @@
         }
       ],
       "stats": {
-        "views": 211,
+        "views": 221,
         "opens": 60,
         "opened": 36,
         "open_rate": 0.473684,
@@ -2501,7 +2697,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2512,7 +2708,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2538,7 +2734,7 @@
         }
       ],
       "stats": {
-        "views": 451,
+        "views": 610,
         "opens": 41,
         "opened": 27,
         "open_rate": 0.45,
@@ -2559,7 +2755,7 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 22,
+        "signups": 25,
         "subscribes": 0,
         "shares": 4,
         "estimated_value": 0,
@@ -2599,7 +2795,7 @@
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
+      "draftBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2610,7 +2806,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "draftBylines": [
+      "publishedBylines": [
         {
           "id": 27397137,
           "name": "Lucas Faria",
@@ -2636,7 +2832,7 @@
         }
       ],
       "stats": {
-        "views": 247,
+        "views": 249,
         "opens": 41,
         "opened": 20,
         "open_rate": 0.425532,
@@ -2677,7 +2873,7 @@
       "is_published": true,
       "title": "Dev na Gringa: Processos Seletivos e Onde Estudar Para Eles",
       "draft_title": "Dev na Gringa: Processos Seletivos e Onde Estudar Para Eles",
-      "draft_updated_at": "2024-06-26T16:14:43.253Z",
+      "draft_updated_at": "2024-12-02T13:36:10.656Z",
       "draft_video_upload_id": null,
       "audience": "everyone",
       "slug": "dev-na-gringa-processos-seletivos",
@@ -2693,21 +2889,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 2 },
+      "reactions": { "❤": 3 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -2719,7 +2904,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 2,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 3,
       "comment_count": 0,
       "child_comment_count": 0,
       "bylines": [
@@ -2734,12 +2930,12 @@
         }
       ],
       "stats": {
-        "views": 738,
+        "views": 788,
         "opens": 22,
         "opened": 12,
         "open_rate": 0.428571,
-        "clicked": 11,
-        "clicks": 16,
+        "clicked": 12,
+        "clicks": 17,
         "sent": 28,
         "delivered": 27,
         "downloads": 0,
@@ -2755,11 +2951,11 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 12,
+        "signups": 13,
         "subscribes": 0,
         "shares": 3,
         "estimated_value": 0,
-        "click_through_rate": 0.916667,
+        "click_through_rate": 1,
         "engagement_rate": 0.25
       }
     },
@@ -2791,21 +2987,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 3 },
+      "reactions": { "❤": 4 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -2817,7 +3002,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 3,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 4,
       "comment_count": 0,
       "child_comment_count": 0,
       "bylines": [
@@ -2832,12 +3028,12 @@
         }
       ],
       "stats": {
-        "views": 693,
+        "views": 705,
         "opens": 16,
         "opened": 11,
         "open_rate": 0.52381,
-        "clicked": 8,
-        "clicks": 10,
+        "clicked": 9,
+        "clicks": 11,
         "sent": 21,
         "delivered": 20,
         "downloads": 0,
@@ -2853,11 +3049,11 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 19,
+        "signups": 20,
         "subscribes": 0,
         "shares": 0,
         "estimated_value": 0,
-        "click_through_rate": 0.727273,
+        "click_through_rate": 0.818182,
         "engagement_rate": 0.454545
       }
     },
@@ -2889,21 +3085,10 @@
       "section_name": null,
       "draft_section_name": null,
       "is_section_pinned": false,
-      "reactions": { "❤": 10 },
+      "reactions": { "❤": 11 },
       "reaction": null,
       "top_exclusions": [],
       "pins": [],
-      "publishedBylines": [
-        {
-          "id": 27397137,
-          "name": "Lucas Faria",
-          "handle": "lucasfaria",
-          "previous_name": "Lucas",
-          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
-          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
-          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
-        }
-      ],
       "draftBylines": [
         {
           "id": 27397137,
@@ -2915,7 +3100,18 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 10,
+      "publishedBylines": [
+        {
+          "id": 27397137,
+          "name": "Lucas Faria",
+          "handle": "lucasfaria",
+          "previous_name": "Lucas",
+          "photo_url": "https://substack-post-media.s3.amazonaws.com/public/images/ee3e99b9-18d1-4b16-b25a-39deeaffb461_1553x1553.jpeg",
+          "bio": "Software Engineer at Brex. Documenting my journey and the lessons learned along the way.",
+          "profile_set_up_at": "2023-01-21T00:28:30.511Z"
+        }
+      ],
+      "reaction_count": 11,
       "comment_count": 0,
       "child_comment_count": 0,
       "bylines": [
@@ -2930,7 +3126,7 @@
         }
       ],
       "stats": {
-        "views": 1902,
+        "views": 1953,
         "opens": 4,
         "opened": 1,
         "open_rate": 1,
@@ -2951,10 +3147,10 @@
         "disables_within_1_day": 0,
         "subscriptions_within_1_day": 0,
         "unsubscribes_within_1_day": 0,
-        "signups": 51,
+        "signups": 53,
         "subscribes": 2,
         "shares": 5,
-        "estimated_value": 65.4860204942711,
+        "estimated_value": 65.48602049427114,
         "click_through_rate": 16,
         "engagement_rate": 1
       }
@@ -2962,5 +3158,5 @@
   ],
   "offset": 0,
   "limit": 40,
-  "total": 30
+  "total": 32
 }

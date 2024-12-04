@@ -62,7 +62,7 @@ const recentPosts = [
 
 export default function Header() {
   return (
-    <Popover className="z-50 bg-slate-950/75 backdrop-blur-md shadow-lg absolute w-full motion-preset-slide-down border-b border-slate-800/20">
+    <Popover className="z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg absolute w-full motion-preset-slide-down border-b border-slate-800/20">
       {({ close }) => (
         <>
           <div className="py-4 mx-auto max-w-7xl w-full px-4 relative flex items-center justify-between">
@@ -74,9 +74,13 @@ export default function Header() {
             </Link>
             <div className="flex items-center gap-x-1 sm:gap-x-2">
               <Search />
-              <Button variant="link" asChild className="text-white px-0">
+              <Button
+                variant="link"
+                asChild
+                className="text-white px-0 text-base"
+              >
                 <PopoverButton className="focus:outline focus:outline-primary focus:outline-2 focus:outline-offset-2">
-                  Conteúdos e links
+                  Menu
                   <ChevronDown aria-hidden="true" className="h-5 w-5" />
                 </PopoverButton>
               </Button>

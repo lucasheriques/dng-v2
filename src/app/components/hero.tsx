@@ -83,19 +83,13 @@ export default function Hero() {
         transition={{ duration: 0.3, delay: 2.1 }} // Delayed to appear after text
       >
         <Button size="xl" asChild className="min-w-80">
-          <Link
-            href={`${SOCIALS.newsletter}/subscribe?ref=nagringa.dev`}
-            className="focus:outline-dotted"
-          >
+          <Link href={`${SOCIALS.newsletter}/subscribe?ref=nagringa.dev`}>
             Participe da mentoria
             <Rocket className="ml-2 h-5 w-5 group-hover:motion-translate-x-in-[-134%] group-hover:motion-translate-y-in-[164%] group-hover:h-8 group-hover:w-8" />
           </Link>
         </Button>
         <Button variant="outline" size="xl" asChild className="min-w-80">
-          <Link
-            href={`${SOCIALS.newsletter}?ref=nagringa.dev`}
-            className="focus:outline-dotted"
-          >
+          <Link href={`${SOCIALS.newsletter}?ref=nagringa.dev`}>
             Veja minha newsletter
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Link>

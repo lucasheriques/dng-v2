@@ -45,17 +45,13 @@ export function Footer() {
             <br />
             <a
               href="https://newsletter.nagringa.dev/about#§beneficios-para-assinantes-pagos"
-              className="text-accent-secondary font-semibold hover:text-[#5CFFE1]/90 transition-colors"
+              className="text-accent-secondary font-semibold hover:text-[#5CFFE1]/90"
             >
               Confira todos os benefícios aqui.
             </a>
           </p>
           <div className="mt-8">
-            <Button
-              size="xl"
-              asChild
-              className="group group-hover:motion-preset-slide-right-lg motion-duration-1000"
-            >
+            <Button size="xl" asChild>
               <Link
                 href={`${SOCIALS.newsletter}/subscribe?ref=nagringa.dev`}
                 target="_blank"
@@ -80,15 +76,15 @@ export function Footer() {
               Artigos populares
             </h3>
             <div className="space-y-4">
-              {MOST_POPULAR_ARTICLES.slice(0, 5).map((post, index) => (
-                <div key={index}>
-                  <Link
-                    href="#"
-                    className="block text-gray-300 hover:text-primary transition-colors"
-                  >
-                    {post.title}
-                  </Link>
-                </div>
+              {MOST_POPULAR_ARTICLES.slice(0, 5).map((post) => (
+                <Link
+                  href={`${SOCIALS.newsletter}/p/${post.slug}`}
+                  key={post.slug}
+                  className="block text-gray-300 hover:text-primary"
+                  target="_blank"
+                >
+                  {post.title}
+                </Link>
               ))}
             </div>
           </div>
@@ -103,7 +99,7 @@ export function Footer() {
                 <li key={tool.name}>
                   <Link
                     href={tool.href}
-                    className="text-gray-300 hover:text-[#5CFFE1] transition-colors"
+                    className="text-gray-300 hover:text-[#5CFFE1]"
                     prefetch={true}
                   >
                     {tool.name}
@@ -129,7 +125,7 @@ export function Footer() {
               <a
                 key={SOCIAL_LINKS.linkedin.href}
                 href={SOCIAL_LINKS.linkedin.href}
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-gray-400 hover:text-primary"
               >
                 <span className="sr-only">{SOCIAL_LINKS.linkedin.title}</span>
                 <SOCIAL_LINKS.linkedin.icon className="h-6 w-6" />
@@ -137,10 +133,18 @@ export function Footer() {
               <a
                 key={SOCIAL_LINKS.x.href}
                 href={SOCIAL_LINKS.x.href}
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-gray-400 hover:text-primary"
               >
                 <span className="sr-only">{SOCIAL_LINKS.x.title}</span>
                 <SOCIAL_LINKS.x.icon className="h-6 w-6" />
+              </a>
+              <a
+                key={SOCIAL_LINKS.instagram.href}
+                href={SOCIAL_LINKS.instagram.href}
+                className="text-gray-400 hover:text-primary"
+              >
+                <span className="sr-only">{SOCIAL_LINKS.instagram.title}</span>
+                <SOCIAL_LINKS.instagram.icon className="h-6 w-6" />
               </a>
             </div>
           </div>
@@ -152,7 +156,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Criado por{" "}
             <Link
               href={SOCIALS.personalWebsite}
-              className="text-[#5CFFE1] hover:text-[#5CFFE1]/90 transition-colors"
+              className="text-[#5CFFE1] hover:text-[#5CFFE1]/90"
               target="_blank"
             >
               Lucas Faria
