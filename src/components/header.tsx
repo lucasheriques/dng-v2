@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { useScrollDirection } from "@/hooks/use-scroll-direction";
 import { SiDiscord, SiYoutube } from "@icons-pack/react-simple-icons";
 
 const comunidade = [
@@ -61,8 +62,15 @@ const recentPosts = [
 ];
 
 export default function Header() {
+  const isScrollingUp = useScrollDirection();
+
   return (
-    <Popover className="z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg absolute w-full motion-preset-slide-down border-b border-slate-800/20">
+    <Popover
+      className={`z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg fixed top-0 w-full motion-preset-slide-down border-b border-slate-800/20 transition-transform duration-300 ${
+        isScrollingUp ? "translate-y-0" : "-translate-y-full"
+      }`}
+      as="header"
+    >
       {({ close }) => (
         <>
           <div className="py-4 mx-auto max-w-7xl w-full px-4 relative flex items-center justify-between">
