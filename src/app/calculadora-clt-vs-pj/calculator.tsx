@@ -129,7 +129,7 @@ export function SalaryCalculatorClient({
 
   return (
     <>
-      <div className="max-w-7xl mx-auto grid gap-4">
+      <div className="grid gap-4">
         <div className="flex md:items-center justify-between md:flex-row flex-col gap-2 md:gap-4">
           <div className="space-y-2">
             <h1 className="text-4xl font-bold">Calculadora CLT vs. PJ</h1>

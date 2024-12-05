@@ -1,5 +1,6 @@
 import { FormData } from "@/app/calculadora-clt-vs-pj/types";
 import { decompress } from "@/app/calculadora-clt-vs-pj/utils";
+import { PageWrapper } from "@/components/page-wrapper";
 import { env } from "@/env";
 import { SalaryCalculatorClient } from "./calculator";
 
@@ -47,11 +48,11 @@ export default async function SalaryCalculator({
   const selicRate = Number(env.NEXT_PUBLIC_SELIC_RATE);
 
   return (
-    <div className="py-24 px-4 max-w-7xl mx-auto">
+    <PageWrapper>
       <SalaryCalculatorClient
         initialData={initialData}
         defaultInterestRate={selicRate}
       />
-    </div>
+    </PageWrapper>
   );
 }
