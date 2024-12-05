@@ -1,46 +1,56 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Toaster } from "@/components/ui/toaster";
 import { useAuth } from "@/use-cases/use-auth";
 import { SiGoogle } from "@icons-pack/react-simple-icons";
-import { useState } from "react";
 
-export function SignInFormEmailLink() {
+export function SignIn() {
   const { signIn } = useAuth();
-  const [step, setStep] = useState<"signIn" | "linkSent">("signIn");
+  // const [step, setStep] = useState<"signIn" | "linkSent">("signIn");
 
   return (
-    <div className="min-w-[384px] flex flex-col gap-4">
-      {step === "signIn" ? (
-        <>
-          <Button
-            className="flex-1"
-            variant="outline"
-            type="button"
-            onClick={() => void signIn("google")}
-          >
-            <SiGoogle className="mr-2 h-4 w-4" /> Entrar com o Google
-          </Button>
-          {/* <SignInWithMagicLink handleLinkSent={() => setStep("linkSent")} /> */}
-        </>
-      ) : (
-        <>
-          <h2 className="font-semibold text-2xl tracking-tight">
-            Verifique seu e-mail
-          </h2>
-          <p>Um link de acesso foi enviado para o seu e-mail.</p>
-          <Button
-            className="p-0 self-start"
-            variant="link"
-            onClick={() => setStep("signIn")}
-          >
-            Cancel
-          </Button>
-        </>
-      )}
-      <Toaster />
-    </div>
+    <Button
+      className="flex-1"
+      variant="outline"
+      type="button"
+      size="xl"
+      onClick={() => void signIn("google")}
+    >
+      <SiGoogle className="mr-2 h-4 w-4" /> Entrar com o Google
+    </Button>
   );
+
+  // return (
+  //   <div className="min-w-[384px] flex flex-col gap-4">
+  //     {step === "signIn" ? (
+  //       <>
+  //         <Button
+  //           className="flex-1"
+  //           variant="outline"
+  //           type="button"
+  //           onClick={() => void signIn("google")}
+  //         >
+  //           <SiGoogle className="mr-2 h-4 w-4" /> Entrar com o Google
+  //         </Button>
+  //         {/* <SignInWithMagicLink handleLinkSent={() => setStep("linkSent")} /> */}
+  //       </>
+  //     ) : (
+  //       <>
+  //         <h2 className="font-semibold text-2xl tracking-tight">
+  //           Verifique seu e-mail
+  //         </h2>
+  //         <p>Um link de acesso foi enviado para o seu e-mail.</p>
+  //         <Button
+  //           className="p-0 self-start"
+  //           variant="link"
+  //           onClick={() => setStep("signIn")}
+  //         >
+  //           Cancel
+  //         </Button>
+  //       </>
+  //     )}
+  //     <Toaster />
+  //   </div>
+  // );
 }
 
 // function SignInWithMagicLink({
