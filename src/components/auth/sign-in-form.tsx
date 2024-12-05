@@ -4,8 +4,29 @@ import { useAuth } from "@/use-cases/use-auth";
 import { SiGoogle } from "@icons-pack/react-simple-icons";
 
 export function SignIn() {
-  const { signIn } = useAuth();
+  const { signIn, isAuthenticated, user, subscription, signOut } = useAuth();
   // const [step, setStep] = useState<"signIn" | "linkSent">("signIn");
+
+  if (isAuthenticated) {
+    return (
+      <div className="flex flex-col gap-4">
+        <h2 className="font-semibold text-2xl tracking-tight">
+          Você está logado!
+        </h2>
+        <ul>
+          <li>Nome: {user?.name}</li>
+          <li>Email: {user?.email}</li>
+          <li>Assina a newsletter: {subscription ? "Sim" : "Não"}</li>
+          {subscription && (
+            <li>
+              Assinatura paga: {subscription?.paidSubscription ? "Sim" : "Não"}
+            </li>
+          )}
+        </ul>
+        <Button onClick={signOut}>Sair</Button>
+      </div>
+    );
+  }
 
   return (
     <Button

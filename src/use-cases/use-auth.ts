@@ -7,5 +7,5 @@ export function useAuth() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { signOut, signIn } = useAuthActions();
 
-  return { user, isAuthenticated, isLoading, signOut, signIn };
+  return { ...user, isAuthenticated, isLoading, signOut, signIn };
 }
