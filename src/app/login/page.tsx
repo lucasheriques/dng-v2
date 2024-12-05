@@ -18,15 +18,15 @@ export default function LoginPage() {
           placeholder="blur"
         />
       </HeroImageGradientOverlay>
-      <div className="z-10 flex flex-col p-8 rounded-xl backdrop-blur-sm bg-black/40 border border-white/10 shadow-lg min-h-[384px] w-full max-w-md">
-        <div className="flex flex-col items-center gap-2 mb-8">
-          <Image src={DngLogo} alt="Dev na Gringa" width={48} height={48} />
-          <h1 className="text-2xl font-bold text-white/90">Dev na Gringa</h1>
+      <div className="z-10 flex flex-col justify-between p-8 pb-4 rounded-xl backdrop-blur-sm bg-black/40 border border-white/10 shadow-lg gap-16 w-full max-w-md">
+        <div className="flex items-center gap-2 justify-center">
+          <Image src={DngLogo} alt="Dev na Gringa" width={32} height={32} />
+          <h1 className="text-xl font-bold text-white/90">Dev na Gringa</h1>
         </div>
-        <div className="flex-1 flex items-center">
+        <div className="flex-1 flex items-center justify-center">
           <SignIn />
         </div>
-        <div className="text-center mt-8 text-xs">
+        <div className="text-center text-xs">
           Ao entrar, você concorda com nossa{" "}
           <Link
             href="/politica-de-privacidade"
