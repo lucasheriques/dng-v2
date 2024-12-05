@@ -21,7 +21,7 @@ export function UserDropdown() {
   const { user, isAuthenticated, signOut } = useAuth();
   const isAuthEnabled = useFeatureFlagEnabled("auth");
 
-  if (!isAuthEnabled) {
+  if (!isAuthEnabled && !isAuthenticated) {
     return null;
   }
 
