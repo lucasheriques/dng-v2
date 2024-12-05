@@ -1,9 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Toaster } from "@/components/ui/toaster";
-import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/use-cases/use-auth";
 import { SiGoogle } from "@icons-pack/react-simple-icons";
 import { useState } from "react";
@@ -46,44 +43,44 @@ export function SignInFormEmailLink() {
   );
 }
 
-function SignInWithMagicLink({
-  handleLinkSent,
-}: {
-  handleLinkSent: () => void;
-}) {
-  const { signIn } = useAuth();
-  const { toast } = useToast();
-  const [submitting, setSubmitting] = useState(false);
-  return (
-    <form
-      className="flex flex-col"
-      onSubmit={(event) => {
-        event.preventDefault();
-        setSubmitting(true);
-        const formData = new FormData(event.currentTarget);
-        signIn("resend", formData)
-          .then(handleLinkSent)
-          .catch((error) => {
-            console.error(error);
-            toast({
-              title: "Could not send sign-in link",
-              variant: "destructive",
-            });
-            setSubmitting(false);
-          });
-      }}
-    >
-      <Label htmlFor="email">Email</Label>
-      <Input
-        name="email"
-        id="email"
-        className="mb-4 mt-2"
-        autoComplete="email"
-        inputMode="email"
-      />
-      <Button type="submit" disabled={submitting}>
-        Enviar link por e-mail
-      </Button>
-    </form>
-  );
-}
+// function SignInWithMagicLink({
+//   handleLinkSent,
+// }: {
+//   handleLinkSent: () => void;
+// }) {
+//   const { signIn } = useAuth();
+//   const { toast } = useToast();
+//   const [submitting, setSubmitting] = useState(false);
+//   return (
+//     <form
+//       className="flex flex-col"
+//       onSubmit={(event) => {
+//         event.preventDefault();
+//         setSubmitting(true);
+//         const formData = new FormData(event.currentTarget);
+//         signIn("resend", formData)
+//           .then(handleLinkSent)
+//           .catch((error) => {
+//             console.error(error);
+//             toast({
+//               title: "Could not send sign-in link",
+//               variant: "destructive",
+//             });
+//             setSubmitting(false);
+//           });
+//       }}
+//     >
+//       <Label htmlFor="email">Email</Label>
+//       <Input
+//         name="email"
+//         id="email"
+//         className="mb-4 mt-2"
+//         autoComplete="email"
+//         inputMode="email"
+//       />
+//       <Button type="submit" disabled={submitting}>
+//         Enviar link por e-mail
+//       </Button>
+//     </form>
+//   );
+// }
