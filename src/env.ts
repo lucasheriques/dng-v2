@@ -6,7 +6,9 @@ export const env = createEnv({
    * Serverside Environment variables, not available on the client.
    * Will throw if you access these variables on the client.
    */
-  server: {},
+  server: {
+    CONVEX_DEPLOYMENT: z.string().min(1).optional(),
+  },
   /*
    * Environment variables available on the client (and server).
    *
@@ -16,6 +18,7 @@ export const env = createEnv({
     NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1),
     NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1),
     NEXT_PUBLIC_SELIC_RATE: z.string().min(1),
+    NEXT_PUBLIC_CONVEX_URL: z.string().min(1),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -27,5 +30,7 @@ export const env = createEnv({
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
     NEXT_PUBLIC_SELIC_RATE: process.env.NEXT_PUBLIC_SELIC_RATE,
+    NEXT_PUBLIC_CONVEX_URL: process.env.NEXT_PUBLIC_CONVEX_URL,
+    CONVEX_DEPLOYMENT: process.env.CONVEX_DEPLOYMENT,
   },
 });
