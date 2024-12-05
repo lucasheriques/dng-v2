@@ -43,7 +43,7 @@ export function UserDropdown() {
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end" forceMount>
+          <DropdownMenuContent className="w-64" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">{user?.name}</p>
@@ -54,23 +54,29 @@ export function UserDropdown() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem disabled>
                 <User className="mr-2 h-4 w-4" />
-                <span>Profile</span>
+                <span>Perfil (em breve)</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem disabled>
                 <Settings className="mr-2 h-4 w-4" />
-                <span>Settings</span>
+                <span>Configurações (em breve)</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard className="mr-2 h-4 w-4" />
-                <span>Billing</span>
+              <DropdownMenuItem asChild>
+                <Link
+                  href="https://newsletter.nagringa.dev/account"
+                  target="_blank"
+                  className="focus:outline-none"
+                >
+                  <CreditCard className="mr-2 h-4 w-4" />
+                  <span>Gerenciar assinatura</span>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={signOut}>
               <LogOut className="mr-2 h-4 w-4" />
-              <span>Log out</span>
+              <span>Sair</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

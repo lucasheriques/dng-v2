@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
@@ -110,12 +111,12 @@ export function TableInput({
           {prefix}
         </span>
       )}
-      <input
+      <Input
         type="number"
         value={value}
         onChange={handleChange}
         onPaste={handlePaste}
-        className={`w-full bg-transparent p-2 focus:outline-none focus:ring-2 focus:ring-slate-600 rounded
+        className={`w-full bg-transparent p-2 focus-visible:ring-offset-0 border-none rounded-none
           ${prefix ? "pl-8" : "pl-2"}
           ${suffix ? "pr-8" : "pr-2"}
           [appearance:textfield]

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
+import HeroImageGradientOverlay from "@/components/hero-image-gradient-overlay";
 import { SearchButton } from "@/components/search-button";
 import Image404 from "../../public/404-v2.webp";
 
@@ -9,14 +10,13 @@ export default function NotFound() {
   return (
     <div className="relative min-h-screen w-ful overflow-hidden bg-slate-950">
       {/* Background image */}
-      <div className="absolute inset-0">
+      <HeroImageGradientOverlay>
         <Image
           src={Image404}
           alt="Cosmic cat in a crescent bowl"
           className="h-full w-full object-cover pointer-events-none select-none"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/50 to-slate-950/90" />
-      </div>
+      </HeroImageGradientOverlay>
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen mx-auto max-w-7xl px-4 flex-col items-center justify-center sm:items-start sm:px-8">
