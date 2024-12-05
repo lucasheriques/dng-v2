@@ -33,7 +33,7 @@ export function Footer() {
       <div className="relative z-10 container mx-auto px-4 py-16">
         {/* CTA Section */}
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <h2 className="text-[#5CFFE1] text-lg font-semibold">
+          <h2 className="text-primary text-lg font-semibold">
             Faça parte da mentoria
           </h2>
           <p className="mt-2 text-4xl font-semibold text-white">
@@ -45,7 +45,7 @@ export function Footer() {
             <br />
             <a
               href="https://newsletter.nagringa.dev/about#§beneficios-para-assinantes-pagos"
-              className="text-accent-secondary font-semibold hover:text-[#5CFFE1]/90"
+              className="text-accent-secondary font-semibold hover:text-primary/90"
             >
               Confira todos os benefícios aqui.
             </a>
@@ -99,7 +99,7 @@ export function Footer() {
                 <li key={tool.name}>
                   <Link
                     href={tool.href}
-                    className="text-gray-300 hover:text-[#5CFFE1]"
+                    className="text-gray-300 hover:text-primary"
                     prefetch={true}
                   >
                     {tool.name}
@@ -116,7 +116,7 @@ export function Footer() {
               Tem alguma dúvida? Fale comigo aqui:
             </p>
             <a
-              className="text-[#5CFFE1] block mb-6"
+              className="text-primary block mb-6"
               href="mailto:hi@lucasfaria.dev"
             >
               hi@lucasfaria.dev
@@ -156,7 +156,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Criado por{" "}
             <Link
               href={SOCIALS.personalWebsite}
-              className="text-[#5CFFE1] hover:text-[#5CFFE1]/90"
+              className="text-primary hover:text-primary/90"
               target="_blank"
             >
               Lucas Faria

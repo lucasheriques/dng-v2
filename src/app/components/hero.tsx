@@ -44,7 +44,7 @@ export default function Hero() {
     <div className="w-full max-w-7xl mx-auto px-4 pt-24 relative z-10">
       <Badge
         variant="outline"
-        className="border-[#5CFFE1]/30 text-[#5CFFE1] mb-6 backdrop-blur-sm motion-delay-[500ms] motion-preset-fade"
+        className="border-primary/30 text-primary mb-6 backdrop-blur-sm motion-delay-[500ms] motion-preset-fade"
       >
         <Link2 className="mr-2 h-4 w-4" />
         <Link
@@ -117,7 +117,7 @@ export default function Hero() {
           <AnimatedStat
             value={25}
             label="assinantes da mentoria"
-            color="text-[#FF4B8C]"
+            color="text-accent-secondary"
           />
         </div>
       </motion.div>

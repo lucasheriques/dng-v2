@@ -35,7 +35,7 @@ export function ExpandableCard({
           <Card className="w-full cursor-pointer group transition-all duration-300 bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10 hover:shadow-lg">
             <CardHeader>
               {title && (
-                <CardTitle className="text-white group-hover:text-[#5CFFE1] transition-colors">
+                <CardTitle className="text-white group-hover:text-primary transition-colors">
                   {title}
                 </CardTitle>
               )}
@@ -44,7 +44,7 @@ export function ExpandableCard({
               <p className="text-white/80">{summary}</p>
             </CardContent>
             {footer && <CardFooter>{footer}</CardFooter>}
-            <div className="absolute bottom-4 right-4 text-white/60 group-hover:text-[#5CFFE1] transition-colors">
+            <div className="absolute bottom-4 right-4 text-white/60 group-hover:text-primary transition-colors">
               <ChevronDown className="w-5 h-5" />
             </div>
           </Card>
@@ -54,7 +54,7 @@ export function ExpandableCard({
       <DialogPortal>
         <DialogOverlay className="fixed inset-0 bg-slate-900/30 z-50 backdrop-blur-sm" />
         <DialogContent className="bg-slate-950 md:max-w-2xl gap-8 max-h-[80vh] overflow-y-auto max-w-[90%] scrollbar-thin scrollbar-track-slate-800 scrollbar-thumb-slate-600">
-          <DialogTitle className="text-[#5CFFE1] text-2xl">{title}</DialogTitle>
+          <DialogTitle className="text-primary text-2xl">{title}</DialogTitle>
           {fullContent}
 
           {footer && (

@@ -2,6 +2,7 @@
 import { SignInWithOAuth } from "@/components/auth/sign-in-with-oauth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import { useAuthActions } from "@convex-dev/auth/react";
@@ -15,7 +16,7 @@ export function SignInFormEmailLink() {
       {step === "signIn" ? (
         <>
           <h2 className="font-semibold text-2xl tracking-tight">
-            Sign in or create an account
+            Entrar ou criar conta
           </h2>
           <SignInWithMagicLink handleLinkSent={() => setStep("linkSent")} />
           <SignInWithOAuth />
@@ -67,10 +68,15 @@ function SignInWithMagicLink({
           });
       }}
     >
-      <label htmlFor="email">Email</label>
-      <Input name="email" id="email" className="mb-4" autoComplete="email" />
+      <Label htmlFor="email">Email</Label>
+      <Input
+        name="email"
+        id="email"
+        className="mb-4 mt-2"
+        autoComplete="email"
+      />
       <Button type="submit" disabled={submitting}>
-        Send sign-in link
+        Enviar link por e-mail
       </Button>
     </form>
   );

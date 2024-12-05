@@ -13,7 +13,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-import { useScrollDirection } from "@/hooks/use-scroll-direction";
+import { UserDropdown } from "@/components/user-dropdown";
 import { SiDiscord, SiYoutube } from "@icons-pack/react-simple-icons";
 
 const comunidade = [
@@ -62,36 +62,32 @@ const recentPosts = [
 ];
 
 export default function Header() {
-  const isScrollingUp = useScrollDirection();
-
   return (
     <Popover
-      className={`z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg fixed top-0 w-full motion-preset-slide-down border-b border-slate-800/20 transition-transform duration-300 ${
-        isScrollingUp ? "translate-y-0" : "-translate-y-full"
-      }`}
+      className={`z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg absolute top-0 w-full motion-preset-slide-down border-b border-slate-800/20 transition-transform duration-300`}
       as="header"
     >
       {({ close }) => (
         <>
           <div className="py-4 mx-auto max-w-7xl w-full px-4 relative flex items-center justify-between">
             <Link href="/" className="items-center gap-2 flex">
-              <Globe2 className="h-6 w-6 text-[#5CFFE1]" />
-              <span className="font-bold text-white text-xl">
+              <Globe2 className="h-6 w-6 text-primary" />
+              <span className="font-bold text-white text-xl hidden md:block">
                 Dev na Gringa
               </span>
+              <span className="font-bold text-white text-xl md:hidden">
+                DnG
+              </span>
             </Link>
-            <div className="flex items-center gap-x-1 sm:gap-x-2">
+            <div className="flex items-center gap-x-4">
               <Search />
-              <Button
-                variant="link"
-                asChild
-                className="text-white px-0 text-base"
-              >
+              <Button variant="link" asChild className="text-white px-0">
                 <PopoverButton className="focus:outline focus:outline-primary focus:outline-2 focus:outline-offset-2">
                   Menu
                   <ChevronDown aria-hidden="true" className="h-5 w-5" />
                 </PopoverButton>
               </Button>
+              <UserDropdown />
             </div>
           </div>
 
