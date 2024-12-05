@@ -1,7 +1,8 @@
 "use client";
 
 import { env } from "@/env";
-import { ConvexProvider, ConvexReactClient } from "convex/react";
+import { ConvexAuthNextjsProvider } from "@convex-dev/auth/nextjs";
+import { ConvexReactClient } from "convex/react";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
@@ -16,9 +17,9 @@ if (typeof window !== "undefined" && process.env.NODE_ENV !== "development") {
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <PostHogProvider client={posthog}>
-      <ConvexProvider client={convex}>
+      <ConvexAuthNextjsProvider client={convex}>
         <NuqsAdapter>{children}</NuqsAdapter>
-      </ConvexProvider>
+      </ConvexAuthNextjsProvider>
     </PostHogProvider>
   );
 }
