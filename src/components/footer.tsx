@@ -30,7 +30,7 @@ export function Footer() {
       </div>
 
       {/* Footer Content */}
-      <div className="relative z-10 container mx-auto px-4 py-16">
+      <div className="relative z-10 content-wrapper py-24">
         {/* CTA Section */}
         <div className="mx-auto max-w-2xl text-center mb-16">
           <h2 className="text-primary text-lg font-semibold">
@@ -151,8 +151,11 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-16 pt-8 border-t border-white/10">
-          <p className="text-center text-gray-400">
+        <div className="mt-16 pt-8 border-t border-white/10 flex justify-between text-xs md:flex-row flex-col gap-4">
+          <Link href="/politica-de-privacidade" className="text-gray-400">
+            Política de privacidade
+          </Link>
+          <p className="text-gray-400">
             &copy; {new Date().getFullYear()} Criado por{" "}
             <Link
               href={SOCIALS.personalWebsite}

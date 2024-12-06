@@ -11,7 +11,7 @@ const stats = [
 
 export default function About() {
   return (
-    <div className="relative isolate overflow-hidden bg-slate-950 py-24 sm:py-32">
+    <div className="relative isolate overflow-hidden py-24 sm:py-32">
       <div
         aria-hidden="true"
         className="absolute -top-80 left-[max(6rem,33%)] -z-10 transform-gpu blur-3xl sm:left-1/2 md:top-20 lg:ml-20 xl:top-3 xl:ml-56"
@@ -24,7 +24,7 @@ export default function About() {
           className="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20"
         />
       </div>
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="content-wrapper">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <Badge className="text-sm" variant="outline">
             Não vou desperdiçar seu tempo por aqui
@@ -33,12 +33,12 @@ export default function About() {
             Conteúdo que faz sentido
           </h1>
           <p className="mt-6 text-xl/8 text-white/70">
-            Meu primeiro trabalho como Engenheiro de Software foi em 2017, como
-            estagiário. E, a partir de 2020, sempre trabalhei para empresas
+            Meu primeiro trabalho como Engenheiro de Software foi em 2016, como
+            estagiário. E, desde 2020, sempre trabalhei para empresas
             americanas.
           </p>
         </div>
-        <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-12">
+        <div className="mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-12">
           <div className="relative lg:order-last lg:col-span-5">
             <svg
               aria-hidden="true"
