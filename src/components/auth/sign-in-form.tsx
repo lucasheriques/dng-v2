@@ -144,7 +144,7 @@ function EmailAppLinks({ email }: { email: string }) {
       "gmail.com": {
         name: "Gmail",
         app: {
-          ios: "googlegmail:///",
+          ios: "googlegmail://",
           android: "https://mail.google.com/mail/",
         },
         web: "https://mail.google.com/mail/",
