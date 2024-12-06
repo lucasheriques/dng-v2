@@ -18,7 +18,7 @@ export default function LoginPage() {
           placeholder="blur"
         />
       </HeroImageGradientOverlay>
-      <div className="z-10 flex flex-col justify-between p-8 pb-4 rounded-xl backdrop-blur-sm bg-black/40 border border-white/10 shadow-lg gap-16 w-full max-w-md">
+      <div className="z-10 flex flex-col justify-between p-4 pt-8 rounded-xl backdrop-blur-sm bg-black/40 border border-white/10 shadow-lg gap-16 w-full max-w-[95%] md:max-w-md ">
         <div className="flex items-center gap-2 justify-center">
           <Image src={DngLogo} alt="Dev na Gringa" width={32} height={32} />
           <h1 className="text-xl font-bold text-white/90">Dev na Gringa</h1>

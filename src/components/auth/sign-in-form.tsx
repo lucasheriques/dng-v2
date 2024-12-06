@@ -75,15 +75,22 @@ export function SignIn() {
         />
       ) : (
         <div className="flex flex-col gap-2">
-          <span className="text-base font-medium">
-            Um link foi enviado para {email}.
+          <span className="text-sm font-medium">
+            Link enviado para {email}.
           </span>
           {email.endsWith("@gmail.com") && (
             <Button variant="link" className="h-auto p-0" asChild>
               <a
-                href="https://gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`googlegmail:///co?to=${email}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  // Try mobile app first
+                  window.location.href = `googlegmail:///co?to=${email}`;
+                  // Fallback to web after a small delay
+                  setTimeout(() => {
+                    window.open("https://gmail.com", "_blank");
+                  }, 500);
+                }}
               >
                 Abrir Gmail →
               </a>
@@ -94,9 +101,16 @@ export function SignIn() {
             email.endsWith("@live.com")) && (
             <Button variant="link" className="h-auto p-0" asChild>
               <a
-                href="https://outlook.live.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`ms-outlook://emails`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  // Try mobile app first
+                  window.location.href = "ms-outlook://emails";
+                  // Fallback to web after a small delay
+                  setTimeout(() => {
+                    window.open("https://outlook.live.com", "_blank");
+                  }, 500);
+                }}
               >
                 Abrir Outlook →
               </a>
@@ -105,9 +119,16 @@ export function SignIn() {
           {email.endsWith("@icloud.com") && (
             <Button variant="link" className="h-auto p-0" asChild>
               <a
-                href="https://www.icloud.com/mail"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`message://`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  // Try mobile app first
+                  window.location.href = "message://";
+                  // Fallback to web after a small delay
+                  setTimeout(() => {
+                    window.open("https://www.icloud.com/mail", "_blank");
+                  }, 500);
+                }}
               >
                 Abrir iCloud Mail →
               </a>
