@@ -136,66 +136,92 @@ function SignInWithMagicLink({
 }
 
 function EmailAppLinks({ email }: { email: string }) {
-  const openEmailApp = (
-    mobileScheme: string,
-    webFallback: string,
-    e: React.MouseEvent
-  ) => {
-    e.preventDefault();
-    window.location.href = mobileScheme;
-    setTimeout(() => {
-      window.open(webFallback, "_blank");
-    }, 500);
+  const getEmailConfig = (email: string) => {
+    const domain = email.split("@")[1].toLowerCase();
+
+    const configs = {
+      "gmail.com": {
+        name: "Gmail",
+        app: {
+          ios: "googlegmail:///",
+          android: "https://mail.google.com/mail/",
+        },
+        web: "https://mail.google.com/mail/",
+      },
+      "outlook.com": {
+        name: "Outlook",
+        app: {
+          ios: "ms-outlook://",
+          android: "https://outlook.office365.com/mail/",
+        },
+        web: "https://outlook.live.com/mail/",
+      },
+      "hotmail.com": {
+        name: "Outlook",
+        app: {
+          ios: "ms-outlook://",
+          android: "https://outlook.office365.com/mail/",
+        },
+        web: "https://outlook.live.com/mail/",
+      },
+      "icloud.com": {
+        name: "iCloud Mail",
+        app: {
+          ios: "message://",
+          android: "https://www.icloud.com/mail",
+        },
+        web: "https://www.icloud.com/mail",
+      },
+    };
+
+    const domainConfig = Object.entries(configs).find(([key]) =>
+      domain.endsWith(key)
+    )?.[1];
+
+    return domainConfig;
   };
+
+  const handleEmailAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    const config = getEmailConfig(email);
+    if (!config) return;
+
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+
+    // Deep link URL based on platform
+    const appUrl = isIOS
+      ? config.app.ios
+      : isAndroid
+        ? config.app.android
+        : config.web;
+
+    if (isIOS || isAndroid) {
+      const appTimeout = setTimeout(() => {
+        window.location.href = config.web;
+      }, 1000);
+
+      window.location.href = appUrl;
+
+      window.addEventListener("blur", () => {
+        clearTimeout(appTimeout);
+      });
+    } else {
+      window.location.href = config.web;
+    }
+  };
+
+  const emailConfig = getEmailConfig(email);
 
   return (
     <div className="flex flex-col gap-2">
       <span className="text-sm font-medium">Link enviado para {email}.</span>
 
-      {email.endsWith("@gmail.com") && (
+      {emailConfig && (
         <Button variant="link" className="h-auto p-0" asChild>
-          <a
-            href="https://mail.google.com"
-            onClick={(e) =>
-              openEmailApp(
-                // On Android it's "google/gmail", on iOS it's "googlegmail"
-                /iPhone|iPad|iPod/.test(navigator.userAgent)
-                  ? "googlegmail://co"
-                  : "google/gmail",
-                "https://mail.google.com",
-                e
-              )
-            }
-          >
-            Abrir Gmail →
-          </a>
-        </Button>
-      )}
-
-      {(email.endsWith("@outlook.com") ||
-        email.endsWith("@hotmail.com") ||
-        email.endsWith("@live.com")) && (
-        <Button variant="link" className="h-auto p-0" asChild>
-          <a
-            href="ms-outlook://"
-            onClick={(e) =>
-              openEmailApp("ms-outlook://", "https://outlook.live.com", e)
-            }
-          >
-            Abrir Outlook →
-          </a>
-        </Button>
-      )}
-
-      {email.endsWith("@icloud.com") && (
-        <Button variant="link" className="h-auto p-0" asChild>
-          <a
-            href="message://"
-            onClick={(e) =>
-              openEmailApp("message://", "https://www.icloud.com/mail", e)
-            }
-          >
-            Abrir iCloud Mail →
+          <a href={emailConfig.web} onClick={handleEmailAppClick}>
+            Abrir {emailConfig.name} →
           </a>
         </Button>
       )}
