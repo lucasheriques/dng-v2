@@ -2,6 +2,7 @@ import { Providers } from "@/app/providers";
 import { BottomSearchFab } from "@/components/bottom-search-fab";
 import { Footer } from "@/components/footer";
 import Header from "@/components/header";
+import PostHogPageView from "@/components/posthog-page-view";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
@@ -46,6 +47,7 @@ export default function RootLayout({
             <Footer />
             <BottomSearchFab />
             <Toaster />
+            <PostHogPageView />
           </Providers>
           <TailwindIndicator />
         </body>
