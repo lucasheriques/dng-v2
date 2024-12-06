@@ -51,7 +51,7 @@ export function SignIn() {
               <SiGoogle className="mr-2 h-4 w-4" /> Entrar com o Google
             </Button>
             {lastUsedMethod === "google" && (
-              <span className="text-xs text-muted-foreground font-medium">
+              <span className="text-xs text-muted-foreground font-medium text-center">
                 Você entrou por aqui na última vez.
               </span>
             )}
@@ -116,19 +116,21 @@ function SignInWithMagicLink({
 
   return (
     <form className="flex flex-col gap-2" onSubmit={handleMagicLink}>
-      <Label htmlFor="email">Email</Label>
-      <Input
-        name="email"
-        type="email"
-        inputMode="email"
-        autoComplete="email"
-        required
-      />
-      {wasLastUsed && (
-        <span className="text-xs text-muted-foreground font-medium">
-          Você entrou por aqui na última vez.
-        </span>
-      )}
+      <div className="flex flex-col gap-1">
+        <Label htmlFor="email">Email</Label>
+        <Input
+          name="email"
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          required
+        />
+        {wasLastUsed && (
+          <span className="text-xs text-muted-foreground font-medium text-center">
+            Você entrou por aqui na última vez.
+          </span>
+        )}
+      </div>
       <Button type="submit" variant="ghost" loading={submitting}>
         Enviar link por email
       </Button>

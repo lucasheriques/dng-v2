@@ -6,6 +6,7 @@ import { ConvexReactClient } from "convex/react";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
+import { Provider as BalancerProvider } from "react-wrap-balancer";
 
 const convex = new ConvexReactClient(env.NEXT_PUBLIC_CONVEX_URL);
 if (typeof window !== "undefined") {
@@ -23,7 +24,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <PostHogProvider client={posthog}>
       <ConvexAuthNextjsProvider client={convex}>
-        <NuqsAdapter>{children}</NuqsAdapter>
+        <NuqsAdapter>
+          <BalancerProvider>{children}</BalancerProvider>
+        </NuqsAdapter>
       </ConvexAuthNextjsProvider>
     </PostHogProvider>
   );

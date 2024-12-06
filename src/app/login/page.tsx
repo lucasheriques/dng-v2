@@ -3,6 +3,7 @@ import HeroImageGradientOverlay from "@/components/hero-image-gradient-overlay";
 import { SOCIALS } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
+import Balancer from "react-wrap-balancer";
 import DngLogo from "../../../public/dng-small.webp";
 import HeroImage from "../../../public/login-bg-hq.webp";
 
@@ -22,15 +23,17 @@ export default function LoginPage() {
       <div className="z-10 flex flex-col justify-between p-4 pt-8 rounded-xl backdrop-blur-sm bg-black/40 border border-white/10 shadow-lg gap-16 w-full max-w-[95%] md:max-w-md ">
         <div className="flex items-center gap-2 flex-col justify-center">
           <Image src={DngLogo} alt="Dev na Gringa" width={64} height={64} />
-          <p className="text-base text-center">
-            Use o mesmo email que você assinou a{" "}
-            <a
-              href={SOCIALS.newsletter}
-              className="border-b border-slate-600 hover:border-b-2 focus:outline-none"
-            >
-              newsletter
-            </a>
-          </p>
+          <Balancer>
+            <p className="text-base text-center">
+              Use o mesmo email que você assinou a{" "}
+              <a
+                href={SOCIALS.newsletter}
+                className="border-b border-slate-600 hover:border-b-2 focus:outline-none"
+              >
+                newsletter
+              </a>
+            </p>
+          </Balancer>
         </div>
         <div className="flex-1 flex items-center justify-center">
           <SignIn />
