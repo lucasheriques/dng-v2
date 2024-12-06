@@ -15,14 +15,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/use-cases/use-auth";
 import Link from "next/link";
-import { useFeatureFlagEnabled } from "posthog-js/react";
+import { useFeatureFlagEnabled, usePostHog } from "posthog-js/react";
 
 export function UserDropdown() {
   const { user, isAuthenticated, signOut } = useAuth();
   const isAuthEnabled = useFeatureFlagEnabled("auth");
 
+  const posthog = usePostHog();
+
   if (!isAuthEnabled && !isAuthenticated) {
     return null;
+  }
+
+  if (isAuthenticated) {
+    posthog.identify(user?.email ?? user?._id, {
+      email: user?.email,
+      name: user?.name,
+    });
   }
 
   return (

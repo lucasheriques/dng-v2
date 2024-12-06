@@ -3,17 +3,14 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/use-cases/use-auth";
 import { SiGoogle } from "@icons-pack/react-simple-icons";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export function SignIn() {
   const { signIn, isAuthenticated } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/perfil");
-    }
-  }, [isAuthenticated, router]);
+  if (isAuthenticated) {
+    router.push("/perfil");
+  }
 
   return (
     <Button
