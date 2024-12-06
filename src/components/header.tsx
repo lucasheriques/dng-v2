@@ -3,15 +3,11 @@ import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
 import { MENTORSHIP_LINKS, SOCIALS } from "@/lib/constants";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
-import {
-  ChevronDown,
-  CircleDollarSign,
-  Globe2,
-  Mail,
-  PhoneCall,
-} from "lucide-react";
+import { ChevronDown, CircleDollarSign, Mail, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
+import Logo from "../../public/logo-no-bg-small.webp";
 
 import { UserDropdown } from "@/components/user-dropdown";
 import { SiDiscord, SiYoutube } from "@icons-pack/react-simple-icons";
@@ -71,7 +67,7 @@ export default function Header() {
         <>
           <div className="py-4 mx-auto max-w-7xl w-full px-4 relative flex items-center justify-between">
             <Link href="/" className="items-center gap-2 flex">
-              <Globe2 className="h-6 w-6 text-primary" />
+              <Image src={Logo} alt="Dev na Gringa" width={48} height={48} />
               <span className="font-bold text-white text-xl hidden md:block">
                 Dev na Gringa
               </span>

@@ -4,8 +4,8 @@ import { SOCIALS } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
-import DngLogo from "../../../public/dng-small.webp";
 import HeroImage from "../../../public/login-bg-hq.webp";
+import DngLogo from "../../../public/logo-no-bg-small.webp";
 
 export default function LoginPage() {
   return (
