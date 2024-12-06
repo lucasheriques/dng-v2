@@ -60,7 +60,7 @@ export function SignIn() {
           <div className="relative flex items-center gap-3">
             <div className="h-[1px] flex-1 bg-slate-600" />
             <span className="text-xs text-muted-foreground">
-              ou, entre com seu email:
+              ou, com outro email:
             </span>
             <div className="h-[1px] flex-1 bg-slate-600" />
           </div>
@@ -95,6 +95,7 @@ function SignInWithMagicLink({
 
   const handleMagicLink = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSubmitting(true);
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
     if (typeof email !== "string") return;
@@ -128,7 +129,7 @@ function SignInWithMagicLink({
           Você entrou por aqui na última vez.
         </span>
       )}
-      <Button type="submit" variant="ghost" disabled={submitting}>
+      <Button type="submit" variant="ghost" loading={submitting}>
         Enviar link por email
       </Button>
     </form>

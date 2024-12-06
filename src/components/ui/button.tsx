@@ -1,11 +1,12 @@
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
+import { ScaleLoader } from "react-spinners";
 
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium group transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 ease-in-out transform active:scale-[0.97] hover:scale-[1.02] focus:outline focus:outline-primary/70 focus:outline-2 focus:outline-offset-2",
+  "group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium group transition-all disabled:pointer-events-none disabled:opacity-75 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 ease-in-out transform active:scale-[0.97] hover:scale-[1.02] focus:outline focus:outline-primary/70 focus:outline-2 focus:outline-offset-2",
   {
     variants: {
       variant: {
@@ -17,7 +18,7 @@ const buttonVariants = cva(
           "border border-input shadow-sm bg-primary/10 border-primary/50 text-primary hover:bg-primary/20 hover:border-primary",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-primary/10 hover:text-primary",
+        ghost: "hover:bg-primary/10 hover:text-primary disabled:text-white",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
@@ -39,17 +40,51 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  loading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      loading = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
+
+    const loadingColors = {
+      default: "white",
+      outline: "black",
+      ghost: "white",
+      secondary: "white",
+      destructive: "white",
+      link: "black",
+    };
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        disabled={loading || props.disabled}
         {...props}
-      />
+      >
+        {loading ? (
+          <ScaleLoader
+            color={variant ? loadingColors[variant] : "white"}
+            height={12}
+            width={2}
+            margin={1}
+          />
+        ) : (
+          children
+        )}
+      </Comp>
     );
   }
 );
