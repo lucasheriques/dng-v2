@@ -1,11 +1,13 @@
 import {
   SiDiscord,
   SiInstagram,
+  SiJson,
   SiLinkedin,
   SiX,
   SiYoutube,
 } from "@icons-pack/react-simple-icons";
 import {
+  Calculator,
   Calendar,
   FileText,
   History as HistoryIcon,
@@ -101,6 +103,19 @@ export const MENTORSHIP_LINKS = {
     title: "Todos os recursos",
     href: "https://drive.nagringa.dev",
     icon: FileText,
+  },
+};
+
+export const TOOLS = {
+  cltVsPjCalculator: {
+    title: "Calculadora Salário CLT vs PJ",
+    href: "/calculadora-clt-vs-pj",
+    icon: Calculator,
+  },
+  jsonFormatter: {
+    title: "Formatador e validador de JSON",
+    href: "/ferramentas/json",
+    icon: SiJson,
   },
 };
 

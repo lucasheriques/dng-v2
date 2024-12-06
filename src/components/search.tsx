@@ -1,7 +1,7 @@
 "use client";
 
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
-import { Calculator, Newspaper, Search as SearchIcon } from "lucide-react";
+import { Newspaper, Search as SearchIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 
@@ -14,7 +14,12 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { MENTORSHIP_LINKS, SOCIAL_LINKS, SOCIALS } from "@/lib/constants";
+import {
+  MENTORSHIP_LINKS,
+  SOCIAL_LINKS,
+  SOCIALS,
+  TOOLS,
+} from "@/lib/constants";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
 import ArticleList from "@/lib/article-list.json";
@@ -69,15 +74,18 @@ export function Search({ size = "icon" }: { size?: "icon" | "default" }) {
         <CommandList>
           <CommandEmpty>Nenhum resultado encontrado.</CommandEmpty>
           <CommandGroup heading="Ferramentas">
-            <CommandItem
-              onSelect={() => {
-                handleClose();
-                router.push("/calculadora-clt-vs-pj");
-              }}
-            >
-              <Calculator />
-              <span>Calculadora Salário CLT vs PJ</span>
-            </CommandItem>
+            {Object.values(TOOLS).map((item) => (
+              <CommandItem
+                key={item.href}
+                onSelect={() => {
+                  handleClose();
+                  router.push(item.href);
+                }}
+              >
+                <item.icon />
+                <span>{item.title}</span>
+              </CommandItem>
+            ))}
           </CommandGroup>
           <CommandGroup heading="Recursos da mentoria">
             {Object.values(MENTORSHIP_LINKS).map((item) => (
