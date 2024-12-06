@@ -156,7 +156,7 @@ export function Footer() {
             Política de privacidade
           </Link>
           <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} Criado por{" "}
+            &copy; {new Date().getFullYear()}. Criado por{" "}
             <Link
               href={SOCIALS.personalWebsite}
               className="text-primary hover:text-primary/90"
@@ -164,7 +164,6 @@ export function Footer() {
             >
               Lucas Faria
             </Link>
-            . Todos os direitos reservados.
           </p>
         </div>
       </div>
