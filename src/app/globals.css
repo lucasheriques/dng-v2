@@ -83,4 +83,14 @@
   .content-wrapper {
     @apply mx-auto max-w-7xl px-4;
   }
+
+  .nice-scrollbar {
+    @apply scrollbar-thin scrollbar-track-slate-950 scrollbar-thumb-slate-800;
+  }
+
+  .dark {
+    .nice-scrollbar {
+      @apply scrollbar-thin scrollbar-track-slate-950 scrollbar-thumb-slate-800;
+    }
+  }
 }

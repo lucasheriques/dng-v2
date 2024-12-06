@@ -6,10 +6,12 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { ChevronDown, CircleDollarSign, Mail, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import Logo from "../../public/logo-no-bg-small.webp";
 
 import { UserDropdown } from "@/components/user-dropdown";
+import { cn } from "@/lib/utils";
 import { SiDiscord, SiYoutube } from "@icons-pack/react-simple-icons";
 
 const comunidade = [
@@ -58,6 +60,9 @@ const recentPosts = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+  const isToolsSection = pathname?.startsWith("/ferramentas");
+
   return (
     <Popover
       className={`z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg absolute top-0 w-full motion-preset-slide-down border-b border-slate-800/20 transition-transform duration-300`}
@@ -65,7 +70,12 @@ export default function Header() {
     >
       {({ close }) => (
         <>
-          <div className="py-4 mx-auto max-w-7xl w-full px-4 relative flex items-center justify-between">
+          <div
+            className={cn(
+              "py-4 mx-auto w-full px-4 relative flex items-center justify-between",
+              !isToolsSection && "max-w-7xl"
+            )}
+          >
             <Link href="/" className="items-center gap-2 flex">
               <Image src={Logo} alt="Dev na Gringa" width={48} height={48} />
               <span className="font-bold text-white text-xl hidden md:block">
@@ -89,9 +99,17 @@ export default function Header() {
 
           <PopoverPanel
             transition
-            className="absolute inset-x-0 top-0 -z-10 bg-slate-900 pt-16 shadow-2xl ring-1 ring-slate-500/30 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in max-h-[calc(100vh-4rem)] overflow-y-auto"
+            className={cn(
+              "absolute inset-x-0 top-0 -z-10 bg-slate-900 pt-16 shadow-2xl ring-1 ring-slate-500/30 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in max-h-[calc(100vh-4rem)] overflow-y-auto"
+            )}
           >
-            <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-6 py-10 lg:grid-cols-2 lg:px-8">
+            <div
+              className={cn(
+                "relative mx-auto grid grid-cols-1 gap-x-8 gap-y-10 px-6 py-10 lg:grid-cols-2",
+                !isToolsSection && "max-w-7xl",
+                "lg:px-8"
+              )}
+            >
               <div className="grid gap-y-4 sm:grid-cols-2 gap-x-6 sm:gap-x-8">
                 <div>
                   <h3 className="text-sm/6 font-medium text-gray-400">

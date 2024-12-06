@@ -53,7 +53,7 @@ export function ExpandableCard({
 
       <DialogPortal>
         <DialogOverlay className="fixed inset-0 bg-slate-900/30 z-50 backdrop-blur-sm" />
-        <DialogContent className="bg-slate-950 md:max-w-2xl gap-8 max-h-[80vh] overflow-y-auto max-w-[90%] scrollbar-thin scrollbar-track-slate-800 scrollbar-thumb-slate-600">
+        <DialogContent className="bg-slate-950 md:max-w-2xl gap-8 max-h-[80vh] overflow-y-auto max-w-[90%] nice-scrollbar">
           <DialogTitle className="text-primary text-2xl">{title}</DialogTitle>
           {fullContent}
 
