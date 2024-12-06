@@ -172,6 +172,14 @@ function EmailAppLinks({ email }: { email: string }) {
         },
         web: "https://www.icloud.com/mail",
       },
+      "yahoo.com": {
+        name: "Yahoo Mail",
+        app: {
+          ios: "ymail://",
+          android: "ymail://",
+        },
+        web: "https://mail.yahoo.com",
+      },
     };
 
     const domainConfig = Object.entries(configs).find(([key]) =>
