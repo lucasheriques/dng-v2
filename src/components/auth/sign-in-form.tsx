@@ -155,9 +155,16 @@ function EmailAppLinks({ email }: { email: string }) {
       {email.endsWith("@gmail.com") && (
         <Button variant="link" className="h-auto p-0" asChild>
           <a
-            href="googlegmail:///"
+            href="https://mail.google.com"
             onClick={(e) =>
-              openEmailApp("googlegmail:///", "https://gmail.com", e)
+              openEmailApp(
+                // On Android it's "google/gmail", on iOS it's "googlegmail"
+                /iPhone|iPad|iPod/.test(navigator.userAgent)
+                  ? "googlegmail://co"
+                  : "google/gmail",
+                "https://mail.google.com",
+                e
+              )
             }
           >
             Abrir Gmail →
