@@ -74,67 +74,7 @@ export function SignIn() {
           wasLastUsed={lastUsedMethod === "email"}
         />
       ) : (
-        <div className="flex flex-col gap-2">
-          <span className="text-sm font-medium">
-            Link enviado para {email}.
-          </span>
-          {email.endsWith("@gmail.com") && (
-            <Button variant="link" className="h-auto p-0" asChild>
-              <a
-                href={`googlegmail:///co?to=${email}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  // Try mobile app first
-                  window.location.href = `googlegmail:///co?to=${email}`;
-                  // Fallback to web after a small delay
-                  setTimeout(() => {
-                    window.open("https://gmail.com", "_blank");
-                  }, 500);
-                }}
-              >
-                Abrir Gmail →
-              </a>
-            </Button>
-          )}
-          {(email.endsWith("@outlook.com") ||
-            email.endsWith("@hotmail.com") ||
-            email.endsWith("@live.com")) && (
-            <Button variant="link" className="h-auto p-0" asChild>
-              <a
-                href={`ms-outlook://emails`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  // Try mobile app first
-                  window.location.href = "ms-outlook://emails";
-                  // Fallback to web after a small delay
-                  setTimeout(() => {
-                    window.open("https://outlook.live.com", "_blank");
-                  }, 500);
-                }}
-              >
-                Abrir Outlook →
-              </a>
-            </Button>
-          )}
-          {email.endsWith("@icloud.com") && (
-            <Button variant="link" className="h-auto p-0" asChild>
-              <a
-                href={`message://`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  // Try mobile app first
-                  window.location.href = "message://";
-                  // Fallback to web after a small delay
-                  setTimeout(() => {
-                    window.open("https://www.icloud.com/mail", "_blank");
-                  }, 500);
-                }}
-              >
-                Abrir iCloud Mail →
-              </a>
-            </Button>
-          )}
-        </div>
+        <EmailAppLinks email={email} />
       )}
     </div>
   );
@@ -192,5 +132,66 @@ function SignInWithMagicLink({
         Enviar link por email
       </Button>
     </form>
+  );
+}
+
+function EmailAppLinks({ email }: { email: string }) {
+  const openEmailApp = (
+    mobileScheme: string,
+    webFallback: string,
+    e: React.MouseEvent
+  ) => {
+    e.preventDefault();
+    window.location.href = mobileScheme;
+    setTimeout(() => {
+      window.open(webFallback, "_blank");
+    }, 500);
+  };
+
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="text-sm font-medium">Link enviado para {email}.</span>
+
+      {email.endsWith("@gmail.com") && (
+        <Button variant="link" className="h-auto p-0" asChild>
+          <a
+            href="googlegmail:///"
+            onClick={(e) =>
+              openEmailApp("googlegmail:///", "https://gmail.com", e)
+            }
+          >
+            Abrir Gmail →
+          </a>
+        </Button>
+      )}
+
+      {(email.endsWith("@outlook.com") ||
+        email.endsWith("@hotmail.com") ||
+        email.endsWith("@live.com")) && (
+        <Button variant="link" className="h-auto p-0" asChild>
+          <a
+            href="ms-outlook://"
+            onClick={(e) =>
+              openEmailApp("ms-outlook://", "https://outlook.live.com", e)
+            }
+          >
+            Abrir Outlook →
+          </a>
+        </Button>
+      )}
+
+      {email.endsWith("@icloud.com") && (
+        <Button variant="link" className="h-auto p-0" asChild>
+          <a
+            href="message://"
+            onClick={(e) =>
+              openEmailApp("message://", "https://www.icloud.com/mail", e)
+            }
+          >
+            Abrir iCloud Mail →
+          </a>
+        </Button>
+      )}
+    </div>
   );
 }
