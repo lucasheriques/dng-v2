@@ -116,7 +116,7 @@ export function TableInput({
         value={value}
         onChange={handleChange}
         onPaste={handlePaste}
-        className={`w-full bg-transparent p-2 focus-visible:ring-offset-0 border-none rounded-none
+        className={`w-full bg-transparent p-2 focus-visible:ring-offset-0 border-none rounded
           ${prefix ? "pl-8" : "pl-2"}
           ${suffix ? "pr-8" : "pr-2"}
           [appearance:textfield]

@@ -64,7 +64,7 @@ export function UserDropdown() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/perfil">
+                <Link href="/perfil" className="focus:outline-none">
                   <User className="mr-2 h-4 w-4" />
                   <span>Perfil</span>
                 </Link>

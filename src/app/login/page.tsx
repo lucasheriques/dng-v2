@@ -26,7 +26,7 @@ export default function LoginPage() {
         <div className="flex-1 flex items-center justify-center">
           <SignIn />
         </div>
-        <div className="text-center text-xs">
+        <div className="text-center text-xs text-muted-foreground">
           Ao entrar, você concorda com nossa{" "}
           <Link
             href="/politica-de-privacidade"
