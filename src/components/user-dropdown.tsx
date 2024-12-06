@@ -54,9 +54,11 @@ export function UserDropdown() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem disabled>
-                <User className="mr-2 h-4 w-4" />
-                <span>Perfil (em breve)</span>
+              <DropdownMenuItem asChild>
+                <Link href="/perfil">
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Perfil</span>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem disabled>
                 <Settings className="mr-2 h-4 w-4" />
