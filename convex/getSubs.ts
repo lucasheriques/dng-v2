@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
-import { action, internalMutation } from "./_generated/server";
+import { internalAction, internalMutation } from "./_generated/server";
 
 const SUBSTACK_BASE_URL = "https://newsletter.nagringa.dev/api/v1";
 
@@ -42,7 +42,7 @@ function parseCSV(csv: string) {
     });
 }
 
-export const syncSubscribers = action({
+export const syncSubscribers = internalAction({
   handler: async (ctx) => {
     const cookie = process.env.SUBSTACK_AUTH_COOKIE;
     if (!cookie) {
