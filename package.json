@@ -47,7 +47,7 @@
     "nuqs": "^2.1.1",
     "pako": "^2.1.0",
     "posthog-js": "^1.181.0",
-    "react": "19.0.0-rc-02c0e824-20241028",
+    "react": "19.0.0",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-intersection-observer": "^9.13.1",
     "recharts": "^2.13.3",
