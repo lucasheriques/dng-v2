@@ -90,7 +90,7 @@ export default function JsonFormatter() {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">Formatador JSON</h1>
         <Select value={indentation} onValueChange={setIndentation}>
-          <SelectTrigger className="w-32">
+          <SelectTrigger className="w-32 bg-teal-900">
             <SelectValue placeholder="Indentação" />
           </SelectTrigger>
           <SelectContent>
