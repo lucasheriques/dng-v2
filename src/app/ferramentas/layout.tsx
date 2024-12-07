@@ -9,7 +9,7 @@ export default function FerramentasLayout({
   return (
     <div className="flex min-h-dvh">
       <ToolsSidebar />
-      <PageWrapper className="flex-1">
+      <PageWrapper className="flex-1 max-w-full">
         <div className="min-h-dvh">{children}</div>
       </PageWrapper>
     </div>
