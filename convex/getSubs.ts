@@ -76,6 +76,8 @@ export const upsertSubscribersBatch = internalMutation({
     ),
   },
   handler: async (ctx, args) => {
+    let numberOfNewSubscribers = 0;
+    let numberOfUpdatedSubscribers = 0;
     await Promise.all(
       args.subscribers.map(async (sub) => {
         const existing = await ctx.db
@@ -88,14 +90,25 @@ export const upsertSubscribersBatch = internalMutation({
             paidSubscription: sub.active_subscription,
             subscribedAt: sub.created_at,
           });
-        } else {
+          numberOfUpdatedSubscribers++;
+        } else if (!existing) {
           await ctx.db.insert("subscribers", {
             email: sub.email,
             paidSubscription: sub.active_subscription,
             subscribedAt: sub.created_at,
           });
+          numberOfNewSubscribers++;
         }
       })
     );
+
+    console.log(
+      `Upserted ${numberOfNewSubscribers} new subscribers and ${numberOfUpdatedSubscribers} updated subscribers`
+    );
+
+    return {
+      numberOfNewSubscribers,
+      numberOfUpdatedSubscribers,
+    };
   },
 });
