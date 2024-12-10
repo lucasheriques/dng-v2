@@ -7,6 +7,17 @@ export function AnimatedHeroBackground({
 }: {
   children: React.ReactNode;
 }) {
+  if (true) {
+    return (
+      <>
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {children}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0118] via-[#0A0118]/50 to-transparent" />
+        </div>
+      </>
+    );
+  }
+
   return (
     <motion.div
       className="absolute inset-0 z-0 overflow-hidden"
