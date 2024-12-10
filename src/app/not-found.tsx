@@ -15,6 +15,8 @@ export default function NotFound() {
           src={Image404}
           alt="Cosmic cat in a crescent bowl"
           className="h-full w-full object-cover pointer-events-none select-none"
+          priority
+          placeholder="blur"
         />
       </HeroImageGradientOverlay>
 

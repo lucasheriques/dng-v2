@@ -13,7 +13,7 @@ export default function LoginPage() {
       <HeroImageGradientOverlay>
         <Image
           src={HeroImage}
-          alt="Mapa mundi artístico com Brasil em destaque"
+          alt="Cidade futurística representando a comunidade Dev na Gringa"
           fill
           className="h-full w-full object-cover pointer-events-none select-none"
           priority
