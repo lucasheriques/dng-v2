@@ -9,7 +9,7 @@ import HeroImage from "../../public/hero.webp";
 export default function Home() {
   return (
     <>
-      <div className="relative min-h-dvh flex items-center">
+      <div className="relative min-h-[85dvh] pt-24 flex items-center">
         <AnimatedHeroBackground>
           <Image
             src={HeroImage}

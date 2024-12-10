@@ -12,8 +12,9 @@ import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 export const metadata = {
-  title: "Dev na Gringa | Do Brasil para o mundo inteiro.",
-  description: `O Dev na Gringa é uma comunidade para todos interessados em engenharia de software e áreas adjacentes. Nosso foco é em crescimento profissional e carreira internacional.`,
+  title: "Dev na Gringa | Comunidade Tech para Carreira Internacional",
+  description:
+    "Comunidade e mentoria para devs brasileiros que querem trabalhar no exterior. Aprenda com quem já está lá, networking ativo e conteúdo exclusivo sobre carreira tech internacional.",
 };
 
 export default function RootLayout({

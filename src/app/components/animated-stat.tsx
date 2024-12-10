@@ -1,11 +1,11 @@
 "use client";
 
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 
 interface AnimatedStatProps {
   value: number;
-  label: string;
+  label: ReactNode;
   color: string;
 }
 
@@ -46,7 +46,7 @@ export function AnimatedStat({ value, label, color }: AnimatedStatProps) {
       <div ref={countRef} className={`text-3xl font-bold ${color}`}>
         0+
       </div>
-      <div className="text-white/60">{label}</div>
+      <div className="text-slate-400">{label}</div>
     </motion.div>
   );
 }
