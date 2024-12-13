@@ -8,7 +8,7 @@ import HeroImage from "../../public/hero.webp";
 export default function Home() {
   return (
     <>
-      <div className="relative min-h-[85dvh] flex items-center">
+      <div className="relative min-h-[75dvh] flex items-center">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src={HeroImage}
