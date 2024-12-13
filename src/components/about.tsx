@@ -1,10 +1,10 @@
 import { HighlightedText } from "@/components/highlighted-text";
 import { Badge } from "@/components/ui/badge";
-import { MOST_POPULAR_ARTICLES } from "@/lib/constants";
+import { getArticles } from "@/use-cases/get-articles";
 import { ConciergeBell, ListCheck, SearchIcon } from "lucide-react";
 
 const stats = [
-  { label: "artigos publicados", value: `${MOST_POPULAR_ARTICLES.length}+` },
+  { label: "artigos publicados", value: `${getArticles().length}+` },
   { label: "mentorias realizadas", value: "15+" },
   { label: "visitantes todo mês", value: "12.000+" },
 ];

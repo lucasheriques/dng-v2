@@ -1,7 +1,6 @@
 import {
   SiDiscord,
   SiInstagram,
-  SiJson,
   SiLinkedin,
   SiX,
   SiYoutube,
@@ -15,12 +14,6 @@ import {
   Target,
   UserPlus,
 } from "lucide-react";
-
-import ArticleList from "@/lib/article-list.json";
-
-export const MOST_POPULAR_ARTICLES = ArticleList.sort(
-  (a, b) => b.views - a.views
-);
 
 export const SOCIALS = {
   newsletter: "https://newsletter.nagringa.dev",
@@ -111,11 +104,6 @@ export const TOOLS = {
     title: "Calculadora Salário CLT vs PJ",
     href: "/calculadora-clt-vs-pj",
     icon: Calculator,
-  },
-  jsonFormatter: {
-    title: "Formatador e validador de JSON",
-    href: "/ferramentas/json",
-    icon: SiJson,
   },
 };
 

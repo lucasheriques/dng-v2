@@ -2,6 +2,7 @@ import { Providers } from "@/app/providers";
 import { BottomSearchFab } from "@/components/bottom-search-fab";
 import { Footer } from "@/components/footer";
 import Header from "@/components/header";
+import LastArticleBanner from "@/components/last-article-banner";
 import PostHogPageView from "@/components/posthog-page-view";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
@@ -40,6 +41,7 @@ export default function RootLayout({
             showAtBottom={false}
           />
           <Providers>
+            <LastArticleBanner />
             <Header />
             <main className="min-h-dvh bg-slate-950">{children}</main>
             <Footer />

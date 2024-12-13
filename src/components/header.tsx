@@ -6,7 +6,6 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { ChevronDown, CircleDollarSign, Mail, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 import Logo from "../../public/logo-no-bg-small.webp";
 
@@ -60,20 +59,16 @@ const recentPosts = [
 ];
 
 export default function Header() {
-  const pathname = usePathname();
-  const isToolsSection = pathname?.startsWith("/ferramentas");
-
   return (
     <Popover
-      className={`z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg absolute top-0 w-full motion-preset-slide-down border-b border-slate-800/20 transition-transform duration-300`}
+      className="z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg sticky top-0 w-full border-b border-slate-800/20"
       as="header"
     >
       {({ close }) => (
         <>
           <div
             className={cn(
-              "py-4 mx-auto w-full px-4 relative flex items-center justify-between",
-              !isToolsSection && "max-w-7xl"
+              "py-2 mx-auto w-full px-4 relative flex items-center justify-between max-w-7xl"
             )}
           >
             <Link href="/" className="items-center gap-2 flex">
@@ -105,8 +100,7 @@ export default function Header() {
           >
             <div
               className={cn(
-                "relative mx-auto grid grid-cols-1 gap-x-8 gap-y-10 px-6 py-10 lg:grid-cols-2",
-                !isToolsSection && "max-w-7xl",
+                "relative mx-auto grid grid-cols-1 gap-x-8 gap-y-10 px-6 py-10 lg:grid-cols-2 max-w-7xl",
                 "lg:px-8"
               )}
             >

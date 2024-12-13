@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { MOST_POPULAR_ARTICLES, SOCIAL_LINKS, SOCIALS } from "@/lib/constants";
+import { SOCIAL_LINKS, SOCIALS } from "@/lib/constants";
+import { getMostPopularArticles } from "@/use-cases/get-articles";
 import Image from "next/image";
 import Link from "next/link";
 import FooterHeroImage from "../../public/footer.webp";
@@ -13,6 +14,8 @@ const tools = [
 ];
 
 export function Footer() {
+  const popularArticles = getMostPopularArticles().slice(0, 5);
+
   return (
     <footer className="relative">
       {/* Background Image */}
@@ -76,7 +79,7 @@ export function Footer() {
               Artigos populares
             </h3>
             <div className="space-y-4">
-              {MOST_POPULAR_ARTICLES.slice(0, 5).map((post) => (
+              {popularArticles.map((post) => (
                 <Link
                   href={`${SOCIALS.newsletter}/p/${post.slug}`}
                   key={post.slug}

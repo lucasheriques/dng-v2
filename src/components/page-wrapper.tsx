@@ -6,6 +6,8 @@ export function PageWrapper({
   className?: string;
 }) {
   return (
-    <div className={`content-wrapper pt-24 pb-20 ${className}`}>{children}</div>
+    <div className={`content-wrapper pb-20 pt-4 md:pt-8 ${className}`}>
+      {children}
+    </div>
   );
 }
