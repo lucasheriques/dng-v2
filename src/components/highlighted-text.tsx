@@ -1,5 +1,6 @@
 "use client";
-import { motion, useAnimation } from "framer-motion";
+import { useAnimation } from "motion/react";
+import * as m from "motion/react-m";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -34,7 +35,7 @@ export function HighlightedText({
   return (
     <span className={`relative px-1 ${className}`} ref={ref}>
       {children}
-      <motion.span
+      <m.span
         initial="hidden"
         animate={controls}
         variants={{

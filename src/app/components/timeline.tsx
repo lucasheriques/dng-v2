@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { ArticleCard } from "@/components/article-card";
 import { ExpandableCard } from "@/components/expandable-card";
@@ -5,8 +6,9 @@ import { MentorshipSection } from "@/components/mentorship-section";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { POPULAR_ARTICLES, SOCIALS } from "@/lib/constants";
-import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { MotionValue, useScroll, useTransform } from "motion/react";
+import * as m from "motion/react-m";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -488,21 +490,21 @@ const TimelineCircle = ({
 
   return (
     <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-gradient-to-br from-white/10 to-white/5 dark:from-white/5 dark:to-transparent backdrop-blur-sm flex items-center justify-center shadow-lg">
-      <motion.div
+      <m.div
         className="h-6 w-6 rounded-full border-2 border-neutral-200/40 dark:border-neutral-700/40 flex items-center justify-center"
         style={{
-          scale: circleScale,
-          background: circleTransform,
+          scale: circleScale as any,
+          background: circleTransform as any,
           boxShadow: "0 0 10px rgba(59, 130, 246, 0.3)",
         }}
       >
-        <motion.div
+        <m.div
           className="h-2 w-2 rounded-full bg-white dark:bg-white/90"
           style={{
-            scale: circleScale,
+            scale: circleScale as any,
           }}
         />
-      </motion.div>
+      </m.div>
     </div>
   );
 };
@@ -567,10 +569,10 @@ const Timeline = () => {
           }}
           className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] "
         >
-          <motion.div
+          <m.div
             style={{
-              height: heightTransform,
-              opacity: opacityTransform,
+              height: heightTransform as any,
+              opacity: opacityTransform as any,
             }}
             className="absolute inset-x-0 top-0  w-[2px] bg-gradient-to-t from-accent-secondary via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
           />

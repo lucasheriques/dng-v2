@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/format";
-import { motion } from "framer-motion";
+import * as m from "motion/react-m";
 import { calculateResults } from "../calculator";
 import { FormData } from "../types";
 import { decompress } from "../utils";
@@ -27,7 +27,7 @@ export function HistoryCard({ hash, onClick }: HistoryCardProps) {
   const pjTotalCompensation = results.pj.total;
 
   return (
-    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+    <m.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
       <Button
         variant="outline"
         className="p-4 h-auto flex flex-col items-start gap-1 text-left w-full"
@@ -42,6 +42,6 @@ export function HistoryCard({ hash, onClick }: HistoryCardProps) {
           {formatCurrency(pjTotalCompensation)}
         </div>
       </Button>
-    </motion.div>
+    </m.div>
   );
 }

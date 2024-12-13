@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import * as m from "motion/react-m";
 
 type Props = {
   text: string;
@@ -20,7 +20,7 @@ export default function AnimatedText({
 
   if (!separatedWords) {
     return (
-      <motion.span
+      <m.span
         className={cn("inline-block", className)}
         initial={{ opacity: 0, filter: "blur(10px)" }}
         animate={{ opacity: 1, filter: "blur(0px)" }}
@@ -30,14 +30,14 @@ export default function AnimatedText({
         }}
       >
         {text}
-      </motion.span>
+      </m.span>
     );
   }
 
   return (
     <span>
       {words.map((word, index) => (
-        <motion.span
+        <m.span
           key={index}
           className={cn("inline-block", className)}
           initial={{ opacity: 0, filter: "blur(10px)" }}
@@ -49,7 +49,7 @@ export default function AnimatedText({
         >
           {word}
           {index < words.length - 1 && "\u00A0"}
-        </motion.span>
+        </m.span>
       ))}
     </span>
   );

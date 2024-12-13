@@ -1,6 +1,8 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { useAnimate, useInView } from "motion/react";
+import * as m from "motion/react-m";
+
 import { ReactNode, useEffect, useRef } from "react";
 
 interface AnimatedStatProps {
@@ -11,42 +13,33 @@ interface AnimatedStatProps {
 
 export function AnimatedStat({ value, label, color }: AnimatedStatProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const countRef = useRef<HTMLDivElement>(null);
+  const [scope, animate] = useAnimate();
   const isInView = useInView(ref, { once: true });
-
-  const motionValue = useMotionValue(0);
-  const springValue = useSpring(motionValue, {
-    damping: 60,
-    stiffness: 100,
-  });
 
   useEffect(() => {
     if (isInView) {
-      motionValue.set(value);
+      animate(0, value, {
+        type: "spring",
+        stiffness: 100,
+        damping: 30,
+        onUpdate: (latest) => {
+          scope.current!.innerHTML = `${Math.round(latest)}+`;
+        },
+      });
     }
-  }, [motionValue, isInView, value]);
-
-  useEffect(
-    () =>
-      springValue.on("change", (latest) => {
-        if (countRef.current) {
-          countRef.current.textContent = `${Math.round(latest)}+`;
-        }
-      }),
-    [springValue]
-  );
+  }, [isInView, value, animate, scope]);
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className="text-center group"
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.2 }}
     >
-      <div ref={countRef} className={`text-3xl font-bold ${color}`}>
+      <div ref={scope} className={`text-3xl font-bold ${color}`}>
         0+
       </div>
       <div className="text-slate-400">{label}</div>
-    </motion.div>
+    </m.div>
   );
 }

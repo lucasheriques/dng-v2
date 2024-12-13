@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "motion/react";
+import * as m from "motion/react-m";
 import { FormData } from "../types";
 import { HistoryCard } from "./history-card";
 
@@ -16,7 +17,7 @@ export function RecentComparisons({
   if (hashes.length === 0) return null;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col gap-2"
@@ -25,7 +26,7 @@ export function RecentComparisons({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
         <AnimatePresence mode="popLayout">
           {hashes.map((hash, index) => (
-            <motion.div
+            <m.div
               key={hash}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -34,10 +35,10 @@ export function RecentComparisons({
               layout
             >
               <HistoryCard hash={hash} onClick={onLoadHistory} />
-            </motion.div>
+            </m.div>
           ))}
         </AnimatePresence>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
