@@ -33,9 +33,8 @@ export default function About() {
             Conteúdo que faz sentido
           </h1>
           <p className="mt-6 text-xl/8 text-white/70">
-            Meu primeiro trabalho como Engenheiro de Software foi em 2016, como
-            estagiário. E, desde 2020, sempre trabalhei para empresas
-            americanas.
+            Meu primeiro trabalho como Software Developer foi em 2016. E, desde
+            2020, estou sempre trabalhando pra empresas gringas.
           </p>
         </div>
         <div className="mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-12">
