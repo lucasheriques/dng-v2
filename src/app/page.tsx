@@ -24,9 +24,11 @@ export default function Home() {
         </div>
         <Hero />
       </div>
-      <div className="relative content-wrapper motion-preset-fade motion-preset-slide-up motion-duration-1500 motion-delay- md:max-w-3xl md:mx-auto md:px-0 py-8">
+      <div
+        className="content-wrapper motion-preset-fade motion-preset-slide-up motion-duration-1500 motion-delay- md:max-w-3xl md:mx-auto md:px-0 py-8"
+        id="youtube-hero"
+      >
         <HeroVideoDialog
-          className=""
           animationStyle="top-in-bottom-out"
           videoSrc="https://www.youtube.com/embed/HkDNy_PMg5A"
           thumbnailSrc={YtThumbnail}
