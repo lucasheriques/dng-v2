@@ -2,8 +2,10 @@ import Features from "@/app/components/features";
 import Hero from "@/app/components/hero";
 import Timeline from "@/app/components/timeline";
 import About from "@/components/about";
+import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 import Image from "next/image";
 import HeroImage from "../../public/hero.webp";
+import YtThumbnail from "../../public/thumb-yt.jpg";
 
 export default function Home() {
   return (
@@ -22,7 +24,15 @@ export default function Home() {
         </div>
         <Hero />
       </div>
-
+      <div className="relative content-wrapper motion-preset-fade motion-preset-slide-up motion-duration-1500 motion-delay- md:max-w-3xl md:mx-auto md:px-0 py-8">
+        <HeroVideoDialog
+          className=""
+          animationStyle="top-in-bottom-out"
+          videoSrc="https://www.youtube.com/embed/HkDNy_PMg5A"
+          thumbnailSrc={YtThumbnail}
+          thumbnailAlt="O que é o Dev na Gringa e como minha jornada de criação de conteúdo começou"
+        />
+      </div>
       <Features />
       <About />
       <Timeline />
