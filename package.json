@@ -47,7 +47,7 @@
     "nextjs-toploader": "^3.7.15",
     "nuqs": "^2.1.1",
     "pako": "^2.1.0",
-    "posthog-js": "^1.181.0",
+    "posthog-js": "^1.200.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-intersection-observer": "^9.13.1",
