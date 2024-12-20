@@ -1,7 +1,6 @@
 import { CalculatorFormData } from "@/app/calculadora-clt-vs-pj/types";
 import { decompress } from "@/app/calculadora-clt-vs-pj/utils";
 import { PageWrapper } from "@/components/page-wrapper";
-import { env } from "@/env";
 import { SalaryCalculatorClient } from "./calculator";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -11,6 +10,8 @@ export const metadata = {
   description:
     "Calcule o salário líquido de um profissional CLT e PJ para entender qual a melhor opção. Incluindo todos os benefícios.",
 };
+
+const SELIC_RATE = 12.25;
 
 export default async function SalaryCalculator({
   searchParams,
@@ -30,13 +31,11 @@ export default async function SalaryCalculator({
     }
   }
 
-  const selicRate = Number(env.NEXT_PUBLIC_SELIC_RATE);
-
   return (
     <PageWrapper>
       <SalaryCalculatorClient
         initialData={initialData}
-        defaultInterestRate={selicRate}
+        defaultInterestRate={SELIC_RATE}
       />
     </PageWrapper>
   );
