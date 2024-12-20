@@ -29,7 +29,7 @@
       "draft_section_name": null,
       "is_section_pinned": false,
       "reactions": {
-        "❤": 6
+        "❤": 7
       },
       "reaction": null,
       "top_exclusions": [],
@@ -56,7 +56,7 @@
           "profile_set_up_at": "2023-01-21T00:28:30.511Z"
         }
       ],
-      "reaction_count": 6,
+      "reaction_count": 7,
       "comment_count": 0,
       "child_comment_count": 0,
       "bylines": [
@@ -71,12 +71,12 @@
         }
       ],
       "stats": {
-        "views": 903,
-        "opens": 866,
-        "opened": 523,
-        "open_rate": 0.385978,
-        "clicked": 25,
-        "clicks": 41,
+        "views": 916,
+        "opens": 874,
+        "opened": 524,
+        "open_rate": 0.386716,
+        "clicked": 26,
+        "clicks": 42,
         "sent": 1355,
         "delivered": 1316,
         "downloads": 0,
@@ -93,11 +93,11 @@
         "subscriptions_within_1_day": 1,
         "unsubscribes_within_1_day": 0,
         "signups": 1,
-        "subscribes": 0,
+        "subscribes": 1,
         "shares": 1,
-        "estimated_value": 0,
-        "click_through_rate": 0.047801,
-        "engagement_rate": 0.059273
+        "estimated_value": 59.09768313363983,
+        "click_through_rate": 0.049618,
+        "engagement_rate": 0.062977
       },
       "republishedPosts": null
     },
@@ -172,10 +172,10 @@
         }
       ],
       "stats": {
-        "views": 1080,
-        "opens": 1020,
-        "opened": 561,
-        "open_rate": 0.425322,
+        "views": 1087,
+        "opens": 1026,
+        "opened": 562,
+        "open_rate": 0.42608,
         "clicked": 11,
         "clicks": 23,
         "sent": 1319,
@@ -197,8 +197,8 @@
         "subscribes": 0,
         "shares": 1,
         "estimated_value": 0,
-        "click_through_rate": 0.019608,
-        "engagement_rate": 0.035651
+        "click_through_rate": 0.019573,
+        "engagement_rate": 0.035587
       },
       "republishedPosts": null
     },
@@ -273,8 +273,8 @@
         }
       ],
       "stats": {
-        "views": 1324,
-        "opens": 1166,
+        "views": 1328,
+        "opens": 1169,
         "opened": 643,
         "open_rate": 0.503524,
         "clicked": 25,
@@ -297,7 +297,7 @@
         "signups": 7,
         "subscribes": 3,
         "shares": 0,
-        "estimated_value": 176.801899084729,
+        "estimated_value": 176.80189908472897,
         "click_through_rate": 0.03888,
         "engagement_rate": 0.096423
       },
@@ -374,8 +374,8 @@
         }
       ],
       "stats": {
-        "views": 1336,
-        "opens": 1209,
+        "views": 1346,
+        "opens": 1215,
         "opened": 518,
         "open_rate": 0.425637,
         "clicked": 27,
@@ -576,7 +576,7 @@
         }
       ],
       "stats": {
-        "views": 1410,
+        "views": 1411,
         "opens": 911,
         "opened": 431,
         "open_rate": 0.422135,
@@ -677,7 +677,7 @@
         }
       ],
       "stats": {
-        "views": 1023,
+        "views": 1024,
         "opens": 849,
         "opened": 393,
         "open_rate": 0.46181,
@@ -739,7 +739,9 @@
         "❤": 1
       },
       "reaction": null,
-      "top_exclusions": [2617704],
+      "top_exclusions": [
+        2617704
+      ],
       "pins": [],
       "draftBylines": [
         {
@@ -802,7 +804,7 @@
         "signups": 2,
         "subscribes": 1,
         "shares": 0,
-        "estimated_value": 59.3587566822028,
+        "estimated_value": 59.35875668220284,
         "click_through_rate": 0,
         "engagement_rate": 0
       },
@@ -903,7 +905,7 @@
         "signups": 5,
         "subscribes": 1,
         "shares": 2,
-        "estimated_value": 51.5424731526635,
+        "estimated_value": 51.54247315266346,
         "click_through_rate": 0.0347,
         "engagement_rate": 0.050473
       },
@@ -1081,7 +1083,7 @@
         }
       ],
       "stats": {
-        "views": 2583,
+        "views": 2586,
         "opens": 1179,
         "opened": 302,
         "open_rate": 0.509275,
@@ -1105,7 +1107,7 @@
         "signups": 19,
         "subscribes": 2,
         "shares": 3,
-        "estimated_value": 104.445341654609,
+        "estimated_value": 104.44534165460884,
         "click_through_rate": 0.135762,
         "engagement_rate": 0.142384
       },
@@ -1182,12 +1184,12 @@
         }
       ],
       "stats": {
-        "views": 487,
+        "views": 489,
         "opens": 344,
         "opened": 212,
         "open_rate": 0.368056,
-        "clicked": 7,
-        "clicks": 8,
+        "clicked": 8,
+        "clicks": 9,
         "sent": 576,
         "delivered": 561,
         "downloads": 0,
@@ -1206,8 +1208,8 @@
         "signups": 1,
         "subscribes": 2,
         "shares": 1,
-        "estimated_value": 121.296427842537,
-        "click_through_rate": 0.033019,
+        "estimated_value": 121.29642784253714,
+        "click_through_rate": 0.037736,
         "engagement_rate": 0.117925
       },
       "republishedPosts": null
@@ -1283,7 +1285,7 @@
         }
       ],
       "stats": {
-        "views": 2378,
+        "views": 2385,
         "opens": 575,
         "opened": 294,
         "open_rate": 0.544444,
@@ -1307,7 +1309,7 @@
         "signups": 14,
         "subscribes": 2,
         "shares": 7,
-        "estimated_value": 87.7722548541102,
+        "estimated_value": 87.77225485411017,
         "click_through_rate": 0.204082,
         "engagement_rate": 0.20068
       },
@@ -1408,7 +1410,7 @@
         "signups": 0,
         "subscribes": 1,
         "shares": 0,
-        "estimated_value": 55.880282083664,
+        "estimated_value": 55.88028208366396,
         "click_through_rate": 0.1,
         "engagement_rate": 0.113333
       },
@@ -1586,7 +1588,7 @@
         }
       ],
       "stats": {
-        "views": 1050,
+        "views": 1052,
         "opens": 288,
         "opened": 152,
         "open_rate": 0.460606,
@@ -1610,7 +1612,7 @@
         "signups": 7,
         "subscribes": 5,
         "shares": 3,
-        "estimated_value": 289.230890510367,
+        "estimated_value": 289.2308905103666,
         "click_through_rate": 0.269737,
         "engagement_rate": 0.230263
       },
@@ -1687,7 +1689,7 @@
         }
       ],
       "stats": {
-        "views": 1671,
+        "views": 1673,
         "opens": 265,
         "opened": 138,
         "open_rate": 0.424615,
@@ -1711,7 +1713,7 @@
         "signups": 13,
         "subscribes": 1,
         "shares": 11,
-        "estimated_value": 36.6786538897159,
+        "estimated_value": 36.678653889715946,
         "click_through_rate": 0.173913,
         "engagement_rate": 0.130435
       },
@@ -1788,7 +1790,7 @@
         }
       ],
       "stats": {
-        "views": 4553,
+        "views": 4558,
         "opens": 193,
         "opened": 106,
         "open_rate": 0.445378,
@@ -1889,7 +1891,7 @@
         }
       ],
       "stats": {
-        "views": 2152,
+        "views": 2156,
         "opens": 200,
         "opened": 91,
         "open_rate": 0.47644,
@@ -1913,7 +1915,7 @@
         "signups": 33,
         "subscribes": 1,
         "shares": 4,
-        "estimated_value": 21.8850306390429,
+        "estimated_value": 21.885030639042892,
         "click_through_rate": 0.307692,
         "engagement_rate": 0.197802
       },
@@ -2192,12 +2194,12 @@
         }
       ],
       "stats": {
-        "views": 308,
+        "views": 309,
         "opens": 97,
         "opened": 68,
         "open_rate": 0.465753,
-        "clicked": 16,
-        "clicks": 19,
+        "clicked": 17,
+        "clicks": 21,
         "sent": 146,
         "delivered": 143,
         "downloads": 0,
@@ -2216,8 +2218,8 @@
         "signups": 1,
         "subscribes": 3,
         "shares": 0,
-        "estimated_value": 123.729419622492,
-        "click_through_rate": 0.235294,
+        "estimated_value": 123.72941962249229,
+        "click_through_rate": 0.25,
         "engagement_rate": 0.205882
       },
       "republishedPosts": null
@@ -2293,7 +2295,7 @@
         }
       ],
       "stats": {
-        "views": 244,
+        "views": 245,
         "opens": 142,
         "opened": 51,
         "open_rate": 0.364286,
@@ -2394,12 +2396,12 @@
         }
       ],
       "stats": {
-        "views": 1195,
+        "views": 1198,
         "opens": 175,
         "opened": 57,
         "open_rate": 0.448819,
-        "clicked": 40,
-        "clicks": 84,
+        "clicked": 41,
+        "clicks": 86,
         "sent": 127,
         "delivered": 123,
         "downloads": 0,
@@ -2419,7 +2421,7 @@
         "subscribes": 0,
         "shares": 4,
         "estimated_value": 0,
-        "click_through_rate": 0.701754,
+        "click_through_rate": 0.719298,
         "engagement_rate": 0.192982
       },
       "republishedPosts": null
@@ -2495,7 +2497,7 @@
         }
       ],
       "stats": {
-        "views": 199,
+        "views": 200,
         "opens": 86,
         "opened": 58,
         "open_rate": 0.47541,
@@ -2721,7 +2723,7 @@
         "signups": 4,
         "subscribes": 1,
         "shares": 0,
-        "estimated_value": 21.4577079305543,
+        "estimated_value": 21.45770793055427,
         "click_through_rate": 0.222222,
         "engagement_rate": 0.2
       },
@@ -2798,7 +2800,7 @@
         }
       ],
       "stats": {
-        "views": 2015,
+        "views": 2017,
         "opens": 404,
         "opened": 39,
         "open_rate": 0.464286,
@@ -2822,7 +2824,7 @@
         "signups": 45,
         "subscribes": 1,
         "shares": 4,
-        "estimated_value": 43.8159751063611,
+        "estimated_value": 43.81597510636108,
         "click_through_rate": 0.333333,
         "engagement_rate": 0.179487
       },
@@ -3000,7 +3002,7 @@
         }
       ],
       "stats": {
-        "views": 722,
+        "views": 726,
         "opens": 41,
         "opened": 27,
         "open_rate": 0.45,
@@ -3202,7 +3204,7 @@
         }
       ],
       "stats": {
-        "views": 874,
+        "views": 882,
         "opens": 22,
         "opened": 12,
         "open_rate": 0.428571,
@@ -3303,7 +3305,7 @@
         }
       ],
       "stats": {
-        "views": 719,
+        "views": 720,
         "opens": 16,
         "opened": 11,
         "open_rate": 0.52381,
@@ -3404,7 +3406,7 @@
         }
       ],
       "stats": {
-        "views": 2032,
+        "views": 2035,
         "opens": 4,
         "opened": 1,
         "open_rate": 1,
@@ -3428,7 +3430,7 @@
         "signups": 55,
         "subscribes": 2,
         "shares": 5,
-        "estimated_value": 65.4860204942711,
+        "estimated_value": 65.48602049427114,
         "click_through_rate": 18,
         "engagement_rate": 1
       },

@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "get:articles": "NODE_OPTIONS=\"--loader ts-node/esm\" ts-node src/lib/generate-article-list.ts",
+    "get:articles": "node -r dotenv/config --loader ts-node/esm src/lib/generate-article-list.ts dotenv_config_path=.env.local",
     "get:subs": "node src/scripts/get-subs.js",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
@@ -71,7 +71,9 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@vitest/coverage-v8": "2.1.8",
     "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "eslint": "^8",
     "eslint-config-next": "15.0.2",
     "postcss": "^8",
