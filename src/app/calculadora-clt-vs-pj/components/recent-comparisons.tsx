@@ -2,12 +2,12 @@
 
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
-import { FormData } from "../types";
+import { CalculatorFormData } from "../types";
 import { HistoryCard } from "./history-card";
 
 interface RecentComparisonsProps {
   hashes: string[];
-  onLoadHistory: (data: FormData) => void;
+  onLoadHistory: (data: CalculatorFormData) => void;
 }
 
 export function RecentComparisons({

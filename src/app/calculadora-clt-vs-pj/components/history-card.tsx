@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/format";
+import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import * as m from "motion/react-m";
-import { calculateResults } from "../calculator";
-import { FormData } from "../types";
+import { CalculatorFormData } from "../types";
 import { decompress } from "../utils";
 
 interface HistoryCardProps {
   hash: string;
-  onClick: (data: FormData) => void;
+  onClick: (data: CalculatorFormData) => void;
 }
 
 export function HistoryCard({ hash, onClick }: HistoryCardProps) {

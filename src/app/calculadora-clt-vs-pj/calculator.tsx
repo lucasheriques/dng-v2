@@ -3,7 +3,7 @@
 import Results from "@/app/calculadora-clt-vs-pj/components/results";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { calculateCLT, calculatePJ } from "@/lib/salary-calculations";
+import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import { Share2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -14,7 +14,7 @@ import {
   TableInput,
   TableRow,
 } from "./components";
-import { CalculationResults, FormData } from "./types";
+import { CalculationResults, CalculatorFormData } from "./types";
 import { compress } from "./utils";
 
 const RecentComparisons = dynamic(
@@ -26,7 +26,7 @@ const RecentComparisons = dynamic(
 );
 
 interface SalaryCalculatorProps {
-  initialData?: FormData;
+  initialData?: CalculatorFormData;
   defaultInterestRate: number;
 }
 
@@ -34,7 +34,7 @@ interface CalculatorHistory {
   hashes: string[];
 }
 
-const defaultFormData: FormData = {
+const defaultFormData: CalculatorFormData = {
   grossSalary: "",
   pjGrossSalary: "",
   mealAllowance: "",
@@ -56,7 +56,7 @@ export function SalaryCalculatorClient({
   initialData,
   defaultInterestRate,
 }: SalaryCalculatorProps) {
-  const [formData, setFormData] = useState<FormData>(
+  const [formData, setFormData] = useState<CalculatorFormData>(
     initialData ?? defaultFormData
   );
 
@@ -81,7 +81,10 @@ export function SalaryCalculatorClient({
     setResults(calculateResults(newFormData));
   };
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const handleInputChange = (
+    field: keyof CalculatorFormData,
+    value: string
+  ) => {
     const newFormData = {
       ...formData,
       [field]: value,
@@ -122,7 +125,7 @@ export function SalaryCalculatorClient({
     window.history.replaceState({}, "", url.toString());
   };
 
-  const handleLoadHistory = (data: FormData) => {
+  const handleLoadHistory = (data: CalculatorFormData) => {
     setFormData(data);
     setResults(calculateResults(data));
   };
@@ -362,38 +365,4 @@ export function SalaryCalculatorClient({
       </div>
     </>
   );
-}
-
-export function calculateResults(
-  formData: FormData
-): CalculationResults | null {
-  if (!formData.grossSalary && !formData.pjGrossSalary) {
-    return null;
-  }
-
-  const cltInput = {
-    grossSalary: Number(formData.grossSalary || formData.pjGrossSalary),
-    mealAllowance: Number(formData.mealAllowance) || undefined,
-    transportAllowance: Number(formData.transportAllowance) || undefined,
-    healthInsurance: Number(formData.healthInsurance) || undefined,
-    otherBenefits: Number(formData.otherBenefits) || undefined,
-    includeFGTS: formData.includeFGTS,
-    yearsAtCompany: Number(formData.yearsAtCompany) || 0,
-    plr: Number(formData.plr) || undefined,
-  };
-
-  const pjInput = {
-    grossSalary: Number(formData.pjGrossSalary || formData.grossSalary),
-    accountingFee: Number(formData.accountingFee),
-    inssContribution: Number(formData.inssContribution),
-    taxRate: Number(formData.taxRate) / 100,
-    otherExpenses: Number(formData.otherExpenses) || 0,
-    taxableBenefits: Number(formData.taxableBenefits) || 0,
-    nonTaxableBenefits: Number(formData.nonTaxableBenefits) || 0,
-  };
-
-  const cltResults = calculateCLT(cltInput);
-  const pjResults = calculatePJ(pjInput);
-
-  return { clt: cltResults, pj: pjResults };
 }

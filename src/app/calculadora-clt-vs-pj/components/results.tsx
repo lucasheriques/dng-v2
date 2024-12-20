@@ -7,17 +7,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatCurrency } from "@/lib/utils";
 import {
   findCLTEquivalentForPJ,
   findPJEquivalentForCLT,
-} from "@/lib/salary-calculations";
-import { formatCurrency } from "@/lib/utils";
-import { CalculationResults, FormData } from "../types";
+} from "@/use-cases/calculator/salary-calculations";
+import { CalculationResults, CalculatorFormData } from "../types";
 
 interface ResultsProps {
   results: CalculationResults;
   defaultInterestRate: number;
-  formData: FormData;
+  formData: CalculatorFormData;
 }
 
 export default function Results({

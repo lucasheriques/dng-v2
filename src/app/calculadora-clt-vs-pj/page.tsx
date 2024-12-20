@@ -1,25 +1,10 @@
-import { FormData } from "@/app/calculadora-clt-vs-pj/types";
+import { CalculatorFormData } from "@/app/calculadora-clt-vs-pj/types";
 import { decompress } from "@/app/calculadora-clt-vs-pj/utils";
 import { PageWrapper } from "@/components/page-wrapper";
 import { env } from "@/env";
 import { SalaryCalculatorClient } from "./calculator";
 
-// type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
-
-// async function getSelicRate() {
-//   try {
-//     const response = await fetch(
-//       "https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1",
-//       { next: { revalidate: 86400 } } // Revalidate every 24 hours (24 * 60 * 60 seconds)
-//     );
-//     const data = await response.json();
-//     return Number(data[0].valor);
-//   } catch (error) {
-//     console.error("Error fetching SELIC rate:", error);
-//     return 11.25; // Fallback value
-//   }
-// }
 
 export const metadata = {
   title: "Calculadora de Salário CLT e PJ | Dev na Gringa",
@@ -32,7 +17,7 @@ export default async function SalaryCalculator({
 }: {
   searchParams: SearchParams;
 }) {
-  let initialData: FormData | undefined;
+  let initialData: CalculatorFormData | undefined;
 
   const data = (await searchParams).d;
 

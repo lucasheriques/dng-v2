@@ -1,7 +1,7 @@
 import { deflate, inflate } from "pako";
-import { FormData } from "./types";
+import { CalculatorFormData } from "./types";
 
-export function compress(data: FormData) {
+export function compress(data: CalculatorFormData) {
   // Remove empty/default values to minimize data size
   const minimalData = Object.fromEntries(
     Object.entries(data).filter(([key, value]) => {

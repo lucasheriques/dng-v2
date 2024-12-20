@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "get:articles": "NODE_OPTIONS=\"--loader ts-node/esm\" ts-node src/lib/generate-article-list.ts",
-    "get:subs": "node src/scripts/get-subs.js"
+    "get:subs": "node src/scripts/get-subs.js",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@auth/core": "0.36.0",
@@ -76,6 +78,7 @@
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^2.1.8"
   }
 }

@@ -1,6 +1,9 @@
-import { calculateCLT, calculatePJ } from "@/lib/salary-calculations";
+import {
+  calculateCLT,
+  calculatePJ,
+} from "@/use-cases/calculator/salary-calculations";
 
-export type FormData = {
+export type CalculatorFormData = {
   grossSalary: string;
   pjGrossSalary: string;
   mealAllowance: string;

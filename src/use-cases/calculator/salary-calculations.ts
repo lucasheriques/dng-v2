@@ -1,4 +1,7 @@
-import { FormData } from "@/app/calculadora-clt-vs-pj/types";
+import {
+  CalculationResults,
+  CalculatorFormData,
+} from "@/app/calculadora-clt-vs-pj/types";
 
 interface SalaryInput {
   grossSalary: number;
@@ -188,7 +191,7 @@ export function calculatePJ(input: PJInput) {
 
 export function findCLTEquivalentForPJ(
   targetNet: number,
-  formData: FormData
+  formData: CalculatorFormData
 ): number {
   let grossSalary = targetNet * 0.8; // Initial guess
   let lastGross = 0;
@@ -223,7 +226,7 @@ export function findCLTEquivalentForPJ(
 
 export function findPJEquivalentForCLT(
   targetNet: number,
-  formData: FormData
+  formData: CalculatorFormData
 ): number {
   // For PJ: netSalary = grossSalary * (1 - taxRate) - fixedCosts
   const taxRate = Number(formData.taxRate) / 100;
@@ -233,4 +236,38 @@ export function findPJEquivalentForCLT(
   const fixedCosts = accountingFee + inssContribution + otherExpenses;
 
   return (targetNet + fixedCosts) / (1 - taxRate);
+}
+
+export function calculateResults(
+  formData: CalculatorFormData
+): CalculationResults | null {
+  if (!formData.grossSalary && !formData.pjGrossSalary) {
+    return null;
+  }
+
+  const cltInput = {
+    grossSalary: Number(formData.grossSalary || formData.pjGrossSalary),
+    mealAllowance: Number(formData.mealAllowance) || undefined,
+    transportAllowance: Number(formData.transportAllowance) || undefined,
+    healthInsurance: Number(formData.healthInsurance) || undefined,
+    otherBenefits: Number(formData.otherBenefits) || undefined,
+    includeFGTS: formData.includeFGTS,
+    yearsAtCompany: Number(formData.yearsAtCompany) || 0,
+    plr: Number(formData.plr) || undefined,
+  };
+
+  const pjInput = {
+    grossSalary: Number(formData.pjGrossSalary || formData.grossSalary),
+    accountingFee: Number(formData.accountingFee),
+    inssContribution: Number(formData.inssContribution),
+    taxRate: Number(formData.taxRate) / 100,
+    otherExpenses: Number(formData.otherExpenses) || 0,
+    taxableBenefits: Number(formData.taxableBenefits) || 0,
+    nonTaxableBenefits: Number(formData.nonTaxableBenefits) || 0,
+  };
+
+  const cltResults = calculateCLT(cltInput);
+  const pjResults = calculatePJ(pjInput);
+
+  return { clt: cltResults, pj: pjResults };
 }
