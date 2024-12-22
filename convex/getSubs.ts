@@ -54,14 +54,19 @@ export const syncSubscribers = internalAction({
 
     // Batch update subscribers in chunks to avoid timeout
     const BATCH_SIZE = 5000;
+    const messages: string[] = [];
     for (let i = 0; i < subscribers.length; i += BATCH_SIZE) {
       const batch = subscribers.slice(i, i + BATCH_SIZE);
-      await ctx.runMutation(internal.getSubs.upsertSubscribersBatch, {
-        subscribers: batch,
-      });
+      const message = await ctx.runMutation(
+        internal.getSubs.upsertSubscribersBatch,
+        {
+          subscribers: batch,
+        }
+      );
+      messages.push(message);
     }
 
-    return subscribers.length;
+    return messages.join("\n");
   },
 });
 
@@ -78,37 +83,59 @@ export const upsertSubscribersBatch = internalMutation({
   handler: async (ctx, args) => {
     let numberOfNewSubscribers = 0;
     let numberOfUpdatedSubscribers = 0;
-    await Promise.all(
-      args.subscribers.map(async (sub) => {
-        const existing = await ctx.db
-          .query("subscribers")
-          .withIndex("by_email", (q) => q.eq("email", sub.email))
-          .first();
 
-        if (existing && existing.paidSubscription !== sub.active_subscription) {
-          await ctx.db.patch(existing._id, {
-            paidSubscription: sub.active_subscription,
-            subscribedAt: sub.created_at,
-          });
-          numberOfUpdatedSubscribers++;
-        } else if (!existing) {
-          await ctx.db.insert("subscribers", {
-            email: sub.email,
-            paidSubscription: sub.active_subscription,
-            subscribedAt: sub.created_at,
-          });
-          numberOfNewSubscribers++;
+    for await (const sub of args.subscribers) {
+      const upsertResult = await ctx.runMutation(
+        internal.getSubs.upsertSubscriber,
+        {
+          email: sub.email,
+          paidSubscription: sub.active_subscription,
+          subscribedAt: sub.created_at,
         }
-      })
-    );
+      );
 
-    console.log(
-      `Upserted ${numberOfNewSubscribers} new subscribers and ${numberOfUpdatedSubscribers} updated subscribers`
-    );
+      if (upsertResult.created) {
+        numberOfNewSubscribers++;
+      } else if (upsertResult.updated) {
+        numberOfUpdatedSubscribers++;
+      }
+    }
 
-    return {
-      numberOfNewSubscribers,
-      numberOfUpdatedSubscribers,
-    };
+    return `Upserted ${numberOfNewSubscribers} new subscribers and ${numberOfUpdatedSubscribers} updated subscribers`;
+  },
+});
+
+export const upsertSubscriber = internalMutation({
+  args: {
+    email: v.string(),
+    paidSubscription: v.boolean(),
+    subscribedAt: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db
+      .query("subscribers")
+      .withIndex("by_email", (q) => q.eq("email", args.email))
+      .first();
+
+    if (existing) {
+      // only update if the paidSubscription has changed
+      if (existing.paidSubscription === args.paidSubscription) {
+        return { created: false, updated: false };
+      }
+
+      await ctx.db.patch(existing._id, {
+        paidSubscription: args.paidSubscription,
+        subscribedAt: args.subscribedAt,
+      });
+      return { created: false, updated: true };
+    }
+
+    const id = await ctx.db.insert("subscribers", {
+      email: args.email,
+      paidSubscription: args.paidSubscription,
+      subscribedAt: args.subscribedAt,
+    });
+
+    return { id, created: true, updated: false };
   },
 });
