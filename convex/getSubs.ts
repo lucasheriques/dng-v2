@@ -1,6 +1,10 @@
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
-import { internalAction, internalMutation } from "./_generated/server";
+import {
+  internalAction,
+  internalMutation,
+  MutationCtx,
+} from "./_generated/server";
 
 const SUBSTACK_BASE_URL = "https://newsletter.nagringa.dev/api/v1";
 
@@ -84,58 +88,55 @@ export const upsertSubscribersBatch = internalMutation({
     let numberOfNewSubscribers = 0;
     let numberOfUpdatedSubscribers = 0;
 
-    for await (const sub of args.subscribers) {
-      const upsertResult = await ctx.runMutation(
-        internal.getSubs.upsertSubscriber,
-        {
-          email: sub.email,
-          paidSubscription: sub.active_subscription,
-          subscribedAt: sub.created_at,
-        }
-      );
+    args.subscribers.map(async (sub) => {
+      const result = await upsertSubscriber(ctx, {
+        email: sub.email,
+        paidSubscription: sub.active_subscription,
+        subscribedAt: sub.created_at,
+      });
 
-      if (upsertResult.created) {
+      if (result.created) {
         numberOfNewSubscribers++;
-      } else if (upsertResult.updated) {
+      } else if (result.updated) {
         numberOfUpdatedSubscribers++;
       }
-    }
+    });
 
     return `Upserted ${numberOfNewSubscribers} new subscribers and ${numberOfUpdatedSubscribers} updated subscribers`;
   },
 });
 
-export const upsertSubscriber = internalMutation({
+const upsertSubscriber = async (
+  ctx: MutationCtx,
   args: {
-    email: v.string(),
-    paidSubscription: v.boolean(),
-    subscribedAt: v.string(),
-  },
-  handler: async (ctx, args) => {
-    const existing = await ctx.db
-      .query("subscribers")
-      .withIndex("by_email", (q) => q.eq("email", args.email))
-      .first();
+    email: string;
+    paidSubscription: boolean;
+    subscribedAt: string;
+  }
+) => {
+  const existing = await ctx.db
+    .query("subscribers")
+    .withIndex("by_email", (q) => q.eq("email", args.email))
+    .first();
 
-    if (existing) {
-      // only update if the paidSubscription has changed
-      if (existing.paidSubscription === args.paidSubscription) {
-        return { created: false, updated: false };
-      }
-
-      await ctx.db.patch(existing._id, {
-        paidSubscription: args.paidSubscription,
-        subscribedAt: args.subscribedAt,
-      });
-      return { created: false, updated: true };
+  if (existing) {
+    // only update if the paidSubscription has changed
+    if (existing.paidSubscription === args.paidSubscription) {
+      return { created: false, updated: false };
     }
 
-    const id = await ctx.db.insert("subscribers", {
-      email: args.email,
+    await ctx.db.patch(existing._id, {
       paidSubscription: args.paidSubscription,
       subscribedAt: args.subscribedAt,
     });
+    return { created: false, updated: true };
+  }
 
-    return { id, created: true, updated: false };
-  },
-});
+  const id = await ctx.db.insert("subscribers", {
+    email: args.email,
+    paidSubscription: args.paidSubscription,
+    subscribedAt: args.subscribedAt,
+  });
+
+  return { id, created: true, updated: false };
+};
