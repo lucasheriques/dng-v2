@@ -88,19 +88,25 @@ export const upsertSubscribersBatch = internalMutation({
     let numberOfNewSubscribers = 0;
     let numberOfUpdatedSubscribers = 0;
 
-    args.subscribers.map(async (sub) => {
-      const result = await upsertSubscriber(ctx, {
-        email: sub.email,
-        paidSubscription: sub.active_subscription,
-        subscribedAt: sub.created_at,
-      });
+    await Promise.all(
+      args.subscribers.map(async (sub) => {
+        const result = await upsertSubscriber(ctx, {
+          email: sub.email,
+          paidSubscription: sub.active_subscription,
+          subscribedAt: sub.created_at,
+        });
 
-      if (result.created) {
-        numberOfNewSubscribers++;
-      } else if (result.updated) {
-        numberOfUpdatedSubscribers++;
-      }
-    });
+        if (result.created) {
+          numberOfNewSubscribers++;
+        } else if (result.updated) {
+          numberOfUpdatedSubscribers++;
+        }
+      })
+    );
+
+    console.log(
+      `Upserted ${numberOfNewSubscribers} new subscribers and ${numberOfUpdatedSubscribers} updated subscribers`
+    );
 
     return `Upserted ${numberOfNewSubscribers} new subscribers and ${numberOfUpdatedSubscribers} updated subscribers`;
   },

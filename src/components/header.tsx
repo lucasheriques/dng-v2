@@ -76,18 +76,18 @@ export default function Header() {
               <span className="font-bold text-white text-xl hidden md:block">
                 Dev na Gringa
               </span>
-              <span className="font-bold text-white text-xl md:hidden">
-                DnG
-              </span>
             </Link>
             <div className="flex items-center gap-x-4">
-              <Search />
+              <Button variant="link" asChild className="text-white px-0">
+                <Link href="/discussoes">Discussões</Link>
+              </Button>
               <Button variant="link" asChild className="text-white px-0">
                 <PopoverButton className="focus:outline focus:outline-primary focus:outline-2 focus:outline-offset-2">
                   Menu
                   <ChevronDown aria-hidden="true" className="h-5 w-5" />
                 </PopoverButton>
               </Button>
+              <Search />
               <UserDropdown />
             </div>
           </div>
