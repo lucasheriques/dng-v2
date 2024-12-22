@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "@/app/discussoes/types/forum";
+import { Post } from "@/app/discussoes/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
