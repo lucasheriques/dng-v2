@@ -18,8 +18,10 @@ import Link from "next/link";
 import { usePostHog } from "posthog-js/react";
 
 export function UserDropdown() {
-  const { user, isAuthenticated, signOut } = useAuth();
+  const { user, isAuthenticated, signOut, isLoading } = useAuth();
   const posthog = usePostHog();
+
+  if (isLoading) return null;
 
   if (isAuthenticated) {
     posthog.identify(user?.email ?? user?._id, {
