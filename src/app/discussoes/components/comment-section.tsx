@@ -2,12 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Id } from "../../../../convex/_generated/dataModel";
 import { MarkdownEditor } from "./markdown-editor";
-
-interface CommentSectionProps {
-  postId: Id<"posts">;
-}
 
 export function CommentSection() {
   const [comment, setComment] = useState("");
