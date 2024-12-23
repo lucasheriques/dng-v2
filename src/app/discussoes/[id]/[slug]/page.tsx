@@ -26,9 +26,9 @@ export async function generateMetadata({
 export default async function PostPage({
   params,
 }: {
-  params: { id: string; slug: string };
+  params: Promise<{ id: string; slug: string }>;
 }) {
-  const postId = params.id as Id<"posts">;
+  const postId = (await params).id as Id<"posts">;
 
   const post = await fetchQuery(api.posts.queries.getPostById, {
     postId,
