@@ -23,7 +23,7 @@ export function AnimatedStat({ value, label, color }: AnimatedStatProps) {
         stiffness: 100,
         damping: 30,
         onUpdate: (latest) => {
-          scope.current!.innerHTML = `${Math.round(latest)}+`;
+          scope.current!.innerHTML = `${Math.round(latest)}`;
         },
       });
     }
@@ -37,7 +37,7 @@ export function AnimatedStat({ value, label, color }: AnimatedStatProps) {
       transition={{ duration: 0.2 }}
     >
       <div ref={scope} className={`text-3xl font-bold ${color}`}>
-        0+
+        0
       </div>
       <div className="text-slate-400">{label}</div>
     </m.div>

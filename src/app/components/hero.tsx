@@ -3,11 +3,21 @@ import AnimatedText from "@/app/components/animated-text";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SOCIALS } from "@/lib/constants";
+import { api } from "@convex/_generated/api";
+import { fetchAction, fetchQuery } from "convex/nextjs";
 import { ArrowRight, Link2, Rocket } from "lucide-react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
-export default function Hero() {
+export default async function Hero() {
+  const { totalSubscribers, paidSubscribers } = await fetchQuery(
+    api.subscribers.getSubscriberStats
+  );
+
+  const { totalMembers: totalDiscordMembers } = await fetchAction(
+    api.discord.getDiscordMembers
+  );
+
   return (
     <div className="w-full max-w-7xl mx-auto px-4 relative z-10 space-y-4 md:space-y-8">
       <div>
@@ -40,7 +50,7 @@ export default function Hero() {
       <h2 className="text-xl text-slate-200 max-w-2xl">
         <Balancer>
           <AnimatedText
-            text="Junte-se a +1300 devs brasileiros aprendendo, compartilhando experiências e construindo carreiras internacionais juntos."
+            text={`Junte-se a +${Math.round(totalSubscribers / 50) * 50} devs brasileiros aprendendo, compartilhando experiências e construindo carreiras internacionais juntos.`}
             delay={0.9}
           />
         </Balancer>
@@ -79,17 +89,17 @@ export default function Hero() {
       <div className="mt-16 flex justify-center items-center border-t border-white/10 pt-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl w-full">
           <AnimatedStat
-            value={1300}
+            value={totalSubscribers ?? 1300}
             label="inscritos na newsletter"
             color="text-primary"
           />
           <AnimatedStat
-            value={150}
+            value={totalDiscordMembers ?? 150}
             label="membros na comunidade"
             color="text-yellow-400"
           />
           <AnimatedStat
-            value={30}
+            value={paidSubscribers ?? 30}
             label="assinantes da mentoria"
             color="text-accent-secondary"
           />

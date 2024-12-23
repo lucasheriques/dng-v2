@@ -15,10 +15,12 @@ import type {
 } from "convex/server";
 import type * as auth from "../auth.js";
 import type * as crons from "../crons.js";
+import type * as discord from "../discord.js";
 import type * as getSubs from "../getSubs.js";
 import type * as http from "../http.js";
 import type * as posts_mutations from "../posts/mutations.js";
 import type * as posts_queries from "../posts/queries.js";
+import type * as subscribers from "../subscribers.js";
 import type * as users from "../users.js";
 import type * as utils_slugify from "../utils/slugify.js";
 
@@ -33,10 +35,12 @@ import type * as utils_slugify from "../utils/slugify.js";
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   crons: typeof crons;
+  discord: typeof discord;
   getSubs: typeof getSubs;
   http: typeof http;
   "posts/mutations": typeof posts_mutations;
   "posts/queries": typeof posts_queries;
+  subscribers: typeof subscribers;
   users: typeof users;
   "utils/slugify": typeof utils_slugify;
 }>;
