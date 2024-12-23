@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { api } from "@convex/_generated/api";
 import { useMutation } from "convex/react";
 import { PenSquare } from "lucide-react";
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { MarkdownEditor } from "./markdown-editor";
 
@@ -25,6 +26,9 @@ export function CreatePostModal() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const createPost = useMutation(api.posts.mutations.createPost);
   const { toast } = useToast();
+  const posthog = usePostHog();
+
+  const isDiscussionsEnabled = posthog.isFeatureEnabled("isDiscussionsEnabled");
 
   const handleSubmit = async () => {
     if (!title.trim() || !content.trim()) {
@@ -59,7 +63,7 @@ export function CreatePostModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild disabled={!isDiscussionsEnabled}>
         <Button className="gap-2">
           <PenSquare className="h-4 w-4" />
           Criar post

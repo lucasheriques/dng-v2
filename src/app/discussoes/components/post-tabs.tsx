@@ -2,7 +2,6 @@
 
 import { PostList } from "@/app/discussoes/components/post-list";
 import { ResponsiveFilters } from "@/app/discussoes/components/responsive-filters";
-import { PageWrapper } from "@/components/page-wrapper";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { api } from "@convex/_generated/api";
 import { Preloaded, usePreloadedQuery } from "convex/react";
@@ -20,15 +19,13 @@ export default function PostTabs({
 
   if (isDiscussionsEnabled === undefined || isDiscussionsEnabled === false) {
     return (
-      <PageWrapper>
-        <h1 className="text-2xl font-bold">
-          Discussões não estão disponíveis no momento.
-        </h1>
+      <>
+        <h2 className="text-2xl font-bold">Em construção.</h2>
         <p>
           A funcionalidade de discussões ainda não está disponível para todos os
           usuários.
         </p>
-      </PageWrapper>
+      </>
     );
   }
   return (
