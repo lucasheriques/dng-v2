@@ -9,9 +9,9 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string; slug: string };
+  params: Promise<{ id: string; slug: string }>;
 }): Promise<Metadata> {
-  const postId = params.id as Id<"posts">;
+  const postId = (await params).id as Id<"posts">;
   const post = await fetchQuery(api.posts.queries.getPostById, {
     postId,
   });
