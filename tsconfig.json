@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@convex/*": ["./convex/*"],
+      "@public/*": ["./public/*"]
     },
     "strictNullChecks": true
   },

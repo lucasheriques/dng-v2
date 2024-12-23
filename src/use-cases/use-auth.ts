@@ -1,6 +1,6 @@
 import { useAuthActions } from "@convex-dev/auth/react";
+import { api } from "@convex/_generated/api";
 import { useConvexAuth, useQuery } from "convex/react";
-import { api } from "../../convex/_generated/api";
 
 export function useAuth() {
   const user = useQuery(api.users.viewer);

@@ -4,9 +4,9 @@ import { PostList } from "@/app/discussoes/components/post-list";
 import { ResponsiveFilters } from "@/app/discussoes/components/responsive-filters";
 import { PageWrapper } from "@/components/page-wrapper";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { api } from "@convex/_generated/api";
 import { Preloaded, usePreloadedQuery } from "convex/react";
 import { usePostHog } from "posthog-js/react";
-import { api } from "../../../../convex/_generated/api";
 
 export default function PostTabs({
   preloadedPosts,

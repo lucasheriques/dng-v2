@@ -1,8 +1,8 @@
 import { CreatePostModal } from "@/app/discussoes/components/create-post-modal";
 import PostTabs from "@/app/discussoes/components/post-tabs";
 import { PageWrapper } from "@/components/page-wrapper";
+import { api } from "@convex/_generated/api";
 import { preloadQuery } from "convex/nextjs";
-import { api } from "../../../convex/_generated/api";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 

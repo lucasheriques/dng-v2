@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { formatRelativeTime } from "@/lib/utils";
+import { Doc } from "@convex/_generated/dataModel";
 import {
   ArrowUp,
   Eye,
@@ -16,7 +17,6 @@ import {
   MoreHorizontal,
 } from "lucide-react";
 import Link from "next/link";
-import { Doc } from "../../../../convex/_generated/dataModel";
 
 interface PostListProps {
   posts: Doc<"posts">[];

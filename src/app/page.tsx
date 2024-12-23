@@ -3,9 +3,9 @@ import Hero from "@/app/components/hero";
 import Timeline from "@/app/components/timeline";
 import About from "@/components/about";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
+import HeroImage from "@public/hero.webp";
+import YtThumbnail from "@public/thumb-yt.jpg";
 import Image from "next/image";
-import HeroImage from "../../public/hero.webp";
-import YtThumbnail from "../../public/thumb-yt.jpg";
 
 export default function Home() {
   return (

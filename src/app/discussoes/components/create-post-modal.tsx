@@ -12,10 +12,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { api } from "@convex/_generated/api";
 import { useMutation } from "convex/react";
 import { PenSquare } from "lucide-react";
 import { useState } from "react";
-import { api } from "../../../../convex/_generated/api";
 import { MarkdownEditor } from "./markdown-editor";
 
 export function CreatePostModal() {

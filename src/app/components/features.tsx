@@ -1,7 +1,7 @@
 import { HighlightedText } from "@/components/highlighted-text";
+import CommunityImage from "@public/community.webp";
 import { ChartNoAxesCombined, Network, Newspaper } from "lucide-react";
 import Image from "next/image";
-import CommunityImage from "../../../public/community.webp";
 
 const features = [
   {

@@ -26,6 +26,12 @@ export default function RootLayout({
   return (
     <ConvexAuthNextjsServerProvider>
       <html lang="pt-BR" className="nice-scrollbar">
+        <head>
+          {/* <script
+            src="https://unpkg.com/react-scan/dist/auto.global.js"
+            async
+          /> */}
+        </head>
         <body
           className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased dark selection:bg-teal-500 selection:text-slate-950 bg-slate-950`}
         >

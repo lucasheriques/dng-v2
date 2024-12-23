@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import HeroImageGradientOverlay from "@/components/hero-image-gradient-overlay";
 import { SearchButton } from "@/components/search-button";
-import Image404 from "../../public/404-v2.webp";
+import Image404 from "@public/404-v2.webp";
 
 export default function NotFound() {
   return (

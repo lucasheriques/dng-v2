@@ -1,11 +1,10 @@
 "use client";
 
-import PostContent from "@/app/discussoes/components/post-content";
 import { Button } from "@/components/ui/button";
 import { formatRelativeTime } from "@/lib/utils";
+import { api } from "@convex/_generated/api";
 import { Preloaded, usePreloadedQuery } from "convex/react";
 import { ArrowUp, Eye } from "lucide-react";
-import { api } from "../../../../convex/_generated/api";
 
 interface PostDetailProps {
   preloadedPost: Preloaded<typeof api.posts.queries.getPostById>;
@@ -42,8 +41,6 @@ export function PostDetail({ preloadedPost }: PostDetailProps) {
             <span>•</span>
             <span>{formatRelativeTime(new Date(post.createdAt))}</span>
           </div>
-
-          {post.content && <PostContent content={post.content} />}
         </div>
       </div>
     </article>
