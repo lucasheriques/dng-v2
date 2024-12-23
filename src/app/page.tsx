@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
-      <div className="relative min-h-[75dvh] flex items-center">
+      <div className="relative min-h-[75dvh] pt-8 md:pt-0 flex items-center">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src={HeroImage}

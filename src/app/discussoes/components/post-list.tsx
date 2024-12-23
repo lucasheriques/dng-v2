@@ -29,7 +29,7 @@ export function PostList({ posts }: PostListProps) {
         <div
           key={post._id}
           id={`post-${index}`}
-          className={`flex gap-4 p-4 rounded-lg transition-colors hover:bg-accent/5`}
+          className={`flex gap-4 rounded-lg transition-colors hover:bg-accent/5`}
         >
           <div className="flex flex-col items-center gap-1">
             <Button

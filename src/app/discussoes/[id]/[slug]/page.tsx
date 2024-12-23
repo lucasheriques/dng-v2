@@ -3,14 +3,32 @@ import { PageWrapper } from "@/components/page-wrapper";
 import { api } from "@convex/_generated/api";
 import { Id } from "@convex/_generated/dataModel";
 import { fetchQuery } from "convex/nextjs";
+import { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string; slug: string };
+}): Promise<Metadata> {
+  const postId = params.id as Id<"posts">;
+  const post = await fetchQuery(api.posts.queries.getPostById, {
+    postId,
+  });
+
+  return {
+    title: post?.title ? `${post.title} | Dev na Gringa` : "Dev na Gringa",
+    description:
+      post?.content?.slice(0, 160) || "Uma discussão na Dev na Gringa",
+  };
+}
 
 export default async function PostPage({
   params,
 }: {
-  params: Promise<{ id: string; slug: string }>;
+  params: { id: string; slug: string };
 }) {
-  const postId = (await params).id as Id<"posts">;
+  const postId = params.id as Id<"posts">;
 
   const post = await fetchQuery(api.posts.queries.getPostById, {
     postId,
@@ -24,8 +42,8 @@ export default async function PostPage({
 
   return (
     <PageWrapper>
+      <h1>{post.title}</h1>
       <article className="prose max-w-full text-lg dark:prose-invert">
-        <h1>{post.title}</h1>
         <MDXRemote source={post.content} />
       </article>
       <CommentSection />

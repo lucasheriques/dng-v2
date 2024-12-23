@@ -55,7 +55,7 @@ export function MarkdownEditor({ onChange, placeholder }: MarkdownEditorProps) {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div className="relative max-h-[60vh] overflow-auto">
+      <div className="relative max-h-[60vh] overflow-auto nice-scrollbar">
         <RichTextPlugin
           contentEditable={
             <ContentEditable className="min-h-[200px] outline-none prose prose-slate dark:prose-invert max-w-none" />
