@@ -13,8 +13,6 @@ export const getDiscordMembers = action(async () => {
 
     const guild = await response.json();
 
-    console.log(guild);
-
     return {
       totalMembers: guild.approximate_member_count as number,
     };

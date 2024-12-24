@@ -1,240 +1,779 @@
 [
   {
+    "id": 153186428,
     "slug": "o-que-e-networking-e-como-fazer-efetivamente",
     "postDate": "2024-12-16T13:03:35.227Z",
     "title": "O que é networking, e como fazer efetivamente",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcf87711b-bb20-46b0-a493-36c63d36ed02_1580x884.png",
-    "views": 916
+    "views": 959,
+    "description": "Por que muitos conselhos sobre networking são ineficazes, e minha abordagem sobre como fazer networking sem precisar de horas extras",
+    "canonical_url": "https://newsletter.nagringa.dev/p/o-que-e-networking-e-como-fazer-efetivamente",
+    "postTags": [
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 152948423,
     "slug": "ddia-capitulo-3",
     "postDate": "2024-12-11T13:03:29.411Z",
     "title": "Designing Data-Intensive Applications: Capítulo 3 — Armazenamento e Recuperação",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F33adae79-daea-4141-b2f2-39fe55f8753b_735x1385.png",
-    "views": 1087
+    "views": 1100,
+    "description": "Existem diferentes tipos de bancos de dados, e cada um tem mecanismos diferentes para armazenar e recuperar informações. Vamos descobrir os trade-offs de cada uma.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/ddia-capitulo-3",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "4a448a00-e31e-40c0-924a-37a902ebf74d",
+        "publication_id": 2617704,
+        "name": "System Design",
+        "slug": "system-design",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 152466695,
     "slug": "processos-seletivos-e-ofertas-de-vagas-na-gringa",
     "postDate": "2024-12-02T21:24:05.440Z",
     "title": "Processos seletivos e ofertas que recebi na gringa desde 2020",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1933927b-c3f7-475d-9fde-83ab50ec07bb_2610x2616.png",
-    "views": 1328
+    "views": 1347,
+    "description": "Como eu consegui vagas, como foram os processos seletivos, e quais ofertas eu recebi ou não recebi. E o que eu aprendi com cada processo.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/processos-seletivos-e-ofertas-de-vagas-na-gringa",
+    "postTags": [
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 152051773,
     "slug": "como-fazer-um-excelente-onboarding",
     "postDate": "2024-11-25T13:01:06.113Z",
     "title": "Como fazer um excelente onboarding em empresas de tecnologia",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F944b2361-4d1b-492b-a958-3d057d2e8c76_1299x940.png",
-    "views": 1346
+    "views": 1372,
+    "description": "Onboarding é o processo que todo novo funcionário faz ao entrar numa empresa. Aprenda como se destacar desde cedo, especialmente como engenheiro de software.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-fazer-um-excelente-onboarding",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 151940882,
     "slug": "designing-data-intensive-applications",
     "postDate": "2024-11-20T20:15:31.741Z",
     "title": "Designing Data-Intensive Applications: Capítulo 2 - Modelos de Dados",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75d46394-b2ab-4472-8be1-8b178344d360_517x825.png",
-    "views": 1073
+    "views": 1073,
+    "description": "Modelos de Dados em Aplicações Modernas: um resumo prático baseado no DDIA.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/designing-data-intensive-applications",
+    "postTags": [
+      {
+        "id": "4a448a00-e31e-40c0-924a-37a902ebf74d",
+        "publication_id": 2617704,
+        "name": "System Design",
+        "slug": "system-design",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 151551951,
     "slug": "como-nao-ser-um-dev-de-tutoriais",
     "postDate": "2024-11-12T13:58:07.388Z",
     "title": "Como não ser um dev de tutoriais e aprender de verdade",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F465bc8a4-9c30-4ec2-99e6-b891039fa904_1449x865.png",
-    "views": 1411
+    "views": 1424,
+    "description": "Tutoriais e cursos são bons meios de aprendizado. Mas estão longe de ser o suficiente pra você ser um bom engenheiro de software.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-nao-ser-um-dev-de-tutoriais",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 151245595,
     "slug": "ddia-capitulo-1",
     "postDate": "2024-11-06T12:27:21.205Z",
     "title": "Designing Data-Intensive Applications: Capítulo 1",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfa711af-3352-46ed-b20b-cd61a927efe5_1086x959.png",
-    "views": 1024
+    "views": 1030,
+    "description": "Os sistemas de software hoje em dia são mais",
+    "canonical_url": "https://newsletter.nagringa.dev/p/ddia-capitulo-1",
+    "postTags": [
+      {
+        "id": "4a448a00-e31e-40c0-924a-37a902ebf74d",
+        "publication_id": 2617704,
+        "name": "System Design",
+        "slug": "system-design",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 150997725,
     "slug": "recursos-para-assinantes-pagos",
     "postDate": "2024-10-31T18:55:28.886Z",
     "title": "🎁 Recursos para assinantes pagos",
     "coverImage": null,
-    "views": 78
+    "views": 81,
+    "description": "",
+    "canonical_url": ""
   },
   {
+    "id": 150960037,
     "slug": "design-docs-e-rfcs",
     "postDate": "2024-10-30T22:27:27.430Z",
     "title": "Design documents e RFCs",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F949ef4b3-51fa-4e50-94c7-2a13ee0f9bdd_2912x1632.png",
-    "views": 837
+    "views": 838,
+    "description": "Como fazer documentação técnica que realmente ajude você, seu time e também sua carreira.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/design-docs-e-rfcs",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 150544441,
     "slug": "aplicacoes-local-first",
     "postDate": "2024-10-22T02:43:57.931Z",
     "title": "Aplicações Local-First: O Futuro da Web?",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa115e748-3d7b-4548-b833-3b36d27f6c18_1622x1208.png",
-    "views": 1051
+    "views": 1052,
+    "description": "Como empresas como Figma e Linear usam local-first para criar experiências excepcionais na web.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/aplicacoes-local-first",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 150188258,
     "slug": "por-que-trabalhar-na-brex",
     "postDate": "2024-10-14T13:03:25.914Z",
     "title": "Por que trabalhar na Brex",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcefc7411-08d2-4c46-8ce4-1fb430bd4484_910x855.png",
-    "views": 2586
+    "views": 2592,
+    "description": "A Brex é uma fintech fundada por dois brasileiros em 2017. Venha descobrir os meus principais motivos para trabalhar aqui.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/por-que-trabalhar-na-brex",
+    "postTags": [
+      {
+        "id": "12ca02fd-59d3-4b5a-8fed-1efcce1042ea",
+        "publication_id": 2617704,
+        "name": "Brex",
+        "slug": "brex",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 149817095,
     "slug": "como-definir-boas-metas-para-a-sua",
     "postDate": "2024-10-04T20:12:17.356Z",
     "title": "Como definir boas metas para a sua carreira ou sua vida",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10661c39-16e1-4622-877b-4af8b2f988ba_1336x903.png",
-    "views": 489
+    "views": 492,
+    "description": "Um guia rápido de como fazer boas metas, e como isso vai te ajudar se você quiser entrar para a comunidade de assinantes.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-definir-boas-metas-para-a-sua",
+    "postTags": [
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 149648344,
     "slug": "processo-seletivo-vagas-engenharia-de-software-na-brex",
     "postDate": "2024-10-01T22:00:58.314Z",
     "title": "O processo seletivo para vagas de engenharia de software na Brex",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd50f9bc7-dcf2-4689-865a-da975a6255c3_2126x799.png",
-    "views": 2385
+    "views": 2407,
+    "description": "Todas as etapas do processo seletivo para vagas de engenharia de software na Brex, o que esperar em cada uma delas, e como se preparar.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/processo-seletivo-vagas-engenharia-de-software-na-brex",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 149369881,
     "slug": "template-para-promocoes-e-aumento",
     "postDate": "2024-09-24T23:08:31.031Z",
     "title": "Template para promoções e aumento de preço",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb838e9fc-9588-4d5f-a637-52d5b66f40d1_1286x646.png",
-    "views": 382
+    "views": 382,
+    "description": "Meu segundo template para assinantes, e um anúncio sobre a mudança dos preços aqui na newsletter.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/template-para-promocoes-e-aumento",
+    "postTags": [
+      {
+        "id": "e970d10d-b9ce-412b-bb03-d9a9cb750d65",
+        "publication_id": 2617704,
+        "name": "Templates",
+        "slug": "templates",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 149254713,
     "slug": "dicas-para-entrevistas-de-live-coding",
     "postDate": "2024-09-22T16:57:31.762Z",
     "title": "Dicas para ir bem em entrevistas de live coding",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F522626b1-339f-4fc1-b1af-521a59d7263a_1360x503.png",
-    "views": 570
+    "views": 580,
+    "description": "Já participei de live coding como entrevistador e entrevistado. Hoje, vou falar todos os passos que uso para ter um bom desempenho nessas entrevistas.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/dicas-para-entrevistas-de-live-coding",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 149004019,
     "slug": "o-meu-template-para-brag-documents",
     "postDate": "2024-09-17T12:41:53.119Z",
     "title": "O meu template para brag documents",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25cf8c29-cd5d-4418-a0de-724880165691_854x507.png",
-    "views": 1052
+    "views": 1055,
+    "description": "O brag document auxilia com que você se lembre do seu progresso ao longo dos meses, e saiba como impactou na empresa. Ele é essencial para criar um bom pacote de promoção.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/o-meu-template-para-brag-documents",
+    "postTags": [
+      {
+        "id": "e970d10d-b9ce-412b-bb03-d9a9cb750d65",
+        "publication_id": 2617704,
+        "name": "Templates",
+        "slug": "templates",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 148923134,
     "slug": "como-otimizar-seu-curriculo-para",
     "postDate": "2024-09-15T16:18:32.651Z",
     "title": "Como otimizar seu currículo para vagas na gringa",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8d79d8af-fb67-4700-b833-ebfb5a47cc59_1376x624.png",
-    "views": 1673
+    "views": 1680,
+    "description": "Como estruturar seu currículo que recrutadores e gerentes realmente prestem atenção nele. Erros para evitar quando se candidatar para uma vaga de dev na gringa.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-otimizar-seu-curriculo-para",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 148797342,
     "slug": "os-maiores-salarios-do-brasil-para",
     "postDate": "2024-09-12T12:02:28.478Z",
     "title": "Os maiores salários do Brasil para engenheiros de software",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F77916ab3-3a6a-4318-a75e-da4b36864016_1766x1106.jpeg",
-    "views": 4558
+    "views": 4574,
+    "description": "Entenda porque existem tanta diferença entre salários de empresas, e o modelo trimodal de salários para engenheiros de software.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/os-maiores-salarios-do-brasil-para",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 148367590,
     "slug": "o-que-eu-aprendi-ao-nao-ser-promovido",
     "postDate": "2024-09-01T14:23:45.477Z",
     "title": "O que eu aprendi ao não ser promovido para sênior",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fecc42f60-df4f-4fbc-90a1-49074311a342_805x397.png",
-    "views": 2156
+    "views": 2165,
+    "description": "Como funcionam as promoções em carreiras de tecnologia, o que é exigido de um engenheiro sênior e dicas práticas para alcançar sua próxima promoção.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/o-que-eu-aprendi-ao-nao-ser-promovido",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 147646929,
     "slug": "melhor-jeito-de-aprender-qualquer-habilidade-rapidamente",
     "postDate": "2024-08-13T13:01:38.858Z",
     "title": "O melhor jeito de aprender qualquer habilidade rapidamente",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6981e09c-1e23-496e-9b43-7e3d7cf021d5_1600x1043.png",
-    "views": 289
+    "views": 291,
+    "description": "Aprendendo em público.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/melhor-jeito-de-aprender-qualquer-habilidade-rapidamente",
+    "postTags": [
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 147330487,
     "slug": "como-liderar-projetos-e-reunioes",
     "postDate": "2024-08-04T14:01:33.799Z",
     "title": "Como liderar projetos e reuniões como engenheiro de software",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb97225b4-f03e-4fd9-9813-03b6eb9f5d2c_1032x643.png",
-    "views": 373
+    "views": 373,
+    "description": "Uma das principais habilidades para engenheiros de software. Especialmente os que buscam uma promoção para sênior+.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-liderar-projetos-e-reunioes",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 147149700,
     "slug": "como-funciona-a-mentoria",
     "postDate": "2024-07-30T13:00:37.390Z",
     "title": "Como funciona a mentoria do Dev na Gringa",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffe0a039c-b404-4b76-bc23-04be5695783e_1200x883.png",
-    "views": 309
+    "views": 313,
+    "description": "Confira também: a motivação para criar essa newsletter. Dicas para fazer o melhor uso do seu tempo em qualquer mentoria.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-funciona-a-mentoria",
+    "postTags": [
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 147093209,
     "slug": "dev-na-gringa-carga-horaria-e-cultura",
     "postDate": "2024-07-28T14:02:38.009Z",
     "title": "Dev na Gringa: carga horária e cultura",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5a28098e-dd0e-490a-9955-b29c40127ac7_1517x672.png",
-    "views": 245
+    "views": 245,
+    "description": "Quais são as diferenças entre empresas brasileiras e americanas quanto aos horários e a cultura.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/dev-na-gringa-carga-horaria-e-cultura",
+    "postTags": [
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 146847859,
     "slug": "dev-na-gringa-contratacao-impostos-hardware",
     "postDate": "2024-07-21T14:44:51.515Z",
     "title": "Dev na Gringa: contratação, impostos, hardware e começando do zero.",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F15d80138-fe09-41c9-9d25-190b246e92df_1600x579.png",
-    "views": 1198
+    "views": 1207,
+    "description": "Como foi a questão burocrática no meu trabalho pra fora desde 2020. E o que eu faria se estivesse começando do zero.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/dev-na-gringa-contratacao-impostos-hardware",
+    "postTags": [
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 146600656,
     "slug": "o-que-e-um-engenheiro-de-produto",
     "postDate": "2024-07-14T14:39:55.444Z",
     "title": "O que é um engenheiro de produto e como se tornar um",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcb83369-5753-4d77-b6d7-500796e37ddd_1672x866.png",
-    "views": 200
+    "views": 200,
+    "description": "Dicas práticas para engenheiros de software se destacarem como engenheiros de produto.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/o-que-e-um-engenheiro-de-produto",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 146417092,
     "slug": "como-ter-mais-sorte",
     "postDate": "2024-07-09T13:02:43.040Z",
     "title": "Como ter sorte",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F498499a4-efd9-414e-b419-cfa46be1a2b8_1185x878.png",
-    "views": 240
+    "views": 240,
+    "description": "É possível aumentar nossa chance em ter sorte? Vamos descobrir.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-ter-mais-sorte",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 146124023,
     "slug": "experiencia-necessaria-para-vagas-internacionais",
     "postDate": "2024-06-30T15:30:56.161Z",
     "title": "Quanto tempo de experiência para se candidatar pra uma vaga internacional? ",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F098fc2d4-a05f-4da6-abd6-eb456f511df9_1396x864.png",
-    "views": 294
+    "views": 295,
+    "description": "E uma pequena surpresa para comemorar nossa marca de 100 assinantes!",
+    "canonical_url": "https://newsletter.nagringa.dev/p/experiencia-necessaria-para-vagas-internacionais",
+    "postTags": [
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 145924636,
     "slug": "18-dicas-para-se-destacar-na-carreira",
     "postDate": "2024-06-23T19:07:50.673Z",
     "title": "18 dicas para se destacar como engenheiro de software",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe301354e-7e8c-4866-a8df-c47f13184d45_996x792.png",
-    "views": 2017
+    "views": 2024,
+    "description": "Tudo que eu venho aplicado desde que entrei comecei meu novo emprego 1 ano atrás.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/18-dicas-para-se-destacar-na-carreira",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 145704483,
     "slug": "produto-vs-plataforma",
     "postDate": "2024-06-16T20:10:31.567Z",
     "title": "Engenharia de Software: produto vs plataforma",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F103efcda-6083-4250-b259-a70f03750b00_941x1070.png",
-    "views": 227
+    "views": 227,
+    "description": "A separação entre frontend, backend, fullstack faz sentido?",
+    "canonical_url": "https://newsletter.nagringa.dev/p/produto-vs-plataforma",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 145471201,
     "slug": "como-se-destacar-em-qualquer-processo",
     "postDate": "2024-06-09T16:46:04.766Z",
     "title": "Como se destacar em qualquer processo seletivo que você participe",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57fbcd94-437f-4e09-a457-14dc866d00a2_1438x1022.png",
-    "views": 726
+    "views": 733,
+    "description": "Tudo que eu usei para passar em entrevistas mesmo quando não era o melhor candidato em nível técnico.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-se-destacar-em-qualquer-processo",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 145224814,
     "slug": "engenheiro-de-software-precisa-de-faculdade",
     "postDate": "2024-06-02T15:26:26.475Z",
     "title": "Engenharia de software: precisa de faculdade?",
     "coverImage": "https://substack-post-media.s3.amazonaws.com/public/images/d7883059-995c-4af2-b3bb-5f075721f097.avif",
-    "views": 256
+    "views": 256,
+    "description": "Diploma é necessário? As vantagens e desvantagens de fazer faculdade na carreira como engenheiro de software.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/engenheiro-de-software-precisa-de-faculdade",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 144986561,
     "slug": "dev-na-gringa-processos-seletivos",
     "postDate": "2024-05-26T15:00:48.806Z",
     "title": "Dev na Gringa: Processos Seletivos e Onde Estudar Para Eles",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9a5f48d-f6d7-423a-95ef-fa70a42aea18_1021x915.png",
-    "views": 882
+    "views": 901,
+    "description": "Um resumo sobre as principais etapas em processos seletivos para engenheiros de software. Incluindo devs na gringa.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/dev-na-gringa-processos-seletivos",
+    "postTags": [
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 144723876,
     "slug": "dev-na-gringa-vale-a-pena",
     "postDate": "2024-05-17T14:05:42.221Z",
     "title": "Dev na Gringa: Vale a Pena?",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffe34ba35-77a2-470d-9636-429ac64b8826_995x709.png",
-    "views": 720
+    "views": 720,
+    "description": "Reflexão e aprendizados dos últimos quatro anos trabalhando para empresas americanas.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/dev-na-gringa-vale-a-pena",
+    "postTags": [
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      }
+    ]
   },
   {
+    "id": 144656847,
     "slug": "como-eu-virei-um-dev-na-gringa",
     "postDate": "2024-05-15T15:41:22.642Z",
     "title": "Dev na Gringa: Como Encontrar Vagas e Salários",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec9e98f6-0bbb-4cb1-93b3-5dedc7239f03_592x598.png",
-    "views": 2035
+    "views": 2047,
+    "description": "Um relato da minha experiência trabalhando para os Estados Unidos desde o final de 2020.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-eu-virei-um-dev-na-gringa",
+    "postTags": [
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
+        "hidden": false
+      }
+    ]
   }
 ]

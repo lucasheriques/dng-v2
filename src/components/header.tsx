@@ -3,6 +3,8 @@ import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
 import { MENTORSHIP_LINKS, SOCIALS } from "@/lib/constants";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 import { ChevronDown, CircleDollarSign, Mail, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,8 +12,11 @@ import Link from "next/link";
 import Logo from "../../public/logo-no-bg-small.webp";
 
 import { UserDropdown } from "@/components/user-dropdown";
+import { Article } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { SiDiscord, SiYoutube } from "@icons-pack/react-simple-icons";
+
+dayjs.locale("pt-br");
 
 const comunidade = [
   {
@@ -25,40 +30,11 @@ const comunidade = [
   { name: "Fale comigo", href: SOCIALS.calendar, icon: PhoneCall },
 ];
 
-const recentPosts = [
-  {
-    id: 1,
-    title: "Design documents e RFCs",
-    href: "https://newsletter.nagringa.dev/p/design-docs-e-rfcs",
-    date: "Out 30, 2024",
-    datetime: "2024-10-30",
-    category: {
-      title: "Eng. de Software",
-      href: "https://newsletter.nagringa.dev/t/engenharia-de-software",
-    },
-    imageUrl:
-      "https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F949ef4b3-51fa-4e50-94c7-2a13ee0f9bdd_2912x1632.png",
-    description:
-      "Como fazer documentação técnica que realmente ajude você, seu time e também sua carreira.",
-  },
-  {
-    id: 2,
-    title: "Por que trabalhar na Brex?",
-    href: "https://newsletter.nagringa.dev/p/por-que-trabalhar-na-brex",
-    date: "Out 14, 2024",
-    datetime: "2024-10-14",
-    category: {
-      title: "Carreira",
-      href: "https://newsletter.nagringa.dev/t/carreira",
-    },
-    imageUrl:
-      "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcefc7411-08d2-4c46-8ce4-1fb430bd4484_910x855.png",
-    description:
-      "A Brex é uma fintech fundada por dois brasileiros em 2017. Venha descobrir os meus principais motivos para trabalhar aqui.",
-  },
-];
+interface HeaderProps {
+  articles: Article[];
+}
 
-export default function Header() {
+export default function Header({ articles }: HeaderProps) {
   return (
     <Popover
       className="z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg sticky top-0 w-full border-b border-slate-800/20"
@@ -155,7 +131,7 @@ export default function Header() {
               </div>
               <div className="grid grid-cols-1 gap-10 sm:gap-8 lg:grid-cols-2">
                 <h3 className="sr-only">Recent posts</h3>
-                {recentPosts.map((post) => (
+                {articles.map((post) => (
                   <article
                     key={post.id}
                     className="relative isolate flex max-w-2xl flex-col gap-x-8 gap-y-6 sm:flex-row sm:items-start lg:flex-col lg:items-stretch group"
@@ -165,7 +141,7 @@ export default function Header() {
                         alt={post.title}
                         width={280}
                         height={180}
-                        src={post.imageUrl}
+                        src={post.coverImage ?? "https://picsum.photos/280/180"}
                         className="aspect-[2/1] w-full rounded-xl bg-gray-800 object-cover sm:aspect-[16/9] sm:h-32 lg:h-auto shadow-lg transition-transform group-hover:scale-[1.02]"
                       />
                       <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-700/50 group-hover:ring-gray-700 transition-colors" />
@@ -173,20 +149,20 @@ export default function Header() {
                     <div>
                       <div className="flex items-center gap-x-4">
                         <time
-                          dateTime={post.datetime}
+                          dateTime={post.postDate}
                           className="text-sm/6 text-gray-400"
                         >
-                          {post.date}
+                          {dayjs(post.postDate).format("MMM. D, YYYY")}
                         </time>
                         <a
-                          href={post.category.href}
+                          href={`${SOCIALS.newsletter}/t/${post.postTags?.[0]?.slug}`}
                           className="relative z-10 rounded-full bg-slate-800/50 backdrop-blur px-3 py-1.5 text-xs font-medium text-gray-300 hover:bg-slate-700 transition-colors"
                         >
-                          {post.category.title}
+                          {post.postTags?.[0]?.name}
                         </a>
                       </div>
                       <h4 className="mt-2 text-sm/6 font-semibold text-gray-200 group-hover:text-white transition-colors">
-                        <a href={post.href}>
+                        <a href={post.canonical_url}>
                           <span className="absolute inset-0" />
                           {post.title}
                         </a>

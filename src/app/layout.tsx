@@ -6,6 +6,7 @@ import LastArticleBanner from "@/components/last-article-banner";
 import PostHogPageView from "@/components/posthog-page-view";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
+import { getRandomArticles } from "@/use-cases/get-articles";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -23,6 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const randomArticles = getRandomArticles(2);
   return (
     <ConvexAuthNextjsServerProvider>
       <html lang="pt-BR" className="nice-scrollbar">
@@ -48,7 +50,7 @@ export default function RootLayout({
           />
           <Providers>
             <LastArticleBanner />
-            <Header />
+            <Header articles={randomArticles} />
             <main className="min-h-dvh bg-slate-950">{children}</main>
             <Footer />
             <BottomSearchFab />
