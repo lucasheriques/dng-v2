@@ -4,9 +4,9 @@ import { getArticles } from "@/use-cases/get-articles";
 import { ConciergeBell, ListCheck, SearchIcon } from "lucide-react";
 
 const stats = [
-  { label: "artigos publicados", value: `${getArticles().length}+` },
+  { label: "artigos publicados", value: `${getArticles().length}` },
   { label: "mentorias realizadas", value: "15+" },
-  { label: "visitantes todo mês", value: "12.000+" },
+  { label: "visitantes todo mês", value: "18.000+" },
 ];
 
 export default function About() {
