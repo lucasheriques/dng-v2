@@ -50,7 +50,7 @@ export default async function Hero() {
       <h2 className="text-xl text-slate-200 max-w-2xl">
         <Balancer>
           <AnimatedText
-            text={`Junte-se a +${Math.round(totalSubscribers / 50) * 50} devs brasileiros aprendendo, compartilhando experiências e construindo carreiras internacionais juntos.`}
+            text={`Junte-se a ${Math.floor(totalSubscribers / 50) * 50}+ devs brasileiros aprendendo, compartilhando experiências e construindo carreiras internacionais juntos.`}
             delay={0.9}
           />
         </Balancer>
