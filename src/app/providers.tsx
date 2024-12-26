@@ -28,8 +28,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
     });
   }, [isDev]);
 
-  console.log("re-render");
-
   return (
     <LazyMotion features={async () => await loadFeatures} strict>
       <PostHogProvider client={posthog}>
