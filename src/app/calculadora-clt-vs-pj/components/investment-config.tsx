@@ -1,7 +1,9 @@
-"use client";
-
+import {
+  TableHeader,
+  TableInput,
+  TableRow,
+} from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { formatCurrency } from "@/lib/utils";
-import { TableHeader, TableInput, TableRow } from "../components";
 
 interface InvestmentConfigProps {
   cltMonthlyTotal: number;

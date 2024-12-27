@@ -1,6 +1,12 @@
 "use client";
 
 import Results from "@/app/calculadora-clt-vs-pj/components/results";
+import ResultsAccordion from "@/app/calculadora-clt-vs-pj/components/results-accordion";
+import {
+  TableHeader,
+  TableInput,
+  TableRow,
+} from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
@@ -8,12 +14,6 @@ import { Share2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import {
-  ResultsAccordion,
-  TableHeader,
-  TableInput,
-  TableRow,
-} from "./components";
 import { CalculationResults, CalculatorFormData } from "./types";
 import { compress } from "./utils";
 

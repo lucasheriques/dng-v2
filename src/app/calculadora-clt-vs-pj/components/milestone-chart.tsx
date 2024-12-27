@@ -1,5 +1,6 @@
 "use client";
 
+import { TableHeader } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatCurrency } from "@/lib/utils";
 import {
@@ -10,7 +11,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { TableHeader } from "../components";
 
 interface Milestone {
   name: string;
