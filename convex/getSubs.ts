@@ -1,10 +1,14 @@
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
+import { Doc } from "./_generated/dataModel";
 import {
   internalAction,
   internalMutation,
+  internalQuery,
   MutationCtx,
 } from "./_generated/server";
+
+type Subscriber = Omit<Doc<"subscribers">, "_id" | "_creationTime">;
 
 const SUBSTACK_BASE_URL = "https://newsletter.nagringa.dev/api/v1";
 
@@ -33,18 +37,46 @@ async function downloadSignups(cookie: string) {
 
 function parseCSV(csv: string) {
   const rows = csv.split("\n");
-  return rows
+  const subscribersMap = rows
     .slice(1)
     .filter((row) => row.trim() !== "")
-    .map((row) => {
-      const [email, active_subscription, , , created_at] = row.split(",");
-      return {
-        email,
-        active_subscription: active_subscription === "true",
-        created_at,
-      };
-    });
+    .reduce(
+      (acc, row) => {
+        const [email, active_subscription, , , created_at] = row.split(",");
+        acc[email] = {
+          email,
+          paidSubscription: active_subscription === "true",
+          subscribedAt: created_at,
+        };
+        return acc;
+      },
+      {} as Record<
+        string,
+        { email: string; paidSubscription: boolean; subscribedAt: string }
+      >
+    );
+
+  return subscribersMap;
 }
+
+export const getSubscribers = internalQuery({
+  handler: async (ctx) => {
+    return await ctx.db.query("subscribers").collect();
+  },
+});
+
+export const upsertSubscriberMutation = internalMutation({
+  args: {
+    subscriber: v.object({
+      email: v.string(),
+      paidSubscription: v.boolean(),
+      subscribedAt: v.string(),
+    }),
+  },
+  handler: async (ctx, args) => {
+    await upsertSubscriber(ctx, args.subscriber);
+  },
+});
 
 export const syncSubscribers = internalAction({
   handler: async (ctx) => {
@@ -54,23 +86,55 @@ export const syncSubscribers = internalAction({
     }
 
     const csv = await downloadSignups(cookie);
-    const subscribers = parseCSV(csv);
+    const substackSubscribers = parseCSV(csv);
 
-    // Batch update subscribers in chunks to avoid timeout
-    const BATCH_SIZE = 5000;
-    const messages: string[] = [];
-    for (let i = 0; i < subscribers.length; i += BATCH_SIZE) {
-      const batch = subscribers.slice(i, i + BATCH_SIZE);
-      const message = await ctx.runMutation(
-        internal.getSubs.upsertSubscribersBatch,
-        {
-          subscribers: batch,
-        }
-      );
-      messages.push(message);
+    const existingSubscribers = await ctx.runQuery(
+      internal.getSubs.getSubscribers
+    );
+
+    const returnInfo = {
+      numberOfRemovedSubscribers: 0,
+      numberOfUpdatedSubscribers: 0,
+      numberOfNewSubscribers: 0,
+    };
+
+    for (const subscriber of existingSubscribers) {
+      // remove subscriber if not in substack
+      if (!substackSubscribers[subscriber.email]) {
+        await ctx.runMutation(internal.getSubs.removeSubscriber, {
+          id: subscriber._id,
+        });
+        console.log(`Removed subscriber ${subscriber.email}`);
+        returnInfo.numberOfRemovedSubscribers++;
+        continue;
+      }
+
+      // upsert subscriber if paidSubscription has changed
+      if (
+        substackSubscribers[subscriber.email].paidSubscription !==
+        subscriber.paidSubscription
+      ) {
+        console.log(
+          `Updating subscriber ${subscriber.email} with paidSubscription ${substackSubscribers[subscriber.email].paidSubscription}`
+        );
+        await ctx.runMutation(internal.getSubs.upsertSubscriberMutation, {
+          subscriber: substackSubscribers[subscriber.email],
+        });
+      }
     }
 
-    return messages.join("\n");
+    // add new subscribers
+    for (const subscriber of Object.values(substackSubscribers)) {
+      if (!existingSubscribers.find((s) => s.email === subscriber.email)) {
+        console.log(`Adding new subscriber ${subscriber.email}`);
+        await ctx.runMutation(internal.getSubs.upsertSubscriberMutation, {
+          subscriber,
+        });
+        returnInfo.numberOfNewSubscribers++;
+      }
+    }
+
+    return returnInfo;
   },
 });
 
@@ -79,8 +143,8 @@ export const upsertSubscribersBatch = internalMutation({
     subscribers: v.array(
       v.object({
         email: v.string(),
-        active_subscription: v.boolean(),
-        created_at: v.string(),
+        paidSubscription: v.boolean(),
+        subscribedAt: v.string(),
       })
     ),
   },
@@ -90,11 +154,7 @@ export const upsertSubscribersBatch = internalMutation({
 
     await Promise.all(
       args.subscribers.map(async (sub) => {
-        const result = await upsertSubscriber(ctx, {
-          email: sub.email,
-          paidSubscription: sub.active_subscription,
-          subscribedAt: sub.created_at,
-        });
+        const result = await upsertSubscriber(ctx, sub);
 
         if (result.created) {
           numberOfNewSubscribers++;
@@ -112,14 +172,16 @@ export const upsertSubscribersBatch = internalMutation({
   },
 });
 
-const upsertSubscriber = async (
-  ctx: MutationCtx,
+export const removeSubscriber = internalMutation({
   args: {
-    email: string;
-    paidSubscription: boolean;
-    subscribedAt: string;
-  }
-) => {
+    id: v.id("subscribers"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.id);
+  },
+});
+
+const upsertSubscriber = async (ctx: MutationCtx, args: Subscriber) => {
   const existing = await ctx.db
     .query("subscribers")
     .withIndex("by_email", (q) => q.eq("email", args.email))
