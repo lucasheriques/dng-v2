@@ -33,6 +33,10 @@ export default function RootLayout({
             src="https://unpkg.com/react-scan/dist/auto.global.js"
             async
           /> */}
+          <meta
+            name="impact-site-verification"
+            content="8fda9f93-ed67-4dbc-b552-8888828822be"
+          />
         </head>
         <body
           className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased dark selection:bg-teal-500 selection:text-slate-950 bg-slate-950`}
