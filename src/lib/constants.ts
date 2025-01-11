@@ -11,6 +11,7 @@ import {
   FileText,
   History as HistoryIcon,
   Mail,
+  Receipt,
   Target,
   UserPlus,
 } from "lucide-react";
@@ -104,6 +105,11 @@ export const TOOLS = {
     title: "Calculadora Salário CLT vs PJ",
     href: "/calculadora-clt-vs-pj",
     icon: Calculator,
+  },
+  invoiceGenerator: {
+    title: "Gerador de Invoice",
+    href: "/gerador-de-invoice",
+    icon: Receipt,
   },
 };
 

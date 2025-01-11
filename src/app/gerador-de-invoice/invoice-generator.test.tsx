@@ -45,7 +45,7 @@ describe("InvoiceGenerator", () => {
     // Add first item
     await user.click(screen.getByText("Adicionar item"));
     const descriptionInputs = screen.getAllByPlaceholderText(
-      "Informações do serviço"
+      "Software Development"
     );
     const priceInputs = screen.getAllByPlaceholderText("0.00");
 
@@ -124,12 +124,15 @@ describe("InvoiceGenerator", () => {
     render(<InvoiceGenerator />);
 
     // Fill form data
-    await user.type(screen.getByPlaceholderText("123"), "INV001");
+    await user.type(
+      screen.getByPlaceholderText(`INV-${new Date().getFullYear()}-1`),
+      "INV001"
+    );
 
     // Add an item
     await user.click(screen.getByText("Adicionar item"));
     const descriptionInputs = screen.getAllByPlaceholderText(
-      "Informações do serviço"
+      "Software Development"
     );
     const priceInputs = screen.getAllByPlaceholderText("0.00");
     await user.type(descriptionInputs[0], "Test Service");
@@ -168,7 +171,7 @@ describe("InvoiceGenerator", () => {
     // Add an item
     await user.click(screen.getByText("Adicionar item"));
     const descriptionInputs = screen.getAllByPlaceholderText(
-      "Informações do serviço"
+      "Software Development"
     );
     const priceInputs = screen.getAllByPlaceholderText("0.00");
     await user.type(descriptionInputs[0], "Test Service");
@@ -184,10 +187,13 @@ describe("InvoiceGenerator", () => {
     render(<InvoiceGenerator />);
 
     // Fill some data
-    await user.type(screen.getByPlaceholderText("123"), "INV001");
+    await user.type(
+      screen.getByPlaceholderText(`INV-${new Date().getFullYear()}-1`),
+      "INV001"
+    );
     await user.click(screen.getByText("Adicionar item"));
     const descriptionInputs = screen.getAllByPlaceholderText(
-      "Informações do serviço"
+      "Software Development"
     );
     const priceInputs = screen.getAllByPlaceholderText("0.00");
     await user.type(descriptionInputs[0], "Test Service");
@@ -197,7 +203,9 @@ describe("InvoiceGenerator", () => {
     await user.click(screen.getByText("Limpar"));
 
     // Verify form is cleared
-    expect(screen.getByPlaceholderText("123")).toHaveValue("");
+    expect(
+      screen.getByPlaceholderText(`INV-${new Date().getFullYear()}-1`)
+    ).toHaveValue("");
     expect(screen.queryByDisplayValue("Test Service")).not.toBeInTheDocument();
     const totalText = await screen.findByTestId("total");
     expect(totalText).toHaveTextContent("$0.00");

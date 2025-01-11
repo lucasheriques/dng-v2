@@ -136,7 +136,8 @@ function ContactCard({ type, info, onSelect }: ContactCardProps) {
           className="w-full text-left space-y-1 p-4 rounded-lg border border-dashed border-slate-700 hover:border-primary transition-colors focus:border-primary focus:outline-none"
         >
           <p className="text-lg font-semibold">
-            {info.name || `Add ${type} info`}
+            {info.name ||
+              `Adicionar ${type === "vendor" ? "empresa" : "cliente"}`}
           </p>
           {info.name && (
             <>
@@ -259,8 +260,15 @@ function formatCurrency(amount: string | number, currency: CurrencyCode) {
 const InvoiceHistorySkeleton = () => (
   <div className="w-80 shrink-0 space-y-4 ">
     <div className="flex justify-between items-center">
-      <Skeleton className="h-7 w-48" />
-      <Skeleton className="h-8 w-8 rounded-md" />
+      <h2 className="text-lg font-semibold">Histórico de Invoices</h2>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="text-red-500 hover:text-red-400 hover:bg-red-500/10"
+        loading
+      >
+        <Trash2 className="h-4 w-4" />
+      </Button>
     </div>
     <Skeleton className="h-10 w-full rounded-md" />
     <div className="space-y-4">
@@ -434,7 +442,6 @@ export default function InvoiceGenerator() {
   };
 
   const total = formData.items
-    .filter((item) => item.description !== "" && item.price !== "")
     .reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0)
     .toFixed(2);
 
@@ -446,12 +453,10 @@ export default function InvoiceGenerator() {
       const { companyLogo, invoiceDate, dueDate, ...rest } = formData;
 
       // Format all price values with currency symbol
-      const formattedItems = rest.items
-        .filter((item) => item.description !== "" && item.price !== "")
-        .map((item) => ({
-          ...item,
-          price: `${CURRENCIES[currency].symbol}${parseFloat(item.price).toFixed(2)}`,
-        }));
+      const formattedItems = rest.items.map((item) => ({
+        description: item.description || "Software Development",
+        price: `${CURRENCIES[currency].symbol}${parseFloat(item.price).toFixed(2)}`,
+      }));
 
       const formattedTotal = `${CURRENCIES[currency].symbol}${parseFloat(total).toFixed(2)}`;
 
@@ -496,8 +501,8 @@ export default function InvoiceGenerator() {
   };
 
   return (
-    <div className="flex gap-8">
-      <div className="hidden md:block">
+    <div className="flex gap-4 lg:gap-8">
+      <div className="hidden lg:block">
         <Suspense fallback={<InvoiceHistorySkeleton />}>
           <InvoiceHistory onSelect={setFormData} setCurrency={setCurrency} />
         </Suspense>
@@ -506,292 +511,284 @@ export default function InvoiceGenerator() {
       {/* Invoice Form */}
       <form
         onSubmit={handleSubmit}
-        className="flex-1 space-y-8 bg-slate-900 rounded-xl border border-slate-800 p-8"
+        className="flex-1 space-y-4 lg:space-y-8 bg-slate-900 rounded-xl border border-slate-800 p-4 lg:p-8 max-w-full"
       >
-        <div className="">
-          {/* Rest of the form remains the same */}
-          {/* Header Section */}
-          <div className="flex justify-between items-start">
-            <div className="space-y-2">
-              {formData.companyLogo ? (
-                <img
-                  src={formData.companyLogo}
-                  alt="Company Logo"
-                  className="h-16 w-auto"
-                />
-              ) : (
-                <DashedInput
-                  placeholder="Your Logo URL (optional)"
-                  value={formData.companyLogo}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      companyLogo: e.target.value,
-                    }))
-                  }
-                  className="w-[300px]"
-                />
-              )}
-            </div>
-            <div className="text-right space-y-2">
-              <div className="flex items-center gap-2 justify-end">
-                <span className="text-slate-400">Invoice #:</span>
-                <DashedInput
-                  value={formData.invoiceNumber}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      invoiceNumber: e.target.value,
-                    }))
-                  }
-                  placeholder="123"
-                  className="w-32 text-left h-8"
-                />
-              </div>
-              <div className="flex items-center gap-2 justify-end">
-                <span className="text-slate-400">Created:</span>
-                <DashedInput
-                  type="date"
-                  value={formData.invoiceDate}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      invoiceDate: e.target.value,
-                    }))
-                  }
-                  className="w-32 text-left h-8"
-                />
-              </div>
-              <div className="flex items-center gap-2 justify-end">
-                <span className="text-slate-400">Due:</span>
-                <DashedInput
-                  type="date"
-                  value={formData.dueDate}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      dueDate: e.target.value,
-                    }))
-                  }
-                  className="w-32 text-left h-8"
-                />
-              </div>
-            </div>
+        {/* Rest of the form remains the same */}
+        {/* Header Section */}
+        <div className="flex justify-between items-start min-w-full">
+          <div className="space-y-2 hidden md:block">
+            {formData.companyLogo ? (
+              <img
+                src={formData.companyLogo}
+                alt="Company Logo"
+                className="h-16 w-auto"
+              />
+            ) : (
+              <DashedInput
+                placeholder="URL da logo da empresa (opcional)"
+                value={formData.companyLogo}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    companyLogo: e.target.value,
+                  }))
+                }
+                className="w-[300px]"
+              />
+            )}
           </div>
-
-          {/* Address Section */}
-          <div className="flex justify-between pt-8 gap-8">
-            <div className="flex-1">
-              <ContactCard
-                type="vendor"
-                info={formData.vendorInfo}
-                onSelect={(info) => handleContactSelect("vendorInfo", info)}
+          <div className="space-y-2 flex-1 md:flex-none">
+            <div className="grid grid-cols-2 items-center gap-2">
+              <span className="text-slate-400 md:text-right">Invoice #:</span>
+              <DashedInput
+                value={formData.invoiceNumber}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    invoiceNumber: e.target.value,
+                  }))
+                }
+                placeholder={`INV-${new Date().getFullYear()}-1`}
+                className="lg:w-32 text-left h-8"
               />
             </div>
-            <div className="flex-1">
-              <ContactCard
-                type="customer"
-                info={formData.customerInfo}
-                onSelect={(info) => handleContactSelect("customerInfo", info)}
+            <div className="grid grid-cols-2 items-center gap-2">
+              <span className="text-slate-400 md:text-right">Created:</span>
+              <DashedInput
+                type="date"
+                value={formData.invoiceDate}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    invoiceDate: e.target.value,
+                  }))
+                }
+                className="lg:w-32 text-left h-8"
+              />
+            </div>
+            <div className="grid grid-cols-2 items-center gap-2">
+              <span className="text-slate-400 md:text-right">Due:</span>
+              <DashedInput
+                type="date"
+                value={formData.dueDate}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    dueDate: e.target.value,
+                  }))
+                }
+                className="lg:w-32 text-left h-8"
               />
             </div>
           </div>
+        </div>
 
-          {/* Payment Methods Section */}
-          <div className="pt-8 space-y-4 grid">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="w-full">
-                  Adicionar método de pagamento (opcional)
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-slate-800">
-                {Object.entries(PAYMENT_METHOD_TEMPLATES).map(
-                  ([key, value]) => (
-                    <DropdownMenuItem
-                      key={key}
-                      onClick={() =>
-                        addPaymentMethod(
-                          key as keyof typeof PAYMENT_METHOD_TEMPLATES
-                        )
-                      }
-                    >
-                      {value.rail}
-                    </DropdownMenuItem>
-                  )
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
-            {formData.paymentMethods.map((paymentMethod, paymentIndex) => (
-              <div
-                key={paymentIndex}
-                className="grid gap-2 motion-preset-slide-down"
-              >
-                <div className="grid grid-cols-12 gap-4 bg-slate-800 p-2 rounded-t-lg font-semibold">
-                  <div className="col-span-6 flex items-center">
-                    Payment Method
-                  </div>
-                  <div className="col-span-6 flex items-center gap-1">
+        {/* Contact Section */}
+        <div className="flex justify-between flex-col lg:flex-row gap-4 lg:gap-8">
+          <ContactCard
+            type="vendor"
+            info={formData.vendorInfo}
+            onSelect={(info) => handleContactSelect("vendorInfo", info)}
+          />
+          <ContactCard
+            type="customer"
+            info={formData.customerInfo}
+            onSelect={(info) => handleContactSelect("customerInfo", info)}
+          />
+        </div>
+
+        {/* Payment Methods Section */}
+        <div className="space-y-4 grid">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="w-full">
+                Adicionar método de pagamento (opcional)
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-slate-800">
+              {Object.entries(PAYMENT_METHOD_TEMPLATES).map(([key, value]) => (
+                <DropdownMenuItem
+                  key={key}
+                  onClick={() =>
+                    addPaymentMethod(
+                      key as keyof typeof PAYMENT_METHOD_TEMPLATES
+                    )
+                  }
+                >
+                  {value.rail}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          {formData.paymentMethods.map((paymentMethod, paymentIndex) => (
+            <div
+              key={paymentIndex}
+              className="grid gap-2 motion-preset-slide-down"
+            >
+              <div className="grid grid-cols-12 gap-4 bg-slate-800 p-2 rounded-t-lg font-semibold">
+                <div className="col-span-4 lg:col-span-6 flex items-center">
+                  Payment Method
+                </div>
+                <div className="col-span-8 lg:col-span-6 flex items-center gap-1">
+                  <DashedInput
+                    value={paymentMethod.rail}
+                    onChange={(e) =>
+                      handlePaymentMethodRailChange(
+                        paymentIndex,
+                        e.target.value
+                      )
+                    }
+                    placeholder="Método de pagamento"
+                    className="lg:min-w-64 text-right max-w-full"
+                  />
+                  <TrashButton
+                    onClick={() => handleRemovePaymentMethod(paymentIndex)}
+                    ariaLabel="Deletar método de pagamento"
+                  />
+                </div>
+              </div>
+              {paymentMethod.details.map((detail, detailIndex) => (
+                <div
+                  key={`${paymentIndex}-${detailIndex}`}
+                  className="grid grid-cols-12 gap-4 motion-preset-slide-down"
+                >
+                  <div className="col-span-6">
                     <DashedInput
-                      value={paymentMethod.rail}
+                      value={detail.name}
                       onChange={(e) =>
-                        handlePaymentMethodRailChange(
+                        handlePaymentMethodChange(
                           paymentIndex,
+                          detailIndex,
+                          "name",
                           e.target.value
                         )
                       }
-                      placeholder="Método de pagamento"
-                      className="min-w-64 text-right"
-                    />
-                    <TrashButton
-                      onClick={() => handleRemovePaymentMethod(paymentIndex)}
-                      ariaLabel="Deletar método de pagamento"
+                      placeholder="Detalhe do pagamento"
                     />
                   </div>
-                </div>
-                {paymentMethod.details.map((detail, detailIndex) => (
-                  <div
-                    key={`${paymentIndex}-${detailIndex}`}
-                    className="grid grid-cols-12 gap-4 motion-preset-slide-down"
-                  >
-                    <div className="col-span-6">
-                      <DashedInput
-                        value={detail.name}
-                        onChange={(e) =>
-                          handlePaymentMethodChange(
-                            paymentIndex,
-                            detailIndex,
-                            "name",
-                            e.target.value
-                          )
-                        }
-                        placeholder="Detalhe do pagamento"
-                      />
-                    </div>
-                    <div className="col-span-6 flex items-center gap-1">
-                      <DashedInput
-                        value={detail.value}
-                        onChange={(e) =>
-                          handlePaymentMethodChange(
-                            paymentIndex,
-                            detailIndex,
-                            "value",
-                            e.target.value
-                          )
-                        }
-                        placeholder="Detalhe do pagamento"
-                      />
-                      <TrashButton
-                        onClick={() =>
-                          handleRemovePaymentMethodDetail(
-                            paymentIndex,
-                            detailIndex
-                          )
-                        }
-                        ariaLabel="Deletar detalhe do pagamento"
-                      />
-                    </div>
-                  </div>
-                ))}
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => addPaymentMethodDetails(paymentIndex)}
-                >
-                  <Plus className="h-4 w-4" />
-                  Adicionar mais informações
-                </Button>
-              </div>
-            ))}
-          </div>
-
-          {/* Items Section */}
-          <div className="pt-8 space-y-2">
-            <div className="grid grid-cols-12 gap-4 bg-slate-800 p-2 rounded-t-lg font-semibold">
-              <div className="col-span-8">Item</div>
-              <div className="col-span-4 text-right">Price</div>
-            </div>
-            <div className="space-y-2">
-              {formData.items.map((item, index) => (
-                <div
-                  key={index}
-                  className="grid grid-cols-12 gap-4 motion-preset-slide-down"
-                >
-                  <div className="col-span-8">
+                  <div className="col-span-6 flex items-center gap-1">
                     <DashedInput
-                      value={item.description}
+                      value={detail.value}
                       onChange={(e) =>
-                        handleItemChange(index, "description", e.target.value)
+                        handlePaymentMethodChange(
+                          paymentIndex,
+                          detailIndex,
+                          "value",
+                          e.target.value
+                        )
                       }
-                      placeholder="Informações do serviço"
-                    />
-                  </div>
-                  <div className="col-span-4 flex items-center gap-1">
-                    <PriceInput
-                      currency={currency}
-                      value={item.price}
-                      onChange={(e) =>
-                        handleItemChange(index, "price", e.target.value)
-                      }
-                      placeholder="0.00"
+                      placeholder="Detalhe do pagamento"
                     />
                     <TrashButton
-                      onClick={() => handleRemoveItem(index)}
-                      ariaLabel="Deletar item"
+                      onClick={() =>
+                        handleRemovePaymentMethodDetail(
+                          paymentIndex,
+                          detailIndex
+                        )
+                      }
+                      ariaLabel="Deletar detalhe do pagamento"
                     />
                   </div>
                 </div>
               ))}
-            </div>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={addItem}
-              className="w-full"
-            >
-              Adicionar item
-            </Button>
-          </div>
-
-          {/* Total Section */}
-          <div className="pt-8 flex justify-between items-center border-t border-slate-800">
-            <Select
-              value={currency}
-              onValueChange={(value: CurrencyCode) => setCurrency(value)}
-            >
-              <SelectTrigger
-                className="w-64 bg-slate-800"
-                data-testid="currency-select"
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => addPaymentMethodDetails(paymentIndex)}
               >
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-slate-800">
-                {Object.entries(CURRENCIES).map(([code, { name }]) => (
-                  <SelectItem key={code} value={code}>
-                    {code} - {name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <div className="text-xl font-semibold flex gap-4 items-center">
-              <span className="text-slate-400">Total:</span>
-              <span data-testid="total">{formatCurrency(total, currency)}</span>
+                <Plus className="h-4 w-4" />
+                Adicionar mais informações
+              </Button>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Actions */}
-          <div className="flex justify-end gap-4 pt-8">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setFormData(EMPTY_INVOICE)}
-            >
-              Limpar
-            </Button>
-            <Button type="submit" loading={isLoading}>
-              Gerar Invoice
-            </Button>
+        {/* Items Section */}
+        <div className="space-y-2">
+          <div className="grid grid-cols-12 gap-4 bg-slate-800 p-2 rounded-t-lg font-semibold">
+            <div className="col-span-8">Item</div>
+            <div className="col-span-4 text-right">Price</div>
           </div>
+          <div className="space-y-2">
+            {formData.items.map((item, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-12 gap-4 motion-preset-slide-down"
+              >
+                <div className="col-span-6 lg:col-span-8">
+                  <DashedInput
+                    value={item.description}
+                    onChange={(e) =>
+                      handleItemChange(index, "description", e.target.value)
+                    }
+                    placeholder="Software Development"
+                  />
+                </div>
+                <div className="col-span-6 lg:col-span-4 flex items-center gap-1">
+                  <PriceInput
+                    currency={currency}
+                    value={item.price}
+                    onChange={(e) =>
+                      handleItemChange(index, "price", e.target.value)
+                    }
+                    placeholder="0.00"
+                  />
+                  <TrashButton
+                    onClick={() => handleRemoveItem(index)}
+                    ariaLabel="Deletar item"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={addItem}
+            className="w-full"
+          >
+            Adicionar item
+          </Button>
+        </div>
+
+        {/* Total Section */}
+        <div className="flex justify-between items-center border-t pt-2 lg:pt-4 border-slate-800 gap-2">
+          <Select
+            value={currency}
+            onValueChange={(value: CurrencyCode) => setCurrency(value)}
+          >
+            <SelectTrigger
+              className="w-48 lg:w-64 bg-slate-800"
+              data-testid="currency-select"
+            >
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="bg-slate-800">
+              {Object.entries(CURRENCIES).map(([code, { name }]) => (
+                <SelectItem key={code} value={code}>
+                  {code} - {name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <div className="text-xl font-semibold flex gap-4 items-center">
+            <span className="text-slate-400">Total:</span>
+            <span data-testid="total">{formatCurrency(total, currency)}</span>
+          </div>
+        </div>
+
+        {/* Actions */}
+        <div className="flex justify-end gap-4">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setFormData(EMPTY_INVOICE)}
+          >
+            Limpar
+          </Button>
+          <Button type="submit" loading={isLoading}>
+            Gerar Invoice
+          </Button>
         </div>
       </form>
     </div>
