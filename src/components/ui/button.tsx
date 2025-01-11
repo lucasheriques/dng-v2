@@ -15,7 +15,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-input shadow-sm bg-primary/10 border-primary/50 text-primary hover:bg-primary/20 hover:border-primary",
+          "border shadow-sm bg-primary/10 border-primary/50 text-primary hover:bg-primary/20 hover:border-primary",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-primary/10 hover:text-primary disabled:text-white",
@@ -47,7 +47,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
-      variant,
+      variant = "default",
       size,
       asChild = false,
       loading = false,
@@ -59,7 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
 
     const loadingColors = {
-      default: "white",
+      default: "black",
       outline: "black",
       ghost: "white",
       secondary: "white",

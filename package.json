@@ -54,6 +54,7 @@
     "lexical": "^0.21.0",
     "lucide-react": "^0.454.0",
     "motion": "^11.14.1",
+    "nanoid": "^5.0.9",
     "next": "15.0.2",
     "next-mdx-remote": "^5.0.0",
     "nextjs-toploader": "^3.7.15",

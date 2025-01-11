@@ -5,7 +5,13 @@ import { MENTORSHIP_LINKS, SOCIALS } from "@/lib/constants";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import { ChevronDown, CircleDollarSign, Mail, PhoneCall } from "lucide-react";
+import {
+  ChevronDown,
+  CircleDollarSign,
+  Mail,
+  PhoneCall,
+  Receipt,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,6 +29,11 @@ const comunidade = [
     name: "Calculadora de Salário CLT vs PJ",
     href: "/calculadora-clt-vs-pj",
     icon: CircleDollarSign,
+  },
+  {
+    name: "Gerador de Invoice",
+    href: "/gerador-de-invoice",
+    icon: Receipt,
   },
   { name: "Newsletter", href: SOCIALS.newsletter, icon: Mail },
   { name: "YouTube", href: SOCIALS.youtube, icon: SiYoutube },
@@ -83,7 +94,7 @@ export default function Header({ articles }: HeaderProps) {
               <div className="grid gap-y-4 sm:grid-cols-2 gap-x-6 sm:gap-x-8">
                 <div>
                   <h3 className="text-sm/6 font-medium text-gray-400">
-                    Comunidade e conteúdo
+                    Comunidade e ferramentas
                   </h3>
                   <div className="mt-6 flow-root">
                     <div className="-my-2">

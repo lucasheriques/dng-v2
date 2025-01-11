@@ -80,6 +80,10 @@
     @apply focus:outline focus:outline-primary/70 focus:outline-2 focus:outline-offset-2 transition-all;
   }
 
+  [type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+
   .content-wrapper {
     @apply mx-auto max-w-7xl px-4;
   }

@@ -10,6 +10,10 @@ const tools = [
     name: "Calculadora de Salário Líquido CLT vs PJ",
     href: "/calculadora-clt-vs-pj",
   },
+  {
+    name: "Gerador de Invoice",
+    href: "/gerador-de-invoice",
+  },
   { name: "Newsletter", href: SOCIALS.newsletter },
 ];
 
