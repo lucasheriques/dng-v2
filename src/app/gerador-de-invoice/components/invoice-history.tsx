@@ -33,18 +33,23 @@ function InvoiceHistoryCard({
         onClick(formInvoice);
         setCurrency(invoice.currency);
       }}
-      className="w-full text-left p-4 rounded-lg border border-slate-800 hover:bg-slate-800/50 transition-colors space-y-2 motion-preset-slide-right "
+      className="min-w-40 lg:w-full text-left p-4 rounded-lg border border-slate-800 hover:bg-slate-800/50 transition-colors space-y-3 motion-preset-slide-right"
     >
-      <div className="flex justify-between items-start">
-        <div>
-          <p className="font-medium">Invoice #{invoice.invoiceNumber}</p>
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-2">
+        <div className="w-full lg:w-auto">
+          <p className="font-medium">
+            {`${invoice.invoiceNumber !== "" ? `#${invoice.invoiceNumber}` : "Invoice"}`}
+          </p>
+          <p className="text-primary font-medium lg:hidden">{invoice.total}</p>
           <p className="text-sm text-slate-400">{formattedDate}</p>
         </div>
-        <p className="text-primary font-medium">{invoice.total}</p>
+        <p className="text-primary font-medium hidden lg:block">
+          {invoice.total}
+        </p>
       </div>
-      <div className="text-sm text-slate-400">
-        <p>From: {invoice.vendorInfo.name}</p>
-        <p>To: {invoice.customerInfo.name}</p>
+      <div className="text-sm text-slate-400 space-y-1">
+        <p className="truncate">From: {invoice.vendorInfo.name}</p>
+        <p className="truncate">To: {invoice.customerInfo.name}</p>
       </div>
     </button>
   );
@@ -82,13 +87,17 @@ export default function InvoiceHistory({
   }, [invoiceHistory, searchTerm]);
 
   const handleClearHistory = () => {
-    if (window.confirm("Are you sure you want to clear all invoice history?")) {
+    if (
+      window.confirm(
+        "Tem certeza que deseja limpar o seu histórico de invoices?"
+      )
+    ) {
       setInvoiceHistory([]);
     }
   };
 
   return (
-    <div className="w-80 shrink-0 space-y-4">
+    <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold">Histórico de Invoices</h2>
         {invoiceHistory.length > 0 && (
@@ -125,7 +134,7 @@ export default function InvoiceHistory({
         </div>
       )}
 
-      <div className="space-y-2">
+      <div className="flex lg:flex-col gap-2 overflow-auto nice-scrollbar">
         {invoiceHistory.length === 0 ? (
           <p className="text-sm text-slate-400">Nenhuma invoice gerada ainda</p>
         ) : filteredHistory.length === 0 ? (
@@ -134,7 +143,7 @@ export default function InvoiceHistory({
           </p>
         ) : (
           <>
-            {filteredHistory.slice(0, 5).map((invoice) => (
+            {filteredHistory.map((invoice) => (
               <InvoiceHistoryCard
                 key={invoice.id}
                 invoice={invoice}
@@ -142,11 +151,11 @@ export default function InvoiceHistory({
                 setCurrency={setCurrency}
               />
             ))}
-            {filteredHistory.length > 5 && (
+            {/* {filteredHistory.length > 5 && (
               <p className="text-sm text-center text-slate-400">
                 +{filteredHistory.length - 5} invoices mais antigas
               </p>
-            )}
+            )} */}
           </>
         )}
       </div>

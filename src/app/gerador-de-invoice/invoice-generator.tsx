@@ -258,7 +258,7 @@ function formatCurrency(amount: string | number, currency: CurrencyCode) {
 }
 
 const InvoiceHistorySkeleton = () => (
-  <div className="w-80 shrink-0 space-y-4 ">
+  <div className="space-y-4">
     <div className="flex justify-between items-center">
       <h2 className="text-lg font-semibold">Histórico de Invoices</h2>
       <Button
@@ -501,8 +501,8 @@ export default function InvoiceGenerator() {
   };
 
   return (
-    <div className="flex gap-4 lg:gap-8">
-      <div className="hidden lg:block">
+    <div className="grid lg:gap-8 gap-4 lg:grid-cols-12">
+      <div className="nice-scrollbar lg:px-4 lg:-mx-4 lg:col-span-3 overflow-auto">
         <Suspense fallback={<InvoiceHistorySkeleton />}>
           <InvoiceHistory onSelect={setFormData} setCurrency={setCurrency} />
         </Suspense>
@@ -511,7 +511,7 @@ export default function InvoiceGenerator() {
       {/* Invoice Form */}
       <form
         onSubmit={handleSubmit}
-        className="flex-1 space-y-4 lg:space-y-8 bg-slate-900 rounded-xl border border-slate-800 p-4 lg:p-8 max-w-full"
+        className="lg:col-span-9 space-y-4 lg:space-y-8 bg-slate-900 rounded-xl border border-slate-800 p-4 max-w-full"
       >
         {/* Rest of the form remains the same */}
         {/* Header Section */}

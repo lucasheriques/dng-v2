@@ -23,9 +23,5 @@ jobs:
       - name: Run tests
         run: pnpm test:ci
 
-      - name: Block Deployment if Tests Fail
-        if: failure()
-        run: |
-          curl -X POST ${{ secrets.DEPLOY_HOOK_URL }} \
-          -H "Content-Type: application/json" \
-          -d '{"target":"preview", "state":"canceled"}'
+      - name: Deploy to Vercel
+        run: curl -X POST ${{ secrets.DEPLOY_HOOK_URL }}
