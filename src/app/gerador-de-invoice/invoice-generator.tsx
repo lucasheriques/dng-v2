@@ -40,13 +40,20 @@ import {
   StoredInvoice,
 } from "./types";
 
-const TrashButton = ({ onClick }: { onClick: () => void }) => (
+const TrashButton = ({
+  onClick,
+  ariaLabel,
+}: {
+  onClick: () => void;
+  ariaLabel: string;
+}) => (
   <Button
     variant="ghost"
     type="button"
     size="icon"
     className="shrink-0 text-red-500 hover:text-red-400 hover:bg-red-500/10"
     onClick={onClick}
+    aria-label={ariaLabel}
   >
     <Trash2 className="h-4 w-4" />
   </Button>
@@ -167,7 +174,10 @@ function ContactCard({ type, info, onSelect }: ContactCardProps) {
                       <p className="font-medium">{contact.name}</p>
                       <p className="text-sm text-slate-400">{contact.email}</p>
                     </DialogClose>
-                    <TrashButton onClick={() => handleDelete(contact.email)} />
+                    <TrashButton
+                      onClick={() => handleDelete(contact.email)}
+                      ariaLabel="Delete contact"
+                    />
                   </div>
                 ))}
               </div>
@@ -633,6 +643,7 @@ export default function InvoiceGenerator() {
                     />
                     <TrashButton
                       onClick={() => handleRemovePaymentMethod(paymentIndex)}
+                      ariaLabel="Deletar método de pagamento"
                     />
                   </div>
                 </div>
@@ -675,6 +686,7 @@ export default function InvoiceGenerator() {
                             detailIndex
                           )
                         }
+                        ariaLabel="Deletar detalhe do pagamento"
                       />
                     </div>
                   </div>
@@ -721,7 +733,10 @@ export default function InvoiceGenerator() {
                       }
                       placeholder="0.00"
                     />
-                    <TrashButton onClick={() => handleRemoveItem(index)} />
+                    <TrashButton
+                      onClick={() => handleRemoveItem(index)}
+                      ariaLabel="Deletar item"
+                    />
                   </div>
                 </div>
               ))}
@@ -742,7 +757,10 @@ export default function InvoiceGenerator() {
               value={currency}
               onValueChange={(value: CurrencyCode) => setCurrency(value)}
             >
-              <SelectTrigger className="w-64 bg-slate-800">
+              <SelectTrigger
+                className="w-64 bg-slate-800"
+                data-testid="currency-select"
+              >
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-slate-800">
@@ -755,7 +773,7 @@ export default function InvoiceGenerator() {
             </Select>
             <div className="text-xl font-semibold flex gap-4 items-center">
               <span className="text-slate-400">Total:</span>
-              <span>{formatCurrency(total, currency)}</span>
+              <span data-testid="total">{formatCurrency(total, currency)}</span>
             </div>
           </div>
 

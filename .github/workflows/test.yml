@@ -1,0 +1,26 @@
+name: Test and Block Deploy
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Block Deployment if Tests Fail
+        if: failure()
+        run: |
+          curl -X POST ${{ secrets.DEPLOY_HOOK_URL }} \
+          -H "Content-Type: application/json" \
+          -d '{"target":"preview", "state":"canceled"}'
