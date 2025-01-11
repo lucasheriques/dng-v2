@@ -497,9 +497,11 @@ export default function InvoiceGenerator() {
 
   return (
     <div className="flex gap-8">
-      <Suspense fallback={<InvoiceHistorySkeleton />}>
-        <InvoiceHistory onSelect={setFormData} setCurrency={setCurrency} />
-      </Suspense>
+      <div className="hidden md:block">
+        <Suspense fallback={<InvoiceHistorySkeleton />}>
+          <InvoiceHistory onSelect={setFormData} setCurrency={setCurrency} />
+        </Suspense>
+      </div>
 
       {/* Invoice Form */}
       <form
