@@ -1,3 +1,4 @@
+import { CurrencyCode } from "@/app/gerador-de-invoice/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -5,10 +6,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCurrency(value: number) {
+export function formatCurrency(
+  amount: number | string,
+  currency: CurrencyCode = "BRL"
+) {
+  const value = typeof amount === "string" ? parseFloat(amount) : amount;
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
-    currency: "BRL",
+    currency,
   }).format(value);
 }
 

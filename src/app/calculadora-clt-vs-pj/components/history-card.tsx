@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency } from "@/lib/utils";
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import * as m from "motion/react-m";
 import { CalculatorFormData } from "../types";

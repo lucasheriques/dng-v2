@@ -23,22 +23,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { addMonths, format } from "date-fns";
 import { Plus, Trash2 } from "lucide-react";
-import { nanoid } from "nanoid";
 import dynamic from "next/dynamic";
-import { Suspense, useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useLocalStorage, useMediaQuery } from "usehooks-ts";
 import { PAYMENT_METHOD_TEMPLATES } from "./constants";
-import {
-  ContactInfo,
-  CURRENCIES,
-  CurrencyCode,
-  Invoice,
-  StoredInvoice,
-} from "./types";
+import { useInvoice } from "./hooks/use-invoice";
+import { ContactInfo, CURRENCIES, CurrencyCode } from "./types";
 
 const TrashButton = ({
   onClick,
@@ -151,7 +144,9 @@ function ContactCard({ type, info, onSelect }: ContactCardProps) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {type === "vendor" ? "Company" : "Client"} Information
+            {type === "vendor"
+              ? "Informações da empresa"
+              : "Informações do cliente"}
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-6">
@@ -249,14 +244,6 @@ function ContactCard({ type, info, onSelect }: ContactCardProps) {
   );
 }
 
-function formatCurrency(amount: string | number, currency: CurrencyCode) {
-  const value = typeof amount === "string" ? parseFloat(amount) : amount;
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-  }).format(value);
-}
-
 const InvoiceHistorySkeleton = () => (
   <div className="space-y-4">
     <div className="flex justify-between items-center">
@@ -284,225 +271,69 @@ const InvoiceHistory = dynamic(() => import("./components/invoice-history"), {
   loading: InvoiceHistorySkeleton,
 });
 
-const EMPTY_INVOICE = {
-  companyLogo: "",
-  invoiceNumber: "",
-  invoiceDate: format(new Date(), "yyyy-MM-dd"),
-  dueDate: format(addMonths(new Date(), 1), "yyyy-MM-dd"),
-  vendorInfo: {
-    name: "",
-    streetAddress: "",
-    cityStateZip: "",
-    email: "",
-  },
-  customerInfo: {
-    name: "",
-    streetAddress: "",
-    cityStateZip: "",
-    email: "",
-  },
-  paymentMethods: [],
-  items: [{ description: "", price: "0" }],
-  total: "0",
-};
-
 export default function InvoiceGenerator() {
-  const [formData, setFormData] = useState<Invoice>(EMPTY_INVOICE);
+  const invoiceRef = useRef<HTMLFormElement>(null);
+  const [historyHeight, setHistoryHeight] = useState("auto");
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [currency, setCurrency] = useState<CurrencyCode>("USD");
-  const [, setInvoiceHistory] = useLocalStorage<StoredInvoice[]>(
-    "invoiceHistory",
-    []
-  );
+  useEffect(() => {
+    const updateHeight = () => {
+      if (invoiceRef.current) {
+        const invoiceHeight = invoiceRef.current.getBoundingClientRect().height;
+        setHistoryHeight(`${invoiceHeight}px`);
+      }
+    };
 
-  const handleContactSelect = (
-    type: "vendorInfo" | "customerInfo",
-    info: ContactInfo
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [type]: info,
-    }));
-  };
+    // Initial height set
+    updateHeight();
 
-  const handleRemoveItem = (index: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      items: prev.items.filter((_, i) => i !== index),
-    }));
-  };
+    // Update height on window resize
+    window.addEventListener("resize", updateHeight);
 
-  const handleItemChange = (
-    index: number,
-    field: "description" | "price",
-    value: string
-  ) => {
-    setFormData((prev) => {
-      const newItems = prev.items.map((item, i) =>
-        i === index ? { ...item, [field]: value } : item
-      );
-
-      // Calculate new total
-      const newTotal = newItems
-        .reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0)
-        .toFixed(2);
-
-      return {
-        ...prev,
-        items: newItems,
-        total: newTotal,
-      };
-    });
-  };
-
-  const addItem = () => {
-    setFormData((prev) => ({
-      ...prev,
-      items: [...prev.items, { description: "", price: "0" }],
-    }));
-  };
-
-  const addPaymentMethod = (
-    template: keyof typeof PAYMENT_METHOD_TEMPLATES
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      paymentMethods: [
-        ...prev.paymentMethods,
-        PAYMENT_METHOD_TEMPLATES[template],
-      ],
-    }));
-  };
-
-  const handlePaymentMethodRailChange = (index: number, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      paymentMethods: prev.paymentMethods.map((method, i) =>
-        i === index ? { ...method, rail: value } : method
-      ),
-    }));
-  };
-
-  const handlePaymentMethodChange = (
-    paymentIndex: number,
-    detailIndex: number,
-    field: "name" | "value",
-    value: string
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      paymentMethods: prev.paymentMethods.map((method, i) => {
-        if (i !== paymentIndex) return method;
-
-        const newDetails = method.details.map((detail, j) =>
-          j === detailIndex ? { ...detail, [field]: value } : detail
-        );
-
-        return { ...method, details: newDetails };
-      }),
-    }));
-  };
-
-  const addPaymentMethodDetails = (paymentIndex: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      paymentMethods: prev.paymentMethods.map((method, i) => {
-        if (i !== paymentIndex) return method;
-
-        const newDetails = [...method.details, { name: "", value: "" }];
-
-        return { ...method, details: newDetails };
-      }),
-    }));
-  };
-
-  const handleRemovePaymentMethod = (index: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      paymentMethods: prev.paymentMethods.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleRemovePaymentMethodDetail = (
-    paymentIndex: number,
-    detailIndex: number
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      paymentMethods: prev.paymentMethods.map((method, i) =>
-        i === paymentIndex
-          ? {
-              ...method,
-              details: method.details.filter((_, j) => j !== detailIndex),
-            }
-          : method
-      ),
-    }));
-  };
-
-  const total = formData.items
-    .reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0)
-    .toFixed(2);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      const { companyLogo, invoiceDate, dueDate, ...rest } = formData;
-
-      // Format all price values with currency symbol
-      const formattedItems = rest.items.map((item) => ({
-        description: item.description || "Software Development",
-        price: `${CURRENCIES[currency].symbol}${parseFloat(item.price).toFixed(2)}`,
-      }));
-
-      const formattedTotal = `${CURRENCIES[currency].symbol}${parseFloat(total).toFixed(2)}`;
-
-      // Save to history with formatted values and currency
-      const historyEntry: StoredInvoice = {
-        ...formData,
-        id: nanoid(),
-        items: rest.items,
-        total: formattedTotal,
-        currency,
-      };
-      setInvoiceHistory((prev) => [historyEntry, ...prev]);
-
-      const payload = {
-        companyLogo:
-          companyLogo !== ""
-            ? companyLogo
-            : `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${rest.vendorInfo.name}&rounded=true&size=16`,
-        invoiceDate: format(new Date(invoiceDate), "MMM d, yyyy"),
-        dueDate: format(new Date(dueDate), "MMM d, yyyy"),
-        items: formattedItems,
-        total: formattedTotal,
-        invoiceNumber: rest.invoiceNumber,
-        vendorInfo: rest.vendorInfo,
-        customerInfo: rest.customerInfo,
-        paymentMethods: rest.paymentMethods,
-      };
-
-      const request = await fetch("https://tools.lucasfaria.dev/v1/invoices", {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
-
-      const pdf = await request.blob();
-      const url = URL.createObjectURL(pdf);
-      window.open(url, "_blank");
-    } catch (error) {
-      console.error("Failed to generate invoice:", error);
-    } finally {
-      setIsLoading(false);
+    // Set up resize observer to update height when invoice form changes
+    const resizeObserver = new ResizeObserver(updateHeight);
+    if (invoiceRef.current) {
+      resizeObserver.observe(invoiceRef.current);
     }
-  };
+
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  const {
+    formData,
+    isLoading,
+    currency,
+    setCurrency,
+    total,
+    handleContactSelect,
+    handleRemoveItem,
+    handleItemChange,
+    addItem,
+    addPaymentMethod,
+    handlePaymentMethodRailChange,
+    handlePaymentMethodChange,
+    addPaymentMethodDetails,
+    handleRemovePaymentMethod,
+    handleRemovePaymentMethodDetail,
+    handleCompanyLogoChange,
+    handleInvoiceNumberChange,
+    handleInvoiceDateChange,
+    handleDueDateChange,
+    handleSubmit,
+    resetForm,
+    setFormData,
+  } = useInvoice();
+
+  const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
   return (
     <div className="grid lg:gap-8 gap-4 lg:grid-cols-12">
-      <div className="nice-scrollbar lg:px-4 lg:-mx-4 lg:col-span-3 overflow-auto">
+      <div
+        style={{ height: isLargeScreen ? historyHeight : "auto" }}
+        className="nice-scrollbar lg:px-4 lg:-mx-4 lg:col-span-3 overflow-auto"
+      >
         <Suspense fallback={<InvoiceHistorySkeleton />}>
           <InvoiceHistory onSelect={setFormData} setCurrency={setCurrency} />
         </Suspense>
@@ -512,8 +343,8 @@ export default function InvoiceGenerator() {
       <form
         onSubmit={handleSubmit}
         className="lg:col-span-9 space-y-4 lg:space-y-8 bg-slate-900 rounded-xl border border-slate-800 p-4 max-w-full"
+        ref={invoiceRef}
       >
-        {/* Rest of the form remains the same */}
         {/* Header Section */}
         <div className="flex justify-between items-start min-w-full">
           <div className="space-y-2 hidden md:block">
@@ -527,12 +358,7 @@ export default function InvoiceGenerator() {
               <DashedInput
                 placeholder="URL da logo da empresa (opcional)"
                 value={formData.companyLogo}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    companyLogo: e.target.value,
-                  }))
-                }
+                onChange={(e) => handleCompanyLogoChange(e.target.value)}
                 className="w-[300px]"
               />
             )}
@@ -542,12 +368,7 @@ export default function InvoiceGenerator() {
               <span className="text-slate-400 md:text-right">Invoice #:</span>
               <DashedInput
                 value={formData.invoiceNumber}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    invoiceNumber: e.target.value,
-                  }))
-                }
+                onChange={(e) => handleInvoiceNumberChange(e.target.value)}
                 placeholder={`INV-${new Date().getFullYear()}-1`}
                 className="lg:w-32 text-left h-8"
               />
@@ -557,12 +378,7 @@ export default function InvoiceGenerator() {
               <DashedInput
                 type="date"
                 value={formData.invoiceDate}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    invoiceDate: e.target.value,
-                  }))
-                }
+                onChange={(e) => handleInvoiceDateChange(e.target.value)}
                 className="lg:w-32 text-left h-8"
               />
             </div>
@@ -571,12 +387,7 @@ export default function InvoiceGenerator() {
               <DashedInput
                 type="date"
                 value={formData.dueDate}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    dueDate: e.target.value,
-                  }))
-                }
+                onChange={(e) => handleDueDateChange(e.target.value)}
                 className="lg:w-32 text-left h-8"
               />
             </div>
@@ -779,11 +590,7 @@ export default function InvoiceGenerator() {
 
         {/* Actions */}
         <div className="flex justify-end gap-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => setFormData(EMPTY_INVOICE)}
-          >
+          <Button type="button" variant="outline" onClick={resetForm}>
             Limpar
           </Button>
           <Button type="submit" loading={isLoading}>

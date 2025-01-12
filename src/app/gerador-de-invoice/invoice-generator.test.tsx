@@ -10,6 +10,9 @@ global.fetch = vi.fn(() =>
   })
 ) as unknown as typeof fetch;
 
+// Mock fetch
+const mockFetch = global.fetch as Mock;
+
 // Mock localStorage
 const localStorageMock = (() => {
   let store: Record<string, string> = {};
@@ -36,6 +39,71 @@ describe("InvoiceGenerator", () => {
   beforeEach(() => {
     localStorageMock.clear();
     vi.clearAllMocks();
+  });
+
+  it("should call the endpoint with correct payload when generating invoice", async () => {
+    const user = userEvent.setup();
+    render(<InvoiceGenerator />);
+
+    // Fill form data
+    await user.type(
+      screen.getByPlaceholderText(`INV-${new Date().getFullYear()}-1`),
+      "INV001"
+    );
+
+    // Add an item
+    const descriptionInputs = screen.getAllByPlaceholderText(
+      "Software Development"
+    );
+    const priceInputs = screen.getAllByPlaceholderText("0.00");
+    await user.type(descriptionInputs[0], "Test Service");
+    await user.type(priceInputs[0], "100");
+
+    // Fill vendor info
+    const vendorButton = screen.getByText("Adicionar empresa");
+    await user.click(vendorButton);
+    await user.type(screen.getByPlaceholderText("Name"), "Test Company");
+    await user.type(screen.getByPlaceholderText("Email"), "company@test.com");
+    await user.type(
+      screen.getByPlaceholderText("Address line 1"),
+      "123 Test St"
+    );
+    await user.type(
+      screen.getByPlaceholderText("Address line 2"),
+      "City, State 12345"
+    );
+    await user.click(screen.getByText("Salvar"));
+
+    // Generate invoice
+    await user.click(screen.getByText("Gerar Invoice"));
+
+    // Verify fetch was called with correct URL
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://tools.lucasfaria.dev/v1/invoices",
+      expect.objectContaining({
+        method: "POST",
+        body: expect.any(String),
+      })
+    );
+
+    // Parse the payload and verify its contents
+    const payload = JSON.parse(mockFetch.mock.calls[0][1].body);
+    expect(payload).toMatchObject({
+      invoiceNumber: "INV001",
+      vendorInfo: {
+        name: "Test Company",
+        email: "company@test.com",
+        streetAddress: "123 Test St",
+        cityStateZip: "City, State 12345",
+      },
+      items: [
+        {
+          description: "Test Service",
+          price: "$100.00",
+        },
+      ],
+      total: "$100.00",
+    });
   });
 
   it("should add and remove line items correctly", async () => {
