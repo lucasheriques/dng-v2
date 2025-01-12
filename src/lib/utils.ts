@@ -8,10 +8,11 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formatCurrency(
   amount: number | string,
-  currency: CurrencyCode = "BRL"
+  currency: CurrencyCode = "BRL",
+  locale: string = "pt-BR"
 ) {
   const value = typeof amount === "string" ? parseFloat(amount) : amount;
-  return new Intl.NumberFormat("pt-BR", {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
   }).format(value);

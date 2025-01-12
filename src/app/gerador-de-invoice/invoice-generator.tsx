@@ -584,7 +584,9 @@ export default function InvoiceGenerator() {
           </Select>
           <div className="text-xl font-semibold flex gap-4 items-center">
             <span className="text-slate-400">Total:</span>
-            <span data-testid="total">{formatCurrency(total, currency)}</span>
+            <span data-testid="total">
+              {formatCurrency(total, currency, "en-US")}
+            </span>
           </div>
         </div>
 
