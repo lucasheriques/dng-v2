@@ -81,17 +81,18 @@ describe("InvoiceGenerator", () => {
     await user.type(descriptionInputs[0], "Test Service");
     await user.type(priceInputs[0], "100");
 
-    // Fill vendor info
-    const vendorButton = screen.getByText("Adicionar empresa");
-    await user.click(vendorButton);
-    await user.type(screen.getByPlaceholderText("Name"), "Test Company");
+    // Fill vendor info using combobox
+    const vendorCombobox = screen.getByRole("combobox", { name: /empresa/i });
+    await user.click(vendorCombobox);
+    await user.click(screen.getByText("Adicionar empresa"));
+    await user.type(screen.getByPlaceholderText("Nome"), "Test Company");
     await user.type(screen.getByPlaceholderText("Email"), "company@test.com");
     await user.type(
-      screen.getByPlaceholderText("Address line 1"),
+      screen.getByPlaceholderText("Endereço linha 1"),
       "123 Test St"
     );
     await user.type(
-      screen.getByPlaceholderText("Address line 2"),
+      screen.getByPlaceholderText("Endereço linha 2"),
       "City, State 12345"
     );
     await user.click(screen.getByText("Salvar"));
@@ -299,5 +300,52 @@ describe("InvoiceGenerator", () => {
     expect(screen.queryByDisplayValue("Test Service")).not.toBeInTheDocument();
     const totalText = await screen.findByTestId("total");
     expect(totalText).toHaveTextContent("$0.00");
+  });
+
+  it("should handle contact selection and creation via combobox correctly", async () => {
+    const user = userEvent.setup();
+    render(<InvoiceGenerator />);
+
+    // Open vendor combobox
+    const vendorCombobox = screen.getByRole("combobox", { name: /empresa/i });
+    await user.click(vendorCombobox);
+
+    // Click "Add new" option
+    await user.click(screen.getByText("Adicionar empresa"));
+
+    // Fill in new vendor details
+    await user.type(screen.getByPlaceholderText("Nome"), "Test Company");
+    await user.type(screen.getByPlaceholderText("Email"), "company@test.com");
+    await user.type(
+      screen.getByPlaceholderText("Endereço linha 1"),
+      "123 Test St"
+    );
+    await user.type(
+      screen.getByPlaceholderText("Endereço linha 2"),
+      "City, State 12345"
+    );
+    await user.click(screen.getByText("Salvar"));
+
+    // Verify the contact card shows the saved contact
+    expect(screen.getByText("Test Company")).toBeInTheDocument();
+    expect(screen.getByText("123 Test St")).toBeInTheDocument();
+    expect(screen.getByText("City, State 12345")).toBeInTheDocument();
+    expect(screen.getByText("company@test.com")).toBeInTheDocument();
+
+    // Open combobox again and verify the saved contact appears
+    await user.click(vendorCombobox);
+    expect(
+      screen.getByText("Test Company (company@test.com)")
+    ).toBeInTheDocument();
+
+    // Delete the contact
+    const deleteButton = screen.getByLabelText("Deletar empresa");
+    await user.click(deleteButton);
+
+    // Verify contact is removed
+    expect(screen.queryByText("Test Company")).not.toBeInTheDocument();
+    expect(screen.queryByText("123 Test St")).not.toBeInTheDocument();
+    expect(screen.queryByText("City, State 12345")).not.toBeInTheDocument();
+    expect(screen.queryByText("company@test.com")).not.toBeInTheDocument();
   });
 });

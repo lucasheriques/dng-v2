@@ -1,12 +1,7 @@
 "use client";
+import { ContactCard } from "@/app/gerador-de-invoice/components/contact-card";
+import { TrashButton } from "@/components/trash-button";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +9,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -24,44 +18,26 @@ import {
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn, formatCurrency } from "@/lib/utils";
-import { DialogClose } from "@radix-ui/react-dialog";
 import { Plus, Trash2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { useLocalStorage, useMediaQuery } from "usehooks-ts";
+import { useMediaQuery } from "usehooks-ts";
 import { PAYMENT_METHOD_TEMPLATES } from "./constants";
 import { useInvoice } from "./hooks/use-invoice";
-import { ContactInfo, CURRENCIES, CurrencyCode } from "./types";
-
-const TrashButton = ({
-  onClick,
-  ariaLabel,
-}: {
-  onClick: () => void;
-  ariaLabel: string;
-}) => (
-  <Button
-    variant="ghost"
-    type="button"
-    size="icon"
-    className="shrink-0 text-red-500 hover:text-red-400 hover:bg-red-500/10"
-    onClick={onClick}
-    aria-label={ariaLabel}
-  >
-    <Trash2 className="h-4 w-4" />
-  </Button>
-);
+import { CURRENCIES, CurrencyCode } from "./types";
 
 const DashedInput = ({
   className,
+  label,
   ...props
-}: React.ComponentProps<"input">) => (
+}: React.ComponentProps<"input"> & { label: string }) => (
   <Input
     className={cn(
       "border-dashed border-2 focus:border-none bg-transparent focus-visible:ring-primary/50",
       className
     )}
     {...props}
+    aria-label={label}
   />
 );
 
@@ -78,171 +54,12 @@ const PriceInput = ({ currency, className, ...props }: PriceInputProps) => (
       type="number"
       step="0.01"
       min="0"
+      label="Valor do item"
       className={cn("pl-7 text-right", className)}
       {...props}
     />
   </div>
 );
-
-interface ContactCardProps {
-  type: "vendor" | "customer";
-  info: ContactInfo;
-  onSelect: (info: ContactInfo) => void;
-}
-
-function ContactCard({ type, info, onSelect }: ContactCardProps) {
-  const [savedContacts, setSavedContacts] = useLocalStorage<ContactInfo[]>(
-    `${type}Contacts`,
-    []
-  );
-  const [editingInfo, setEditingInfo] = useState<ContactInfo>(info);
-
-  const existingContactIndex = savedContacts.findIndex(
-    (contact) => contact.email === editingInfo.email
-  );
-
-  const handleSave = () => {
-    onSelect(editingInfo);
-
-    // Update existing contact or add new one
-    if (existingContactIndex >= 0) {
-      const newContacts = [...savedContacts];
-      newContacts[existingContactIndex] = editingInfo;
-      setSavedContacts(newContacts);
-    } else {
-      setSavedContacts([...savedContacts, editingInfo]);
-    }
-  };
-
-  const handleDelete = (email: string) => {
-    const newContacts = savedContacts.filter(
-      (contact) => contact.email !== email
-    );
-    setSavedContacts(newContacts);
-  };
-
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button
-          type="button"
-          className="w-full text-left space-y-1 p-4 rounded-lg border border-dashed border-slate-700 hover:border-primary transition-colors focus:border-primary focus:outline-none"
-        >
-          <p className="text-lg font-semibold">
-            {info.name ||
-              `Adicionar ${type === "vendor" ? "empresa" : "cliente"}`}
-          </p>
-          {info.name && (
-            <>
-              <p className="text-sm text-slate-400">{info.streetAddress}</p>
-              <p className="text-sm text-slate-400">{info.cityStateZip}</p>
-              <p className="text-sm text-slate-400">{info.email}</p>
-            </>
-          )}
-        </button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>
-            {type === "vendor"
-              ? "Informações da empresa"
-              : "Informações do cliente"}
-          </DialogTitle>
-        </DialogHeader>
-        <div className="space-y-6">
-          {/* Saved Contacts */}
-          {savedContacts.length > 0 && (
-            <div className="space-y-2">
-              <Label>
-                {type === "vendor" ? "Empresas salvas" : "Clientes salvos"}
-              </Label>
-              <div className="grid gap-2">
-                {savedContacts.map((contact, index) => (
-                  <div key={index} className="flex gap-2 items-center">
-                    <DialogClose
-                      type="button"
-                      onClick={() => {
-                        setEditingInfo(contact);
-                        onSelect(contact);
-                      }}
-                      className="flex-1 text-left p-3 rounded-lg border border-slate-800 hover:bg-slate-800/50 transition-colors"
-                    >
-                      <p className="font-medium">{contact.name}</p>
-                      <p className="text-sm text-slate-400">{contact.email}</p>
-                    </DialogClose>
-                    <TrashButton
-                      onClick={() => handleDelete(contact.email)}
-                      ariaLabel="Delete contact"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Edit Form */}
-          <div className="space-y-4">
-            <Label>
-              {existingContactIndex >= 0
-                ? type === "vendor"
-                  ? "Editar informações da empresa"
-                  : "Editar informações do cliente"
-                : type === "vendor"
-                  ? "Adicionar nova empresa"
-                  : "Adicionar novo cliente"}
-            </Label>
-            <div className="space-y-2">
-              <Input
-                placeholder="Name"
-                value={editingInfo.name}
-                onChange={(e) =>
-                  setEditingInfo((prev: ContactInfo) => ({
-                    ...prev,
-                    name: e.target.value,
-                  }))
-                }
-              />
-              <Input
-                placeholder="Address line 1"
-                value={editingInfo.streetAddress}
-                onChange={(e) =>
-                  setEditingInfo((prev: ContactInfo) => ({
-                    ...prev,
-                    streetAddress: e.target.value,
-                  }))
-                }
-              />
-              <Input
-                placeholder="Address line 2"
-                value={editingInfo.cityStateZip}
-                onChange={(e) =>
-                  setEditingInfo((prev: ContactInfo) => ({
-                    ...prev,
-                    cityStateZip: e.target.value,
-                  }))
-                }
-              />
-              <Input
-                type="email"
-                placeholder="Email"
-                value={editingInfo.email}
-                onChange={(e) =>
-                  setEditingInfo((prev: ContactInfo) => ({
-                    ...prev,
-                    email: e.target.value,
-                  }))
-                }
-              />
-            </div>
-            <DialogClose onClick={handleSave} className="w-full" asChild>
-              <Button>Salvar</Button>
-            </DialogClose>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
 
 const InvoiceHistorySkeleton = () => (
   <div className="space-y-4">
@@ -348,20 +165,13 @@ export default function InvoiceGenerator() {
         {/* Header Section */}
         <div className="flex justify-between items-start min-w-full">
           <div className="space-y-2 hidden md:block">
-            {formData.companyLogo ? (
-              <img
-                src={formData.companyLogo}
-                alt="Company Logo"
-                className="h-16 w-auto"
-              />
-            ) : (
-              <DashedInput
-                placeholder="URL da logo da empresa (opcional)"
-                value={formData.companyLogo}
-                onChange={(e) => handleCompanyLogoChange(e.target.value)}
-                className="w-[300px]"
-              />
-            )}
+            <DashedInput
+              placeholder="URL da logo da empresa (opcional)"
+              value={formData.companyLogo}
+              onChange={(e) => handleCompanyLogoChange(e.target.value)}
+              className="w-[300px]"
+              label="URL do logotipo da empresa"
+            />
           </div>
           <div className="space-y-2 flex-1 md:flex-none">
             <div className="grid grid-cols-2 items-center gap-2">
@@ -371,6 +181,7 @@ export default function InvoiceGenerator() {
                 onChange={(e) => handleInvoiceNumberChange(e.target.value)}
                 placeholder={`INV-${new Date().getFullYear()}-1`}
                 className="lg:w-32 text-left h-8"
+                label="Número da invoice"
               />
             </div>
             <div className="grid grid-cols-2 items-center gap-2">
@@ -380,6 +191,7 @@ export default function InvoiceGenerator() {
                 value={formData.invoiceDate}
                 onChange={(e) => handleInvoiceDateChange(e.target.value)}
                 className="lg:w-32 text-left h-8"
+                label="Data de emissão da invoice"
               />
             </div>
             <div className="grid grid-cols-2 items-center gap-2">
@@ -389,6 +201,7 @@ export default function InvoiceGenerator() {
                 value={formData.dueDate}
                 onChange={(e) => handleDueDateChange(e.target.value)}
                 className="lg:w-32 text-left h-8"
+                label="Data de vencimento da invoice"
               />
             </div>
           </div>
@@ -451,6 +264,7 @@ export default function InvoiceGenerator() {
                     }
                     placeholder="Método de pagamento"
                     className="lg:min-w-64 text-right max-w-full"
+                    label="Nome do método de pagamento"
                   />
                   <TrashButton
                     onClick={() => handleRemovePaymentMethod(paymentIndex)}
@@ -475,6 +289,7 @@ export default function InvoiceGenerator() {
                         )
                       }
                       placeholder="Detalhe do pagamento"
+                      label="Nome do detalhe do método de pagamento"
                     />
                   </div>
                   <div className="col-span-6 flex items-center gap-1">
@@ -489,6 +304,7 @@ export default function InvoiceGenerator() {
                         )
                       }
                       placeholder="Detalhe do pagamento"
+                      label="Valor do detalhe do método de pagamento"
                     />
                     <TrashButton
                       onClick={() =>
@@ -533,6 +349,7 @@ export default function InvoiceGenerator() {
                       handleItemChange(index, "description", e.target.value)
                     }
                     placeholder="Software Development"
+                    label="Descrição do item"
                   />
                 </div>
                 <div className="col-span-6 lg:col-span-4 flex items-center gap-1">
@@ -569,12 +386,12 @@ export default function InvoiceGenerator() {
             onValueChange={(value: CurrencyCode) => setCurrency(value)}
           >
             <SelectTrigger
-              className="w-48 lg:w-64 bg-slate-800"
+              className="w-48 lg:w-64 "
               data-testid="currency-select"
             >
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-slate-800">
+            <SelectContent className="">
               {Object.entries(CURRENCIES).map(([code, { name }]) => (
                 <SelectItem key={code} value={code}>
                   {code} - {name}
