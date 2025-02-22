@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { SubscribeButton } from "@/components/newsletter-button";
 import { SOCIAL_LINKS, SOCIALS } from "@/lib/constants";
 import { getMostPopularArticles } from "@/use-cases/get-articles";
 import Image from "next/image";
@@ -58,17 +58,12 @@ export function Footer() {
             </a>
           </p>
           <div className="mt-8">
-            <Button size="xl" asChild>
-              <Link
-                href={`${SOCIALS.newsletter}/subscribe?ref=nagringa.dev`}
-                target="_blank"
-              >
-                Participar da mentoria
-                <div className="motion-preset-oscillate motion-duration-1500 bg-white/50 text-black rounded-full w-8 h-8 flex items-center justify-center">
-                  🛸
-                </div>
-              </Link>
-            </Button>
+            <SubscribeButton>
+              Participar da mentoria
+              <div className="motion-preset-oscillate motion-duration-1500 bg-white/50 text-black rounded-full w-8 h-8 flex items-center justify-center">
+                🛸
+              </div>
+            </SubscribeButton>
             <p className="text-xs text-gray-300">
               Para os devs deste e de outros mundos também.
             </p>

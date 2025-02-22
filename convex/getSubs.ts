@@ -100,7 +100,10 @@ export const syncSubscribers = internalAction({
 
     for (const subscriber of existingSubscribers) {
       // remove subscriber if not in substack
-      if (!substackSubscribers[subscriber.email]) {
+      if (
+        !substackSubscribers[subscriber.email] &&
+        subscriber.email !== "lucasheriques@gmail.com"
+      ) {
         await ctx.runMutation(internal.getSubs.removeSubscriber, {
           id: subscriber._id,
         });
