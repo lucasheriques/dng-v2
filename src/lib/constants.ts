@@ -6,6 +6,7 @@ import {
   SiYoutube,
 } from "@icons-pack/react-simple-icons";
 import {
+  Briefcase,
   Calculator,
   Calendar,
   FileText,
@@ -92,6 +93,11 @@ export const MENTORSHIP_LINKS = {
     title: "Calendário de eventos",
     href: "https://calendario.nagringa.dev/",
     icon: Calendar,
+  },
+  companies: {
+    title: "Lista de empresas",
+    href: "https://empresas.nagringa.dev",
+    icon: Briefcase,
   },
   allResources: {
     title: "Todos os recursos",

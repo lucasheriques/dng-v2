@@ -118,7 +118,7 @@ export default function Header({ articles }: HeaderProps) {
                 </div>
                 <div>
                   <h3 className="text-sm/6 font-medium text-gray-400">
-                    Recursos da mentoria
+                    Links para assinantes
                   </h3>
                   <div className="mt-6 flow-root">
                     <div className="-my-2">
