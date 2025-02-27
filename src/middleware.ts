@@ -6,7 +6,7 @@ import {
 import { NextResponse } from "next/server";
 
 const isLoginPage = createRouteMatcher(["/login"]);
-const isProtectedRoute = createRouteMatcher(["/perfil(.*)"]);
+const isProtectedRoute = createRouteMatcher(["/perfil(.*)", "/assinantes(.*)"]);
 const isSubscribePage = createRouteMatcher(["/sub"]);
 
 export default convexAuthNextjsMiddleware(async (request, { convexAuth }) => {

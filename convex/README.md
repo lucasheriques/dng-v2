@@ -80,7 +80,7 @@ function handleButtonPress() {
   // OR
   // use the result once the mutation has completed
   mutation({ first: "Hello!", second: "me" }).then((result) =>
-    console.log(result),
+    console.log(result)
   );
 }
 ```
@@ -88,3 +88,33 @@ function handleButtonPress() {
 Use the Convex CLI to push your functions to a deployment. See everything
 the Convex CLI can do by running `npx convex -h` in your project root
 directory. To learn more, launch the docs with `npx convex docs`.
+
+## Google Calendar Integration
+
+To enable Google Calendar integration for the subscribers page, you need to set up the following environment variables in your Convex deployment:
+
+1. Create a Google Cloud project and enable the Google Calendar API
+2. Create an API key with access to the Google Calendar API
+3. Set the following environment variables in your Convex deployment:
+
+```bash
+npx convex env set GOOGLE_CALENDAR_API_KEY "your-api-key"
+npx convex env set GOOGLE_CALENDAR_ID "your-calendar-id"
+```
+
+The default calendar ID is already set in the code, but you can override it with your own calendar ID if needed.
+
+### Setting up Service Account (Alternative Approach)
+
+For private calendars, you may need to use a service account instead of an API key:
+
+1. Create a service account in Google Cloud Console
+2. Grant the service account access to your calendar
+3. Download the service account key as JSON
+4. Set the service account credentials as an environment variable:
+
+```bash
+npx convex env set GOOGLE_SERVICE_ACCOUNT_KEY "$(cat path/to/your-service-account-key.json)"
+```
+
+Then modify the `fetchAndStoreEvents` function in `calendar.ts` to use the service account credentials instead of the API key.

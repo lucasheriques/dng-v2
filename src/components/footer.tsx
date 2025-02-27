@@ -133,14 +133,6 @@ export function Footer() {
                 <SOCIAL_LINKS.linkedin.icon className="h-6 w-6" />
               </a>
               <a
-                key={SOCIAL_LINKS.x.href}
-                href={SOCIAL_LINKS.x.href}
-                className="text-gray-400 hover:text-primary"
-              >
-                <span className="sr-only">{SOCIAL_LINKS.x.title}</span>
-                <SOCIAL_LINKS.x.icon className="h-6 w-6" />
-              </a>
-              <a
                 key={SOCIAL_LINKS.instagram.href}
                 href={SOCIAL_LINKS.instagram.href}
                 className="text-gray-400 hover:text-primary"

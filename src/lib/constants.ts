@@ -2,7 +2,6 @@ import {
   SiDiscord,
   SiInstagram,
   SiLinkedin,
-  SiX,
   SiYoutube,
 } from "@icons-pack/react-simple-icons";
 import {
@@ -61,11 +60,6 @@ export const SOCIAL_LINKS = {
     href: SOCIALS.linkedin,
     icon: SiLinkedin,
   },
-  x: {
-    title: "X/Twitter",
-    href: SOCIALS.twitter,
-    icon: SiX,
-  },
   instagram: {
     title: "Instagram",
     href: SOCIALS.instagram,
@@ -105,6 +99,9 @@ export const MENTORSHIP_LINKS = {
     icon: FileText,
   },
 };
+
+export const MANAGE_SUBSCRIPTION_LINK =
+  "https://newsletter.nagringa.dev/account?utm_source=nagringa.dev";
 
 export const TOOLS = {
   cltVsPjCalculator: {

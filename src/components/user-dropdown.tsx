@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { MANAGE_SUBSCRIPTION_LINK } from "@/lib/constants";
 import { useAuth } from "@/use-cases/use-auth";
 import Link from "next/link";
 import { usePostHog } from "posthog-js/react";
@@ -76,7 +77,7 @@ export function UserDropdown() {
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link
-                  href="https://newsletter.nagringa.dev/account"
+                  href={MANAGE_SUBSCRIPTION_LINK}
                   target="_blank"
                   className="focus:outline-none"
                 >

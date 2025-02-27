@@ -1,12 +1,11 @@
 import { getAuthUserId } from "@convex-dev/auth/server";
+import { v } from "convex/values";
 import { query } from "./_generated/server";
 
 export const get = query({
-  args: {},
-  handler: async () => {
-    return {
-      users: ["a@a.com"],
-    };
+  args: { id: v.id("users") },
+  handler: async (ctx, { id }) => {
+    return await ctx.db.get(id);
   },
 });
 
