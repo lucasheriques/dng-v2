@@ -100,29 +100,40 @@ export const syncSubscribers = internalAction({
 
     for (const subscriber of existingSubscribers) {
       // remove subscriber if not in substack
-      if (
-        !substackSubscribers[subscriber.email] &&
-        subscriber.email !== "lucasheriques@gmail.com"
-      ) {
-        await ctx.runMutation(internal.getSubs.removeSubscriber, {
-          id: subscriber._id,
-        });
-        console.log(`Removed subscriber ${subscriber.email}`);
-        returnInfo.numberOfRemovedSubscribers++;
-        continue;
-      }
+      try {
+        if (subscriber.email === "lucasheriques@gmail.com") {
+          // skip lucasheriques@gmail.com
+          continue;
+        }
 
-      // upsert subscriber if paidSubscription has changed
-      if (
-        substackSubscribers[subscriber.email].paidSubscription !==
-        subscriber.paidSubscription
-      ) {
-        console.log(
-          `Updating subscriber ${subscriber.email} with paidSubscription ${substackSubscribers[subscriber.email].paidSubscription}`
+        if (!substackSubscribers[subscriber.email]) {
+          await ctx.runMutation(internal.getSubs.removeSubscriber, {
+            id: subscriber._id,
+          });
+          console.log(`Removed subscriber ${subscriber.email}`);
+          returnInfo.numberOfRemovedSubscribers++;
+          continue;
+        }
+
+        // upsert subscriber if paidSubscription has changed
+        if (
+          substackSubscribers[subscriber.email].paidSubscription !==
+          subscriber.paidSubscription
+        ) {
+          console.log(
+            `Updating subscriber ${subscriber.email} with paidSubscription ${substackSubscribers[subscriber.email].paidSubscription}`
+          );
+          await ctx.runMutation(internal.getSubs.upsertSubscriberMutation, {
+            subscriber: substackSubscribers[subscriber.email],
+          });
+        }
+      } catch (error) {
+        console.error(
+          `Error upserting subscriber ${subscriber.email}: ${error}`
         );
-        await ctx.runMutation(internal.getSubs.upsertSubscriberMutation, {
-          subscriber: substackSubscribers[subscriber.email],
-        });
+        console.error(
+          `Checking subscriber ${subscriber.email}. Substack: ${substackSubscribers[subscriber.email]?.paidSubscription}. Local: ${subscriber.paidSubscription}`
+        );
       }
     }
 
