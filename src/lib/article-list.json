@@ -1,11 +1,30 @@
 [
   {
+    "id": 158418899,
+    "slug": "como-entrevistar-usuarios-um-guia-para-engenheiros-de-software",
+    "postDate": "2025-03-05T13:03:39.931Z",
+    "title": "Como entrevistar usuários - um guia para engenheiros de software",
+    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd5988da-beda-4344-a832-a6be78bfab01_1472x832.jpeg",
+    "views": 588,
+    "description": "Baseado no livro The Mom Test de Rob Fitzpatrick.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-entrevistar-usuarios-um-guia-para-engenheiros-de-software",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      }
+    ]
+  },
+  {
     "id": 157967278,
     "slug": "transformando-a-vida-em-um-jogo",
     "postDate": "2025-02-26T15:59:22.551Z",
     "title": "Transformando a vida em um jogo",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc361542-4951-45c5-9c44-2138ed985d38_1456x816.png",
-    "views": 1420,
+    "views": 1423,
     "description": "Como a teoria dos jogos pode impulsionar sua produtividade como engenheiro de software.",
     "canonical_url": "https://newsletter.nagringa.dev/p/transformando-a-vida-em-um-jogo",
     "postTags": [
@@ -31,7 +50,7 @@
     "postDate": "2025-02-17T13:02:19.073Z",
     "title": "Por que engenheiros de software mudam de emprego",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F50df6881-441f-4733-aa4c-5a5d7e4f3e23_1852x653.png",
-    "views": 2167,
+    "views": 2173,
     "description": "E quando você deveria considerar uma mudança. Com base no meu framework pessoal com 5 perguntas diferentes.",
     "canonical_url": "https://newsletter.nagringa.dev/p/por-que-engenheiros-de-software-mudam-de-emprego",
     "postTags": [
@@ -50,7 +69,7 @@
     "postDate": "2025-02-12T17:10:08.643Z",
     "title": "Como e por que medir o impacto do seu trabalho",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faac7e1d9-e902-4f00-a73d-3f4984c9765c_1731x1110.png",
-    "views": 2234,
+    "views": 2239,
     "description": "O melhor jeito de garantir que está fazendo um bom trabalho é através do seu impacto. Mas, o que significa medir ele, na prática?",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-e-por-que-medir-o-impacto-do",
     "postTags": [
@@ -76,7 +95,7 @@
     "postDate": "2025-02-04T12:29:11.826Z",
     "title": "Lições de onboarding: 4 dicas que aprendi na minha semana presencial na PostHog",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ab0573c-a262-4bd9-82a6-67740d64ebdf_2912x1632.png",
-    "views": 1599,
+    "views": 1600,
     "description": "O que eu aprendi ao trabalhar 1 semana no escritório, especialmente sobre compartilhar conhecimento. E mais algumas novidades também.",
     "canonical_url": "https://newsletter.nagringa.dev/p/dicas-que-aprendi-no-meu-onboarding-na-posthog",
     "postTags": [
@@ -223,7 +242,7 @@
     "postDate": "2024-12-02T21:24:05.440Z",
     "title": "Processos seletivos e ofertas que recebi na gringa desde 2020",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1933927b-c3f7-475d-9fde-83ab50ec07bb_2610x2616.png",
-    "views": 1982,
+    "views": 1983,
     "description": "Como eu consegui vagas, como foram os processos seletivos, e quais ofertas eu recebi ou não recebi. E o que eu aprendi com cada processo.",
     "canonical_url": "https://newsletter.nagringa.dev/p/processos-seletivos-e-ofertas-de-vagas-na-gringa",
     "postTags": [
@@ -249,7 +268,7 @@
     "postDate": "2024-11-25T13:01:06.113Z",
     "title": "Como fazer um excelente onboarding em empresas de tecnologia",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F944b2361-4d1b-492b-a958-3d057d2e8c76_1299x940.png",
-    "views": 1535,
+    "views": 1536,
     "description": "Onboarding é o processo que todo novo funcionário faz ao entrar numa empresa. Aprenda como se destacar desde cedo, especialmente como engenheiro de software.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-fazer-um-excelente-onboarding",
     "postTags": [
