@@ -39,7 +39,7 @@ export function PostDetail({ preloadedPost }: PostDetailProps) {
               </span>
             </div>
             <span>•</span>
-            <span>{formatRelativeTime(new Date(post.createdAt))}</span>
+            <span>{formatRelativeTime(new Date(post._creationTime))}</span>
           </div>
         </div>
       </div>
