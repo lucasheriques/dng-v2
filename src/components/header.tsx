@@ -72,7 +72,7 @@ export default function Header({ articles }: HeaderProps) {
                 </PopoverButton>
               </Button>
               <Button variant="link" asChild className="text-white px-0">
-                <Link href="/discussoes">Discussões</Link>
+                <Link href="/assinantes">Recursos de assinantes</Link>
               </Button>
               <Search />
               <UserDropdown />
