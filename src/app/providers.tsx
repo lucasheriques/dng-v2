@@ -25,6 +25,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       person_profiles: "identified_only",
       capture_pageview: false, // Disable automatic pageview capture, as we capture manually
       disable_session_recording: isDev,
+      ui_host: env.NEXT_PUBLIC_POSTHOG_UI_HOST,
     });
   }, [isDev]);
 
