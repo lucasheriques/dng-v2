@@ -103,6 +103,9 @@ export const MENTORSHIP_LINKS = {
 export const MANAGE_SUBSCRIPTION_LINK =
   "https://newsletter.nagringa.dev/account?utm_source=nagringa.dev";
 
+export const SUBSCRIBE_LINK =
+  "https://newsletter.nagringa.dev/subscribe?ref=nagringa.dev";
+
 export const TOOLS = {
   cltVsPjCalculator: {
     title: "Calculadora Salário CLT vs PJ",

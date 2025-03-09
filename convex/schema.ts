@@ -24,7 +24,6 @@ export default defineSchema({
     authorId: v.id("users"),
     votes: v.number(),
     viewCount: v.number(),
-    createdAt: v.number(),
     updatedAt: v.number(),
   }).index("by_author", ["authorId"]),
 
@@ -34,7 +33,6 @@ export default defineSchema({
     postId: v.id("posts"),
     parentCommentId: v.optional(v.id("comments")),
     votes: v.number(),
-    createdAt: v.number(),
     updatedAt: v.number(),
   })
     .index("by_post", ["postId"])
@@ -46,7 +44,6 @@ export default defineSchema({
     targetType: v.union(v.literal("post"), v.literal("comment")),
     targetId: v.string(),
     value: v.number(),
-    createdAt: v.number(),
   })
     .index("by_user_and_target", ["userId", "targetType", "targetId"])
     .index("by_target", ["targetType", "targetId"]),
@@ -63,7 +60,6 @@ export default defineSchema({
     ),
     targetId: v.string(),
     metadata: v.optional(v.string()),
-    createdAt: v.number(),
   })
     .index("by_user", ["userId"])
     .index("by_activity_type", ["activityType"]),
@@ -73,4 +69,51 @@ export default defineSchema({
     paidSubscription: v.boolean(),
     subscribedAt: v.string(),
   }).index("by_email", ["email"]),
+
+  // New tables for the paid content system
+  products: defineTable({
+    name: v.string(),
+    description: v.string(),
+    type: v.union(v.literal("book"), v.literal("credit")),
+    slug: v.string(),
+    priceInCents: v.number(), // Price in cents
+    currency: v.string(), // e.g., "BRL"
+    isActive: v.boolean(),
+    updatedAt: v.number(),
+    previewAvailable: v.optional(v.boolean()), // Whether a preview is available
+    metadata: v.optional(
+      v.object({
+        creditAmount: v.optional(v.number()),
+        // Other product-specific metadata
+      })
+    ),
+  })
+    .index("by_type", ["type"])
+    .index("by_slug", ["slug"]),
+
+  purchases: defineTable({
+    userId: v.id("users"),
+    productId: v.id("products"),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("completed"),
+      v.literal("failed"),
+      v.literal("refunded")
+    ),
+    paymentMethod: v.union(v.literal("stripe"), v.literal("pix")),
+    paymentIntentId: v.optional(v.string()), // Stripe payment intent ID
+    amount: v.number(), // Amount paid in cents
+    currency: v.string(), // Currency code (e.g., BRL)
+    purchaseDate: v.number(),
+    refundDate: v.optional(v.number()),
+  })
+    .index("by_user", ["userId"])
+    .index("by_product_and_user", ["productId", "userId"])
+    .index("by_payment_intent", ["paymentIntentId"]),
+
+  userCredits: defineTable({
+    userId: v.id("users"),
+    balance: v.number(),
+    lastUpdated: v.number(),
+  }).index("by_user", ["userId"]),
 });

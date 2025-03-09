@@ -100,9 +100,9 @@ const LinkCard = React.forwardRef<HTMLAnchorElement, LinkCardProps>(
             {cardTitle}
           </h3>
           {subtitle && (
-            <p className="text-xs transition-colors text-muted-foreground group-hover:text-current/80">
+            <span className="text-xs transition-colors text-muted-foreground group-hover:text-current/80">
               {subtitle}
-            </p>
+            </span>
           )}
           {children}
         </div>

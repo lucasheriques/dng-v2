@@ -25,7 +25,6 @@ export const createPost = mutation({
       authorId: authorId,
       votes: 0,
       viewCount: 0,
-      createdAt: Date.now(),
       updatedAt: Date.now(),
     });
 
@@ -34,7 +33,6 @@ export const createPost = mutation({
       userId: authorId,
       activityType: "post_created",
       targetId: postId,
-      createdAt: Date.now(),
     });
 
     return postId;

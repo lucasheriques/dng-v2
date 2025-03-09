@@ -47,7 +47,6 @@ interface ServiceAccountKey {
 const cache = new ActionCache(components.actionCache, {
   action: internal.calendar.internalGetEvents,
   name: "getEvents",
-  // ttl should be 1 hour in miliseconds
   ttl: 1000 * 60 * 60,
 });
 

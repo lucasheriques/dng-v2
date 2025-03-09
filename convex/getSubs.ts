@@ -1,7 +1,9 @@
+import { MINUTE, RateLimiter } from "@convex-dev/rate-limiter";
 import { v } from "convex/values";
-import { internal } from "./_generated/api";
+import { components, internal } from "./_generated/api";
 import { Doc } from "./_generated/dataModel";
 import {
+  action,
   internalAction,
   internalMutation,
   internalQuery,
@@ -59,6 +61,44 @@ function parseCSV(csv: string) {
   return subscribersMap;
 }
 
+async function getSubscribersFromSubstack() {
+  const cookie = process.env.SUBSTACK_AUTH_COOKIE;
+  if (!cookie) {
+    throw new Error("SUBSTACK_AUTH_COOKIE is not set");
+  }
+
+  const signups = await downloadSignups(cookie);
+  const substackSubscribers = parseCSV(signups);
+
+  return substackSubscribers;
+}
+
+const rateLimiter = new RateLimiter(components.rateLimiter, {
+  substackSync: { kind: "token bucket", rate: 10, period: MINUTE, capacity: 1 },
+});
+
+export const updateSingleSubscriber = action({
+  args: {
+    email: v.string(),
+  },
+  handler: async (ctx, args) => {
+    await rateLimiter.limit(ctx, "substackSync", {
+      key: args.email,
+    });
+
+    const substackSubscribers = await getSubscribersFromSubstack();
+    const substackSubscriber = substackSubscribers[args.email];
+
+    if (!substackSubscriber) {
+      throw new Error(`Subscriber ${args.email} not found in Substack`);
+    }
+
+    await ctx.runMutation(internal.getSubs.upsertSubscriberMutation, {
+      subscriber: substackSubscriber,
+    });
+  },
+});
+
 export const getSubscribers = internalQuery({
   handler: async (ctx) => {
     return await ctx.db.query("subscribers").collect();
@@ -80,13 +120,7 @@ export const upsertSubscriberMutation = internalMutation({
 
 export const syncSubscribers = internalAction({
   handler: async (ctx) => {
-    const cookie = process.env.SUBSTACK_AUTH_COOKIE;
-    if (!cookie) {
-      throw new Error("SUBSTACK_AUTH_COOKIE is not set");
-    }
-
-    const csv = await downloadSignups(cookie);
-    const substackSubscribers = parseCSV(csv);
+    const substackSubscribers = await getSubscribersFromSubstack();
 
     const existingSubscribers = await ctx.runQuery(
       internal.getSubs.getSubscribers

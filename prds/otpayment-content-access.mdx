@@ -1,0 +1,353 @@
+# Revised PRD: One-Time Payment Content Access System
+
+## 1. Executive Summary
+
+This document outlines the implementation of a content access and payment system focused on one-time purchases, starting with the release of an MDX-based book at "/guia-completo". The system will leverage existing Substack subscription integrations while adding one-time payment options via Stripe (and future PIX integration). The architecture will be designed to accommodate future products like AI services with credit-based access.
+
+## 2. Business Requirements
+
+### 2.1 Content Access Management
+- **One-Time Purchase**: Enable users to make one-time purchases for specific content/products.
+- **Existing Subscription Integration**: Utilize the existing Substack subscriber sync to grant access to paid subscribers.
+- **Payment Method**: Implement Stripe for credit card payments, with a placeholder for future PIX integration.
+- **Preview Access**: Allow preview access to the first chapter of the book.
+- **User Authentication**: Ensure only authenticated users with appropriate permissions can access premium content.
+
+### 2.2 Product Types
+- **Books**: MDX content accessible via NextJS pages with access control.
+- **Credits**: (Future) Purchasable credits for AI services and other usage-based products.
+
+### 2.3 Payment Processing
+- **One-Time Purchases**: Process and record one-time purchases, linking them to user accounts.
+- **Stripe Integration**: Handle payment processing and webhooks from Stripe.
+- **Refund Policy**: Support full refunds within 7 days of purchase for any reason.
+
+## 3. Technical Approach
+
+### 3.1 Data Model
+
+The data model will build upon the existing schema, adding new tables for products and purchases:
+
+#### Products Table
+
+```typescript
+products: defineTable({
+  name: v.string(),
+  description: v.string(),
+  type: v.union(
+    v.literal("book"),
+    v.literal("credit")
+  ),
+  slug: v.string(),
+  price: v.number(), // Price in cents
+  currency: v.string(), // e.g., "BRL"
+  isActive: v.boolean(),
+  createdAt: v.number(),
+  updatedAt: v.number(),
+  previewAvailable: v.optional(v.boolean()), // Whether a preview is available
+  metadata: v.optional(v.object({
+    creditAmount: v.optional(v.number()),
+    // Other product-specific metadata
+  })),
+}).index("by_type", ["type"]).index("by_slug", ["slug"])
+```
+
+#### Purchases Table
+
+```typescript
+purchases: defineTable({
+  userId: v.id("users"),
+  productId: v.id("products"),
+  status: v.union(
+    v.literal("pending"),
+    v.literal("completed"),
+    v.literal("failed"),
+    v.literal("refunded")
+  ),
+  paymentMethod: v.union(v.literal("stripe"), v.literal("pix")),
+  paymentIntentId: v.optional(v.string()), // Stripe payment intent ID
+  amount: v.number(), // Amount paid in cents
+  currency: v.string(), // Currency code (e.g., BRL)
+  purchaseDate: v.number(),
+  refundDate: v.optional(v.number()),
+}).index("by_user", ["userId"])
+  .index("by_product_and_user", ["productId", "userId"])
+  .index("by_payment_intent", ["paymentIntentId"])
+```
+
+#### User Credits Table (for future AI services)
+
+```typescript
+userCredits: defineTable({
+  userId: v.id("users"),
+  balance: v.number(),
+  lastUpdated: v.number(),
+}).index("by_user", ["userId"])
+```
+
+### 3.2 Backend Functions
+
+#### Product Management
+
+```typescript
+// Create a new product (admin only)
+export const createProduct = mutation({
+  args: {
+    name: v.string(),
+    description: v.string(),
+    type: v.union(v.literal("book"), v.literal("credit")),
+    slug: v.string(),
+    price: v.number(),
+    currency: v.string(),
+    previewAvailable: v.optional(v.boolean()),
+    metadata: v.optional(v.object({
+      creditAmount: v.optional(v.number()),
+    })),
+  },
+  handler: async (ctx, args) => {
+    // Check admin permission
+    // Create product logic
+  },
+});
+
+// Get product details
+export const getProduct = query({
+  args: { slug: v.string() },
+  handler: async (ctx, args) => {
+    // Fetch product by slug
+  },
+});
+
+// List available products
+export const listProducts = query({
+  args: {
+    type: v.optional(v.union(v.literal("book"), v.literal("credit")))
+  },
+  handler: async (ctx, args) => {
+    // List active products, optionally filtered by type
+  },
+});
+```
+
+#### Purchase Processing
+
+```typescript
+// Create a payment intent for Stripe
+export const createStripePaymentIntent = mutation({
+  args: {
+    productSlug: v.string(),
+  },
+  handler: async (ctx, args) => {
+    // Get product details
+    // Create Stripe payment intent
+    // Record pending purchase
+    // Return client secret for Stripe Elements
+  },
+});
+
+// Handle Stripe webhook
+export const handleStripeWebhook = httpAction({
+  handler: async (ctx, request) => {
+    // Verify Stripe signature
+    // Process payment success/failure
+    // Update purchase status
+    // Add credits if applicable
+  },
+});
+
+// Check user access to a product
+export const checkProductAccess = query({
+  args: { productSlug: v.string() },
+  handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) return { hasAccess: false };
+
+    const product = await ctx.db
+      .query("products")
+      .withIndex("by_slug", q => q.eq("slug", args.productSlug))
+      .first();
+
+    if (!product) return { hasAccess: false };
+
+    // Check if the first chapter is free for preview
+    if (product.previewAvailable && args.chapterId === 1) {
+      return { hasAccess: true, isPreview: true };
+    }
+
+    // Check if user has a completed purchase for this product
+    const purchase = await ctx.db
+      .query("purchases")
+      .withIndex("by_product_and_user", q =>
+        q.eq("productId", product._id).eq("userId", userId)
+      )
+      .filter(q => q.eq(q.field("status"), "completed"))
+      .first();
+
+    if (purchase) {
+      return { hasAccess: true };
+    }
+
+    // Check if user is a paid subscriber via Substack sync
+    const user = await ctx.db.get(userId);
+    if (!user) return { hasAccess: false };
+
+    const subscription = await ctx.db
+      .query("subscribers")
+      .withIndex("by_email", q => q.eq("email", user.email || ""))
+      .filter(q => q.eq(q.field("paidSubscription"), true))
+      .first();
+
+    return {
+      hasAccess: !!subscription,
+      isPaidSubscriber: !!subscription
+    };
+  },
+});
+
+// Process refund request
+export const requestRefund = mutation({
+  args: {
+    purchaseId: v.id("purchases"),
+  },
+  handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) throw new Error("Not authenticated");
+
+    const purchase = await ctx.db.get(args.purchaseId);
+    if (!purchase) throw new Error("Purchase not found");
+    if (purchase.userId !== userId) throw new Error("Not authorized");
+
+    // Check if purchase is within 7-day refund window
+    const now = Date.now();
+    const purchaseDate = purchase.purchaseDate;
+    const daysSincePurchase = (now - purchaseDate) / (1000 * 60 * 60 * 24);
+
+    if (daysSincePurchase > 7) {
+      throw new Error("Refund window has expired");
+    }
+
+    // Process refund via Stripe
+    // Update purchase status to refunded
+    // Remove credits if applicable
+  },
+});
+```
+
+### 3.3 Frontend Components
+
+#### Product Display Component
+- Shows product details, price, and description
+- Purchase button that initiates payment flow
+- Preview button for content with preview available
+
+#### Payment Flow Component
+- Stripe Elements integration for secure card input
+- Payment confirmation display
+- Error handling for failed payments
+- Success confirmation with access instructions
+
+#### Book Content Page (/guia-completo)
+- Access check before displaying content
+- Table of contents navigation
+- MDX rendering with proper styling
+- Preview indicator for free preview content
+
+#### User Dashboard Component
+- List of purchased products with access links
+- Credit balance display (for future)
+- Purchase history and receipt access
+- Refund request option for eligible purchases
+
+### 3.4 Access Control Implementation
+
+We'll implement access control at the page level using a server component or middleware:
+
+```typescript
+// In src/app/guia-completo/page.tsx
+import { checkProductAccess } from '@/lib/actions';
+
+export default async function BookPage() {
+  const { hasAccess, isPreview, isPaidSubscriber } = await checkProductAccess('guia-completo');
+
+  if (!hasAccess) {
+    return <PaywallComponent />;
+  }
+
+  return (
+    <div>
+      {isPreview && <PreviewBanner />}
+      {isPaidSubscriber && <SubscriberBanner />}
+      <BookContent />
+    </div>
+  );
+}
+```
+
+## 4. Implementation Plan
+
+### Phase 1: Data Model & Backend (Week 1)
+- Set up database schema for products and purchases
+- Implement product management functions
+- Create access control logic
+- Set up Stripe integration for payment processing
+
+### Phase 2: Book Page & Payment Flow (Week 2)
+- Create book content page with access control
+- Implement payment flow with Stripe Elements
+- Add preview functionality for first chapter
+- Build purchase confirmation and error handling
+
+### Phase 3: User Dashboard & Testing (Week 3)
+- Create user dashboard with purchase history
+- Implement refund request functionality
+- Test payment flows and access control
+- Add placeholder for PIX payment
+
+### Phase 4: Launch & Monitoring (Week 4)
+- Final testing and bug fixes
+- Deploy to production
+- Monitor payment processing and access
+- Document the system for future expansions
+
+## 5. Future Expansions
+
+### Phase 5: Credits System (Future)
+- Implement credits purchase and management
+- Create credit consumption tracking
+- Develop AI services that use credits
+
+### Phase 6: PIX Integration (Future)
+- Implement PIX payment processing
+- Add QR code generation and display
+- Set up webhook handling for PIX payments
+
+### Phase 7: Offline Reading (Future)
+- Add content caching for offline access
+- Implement progressive web app features
+- Create download option for purchased content
+
+## Technical Considerations
+
+### Security
+- Use server-side access checks for all protected content
+- Implement proper webhook signature verification
+- Secure payment information handling via Stripe Elements
+
+### Performance
+- Optimize MDX rendering for long-form content
+- Implement incremental static regeneration for book pages
+- Use client-side caching for improved reading experience
+
+### Analytics
+- Track purchase conversion rates
+- Monitor content engagement metrics
+- Analyze user journey from preview to purchase
+
+## Next Steps
+
+1. **Design Decision**: Confirm the structure of the book and how it will be organized in the codebase
+2. **Implementation Start**: Begin with the data model and product management functions
+3. **Integration Testing**: Set up Stripe test environment for payment flow testing
+4. **Content Strategy**: Prepare the preview chapter and determine access granularity
+
+Would you like me to focus on any specific part of this implementation first? Or would you like adjustments to the approach based on additional requirements?

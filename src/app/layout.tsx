@@ -8,10 +8,14 @@ import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
 import { getRandomArticles } from "@/use-cases/get-articles";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
+import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 export const metadata = {
   title: "Dev na Gringa | Comunidade Tech para Carreira Internacional",
@@ -33,13 +37,9 @@ export default function RootLayout({
             src="https://unpkg.com/react-scan/dist/auto.global.js"
             async
           /> */}
-          <meta
-            name="impact-site-verification"
-            content="8fda9f93-ed67-4dbc-b552-8888828822be"
-          />
         </head>
         <body
-          className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased dark selection:bg-teal-500 selection:text-slate-950 bg-slate-950`}
+          className={`${inter.variable} font-sans antialiased dark selection:bg-teal-500 selection:text-slate-950 bg-slate-950`}
         >
           <NextTopLoader
             color="#FF4D8E"

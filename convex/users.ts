@@ -35,6 +35,7 @@ export const viewer = query({
 
     return {
       user,
+      hasPaidSubscription: !!subscription?.paidSubscription,
       subscription,
     };
   },

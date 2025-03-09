@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { SUBSCRIBE_LINK } from "@/lib/constants";
 import { LockIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -29,11 +30,7 @@ export function NonSubscriberView() {
           conteúdo exclusivo.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Link
-            href="https://newsletter.nagringa.dev/subscribe"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Link href={SUBSCRIBE_LINK} target="_blank" rel="noopener noreferrer">
             <Button
               size="lg"
               className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
