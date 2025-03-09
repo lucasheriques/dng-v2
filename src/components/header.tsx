@@ -60,7 +60,7 @@ export default function Header({ articles }: HeaderProps) {
           >
             <Link href="/" className="items-center gap-2 flex">
               <Image src={Logo} alt="Dev na Gringa" width={48} height={48} />
-              <span className="font-bold text-white text-xl hidden md:block">
+              <span className="font-bold text-xl hidden md:block">
                 Dev na Gringa
               </span>
             </Link>
@@ -71,8 +71,8 @@ export default function Header({ articles }: HeaderProps) {
                   <ChevronDown aria-hidden="true" className="h-5 w-5" />
                 </PopoverButton>
               </Button>
-              <Button variant="link" asChild className="text-white px-0">
-                <Link href="/assinantes">Recursos de assinantes</Link>
+              <Button variant="link" asChild className="px-0">
+                <Link href="/assinantes">Recursos para assinantes</Link>
               </Button>
               <Search />
               <UserDropdown />
@@ -102,7 +102,7 @@ export default function Header({ articles }: HeaderProps) {
                         <Link
                           key={item.name}
                           href={item.href}
-                          className="flex gap-x-4 py-2 text-sm/6 font-semibold text-gray-200 hover:text-white transition-all hover:bg-white/5 px-3 -mx-3 rounded-lg group"
+                          className="flex gap-x-4 py-2 text-sm/6 font-semibold text-gray-200 hover:transition-all hover:bg-white/5 px-3 -mx-3 rounded-lg group"
                           onClick={close}
                           prefetch={true}
                         >
@@ -126,7 +126,7 @@ export default function Header({ articles }: HeaderProps) {
                         <a
                           key={item.href}
                           href={item.href}
-                          className="flex gap-x-4 py-2 text-sm/6 font-semibold text-gray-200 hover:text-white transition-all hover:bg-white/5 px-3 -mx-3 rounded-lg group"
+                          className="flex gap-x-4 py-2 text-sm/6 font-semibold text-gray-200 hover:transition-all hover:bg-white/5 px-3 -mx-3 rounded-lg group"
                           target="_blank"
                         >
                           <item.icon
