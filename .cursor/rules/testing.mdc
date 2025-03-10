@@ -1,0 +1,8 @@
+---
+description: How to write tests
+globs: **/*.test.{ts,tsx,js,jsx}
+alwaysApply: false
+---
+Tests:
+- Use vitest
+- Create tests that help makes us be help about shipping our programs, and not break anything in the future

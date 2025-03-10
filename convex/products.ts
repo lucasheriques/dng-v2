@@ -2,60 +2,6 @@ import { getAuthUserId } from "@convex-dev/auth/server";
 import { v } from "convex/values";
 import { internalQuery, mutation, query } from "./_generated/server";
 
-// Create a new product (admin only)
-export const create = mutation({
-  args: {
-    name: v.string(),
-    description: v.string(),
-    type: v.union(v.literal("book"), v.literal("credit")),
-    slug: v.string(),
-    price: v.number(),
-    currency: v.string(),
-    previewAvailable: v.optional(v.boolean()),
-    metadata: v.optional(
-      v.object({
-        creditAmount: v.optional(v.number()),
-      })
-    ),
-  },
-  handler: async (ctx, args) => {
-    const userId = await getAuthUserId(ctx);
-    if (!userId) {
-      throw new Error("Não autenticado");
-    }
-
-    // Check if user is an admin
-    const user = await ctx.db.get(userId);
-    if (!user || user.role !== "admin") {
-      throw new Error("Não autorizado");
-    }
-
-    // Check if slug is already in use
-    const existingProduct = await ctx.db
-      .query("products")
-      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
-      .first();
-
-    if (existingProduct) {
-      throw new Error(`Produto com slug "${args.slug}" já existe`);
-    }
-
-    const now = Date.now();
-    return await ctx.db.insert("products", {
-      name: args.name,
-      description: args.description,
-      type: args.type,
-      slug: args.slug,
-      priceInCents: args.price,
-      currency: args.currency,
-      isActive: true,
-      updatedAt: now,
-      previewAvailable: args.previewAvailable ?? false,
-      metadata: args.metadata,
-    });
-  },
-});
-
 // Get a product by slug
 export const getBySlug = query({
   args: { slug: v.string() },

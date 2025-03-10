@@ -1,10 +1,10 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { useGenerateStripeLink } from "@/hooks/use-generate-stripe-link";
+import { PayWithCardButton } from "@/components/pay-with-card-button";
+import { PayWithPixButton } from "@/components/pay-with-pix-button";
 import { SUBSCRIBE_LINK } from "@/lib/constants";
 import { useAuth } from "@/use-cases/use-auth";
 import { api } from "@convex/_generated/api";
-import { useQuery } from "convex/react";
+import { useQuery } from "convex-helpers/react/cache/hooks";
 import Link from "next/link";
 
 export default function BookPage() {
@@ -12,10 +12,6 @@ export default function BookPage() {
     slug: "guia-dev-na-gringa",
   });
   const { user, hasPaidSubscription } = useAuth();
-  const { generateStripeLink, isLoading } = useGenerateStripeLink({
-    userId: user?._id,
-    productId: query?.product?._id,
-  });
 
   if (!query) {
     return <div>Loading...</div>;
@@ -26,11 +22,6 @@ export default function BookPage() {
   if (!user?._id || !product?._id) {
     return <div>Loading...</div>;
   }
-
-  console.log({
-    hasAccess,
-    hasPaidSubscription,
-  });
 
   if (!product) {
     return (
@@ -66,13 +57,8 @@ export default function BookPage() {
             >
               Assinar no Substack
             </a>
-            <Button onClick={generateStripeLink} loading={isLoading}>
-              Comprar por{" "}
-              {(product.priceInCents / 100).toLocaleString("pt-BR", {
-                style: "currency",
-                currency: product.currency,
-              })}
-            </Button>
+            <PayWithCardButton productId={product._id} userId={user._id} />
+            <PayWithPixButton productId={product._id} userId={user._id} />
           </div>
         </div>
 
@@ -91,11 +77,7 @@ export default function BookPage() {
               ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc quis
               nisl.
             </p>
-            <p className="mt-4">
-              <Button onClick={generateStripeLink} loading={isLoading}>
-                Continue lendo comprando este livro →
-              </Button>
-            </p>
+            <PayWithCardButton productId={product._id} userId={user._id} />
           </div>
         </div>
       </div>

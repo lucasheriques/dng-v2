@@ -1,0 +1,9 @@
+---
+description: For creating amazing components
+globs: **/*.{ts,tsx,js,jsx}
+alwaysApply: false
+---
+UI:
+- use shadcn and tailwindcss
+- for animations, use motion and rombo (tailwind plugin)
+- use only snake-case files for components (test-component.tsx for TestComponent)

@@ -2,38 +2,8 @@ import { v } from "convex/values";
 import Stripe from "stripe";
 import { internal } from "./_generated/api";
 import { Id } from "./_generated/dataModel";
-import { action, ActionCtx, internalAction } from "./_generated/server";
-
-const checkIfProductCanBePurchased = async (
-  ctx: ActionCtx,
-  productId: Id<"products">,
-  userId: Id<"users">
-) => {
-  const product = await ctx.runQuery(internal.products.get, {
-    id: productId,
-  });
-  if (!product) {
-    throw new Error("Produto não encontrado");
-  }
-
-  if (!product.isActive) {
-    throw new Error("Este produto não está disponível para compra");
-  }
-
-  const existingPurchase = await ctx.runQuery(
-    internal.purchases.checkUserPurchase,
-    {
-      productId,
-      userId,
-    }
-  );
-
-  if (existingPurchase) {
-    throw new Error("Você já possui este produto");
-  }
-
-  return product;
-};
+import { action, internalAction } from "./_generated/server";
+import { checkIfProductCanBePurchased } from "./actionHelpers";
 
 export const createCheckoutSession = action({
   args: {
@@ -47,7 +17,11 @@ export const createCheckoutSession = action({
     sessionUrl: string;
     sessionId: string;
   }> => {
-    const product = await checkIfProductCanBePurchased(ctx, productId, userId);
+    const { product } = await checkIfProductCanBePurchased(
+      ctx,
+      productId,
+      userId
+    );
 
     const domain = process.env.HOSTING_URL ?? "http://localhost:3000";
     const stripe = new Stripe(process.env.STRIPE_KEY!, {

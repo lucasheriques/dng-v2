@@ -2,6 +2,7 @@
 
 import { env } from "@/env";
 import { ConvexAuthNextjsProvider } from "@convex-dev/auth/nextjs";
+import { ConvexQueryCacheProvider } from "convex-helpers/react/cache/provider";
 import { ConvexReactClient } from "convex/react";
 import { LazyMotion } from "motion/react";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
@@ -33,9 +34,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <LazyMotion features={async () => await loadFeatures} strict>
       <PostHogProvider client={posthog}>
         <ConvexAuthNextjsProvider client={convex}>
-          <NuqsAdapter>
-            <BalancerProvider>{children}</BalancerProvider>
-          </NuqsAdapter>
+          <ConvexQueryCacheProvider>
+            <NuqsAdapter>
+              <BalancerProvider>{children}</BalancerProvider>
+            </NuqsAdapter>
+          </ConvexQueryCacheProvider>
         </ConvexAuthNextjsProvider>
       </PostHogProvider>
       o

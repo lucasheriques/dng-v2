@@ -11,6 +11,7 @@ export default defineSchema({
     emailVerificationTime: v.optional(v.number()),
     phone: v.optional(v.string()),
     phoneVerificationTime: v.optional(v.number()),
+    cpf: v.optional(v.string()),
     isAnonymous: v.optional(v.boolean()),
     role: v.optional(
       v.union(v.literal("admin"), v.literal("moderator"), v.literal("user"))
@@ -77,6 +78,7 @@ export default defineSchema({
     type: v.union(v.literal("book"), v.literal("credit")),
     slug: v.string(),
     priceInCents: v.number(), // Price in cents
+    pixPriceInCents: v.number(),
     currency: v.string(), // e.g., "BRL"
     isActive: v.boolean(),
     updatedAt: v.number(),

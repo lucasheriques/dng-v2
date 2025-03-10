@@ -36,4 +36,34 @@ http.route({
   }),
 });
 
+http.route({
+  path: "/pix",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    const url = new URL(request.url);
+    const webhookSecret = url.searchParams.get("webhookSecret");
+
+    if (!webhookSecret) {
+      return new Response("Missing webhook secret", { status: 400 });
+    }
+
+    try {
+      const result = await ctx.runAction(internal.pix.fulfill, {
+        webhookSecret,
+        payload: await request.text(),
+      });
+
+      if (result.success) {
+        return new Response("Webhook processed successfully", { status: 200 });
+      } else {
+        console.error("Error in webhook:", result.error);
+        return new Response("Error processing webhook", { status: 400 });
+      }
+    } catch (error) {
+      console.error("Error processing webhook:", error);
+      return new Response("Internal error processing webhook", { status: 500 });
+    }
+  }),
+});
+
 export default http;

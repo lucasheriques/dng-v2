@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as actionHelpers from "../actionHelpers.js";
 import type * as auth from "../auth.js";
 import type * as calendar from "../calendar.js";
 import type * as credits from "../credits.js";
@@ -15,6 +16,7 @@ import type * as crons from "../crons.js";
 import type * as discord from "../discord.js";
 import type * as getSubs from "../getSubs.js";
 import type * as http from "../http.js";
+import type * as pix from "../pix.js";
 import type * as posts_mutations from "../posts/mutations.js";
 import type * as posts_queries from "../posts/queries.js";
 import type * as products from "../products.js";
@@ -38,6 +40,7 @@ import type {
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  actionHelpers: typeof actionHelpers;
   auth: typeof auth;
   calendar: typeof calendar;
   credits: typeof credits;
@@ -45,6 +48,7 @@ declare const fullApi: ApiFromModules<{
   discord: typeof discord;
   getSubs: typeof getSubs;
   http: typeof http;
+  pix: typeof pix;
   "posts/mutations": typeof posts_mutations;
   "posts/queries": typeof posts_queries;
   products: typeof products;

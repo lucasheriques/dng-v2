@@ -5,7 +5,13 @@ import { query } from "./_generated/server";
 export const get = query({
   args: { id: v.id("users") },
   handler: async (ctx, { id }) => {
-    return await ctx.db.get(id);
+    const user = await ctx.db.get(id);
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
   },
 });
 
