@@ -87,7 +87,7 @@ export function ContactCard({ type, info, onSelect }: ContactCardProps) {
     })),
     {
       value: NEW_CONTACT_VALUE,
-      label: `Adicionar novo ${type === "vendor" ? "empresa" : "cliente"}`,
+      label: `Adicionar ${type === "vendor" ? "empresa" : "cliente"}`,
     },
   ];
 
