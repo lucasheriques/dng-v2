@@ -61,7 +61,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const loadingColors = {
       default: "black",
-      outline: "black",
+      outline: "white",
       ghost: "white",
       secondary: "white",
       destructive: "white",

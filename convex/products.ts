@@ -14,28 +14,55 @@ export const getBySlug = query({
 });
 
 export const getProductAndAccess = query({
-  args: { slug: v.string() },
+  args: {
+    slug: v.string(),
+  },
   handler: async (ctx, args) => {
     const product = await ctx.db
       .query("products")
       .withIndex("by_slug", (q) => q.eq("slug", args.slug))
-      .first();
-    if (!product) return { product: null, hasAccess: false };
+      .unique();
 
+    if (!product) {
+      return { product: null, hasAccess: false };
+    }
+
+    // Check if user has access through purchases or subscription
     const userId = await getAuthUserId(ctx);
-    if (!userId) return { product, hasAccess: false };
+    if (!userId) {
+      return { product, hasAccess: false };
+    }
 
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_id", (q) => q.eq("_id", userId))
+      .unique();
+
+    if (!user) {
+      return { product, hasAccess: false };
+    }
+
+    // Check if user has purchased this product
     const purchase = await ctx.db
       .query("purchases")
       .withIndex("by_product_and_user", (q) =>
-        q.eq("productId", product._id).eq("userId", userId)
+        q.eq("productId", product._id).eq("userId", user._id)
       )
       .filter((q) => q.eq(q.field("status"), "completed"))
-      .first();
+      .unique();
+
+    // Check if user has an active subscription
+    const subscriber = await ctx.db
+      .query("subscribers")
+      .withIndex("by_email", (q) => q.eq("email", user.email!))
+      .filter((q) => q.eq(q.field("paidSubscription"), true))
+      .unique();
+
+    const hasAccess = Boolean(purchase || subscriber);
 
     return {
       product,
-      hasAccess: !!purchase,
+      hasAccess,
     };
   },
 });

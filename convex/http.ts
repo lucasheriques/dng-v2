@@ -47,9 +47,15 @@ http.route({
       return new Response("Missing webhook secret", { status: 400 });
     }
 
+    console.log("webhookSecret", webhookSecret);
+    console.log("ABACATE_WEBHOOK_SECRET", process.env.ABACATE_WEBHOOK_SECRET);
+
+    if (webhookSecret !== process.env.ABACATE_WEBHOOK_SECRET) {
+      return new Response("Invalid webhook secret", { status: 400 });
+    }
+
     try {
       const result = await ctx.runAction(internal.pix.fulfill, {
-        webhookSecret,
         payload: await request.text(),
       });
 

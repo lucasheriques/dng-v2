@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useGenerateStripeLink } from "@/hooks/use-generate-stripe-link";
+import { useGenerateStripeLink } from "@/use-cases/use-generate-stripe-link";
 import { Id } from "@convex/_generated/dataModel";
 
 type Props = {

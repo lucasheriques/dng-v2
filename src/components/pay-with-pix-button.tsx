@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useGeneratePixLink } from "@/hooks/use-generate-pix-link";
+import { useGeneratePixLink } from "@/use-cases/use-generate-pix-link";
 import { Id } from "@convex/_generated/dataModel";
 
 type Props = {
@@ -14,13 +14,8 @@ export function PayWithPixButton({ productId, userId }: Props) {
   });
 
   return (
-    <Button
-      onClick={generatePixLink}
-      variant="outline"
-      disabled
-      loading={isLoading}
-    >
-      Pagar com PIX (em breve)
+    <Button onClick={generatePixLink} variant="outline" loading={isLoading}>
+      Pagar com PIX
     </Button>
   );
 }

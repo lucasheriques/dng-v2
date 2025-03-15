@@ -55,9 +55,9 @@ interface Product {
 
 interface Customer {
   name: string;
-  cellphone: string;
+  cellphone?: string;
   email: string;
-  taxId: string; // CPF or CNPJ
+  taxId?: string; // CPF or CNPJ
 }
 
 interface CreatePaymentBody {
@@ -87,12 +87,7 @@ interface CreatePaymentSucessfulResponse {
     nextBilling: string | null;
     customer: {
       id: string;
-      metadata: {
-        name: string;
-        cellphone: string;
-        email: string;
-        taxId: string;
-      };
+      metadata: Customer;
     } | null;
   };
   error: null;
@@ -121,7 +116,7 @@ export const createPixPayment = action({
       args.userId
     );
 
-    if (!user.cpf || !user.phone || !user.email || !user.name) {
+    if (!user.email || !user.name) {
       throw new Error("User data is missing");
     }
 
@@ -191,15 +186,9 @@ export const createPixPayment = action({
 
 export const fulfill = internalAction({
   args: {
-    webhookSecret: v.string(),
     payload: v.string(),
   },
-  handler: async ({ runMutation, runQuery }, { webhookSecret, payload }) => {
-    // Verify webhook secret
-    if (webhookSecret !== process.env.WEBHOOK_SECRET) {
-      throw new Error("Invalid webhook secret");
-    }
-
+  handler: async ({ runMutation, runQuery }, { payload }) => {
     try {
       const webhookData = JSON.parse(payload) as PixWebhookResponse;
 
