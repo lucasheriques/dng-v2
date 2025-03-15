@@ -59,9 +59,8 @@ export const getEvents = action({
     error?: string;
   }> => {
     // Calculate time range (current month)
-    const now = new Date();
-    const timeMin = dayjs(now).startOf("month").toDate().toISOString();
-    const timeMax = dayjs(now).endOf("month").toDate().toISOString();
+    const timeMin = dayjs().startOf("month").toDate().toISOString();
+    const timeMax = dayjs().endOf("month").toDate().toISOString();
 
     // Use the time range as cache parameters
     return await cache.fetch(ctx, { timeMin, timeMax });

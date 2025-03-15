@@ -9,7 +9,9 @@ export function usePreloadedProductAccess(
   const query = usePreloadedQuery(preloaded);
   const { hasPaidSubscription } = useAuth();
 
-  if (!query || !query.product || !query.hasAccess) {
+  console.log("query", query);
+
+  if (!query) {
     return {
       product: null,
       hasAccess: false,

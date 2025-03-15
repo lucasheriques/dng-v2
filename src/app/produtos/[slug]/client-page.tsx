@@ -13,6 +13,9 @@ interface ProductPageProps {
 export function ProductPage({ preloadedProduct }: ProductPageProps) {
   const { product, hasAccess } = usePreloadedProductAccess(preloadedProduct);
 
+  console.log("product", product);
+  console.log("hasAccess", hasAccess);
+
   if (!product) {
     return (
       <div className="max-w-4xl mx-auto py-12 px-4">

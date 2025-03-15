@@ -1,3 +1,4 @@
+import { Banner } from "@/components/ui/banner";
 import { Card } from "@/components/ui/card";
 import { LinkCard } from "@/components/ui/link-card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -46,11 +47,11 @@ export async function EventsSection() {
       </div>
 
       {error && (
-        <div className="bg-amber-900/20 border border-amber-800 rounded-md p-2 text-xs">
+        <Banner intent="warning">
           <p className="text-amber-400/80">
             {`Não foi possível conectar à API do Google Calendar: ${error}`}
           </p>
-        </div>
+        </Banner>
       )}
 
       {events.length === 0 && (

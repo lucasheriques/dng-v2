@@ -7,7 +7,7 @@ interface BookViewerProps {
 
 export function BookViewer({ hasFullAccess }: BookViewerProps) {
   return (
-    <div className="prose max-w-none">
+    <article className="prose dark:prose-invert">
       {!hasFullAccess && (
         <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-6">
           <p className="text-yellow-700">
@@ -44,6 +44,6 @@ export function BookViewer({ hasFullAccess }: BookViewerProps) {
           </p>
         </div>
       )}
-    </div>
+    </article>
   );
 }
