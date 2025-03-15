@@ -12,15 +12,41 @@ const isSubscribePage = createRouteMatcher(["/sub"]);
 
 export default convexAuthNextjsMiddleware(
   async (request, { convexAuth }) => {
+    // Add the current pathname as a header
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-pathname", request.nextUrl.pathname);
+
     if (isSubscribePage(request)) {
-      return NextResponse.redirect(SUBSCRIBE_LINK);
+      const response = NextResponse.redirect(SUBSCRIBE_LINK);
+      // Copy headers to the redirect response
+      requestHeaders.forEach((value, key) => {
+        response.headers.set(key, value);
+      });
+      return response;
     }
     if (isLoginPage(request) && (await convexAuth.isAuthenticated())) {
-      return nextjsMiddlewareRedirect(request, "/perfil");
+      const response = nextjsMiddlewareRedirect(request, "/perfil");
+      // Copy headers to the redirect response
+      requestHeaders.forEach((value, key) => {
+        response.headers.set(key, value);
+      });
+      return response;
     }
     if (isProtectedRoute(request) && !(await convexAuth.isAuthenticated())) {
-      return nextjsMiddlewareRedirect(request, "/login");
+      const response = nextjsMiddlewareRedirect(request, "/login");
+      // Copy headers to the redirect response
+      requestHeaders.forEach((value, key) => {
+        response.headers.set(key, value);
+      });
+      return response;
     }
+
+    // For non-redirect cases, return with the updated headers
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   },
   { cookieConfig: { maxAge: 60 * 60 * 24 * 30 } }
 );

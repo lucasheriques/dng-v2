@@ -1,6 +1,5 @@
 "use client";
 
-import { BookViewer } from "@/components/products/book-viewer";
 import { AccessGate } from "@/components/products/product-access/access-gate";
 import { usePreloadedProductAccess } from "@/use-cases/use-preloaded-product-access";
 import { api } from "@convex/_generated/api";
@@ -8,13 +7,11 @@ import { Preloaded } from "convex/react";
 
 interface ProductPageProps {
   preloadedProduct: Preloaded<typeof api.products.getProductAndAccess>;
+  content: React.ReactNode;
 }
 
-export function ProductPage({ preloadedProduct }: ProductPageProps) {
+export function ProductPage({ preloadedProduct, content }: ProductPageProps) {
   const { product, hasAccess } = usePreloadedProductAccess(preloadedProduct);
-
-  console.log("product", product);
-  console.log("hasAccess", hasAccess);
 
   if (!product) {
     return (
@@ -30,9 +27,7 @@ export function ProductPage({ preloadedProduct }: ProductPageProps) {
       <h1 className="text-3xl font-bold mb-6">{product.name}</h1>
 
       <AccessGate productId={product._id} hasAccess={hasAccess}>
-        {product.type === "book" && (
-          <BookViewer bookSlug={product.slug} hasFullAccess={hasAccess} />
-        )}
+        {content}
       </AccessGate>
     </div>
   );

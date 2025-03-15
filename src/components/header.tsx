@@ -21,6 +21,7 @@ import { UserDropdown } from "@/components/user-dropdown";
 import { Article } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { SiDiscord, SiYoutube } from "@icons-pack/react-simple-icons";
+import { usePathname } from "next/navigation";
 
 dayjs.locale("pt-br");
 
@@ -46,6 +47,12 @@ interface HeaderProps {
 }
 
 export default function Header({ articles }: HeaderProps) {
+  const pathname = usePathname();
+
+  if (pathname.includes("/guias")) {
+    return null;
+  }
+
   return (
     <Popover
       className="z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg sticky top-0 w-full border-b border-slate-800/20"

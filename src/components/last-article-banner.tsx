@@ -1,9 +1,16 @@
 import { getLastArticle } from "@/use-cases/get-articles";
+import { headers } from "next/headers";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
-export default function LastArticleBanner() {
+export default async function LastArticleBanner() {
   const lastArticle = getLastArticle();
+  const headerList = await headers();
+  const pathname = headerList.get("x-pathname") || "";
+
+  if (pathname.includes("/guias")) {
+    return null;
+  }
 
   return (
     <Link
