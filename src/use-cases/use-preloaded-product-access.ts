@@ -1,16 +1,15 @@
 "use client";
 import { useAuth } from "@/use-cases/use-auth";
 import { api } from "@convex/_generated/api";
-import { useQuery } from "convex-helpers/react/cache/hooks";
-import { usePreloadedQuery } from "convex/react";
+import { Preloaded, usePreloadedQuery } from "convex/react";
 
-export function useProductAccess(productSlug: string) {
-  const query = usePreloadedQuery(api.products.getProductAndAccess, {
-    slug: productSlug,
-  });
+export function usePreloadedProductAccess(
+  preloaded: Preloaded<typeof api.products.getProductAndAccess>
+) {
+  const query = usePreloadedQuery(preloaded);
   const { hasPaidSubscription } = useAuth();
 
-  if (!query) {
+  if (!query || !query.product || !query.hasAccess) {
     return {
       product: null,
       hasAccess: false,

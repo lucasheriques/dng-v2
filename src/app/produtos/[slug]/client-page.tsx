@@ -2,15 +2,16 @@
 
 import { BookViewer } from "@/components/products/book-viewer";
 import { AccessGate } from "@/components/products/product-access/access-gate";
+import { usePreloadedProductAccess } from "@/use-cases/use-preloaded-product-access";
 import { api } from "@convex/_generated/api";
-import { Preloaded, usePreloadedQuery } from "convex/react";
+import { Preloaded } from "convex/react";
 
 interface ProductPageProps {
   preloadedProduct: Preloaded<typeof api.products.getProductAndAccess>;
 }
 
 export function ProductPage({ preloadedProduct }: ProductPageProps) {
-  const { product, hasAccess } = usePreloadedQuery(preloadedProduct);
+  const { product, hasAccess } = usePreloadedProductAccess(preloadedProduct);
 
   if (!product) {
     return (

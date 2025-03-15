@@ -5,7 +5,7 @@ interface BookViewerProps {
   hasFullAccess: boolean;
 }
 
-export function BookViewer({ bookSlug, hasFullAccess }: BookViewerProps) {
+export function BookViewer({ hasFullAccess }: BookViewerProps) {
   return (
     <div className="prose max-w-none">
       {!hasFullAccess && (

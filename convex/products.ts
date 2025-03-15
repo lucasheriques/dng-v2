@@ -49,7 +49,7 @@ export const getProductAndAccess = query({
         q.eq("productId", product._id).eq("userId", user._id)
       )
       .filter((q) => q.eq(q.field("status"), "completed"))
-      .unique();
+      .first();
 
     // Check if user has an active subscription
     const subscriber = await ctx.db
