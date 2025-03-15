@@ -6,6 +6,7 @@ import LastArticleBanner from "@/components/last-article-banner";
 import PostHogPageView from "@/components/posthog-page-view";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
+import { cn } from "@/lib/utils";
 import { getRandomArticles } from "@/use-cases/get-articles";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import { Inter } from "next/font/google";
@@ -40,7 +41,10 @@ export default function RootLayout({
           /> */}
         </head>
         <body
-          className={`${inter.variable} font-sans antialiased dark selection:bg-teal-500 selection:text-slate-950 bg-slate-950`}
+          className={cn(
+            "font-sans antialiased dark selection:bg-teal-500 selection:text-slate-950 bg-slate-950",
+            inter.variable
+          )}
         >
           <NextTopLoader
             color="#FF4D8E"
