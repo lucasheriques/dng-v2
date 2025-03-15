@@ -10,7 +10,7 @@ import {
   Field,
   Combobox as HeadlessCombobox,
 } from "@headlessui/react";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, PlusCircle } from "lucide-react";
 import * as React from "react";
 
 export interface ComboboxOption {
@@ -29,7 +29,12 @@ export interface ComboboxProps {
   inputName?: string;
   label?: string;
   extraActions?: React.ReactNode;
+  onCreateNew?: (inputValue: string) => void;
+  createNewLabel?: React.ReactNode;
+  onQueryChange?: (query: string) => void;
 }
+
+const CREATE_NEW_VALUE = "__create_new__";
 
 export function Combobox({
   value,
@@ -42,17 +47,38 @@ export function Combobox({
   disabled,
   label,
   extraActions,
+  onCreateNew,
+  createNewLabel = "Adicionar novo",
+  onQueryChange,
 }: ComboboxProps) {
   const [query, setQuery] = React.useState("");
+
+  // Reset query when combobox is closed
+  const handleComboboxClose = React.useCallback(() => {
+    // Reset query to show the full list of options next time it's opened
+    setQuery("");
+
+    // If a value is selected, we want to show its label
+    const selectedOption = options.find((option) => option.value === value);
+    if (selectedOption) {
+      // We don't need to do anything here as displayValue will handle showing the label
+    }
+  }, [value, options]);
+
+  // Handle value change including the special create new case
+  const handleValueChange = (newValue: string) => {
+    if (newValue === CREATE_NEW_VALUE && onCreateNew) {
+      onCreateNew(query);
+      return;
+    }
+    onValueChange(newValue);
+  };
 
   const filteredOptions =
     query === ""
       ? options
       : options.filter((option) =>
-          option.label
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
+          option.label.toLowerCase().includes(query.toLowerCase())
         );
 
   return (
@@ -60,8 +86,9 @@ export function Combobox({
       {label && <HeadlessLabel>{label}</HeadlessLabel>}
       <HeadlessCombobox
         value={value}
-        onChange={onValueChange}
+        onChange={handleValueChange}
         disabled={disabled}
+        onClose={handleComboboxClose}
       >
         <div className="relative flex-1">
           <div className="flex items-center gap-2">
@@ -74,12 +101,25 @@ export function Combobox({
               >
                 <ComboboxInput
                   className="w-full border-none bg-transparent p-0 focus:outline-none focus:ring-0"
-                  onChange={(event) => setQuery(event.target.value)}
+                  onChange={(event) => {
+                    const newValue = event.target.value;
+                    setQuery(newValue);
+                    onQueryChange?.(newValue);
+                  }}
+                  onKeyDown={(event) => {
+                    // Prevent the default behavior for space key
+                    // which might be intercepted by HeadlessUI
+                    if (event.key === " ") {
+                      event.stopPropagation();
+                    }
+                  }}
                   placeholder={placeholder}
-                  displayValue={(value: string) =>
-                    options.find((option) => option.value === value)?.label ??
-                    ""
-                  }
+                  displayValue={(currentValue: string) => {
+                    const selectedOption = options.find(
+                      (option) => option.value === currentValue
+                    );
+                    return selectedOption ? selectedOption.label : query;
+                  }}
                   name={inputName}
                 />
                 <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
@@ -93,9 +133,42 @@ export function Combobox({
             className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-slate-700 bg-background py-1 shadow-lg focus:outline-none origin-top transition duration-200 ease-out empty:invisible data-[closed]:scale-95 data-[closed]:opacity-0 text-base md:text-sm"
           >
             {filteredOptions.length === 0 && query !== "" ? (
-              <div className="relative cursor-default select-none px-4 py-2 text-slate-400">
-                {emptyText}
-              </div>
+              <>
+                {onCreateNew ? (
+                  <ComboboxOption
+                    className={({ active }) =>
+                      cn(
+                        "relative cursor-pointer select-none py-2 pl-10 pr-4",
+                        active ? "bg-accent text-accent-foreground" : ""
+                      )
+                    }
+                    value={CREATE_NEW_VALUE}
+                  >
+                    {() => (
+                      <>
+                        <span
+                          className={cn(
+                            "block truncate font-medium text-primary"
+                          )}
+                        >
+                          {createNewLabel}: &quot;{query}&quot;
+                        </span>
+                        <span
+                          className={cn(
+                            "absolute inset-y-0 left-0 flex items-center pl-3 text-primary"
+                          )}
+                        >
+                          <PlusCircle className="h-4 w-4" aria-hidden="true" />
+                        </span>
+                      </>
+                    )}
+                  </ComboboxOption>
+                ) : (
+                  <div className="relative cursor-default select-none px-4 py-2 text-slate-400">
+                    {emptyText}
+                  </div>
+                )}
+              </>
             ) : (
               filteredOptions.map((option) => (
                 <ComboboxOption

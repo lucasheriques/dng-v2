@@ -72,6 +72,14 @@ export function ContactCard({ type, info, onSelect }: ContactCardProps) {
     setIsDialogOpen(false);
   };
 
+  const handleCreateNew = (inputName: string) => {
+    setContactInfo({
+      ...EMPTY_CONTACT,
+      name: inputName,
+    });
+    setIsDialogOpen(true);
+  };
+
   const comboboxOptions = [
     ...savedContacts.map((contact) => ({
       value: contact.email,
@@ -79,7 +87,7 @@ export function ContactCard({ type, info, onSelect }: ContactCardProps) {
     })),
     {
       value: NEW_CONTACT_VALUE,
-      label: `Adicionar ${type === "vendor" ? "empresa" : "cliente"}`,
+      label: `Adicionar novo ${type === "vendor" ? "empresa" : "cliente"}`,
     },
   ];
 
@@ -91,7 +99,11 @@ export function ContactCard({ type, info, onSelect }: ContactCardProps) {
             label={type === "vendor" ? "Empresa" : "Cliente"}
             inputName="contact-combobox"
             value={info.email}
+            onQueryChange={(query) => {
+              console.log("query", query);
+            }}
             onValueChange={(email) => {
+              console.log("email", email);
               if (email === NEW_CONTACT_VALUE) {
                 setIsDialogOpen(true);
                 setContactInfo({
@@ -112,7 +124,6 @@ export function ContactCard({ type, info, onSelect }: ContactCardProps) {
             }}
             options={comboboxOptions}
             placeholder={`Selecionar ${type === "vendor" ? "empresa" : "cliente"}...`}
-            emptyText={`${type === "vendor" ? "Nenhuma empresa" : "Nenhum cliente"} encontrado.`}
             className="flex-1"
             extraActions={
               info.email && (
@@ -122,6 +133,8 @@ export function ContactCard({ type, info, onSelect }: ContactCardProps) {
                 />
               )
             }
+            onCreateNew={handleCreateNew}
+            createNewLabel={`Adicionar ${type === "vendor" ? "empresa" : "cliente"}`}
           />
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogContent
