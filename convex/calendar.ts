@@ -75,20 +75,15 @@ export const internalGetEvents = internalAction({
   },
   handler: async (_ctx, args) => {
     try {
-      console.log("Starting calendar events fetch");
-
-      // Get the calendar ID from environment variables
       const calendarId = process.env.GOOGLE_CALENDAR_ID;
       if (!calendarId) {
-        console.log("GOOGLE_CALENDAR_ID not set");
         throw new Error("GOOGLE_CALENDAR_ID is not set");
       }
-      console.log("Using calendar ID:", calendarId);
 
-      console.log("Time range:", args.timeMin, "to", args.timeMax);
+      if (!process.env.GOOGLE_SERVICE_ACCOUNT_KEY) {
+        throw new Error("GOOGLE_SERVICE_ACCOUNT_KEY is not set");
+      }
 
-      // Fetch events from Google Calendar
-      console.log("Fetching events from Google Calendar...");
       const events = await fetchEventsWithServiceAccount(
         calendarId,
         args.timeMin,
@@ -96,7 +91,6 @@ export const internalGetEvents = internalAction({
       );
       console.log(`Successfully fetched ${events.length} events`);
 
-      // iterate on each event, add a new property called isPast, if the event date has passed, it will be true, otherwise it will be false
       const formattedEvents = events.map((event: CalendarEvent) => {
         return {
           ...event,
@@ -159,6 +153,14 @@ function parseServiceAccountKey(keyString: string): ServiceAccountKey {
   }
 }
 
+const serviceAccountKey = parseServiceAccountKey(
+  process.env.GOOGLE_SERVICE_ACCOUNT_KEY as string
+);
+const auth = new google.auth.GoogleAuth({
+  credentials: serviceAccountKey,
+  scopes: ["https://www.googleapis.com/auth/calendar.readonly"],
+});
+
 // Helper function to fetch events using a service account
 async function fetchEventsWithServiceAccount(
   calendarId: string,
@@ -166,42 +168,6 @@ async function fetchEventsWithServiceAccount(
   timeMax: string
 ): Promise<CalendarEvent[]> {
   try {
-    // Check if service account key is available
-    if (!process.env.GOOGLE_SERVICE_ACCOUNT_KEY) {
-      console.log("GOOGLE_SERVICE_ACCOUNT_KEY not set");
-      throw new Error("GOOGLE_SERVICE_ACCOUNT_KEY is not set");
-    }
-    console.log("Service account key is available");
-
-    // Parse the service account key
-    console.log("Parsing service account key...");
-    const serviceAccountKey = parseServiceAccountKey(
-      process.env.GOOGLE_SERVICE_ACCOUNT_KEY as string
-    );
-    console.log("Service account key parsed successfully");
-
-    // Log key properties to verify (without exposing sensitive data)
-    console.log("Service account key properties:", {
-      hasClientEmail: !!serviceAccountKey.client_email,
-      hasPrivateKey: !!serviceAccountKey.private_key,
-      privateKeyLength: serviceAccountKey.private_key
-        ? serviceAccountKey.private_key.length
-        : 0,
-      type: serviceAccountKey.type,
-      projectId: serviceAccountKey.project_id,
-    });
-
-    // Create the JWT client with explicit parameters
-    console.log("Creating JWT client...");
-    const auth = new google.auth.GoogleAuth({
-      credentials: serviceAccountKey,
-      scopes: ["https://www.googleapis.com/auth/calendar.readonly"],
-    });
-
-    console.log("JWT client created successfully");
-
-    // Make the API request with the authorized client
-    console.log("Creating calendar client...");
     const calendar = google.calendar({
       version: "v3",
       auth: auth,
@@ -218,10 +184,6 @@ async function fetchEventsWithServiceAccount(
         maxResults: 100,
       });
 
-      console.log("API request successful");
-
-      // Transform the events to our format
-      console.log(`Processing ${response.data.items?.length || 0} events...`);
       return (response.data.items || [])
         .filter(
           (item): item is calendar_v3.Schema$Event =>
