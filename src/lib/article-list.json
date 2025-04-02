@@ -1,11 +1,37 @@
 [
   {
+    "id": 160441417,
+    "slug": "realidade-das-entrevistas-em-2025",
+    "postDate": "2025-04-02T18:40:05.780Z",
+    "title": "A dura realidade das entrevistas para engenheiros de software em 2025",
+    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F48a93622-cd7d-413a-9646-dade068fae93_2291x1665.png",
+    "views": 754,
+    "description": "O que mudou com a chegada de ferramentas especializadas para ajudar a ter vantagens em processos seletivos?",
+    "canonical_url": "https://newsletter.nagringa.dev/p/realidade-das-entrevistas-em-2025",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
+  },
+  {
     "id": 160295297,
     "slug": "por-que-trabalhar-no-posthog",
     "postDate": "2025-03-31T21:56:55.312Z",
     "title": "Por que trabalhar no PostHog",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a6f71c8-9325-4cf9-b87d-9bf567209638_2733x1252.png",
-    "views": 1329,
+    "views": 1608,
     "description": "Como é trabalhar em uma empresa onde engenheiros definem o roadmap e falam com clientes? Veja por dentro a cultura única do PostHog.",
     "canonical_url": "https://newsletter.nagringa.dev/p/por-que-trabalhar-no-posthog",
     "postTags": [
@@ -31,7 +57,7 @@
     "postDate": "2025-03-23T15:19:01.898Z",
     "title": "O processo seletivo para vagas de Engenharia no PostHog",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F750e0229-b133-4db8-bff2-933d0b80cae1_10579x3017.png",
-    "views": 2722,
+    "views": 2783,
     "description": "Tudo o que você precisa saber caso queira se tornar um engenheiro de produto aqui no PostHog.",
     "canonical_url": "https://newsletter.nagringa.dev/p/processo-seletivo-posthog",
     "postTags": [
@@ -64,7 +90,7 @@
     "postDate": "2025-03-12T21:42:18.725Z",
     "title": "Construindo uma carreira sustentável na Engenharia de Software",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcaddef25-9629-4aba-a772-d01ec5621cf2_941x924.png",
-    "views": 2038,
+    "views": 2046,
     "description": "Como evitar armadilhas de curto prazo e construir uma trajetória profissional que combine crescimento, aprendizado e realização",
     "canonical_url": "https://newsletter.nagringa.dev/p/construindo-uma-carreira-sustentavel",
     "postTags": [
@@ -97,7 +123,7 @@
     "postDate": "2025-03-05T13:03:39.931Z",
     "title": "Como entrevistar usuários - um guia para engenheiros de software",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd5988da-beda-4344-a832-a6be78bfab01_1472x832.jpeg",
-    "views": 1738,
+    "views": 1739,
     "description": "Baseado no livro The Mom Test de Rob Fitzpatrick.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-entrevistar-usuarios-um-guia-para-engenheiros-de-software",
     "postTags": [
@@ -161,7 +187,7 @@
     "postDate": "2025-02-12T17:10:08.643Z",
     "title": "Como e por que medir o impacto do seu trabalho",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faac7e1d9-e902-4f00-a73d-3f4984c9765c_1731x1110.png",
-    "views": 2338,
+    "views": 2340,
     "description": "O melhor jeito de garantir que está fazendo um bom trabalho é através do seu impacto. Mas, o que significa medir ele, na prática?",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-e-por-que-medir-o-impacto-do",
     "postTags": [
@@ -206,7 +232,7 @@
     "postDate": "2025-01-18T13:01:52.673Z",
     "title": "Como se destacar na busca por vagas de tecnologia",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7510c5b7-d020-4d78-ac65-f04c8145808d_1215x676.png",
-    "views": 1875,
+    "views": 1877,
     "description": "Dicas para você para aplicar para menos vagas e ter mais sucesso em suas aplicações",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-se-destacar-na-busca-por-vagas",
     "postTags": [
@@ -334,7 +360,7 @@
     "postDate": "2024-12-02T21:24:05.440Z",
     "title": "Processos seletivos e ofertas que recebi na gringa desde 2020",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1933927b-c3f7-475d-9fde-83ab50ec07bb_2610x2616.png",
-    "views": 2052,
+    "views": 2057,
     "description": "Como eu consegui vagas, como foram os processos seletivos, e quais ofertas eu recebi ou não recebi. E o que eu aprendi com cada processo.",
     "canonical_url": "https://newsletter.nagringa.dev/p/processos-seletivos-e-ofertas-de-vagas-na-gringa",
     "postTags": [
@@ -550,7 +576,7 @@
     "postDate": "2024-10-01T22:00:58.314Z",
     "title": "O processo seletivo para vagas de engenharia de software na Brex",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd50f9bc7-dcf2-4689-865a-da975a6255c3_2126x799.png",
-    "views": 2812,
+    "views": 2814,
     "description": "Todas as etapas do processo seletivo para vagas de engenharia de software na Brex, o que esperar em cada uma delas, e como se preparar.",
     "canonical_url": "https://newsletter.nagringa.dev/p/processo-seletivo-vagas-engenharia-de-software-na-brex",
     "postTags": [
@@ -621,7 +647,7 @@
     "postDate": "2024-09-17T12:41:53.119Z",
     "title": "O meu template para brag documents",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25cf8c29-cd5d-4418-a0de-724880165691_854x507.png",
-    "views": 1203,
+    "views": 1204,
     "description": "O brag document auxilia com que você se lembre do seu progresso ao longo dos meses, e saiba como impactou na empresa. Ele é essencial para criar um bom pacote de promoção.",
     "canonical_url": "https://newsletter.nagringa.dev/p/o-meu-template-para-brag-documents",
     "postTags": [
@@ -640,7 +666,7 @@
     "postDate": "2024-09-15T16:18:32.651Z",
     "title": "Como otimizar seu currículo para vagas na gringa",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8d79d8af-fb67-4700-b833-ebfb5a47cc59_1376x624.png",
-    "views": 2523,
+    "views": 2527,
     "description": "Como estruturar seu currículo que recrutadores e gerentes realmente prestem atenção nele. Erros para evitar quando se candidatar para uma vaga de dev na gringa.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-otimizar-seu-curriculo-para",
     "postTags": [
@@ -770,7 +796,7 @@
     "postDate": "2024-07-30T13:00:37.390Z",
     "title": "Como funciona a mentoria do Dev na Gringa",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffe0a039c-b404-4b76-bc23-04be5695783e_1200x883.png",
-    "views": 510,
+    "views": 513,
     "description": "Confira também: a motivação para criar essa newsletter. Dicas para fazer o melhor uso do seu tempo em qualquer mentoria.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-funciona-a-mentoria",
     "postTags": [
@@ -815,7 +841,7 @@
     "postDate": "2024-07-21T14:44:51.515Z",
     "title": "Dev na Gringa: contratação, impostos, hardware e começando do zero.",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F15d80138-fe09-41c9-9d25-190b246e92df_1600x579.png",
-    "views": 1527,
+    "views": 1533,
     "description": "Como foi a questão burocrática no meu trabalho pra fora desde 2020. E o que eu faria se estivesse começando do zero.",
     "canonical_url": "https://newsletter.nagringa.dev/p/dev-na-gringa-contratacao-impostos-hardware",
     "postTags": [
@@ -919,7 +945,7 @@
     "postDate": "2024-06-23T19:07:50.673Z",
     "title": "18 dicas para se destacar como engenheiro de software",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe301354e-7e8c-4866-a8df-c47f13184d45_996x792.png",
-    "views": 2256,
+    "views": 2257,
     "description": "Tudo que eu venho aplicado desde que entrei comecei meu novo emprego 1 ano atrás.",
     "canonical_url": "https://newsletter.nagringa.dev/p/18-dicas-para-se-destacar-na-carreira",
     "postTags": [
@@ -964,7 +990,7 @@
     "postDate": "2024-06-09T16:46:04.766Z",
     "title": "Como se destacar em qualquer processo seletivo que você participe",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57fbcd94-437f-4e09-a457-14dc866d00a2_1438x1022.png",
-    "views": 1212,
+    "views": 1213,
     "description": "Tudo que eu usei para passar em entrevistas mesmo quando não era o melhor candidato em nível técnico.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-se-destacar-em-qualquer-processo",
     "postTags": [
@@ -1054,7 +1080,7 @@
     "postDate": "2024-05-15T15:41:22.642Z",
     "title": "Dev na Gringa: Como Encontrar Vagas e Salários",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec9e98f6-0bbb-4cb1-93b3-5dedc7239f03_592x598.png",
-    "views": 2435,
+    "views": 2437,
     "description": "Um relato da minha experiência trabalhando para os Estados Unidos desde o final de 2020.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-eu-virei-um-dev-na-gringa",
     "postTags": [
