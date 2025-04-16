@@ -16,13 +16,13 @@ import {
 } from "@/components/ui/chart";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { InvestmentCalculatorData } from "@/lib/compression";
 import { formatCurrency } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
 import { Copy } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Payload } from "recharts/types/component/DefaultLegendContent";
+import { InvestmentCalculatorData } from "./types";
 
 interface ChartData {
   month: number;

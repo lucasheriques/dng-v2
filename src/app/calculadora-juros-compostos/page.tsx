@@ -1,7 +1,7 @@
 import InvestmentCalculator from "@/app/calculadora-juros-compostos/investment-calculator";
 import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
-import { InvestmentCalculatorData } from "@/lib/compression"; // Keep type for now, or redefine locally
+import { InvestmentCalculatorData } from "./types";
 
 export const metadata = {
   title: "Calculadora de Juros Compostos | Dev na Gringa",
