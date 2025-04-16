@@ -21,6 +21,7 @@ export default async function Home() {
             className="object-cover opacity-90 pointer-events-none select-none motion-duration-700 motion-scale-in-[0.4] motion-opacity-in-[10%] motion-blur-in-[30px] motion-ease-spring-smooth"
             priority
             placeholder="blur"
+            sizes="1v"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0118] via-[#0A0118]/50 to-transparent" />
         </div>

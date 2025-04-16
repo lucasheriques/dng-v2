@@ -1,7 +1,7 @@
 "use client";
 
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
-import { Newspaper, Search as SearchIcon } from "lucide-react";
+import { Newspaper, Search as SearchIcon, Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 
@@ -116,6 +116,15 @@ export function Search({ size = "icon" }: { size?: "icon" | "default" }) {
             ))}
           </CommandGroup>
           <CommandGroup heading="Artigos">
+            <CommandItem
+              onSelect={() => {
+                handleClose();
+                router.push("/como-virar-um-dev-na-gringa");
+              }}
+            >
+              <Star />
+              Como virar um dev na gringa (compilado de artigos)
+            </CommandItem>
             {ArticleList.map((item) => (
               <CommandItem
                 key={item.slug}
