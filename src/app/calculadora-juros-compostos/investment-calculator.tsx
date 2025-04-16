@@ -5,6 +5,12 @@ import {
   TableInput,
   TableRow,
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   ChartConfig,
@@ -14,6 +20,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { Table, TableBody, TableCell, TableHead } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
@@ -61,23 +68,21 @@ export const calculateInvestmentResults = ({
 
   // Calculate month by month from 1 up to 'months'
   for (let i = 1; i <= months; i++) {
-    // 1. Add monthly contribution
-    currentAmount += monthlyContribution;
-    totalContributions += monthlyContribution;
-
-    // 2. Calculate interest for the month
+    // 1. Calculate interest for the month based on the current amount BEFORE contribution
     const monthlyInterestRate = interestRate / 100 / 12;
     const interestEarned = currentAmount * monthlyInterestRate;
     totalInterest += interestEarned;
 
-    // 3. Update current amount with interest
+    // 2. Update current amount with interest
     currentAmount += interestEarned;
 
-    // 4. Record data for the chart
-    // Record data only at the end of each year (i % 12 === 0)
-    // or for the very last month (i === months).
-    if (i % 12 === 0 || i === months) {
-      // Always use yearly/final month aggregation
+    // 3. Add monthly contribution AFTER calculating interest
+    currentAmount += monthlyContribution;
+    totalContributions += monthlyContribution;
+
+    // 4. Record data for the chart based on the total number of months
+    const shouldRecordMonthly = months <= 36;
+    if (shouldRecordMonthly || i % 12 === 0 || i === months) {
       chartData.push({
         month: i,
         initialDeposit: initialDeposit, // Keep initial deposit constant for chart stack
@@ -335,10 +340,23 @@ export default function InvestmentCalculator({
                     dataKey="month"
                     tickFormatter={(month) => {
                       if (month === 0) return "Início";
-                      const year = Math.ceil(month / 12);
-                      if (month === results.months && results.months % 12 !== 0)
-                        return `Mês ${results.months}`;
-                      return `Ano ${year}`;
+
+                      // Adjust label based on total months
+                      if (results.months <= 36) {
+                        // Show month number for shorter periods
+                        return `Mês ${month}`;
+                      } else {
+                        // Show year number or final month for longer periods
+                        const year = Math.ceil(month / 12);
+                        // Handle the last data point if it's not exactly at a year end
+                        if (
+                          month === results.months &&
+                          results.months % 12 !== 0
+                        ) {
+                          return `Mês ${results.months}`;
+                        }
+                        return `Ano ${year}`;
+                      }
                     }}
                     tick={{ fontSize: 11, fill: "#cbd5e1" }}
                     stroke="#cbd5e1"
@@ -527,6 +545,42 @@ export default function InvestmentCalculator({
             Compartilhar resultados
           </Button>
         </div>
+
+        <Accordion type="single" collapsible>
+          <AccordionItem value="investment-projection">
+            <AccordionTrigger className="bg-slate-800/50 p-4">
+              Detalhamento mensal
+            </AccordionTrigger>
+            <AccordionContent className="pb-0 bg-slate-800/50 p-4">
+              <Table>
+                <TableHeader>
+                  <TableRow label="Mês">
+                    <TableHead>Mês</TableHead>
+                    <TableHead>Depósito inicial</TableHead>
+                    <TableHead>Contribuições mensais</TableHead>
+                    <TableHead>Juros acumulados</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {results.chartData.map((item) => (
+                    <TableRow label={item.month.toString()} key={item.month}>
+                      <TableCell>{item.month}</TableCell>
+                      <TableCell>
+                        {formatCurrency(item.initialDeposit, "BRL")}
+                      </TableCell>
+                      <TableCell>
+                        {formatCurrency(item.contributions, "BRL")}
+                      </TableCell>
+                      <TableCell>
+                        {formatCurrency(item.interest, "BRL")}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
     </div>
   );

@@ -12,9 +12,9 @@ describe("calculateInvestmentResults", () => {
     });
 
     // Expected values recalculated based on new logic (contribution before interest)
-    expect(result.finalAmount).toBeCloseTo(94434.74, 2);
+    expect(result.finalAmount).toBeCloseTo(94111.23);
     expect(result.totalContributions).toBeCloseTo(60000, 2); // 500 * 120
-    expect(result.totalInterest).toBeCloseTo(24434.74, 2); // 94434.74 - 10000 - 60000
+    expect(result.totalInterest).toBeCloseTo(24111.23, 2); // 94111.23 - 10000 - 60000
     expect(result.initialDeposit).toBe(10000);
   });
 
@@ -28,9 +28,9 @@ describe("calculateInvestmentResults", () => {
     });
 
     // Expected values recalculated based on new logic
-    expect(result.finalAmount).toBeCloseTo(10747.62, 2);
+    expect(result.finalAmount).toBeCloseTo(10722.19, 2);
     expect(result.totalContributions).toBeCloseTo(4800, 2); // 200 * 24
-    expect(result.totalInterest).toBeCloseTo(947.62, 2); // 10747.62 - 5000 - 4800
+    expect(result.totalInterest).toBeCloseTo(922.19, 2); // 10722.19 - 5000 - 4800
     expect(result.initialDeposit).toBe(5000);
   });
 
@@ -44,9 +44,9 @@ describe("calculateInvestmentResults", () => {
     });
 
     // Expected values recalculated based on new logic
-    expect(result.finalAmount).toBeCloseTo(72010.53, 2);
+    expect(result.finalAmount).toBeCloseTo(71592.9, 2);
     expect(result.totalContributions).toBeCloseTo(60000, 2); // 1000 * 12 * 5
-    expect(result.totalInterest).toBeCloseTo(12010.53, 2);
+    expect(result.totalInterest).toBeCloseTo(11592.9, 2);
     expect(result.initialDeposit).toBe(0);
   });
 
