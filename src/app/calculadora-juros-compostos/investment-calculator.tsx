@@ -8,7 +8,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatCurrency } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Bar,
   BarChart,
@@ -19,6 +19,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useDebounceValue } from "usehooks-ts";
 
 interface ChartData {
   month: number;
@@ -27,74 +28,82 @@ interface ChartData {
   interest: number;
 }
 
+// Extracted pure calculation function
+const calculateInvestmentResults = ({
+  initialDeposit,
+  monthlyContribution,
+  period,
+  periodType,
+  interestRate,
+}: {
+  initialDeposit: number;
+  monthlyContribution: number;
+  period: number;
+  periodType: string;
+  interestRate: number;
+}) => {
+  const months = periodType === "anos" ? period * 12 : period;
+  let currentAmount = initialDeposit;
+  let totalContributions = 0;
+  let totalInterest = 0;
+  const chartData: ChartData[] = [];
+
+  for (let i = 0; i <= months; i++) {
+    if (i === months) {
+      chartData.push({
+        month: i,
+        initialDeposit: initialDeposit,
+        contributions: totalContributions,
+        interest: totalInterest,
+      });
+    }
+
+    if (i < months) {
+      const monthlyInterest = currentAmount * (interestRate / 100 / 12);
+      totalInterest += monthlyInterest;
+
+      if (i > 0) {
+        totalContributions += monthlyContribution;
+      }
+
+      const contributionToAdd = i > 0 ? monthlyContribution : 0;
+      currentAmount += contributionToAdd + monthlyInterest;
+    }
+  }
+
+  const finalAmount = initialDeposit + totalContributions + totalInterest;
+
+  return {
+    totalInterest,
+    totalContributions,
+    initialDeposit,
+    finalAmount,
+    chartData,
+  };
+};
+
 export default function InvestmentCalculator() {
+  // Immediate state for inputs
   const [initialDeposit, setInitialDeposit] = useState(10000);
   const [monthlyContribution, setMonthlyContribution] = useState(1000);
   const [period, setPeriod] = useState(10);
   const [periodType, setPeriodType] = useState("anos");
   const [interestRate, setInterestRate] = useState(5.5);
-  const [results, setResults] = useState({
-    totalInterest: 0,
-    totalContributions: 0,
-    initialDeposit: 0,
-    finalAmount: 0,
-    chartData: [] as ChartData[],
-  });
 
-  useEffect(() => {
-    // Debounce the calculation
-    const handler = setTimeout(() => {
-      calculateInvestment();
-    }, 200); // 100ms debounce
-
-    // Cleanup function to clear the timeout if dependencies change before it fires
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [initialDeposit, monthlyContribution, period, periodType, interestRate]);
-
-  const calculateInvestment = () => {
-    const months = periodType === "anos" ? period * 12 : period;
-    let currentAmount = initialDeposit;
-    let totalContributions = 0;
-    let totalInterest = 0;
-    const chartData = [];
-
-    for (let i = 0; i <= months; i++) {
-      if (i === months) {
-        // Final data for stacked bar chart
-        chartData.push({
-          month: i,
-          initialDeposit: initialDeposit,
-          contributions: totalContributions,
-          interest: totalInterest,
-        });
-      }
-
-      if (i < months) {
-        // Monthly interest calculation
-        const monthlyInterest = currentAmount * (interestRate / 100 / 12);
-        totalInterest += monthlyInterest;
-
-        // Add monthly contribution
-        if (i > 0) {
-          // Don't add contribution for the first month
-          totalContributions += monthlyContribution;
-        }
-
-        // Update current amount
-        currentAmount += monthlyContribution + monthlyInterest;
-      }
-    }
-
-    setResults({
-      totalInterest,
-      totalContributions,
-      initialDeposit,
-      finalAmount: currentAmount,
-      chartData,
-    });
+  // Create an object with current input values
+  const currentInputs = {
+    initialDeposit,
+    monthlyContribution,
+    period,
+    periodType,
+    interestRate,
   };
+
+  // Get debounced version of inputs
+  const [results] = useDebounceValue(
+    calculateInvestmentResults(currentInputs),
+    200
+  );
 
   return (
     <div className="flex flex-col gap-8">
