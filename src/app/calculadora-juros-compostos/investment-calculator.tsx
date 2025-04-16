@@ -7,7 +7,7 @@ import {
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatCurrency } from "@/lib/utils";
-import dynamic from "next/dynamic";
+import NumberFlow from "@number-flow/react";
 import { useEffect, useMemo, useState } from "react";
 import {
   Bar,
@@ -19,8 +19,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-
-const NumberFlow = dynamic(() => import("@number-flow/react"), { ssr: false });
 
 interface ChartData {
   month: number;
@@ -74,12 +72,25 @@ const calculateInvestmentResults = ({
 
   const finalAmount = initialDeposit + totalContributions + totalInterest;
 
+  // Calculate percentages inside the function
+  const interestPercent = finalAmount ? (totalInterest / finalAmount) * 100 : 0;
+  const contributionsPercent = finalAmount
+    ? (totalContributions / finalAmount) * 100
+    : 0;
+  const initialDepositPercent = finalAmount
+    ? (initialDeposit / finalAmount) * 100
+    : 0;
+
   return {
     totalInterest,
     totalContributions,
     initialDeposit,
     finalAmount,
     chartData,
+    // Add percentages to the return object
+    interestPercent,
+    contributionsPercent,
+    initialDepositPercent,
   };
 };
 
@@ -124,20 +135,9 @@ export default function InvestmentCalculator() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedInputs]);
 
-  // Calculate percentages
-  const {
-    totalInterest,
-    totalContributions,
-    initialDeposit: resultInitialDeposit,
-    finalAmount,
-  } = results;
-  const interestPercent = finalAmount ? (totalInterest / finalAmount) * 100 : 0;
-  const contributionsPercent = finalAmount
-    ? (totalContributions / finalAmount) * 100
-    : 0;
-  const initialDepositPercent = finalAmount
-    ? (resultInitialDeposit / finalAmount) * 100
-    : 0;
+  // Destructure percentages directly from results
+  const { interestPercent, contributionsPercent, initialDepositPercent } =
+    results;
 
   return (
     <div className="flex flex-col gap-8">
