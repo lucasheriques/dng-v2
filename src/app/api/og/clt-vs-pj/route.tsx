@@ -3,6 +3,14 @@ import { formatCurrency } from "@/lib/utils";
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
+import {
+  baseContainerStyle,
+  colors,
+  detailLabelStyle,
+  footerStyle,
+  headerStyle,
+  logoContainerStyle,
+} from "../commonStyles"; // Import shared styles
 
 export const runtime = "edge";
 
@@ -115,32 +123,20 @@ export async function GET(req: NextRequest) {
 
     return new ImageResponse(
       (
-        <div
-          style={{
-            height: "100%",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)", // slate-800 to slate-900
-            color: "#f8fafc", // slate-50
-            fontFamily: '"Inter", sans-serif',
-            padding: "60px",
-            border: "2px solid #334155", // slate-700
-            borderRadius: "16px",
-            position: "relative",
-          }}
-        >
+        <div style={baseContainerStyle}>
+          {/* Logo */}
+          <div style={logoContainerStyle}>
+            <img
+              src="http://localhost:3000/logo-v2-no-bg-compressed-small.png" // Replace with your actual logo URL
+              alt="nagringa.dev logo"
+              height="128" // Adjust size as needed
+              width="128" // Adjust size as needed
+              style={{ objectFit: "contain" }} // Ensure logo scales nicely
+            />
+          </div>
+
           {/* Header */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "16px",
-              fontSize: "28px",
-              color: "#94a3b8", // slate-400
-              marginBottom: "30px", // Reduced margin
-            }}
-          >
+          <div style={headerStyle}>
             <span>⚖️</span> {/* Scales emoji */}
             <span>Comparativo CLT vs. PJ</span>
           </div>
@@ -154,8 +150,7 @@ export async function GET(req: NextRequest) {
               alignItems: "center",
               gap: "40px",
               padding: "20px 0",
-              borderTop: "1px solid #334155",
-              borderBottom: "1px solid #334155",
+              borderBottom: `1px solid ${colors.border}`, // Use shared color
               marginBottom: "30px",
             }}
           >
@@ -168,7 +163,10 @@ export async function GET(req: NextRequest) {
                 gap: "8px", // Adjusted gap
               }}
             >
-              <span style={{ fontSize: "24px", color: "#cbd5e1" }}>CLT 💼</span>
+              <span style={{ fontSize: "28px", color: colors.textSecondary }}>
+                CLT 💼
+              </span>{" "}
+              {/* Use shared color */}
               {/* Gross Salary */}
               <div
                 style={{
@@ -178,14 +176,16 @@ export async function GET(req: NextRequest) {
                   marginTop: "10px",
                 }}
               >
-                <span style={{ fontSize: "18px", color: "#94a3b8" }}>
+                <span style={detailLabelStyle}>
+                  {" "}
+                  {/* Use shared style */}
                   Salário Bruto
                 </span>
                 <span
                   style={{
-                    fontSize: "28px",
+                    fontSize: "32px",
                     fontWeight: "normal",
-                    color: "#e2e8f0",
+                    color: colors.textSecondary, // Use shared color
                   }}
                 >
                   {formatCurrency(
@@ -203,14 +203,16 @@ export async function GET(req: NextRequest) {
                   marginTop: "15px",
                 }}
               >
-                <span style={{ fontSize: "18px", color: "#94a3b8" }}>
+                <span style={detailLabelStyle}>
+                  {" "}
+                  {/* Use shared style */}
                   Total Mensal
                 </span>
                 <span
                   style={{
-                    fontSize: "56px",
+                    fontSize: "60px",
                     fontWeight: "bold",
-                    color: "#f8fafc",
+                    color: colors.textPrimary, // Use shared color
                   }}
                 >
                   {formatCurrency(netCLT, "BRL")}
@@ -227,7 +229,10 @@ export async function GET(req: NextRequest) {
                 gap: "8px", // Adjusted gap
               }}
             >
-              <span style={{ fontSize: "24px", color: "#cbd5e1" }}>PJ 🏢</span>
+              <span style={{ fontSize: "28px", color: colors.textSecondary }}>
+                PJ 🏢
+              </span>{" "}
+              {/* Use shared color */}
               {/* Gross Revenue */}
               <div
                 style={{
@@ -237,14 +242,16 @@ export async function GET(req: NextRequest) {
                   marginTop: "10px",
                 }}
               >
-                <span style={{ fontSize: "18px", color: "#94a3b8" }}>
+                <span style={detailLabelStyle}>
+                  {" "}
+                  {/* Use shared style */}
                   Receita Bruta
                 </span>
                 <span
                   style={{
-                    fontSize: "28px",
+                    fontSize: "32px",
                     fontWeight: "normal",
-                    color: "#e2e8f0",
+                    color: colors.textSecondary, // Use shared color
                   }}
                 >
                   {formatCurrency(
@@ -262,14 +269,16 @@ export async function GET(req: NextRequest) {
                   marginTop: "15px",
                 }}
               >
-                <span style={{ fontSize: "18px", color: "#94a3b8" }}>
+                <span style={detailLabelStyle}>
+                  {" "}
+                  {/* Use shared style */}
                   Total Mensal
                 </span>
                 <span
                   style={{
-                    fontSize: "56px",
+                    fontSize: "60px",
                     fontWeight: "bold",
-                    color: "#f8fafc",
+                    color: colors.textPrimary, // Use shared color
                   }}
                 >
                   {formatCurrency(netPJ, "BRL")}
@@ -288,26 +297,23 @@ export async function GET(req: NextRequest) {
               gap: "5px",
             }}
           >
-            <span style={{ fontSize: "22px", color: "#cbd5e1" }}>
-              {`${advantage} é\u00A0`}
+            <span style={{ fontSize: "26px", color: colors.textSecondary }}>
+              {" "}
+              {/* Use shared color */}
+              {`${advantage} é`}&nbsp;
               {/* Use non-breaking space */}
               <span style={{ color: advantageColor, fontWeight: "bold" }}>
                 {formatCurrency(Math.abs(difference), "BRL")}
               </span>
-              {`\u00A0${difference >= 0 ? "maior" : "menor"} por mês`}
+              &nbsp;
+              {`${difference >= 0 ? "maior" : "menor"} por mês`}
               {/* Use non-breaking space */}
             </span>
           </div>
 
           {/* Signature/Branding */}
           <div
-            style={{
-              position: "absolute",
-              bottom: "20px",
-              right: "30px",
-              fontSize: "16px",
-              color: "#475569",
-            }}
+            style={footerStyle} // Use shared style
           >
             Calculadora CLT vs PJ - nagringa.dev
           </div>

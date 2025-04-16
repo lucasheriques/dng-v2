@@ -3,6 +3,14 @@ import { InvestmentCalculatorData } from "@/app/calculadora-juros-compostos/type
 import { formatCurrency } from "@/lib/utils";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
+import {
+  baseContainerStyle,
+  colors,
+  detailLabelStyle,
+  footerStyle,
+  headerStyle,
+  logoContainerStyle,
+} from "../commonStyles"; // Corrected import path
 
 export const runtime = "edge";
 
@@ -62,31 +70,20 @@ export async function GET(req: NextRequest) {
 
     return new ImageResponse(
       (
-        <div
-          style={{
-            height: "100%",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
-            color: "#f8fafc",
-            fontFamily: '"Inter", sans-serif',
-            padding: "60px",
-            border: "2px solid #334155",
-            borderRadius: "16px",
-            position: "relative",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "16px",
-              fontSize: "28px",
-              color: "#94a3b8",
-              marginBottom: "40px",
-            }}
-          >
+        <div style={baseContainerStyle}>
+          {/* Logo */}
+          <div style={logoContainerStyle}>
+            <img
+              src="https://www.nagringa.dev/logo-v2-no-bg-compressed-small.png" // Replace with your actual logo URL
+              alt="nagringa.dev logo"
+              height="128" // Adjust size as needed
+              width="128" // Adjust size as needed
+              style={{ objectFit: "contain" }} // Ensure logo scales nicely
+            />
+          </div>
+
+          {/* Header */}
+          <div style={headerStyle}>
             <span>📈</span>
             <span>Simulação de Juros Compostos</span>
           </div>
@@ -96,30 +93,51 @@ export async function GET(req: NextRequest) {
               display: "flex",
               justifyContent: "center",
               gap: "40px",
-              fontSize: "22px",
+              fontSize: "30px",
               color: "#94a3b8",
               marginBottom: "30px",
               textAlign: "center",
             }}
           >
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "16px", color: "#64748b" }}>
-                Período
-              </span>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={detailLabelStyle}>Período</span>{" "}
+              {/* Use shared style */}
               <span>{`${calculationParams.period} ${
                 calculationParams.periodType === "years" ? "anos" : "meses"
               }`}</span>
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "16px", color: "#64748b" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={detailLabelStyle}>
+                {" "}
+                {/* Use shared style */}
                 Investimento mensal
               </span>
               <span>
                 {formatCurrency(calculationParams.monthlyContribution, "BRL")}
               </span>
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "16px", color: "#64748b" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={detailLabelStyle}>
+                {" "}
+                {/* Use shared style */}
                 Taxa de Juros (Anual)
               </span>
               <span>{calculationParams.interestRate}%</span>
@@ -136,7 +154,7 @@ export async function GET(req: NextRequest) {
               gap: "10px",
             }}
           >
-            <div style={{ fontSize: "24px", color: "#cbd5e1" }}>
+            <div style={{ fontSize: "32px", color: "#cbd5e1" }}>
               Seu montante final será:
             </div>
             <div
@@ -160,9 +178,9 @@ export async function GET(req: NextRequest) {
               width: "100%",
               marginTop: "40px",
               paddingTop: "20px",
-              borderTop: "1px solid #334155",
-              fontSize: "20px",
-              color: "#cbd5e1",
+              borderTop: `1px solid ${colors.border}`, // Use shared color
+              fontSize: "28px",
+              color: colors.textSecondary, // Use shared color
             }}
           >
             <div
@@ -173,7 +191,9 @@ export async function GET(req: NextRequest) {
                 gap: "4px",
               }}
             >
-              <span style={{ fontSize: "16px", color: "#64748b" }}>
+              <span style={detailLabelStyle}>
+                {" "}
+                {/* Use shared style */}
                 Depósito Inicial
               </span>
               <span style={{ fontWeight: 500 }}>
@@ -188,7 +208,9 @@ export async function GET(req: NextRequest) {
                 gap: "4px",
               }}
             >
-              <span style={{ fontSize: "16px", color: "#64748b" }}>
+              <span style={detailLabelStyle}>
+                {" "}
+                {/* Use shared style */}
                 Contribuições
               </span>
               <span style={{ fontWeight: 500 }}>
@@ -203,23 +225,21 @@ export async function GET(req: NextRequest) {
                 gap: "4px",
               }}
             >
-              <span style={{ fontSize: "16px", color: "#64748b" }}>
+              <span style={detailLabelStyle}>
+                {" "}
+                {/* Use shared style */}
                 Juros 💰
               </span>
-              <span style={{ fontWeight: 500, color: "#10b981" }}>
-                + {formatCurrency(results.totalInterest, "BRL")}
+              <span style={{ fontWeight: 500, color: colors.accentGreen }}>
+                {" "}
+                {/* Use shared color */}+{" "}
+                {formatCurrency(results.totalInterest, "BRL")}
               </span>
             </div>
           </div>
 
           <div
-            style={{
-              position: "absolute",
-              bottom: "20px",
-              right: "30px",
-              fontSize: "16px",
-              color: "#475569",
-            }}
+            style={footerStyle} // Use shared style
           >
             Calculadora de Juros Compostos - nagringa.dev
           </div>
