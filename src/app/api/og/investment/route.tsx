@@ -11,7 +11,7 @@ const defaultValues: InvestmentCalculatorData = {
   initialDeposit: 10000,
   monthlyContribution: 1000,
   period: 10,
-  periodType: "anos",
+  periodType: "years",
   interestRate: 5.5,
 };
 
@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
       isNaN(monthlyContribution) ||
       isNaN(period) ||
       isNaN(interestRate) ||
-      (periodType !== "anos" && periodType !== "meses")
+      (periodType !== "years" && periodType !== "months")
     ) {
       return new Response("Invalid parameters", { status: 400 });
     }
@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
       initialDeposit,
       monthlyContribution,
       period,
-      periodType,
+      periodType: periodType as "years" | "months",
       interestRate,
     };
 

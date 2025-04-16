@@ -39,8 +39,20 @@ export const calculateInvestmentResults = ({
     totalContributions += monthlyContribution;
 
     // 4. Record data for the chart based on the total number of months
-    const shouldRecordMonthly = months <= 36;
-    if (shouldRecordMonthly || i % 12 === 0 || i === months) {
+    // Determine the recording frequency based on the total duration
+    let shouldRecord = false;
+    if (months <= 36) {
+      // Record monthly for short durations (<= 3 years)
+      shouldRecord = true;
+    } else if (months <= 1200) {
+      // Record yearly for medium durations (> 3 years and <= 100 years)
+      shouldRecord = i % 12 === 0 || i === months;
+    } else {
+      // Record every 10 years for long durations (> 100 years)
+      shouldRecord = i % 120 === 0 || i === months;
+    }
+
+    if (shouldRecord) {
       chartData.push({
         month: i,
         initialDeposit: initialDeposit, // Keep initial deposit constant for chart stack
