@@ -5,3 +5,10 @@ export interface InvestmentCalculatorData {
   periodType: string;
   interestRate: number;
 }
+
+export interface ChartData {
+  month: number;
+  initialDeposit: number;
+  contributions: number;
+  interest: number;
+}

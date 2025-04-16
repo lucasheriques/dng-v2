@@ -5,12 +5,7 @@ import {
   TableInput,
   TableRow,
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { calculateInvestmentResults } from "@/app/calculadora-juros-compostos/lib";
 import { Button } from "@/components/ui/button";
 import {
   ChartConfig,
@@ -20,7 +15,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Table, TableBody, TableCell, TableHead } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
@@ -29,94 +23,7 @@ import { Copy } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Payload } from "recharts/types/component/DefaultLegendContent";
-import { InvestmentCalculatorData } from "./types";
-
-interface ChartData {
-  month: number;
-  initialDeposit: number;
-  contributions: number;
-  interest: number;
-}
-
-// Extracted pure calculation function
-export const calculateInvestmentResults = ({
-  initialDeposit,
-  monthlyContribution,
-  period,
-  periodType,
-  interestRate,
-}: {
-  initialDeposit: number;
-  monthlyContribution: number;
-  period: number;
-  periodType: string;
-  interestRate: number;
-}) => {
-  const months = periodType === "anos" ? period * 12 : period;
-  let currentAmount = initialDeposit;
-  let totalContributions = 0; // Tracks only monthly contributions
-  let totalInterest = 0;
-  const chartData: ChartData[] = [];
-
-  // Add initial state (month 0)
-  chartData.push({
-    month: 0,
-    initialDeposit: initialDeposit,
-    contributions: 0,
-    interest: 0,
-  });
-
-  // Calculate month by month from 1 up to 'months'
-  for (let i = 1; i <= months; i++) {
-    // 1. Calculate interest for the month based on the current amount BEFORE contribution
-    const monthlyInterestRate = interestRate / 100 / 12;
-    const interestEarned = currentAmount * monthlyInterestRate;
-    totalInterest += interestEarned;
-
-    // 2. Update current amount with interest
-    currentAmount += interestEarned;
-
-    // 3. Add monthly contribution AFTER calculating interest
-    currentAmount += monthlyContribution;
-    totalContributions += monthlyContribution;
-
-    // 4. Record data for the chart based on the total number of months
-    const shouldRecordMonthly = months <= 36;
-    if (shouldRecordMonthly || i % 12 === 0 || i === months) {
-      chartData.push({
-        month: i,
-        initialDeposit: initialDeposit, // Keep initial deposit constant for chart stack
-        contributions: totalContributions, // Cumulative monthly contributions
-        interest: totalInterest, // Cumulative interest
-      });
-    }
-  }
-
-  // Final amount is the last calculated currentAmount
-  const finalAmount = currentAmount;
-
-  // Calculate percentages based on the final amount
-  const interestPercent = finalAmount ? (totalInterest / finalAmount) * 100 : 0;
-  const contributionsPercent = finalAmount
-    ? (totalContributions / finalAmount) * 100 // Percentage of *monthly* contributions
-    : 0;
-  const initialDepositPercent = finalAmount
-    ? (initialDeposit / finalAmount) * 100
-    : 0;
-
-  return {
-    months,
-    totalInterest,
-    totalContributions,
-    initialDeposit,
-    finalAmount,
-    chartData,
-    // Add percentages to the return object
-    interestPercent,
-    contributionsPercent,
-    initialDepositPercent,
-  };
-};
+import { ChartData, InvestmentCalculatorData } from "./types";
 
 // Default values (can be moved or duplicated if compression.ts is removed)
 const defaultValues: InvestmentCalculatorData = {
@@ -129,7 +36,7 @@ const defaultValues: InvestmentCalculatorData = {
 
 // Component Props Interface
 interface InvestmentCalculatorProps {
-  initialData?: InvestmentCalculatorData;
+  initialData?: Partial<InvestmentCalculatorData>;
 }
 
 // Chart configuration mapping data keys to labels and CSS variables for colors
@@ -545,42 +452,6 @@ export default function InvestmentCalculator({
             Compartilhar resultados
           </Button>
         </div>
-
-        <Accordion type="single" collapsible>
-          <AccordionItem value="investment-projection">
-            <AccordionTrigger className="bg-slate-800/50 p-4">
-              Detalhamento mensal
-            </AccordionTrigger>
-            <AccordionContent className="pb-0 bg-slate-800/50 p-4">
-              <Table>
-                <TableHeader>
-                  <TableRow label="Mês">
-                    <TableHead>Mês</TableHead>
-                    <TableHead>Depósito inicial</TableHead>
-                    <TableHead>Contribuições mensais</TableHead>
-                    <TableHead>Juros acumulados</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {results.chartData.map((item) => (
-                    <TableRow label={item.month.toString()} key={item.month}>
-                      <TableCell>{item.month}</TableCell>
-                      <TableCell>
-                        {formatCurrency(item.initialDeposit, "BRL")}
-                      </TableCell>
-                      <TableCell>
-                        {formatCurrency(item.contributions, "BRL")}
-                      </TableCell>
-                      <TableCell>
-                        {formatCurrency(item.interest, "BRL")}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
       </div>
     </div>
   );

@@ -63,7 +63,7 @@ export default function Header({ articles }: HeaderProps) {
                   <ChevronDown aria-hidden="true" className="h-5 w-5" />
                 </PopoverButton>
               </Button>
-              <Button variant="link" asChild className="px-0">
+              <Button variant="link" asChild className="px-0 hidden sm:block">
                 <Link href="/assinantes">Recursos para assinantes</Link>
               </Button>
               <Search />

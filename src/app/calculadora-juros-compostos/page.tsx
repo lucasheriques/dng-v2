@@ -1,15 +1,10 @@
 import InvestmentCalculator from "@/app/calculadora-juros-compostos/investment-calculator";
 import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
+import { Metadata } from "next";
 import { InvestmentCalculatorData } from "./types";
 
-export const metadata = {
-  title: "Calculadora de Juros Compostos | Dev na Gringa",
-  description:
-    "Calculadora de Juros Compostos online. Utilize esta calculadora para simular cálculos de juros compostos em investimentos.",
-};
-
-// Default values (consistent with calculator component)
+// Default values matching the calculator component and API route
 const defaultValues: InvestmentCalculatorData = {
   initialDeposit: 10000,
   monthlyContribution: 1000,
@@ -18,78 +13,134 @@ const defaultValues: InvestmentCalculatorData = {
   interestRate: 5.5,
 };
 
-// Helper to safely parse numbers from search params
-const safeParseFloat = (
-  value: string | string[] | undefined,
-  defaultValue: number
-): number => {
-  if (typeof value !== "string") return defaultValue;
-  const parsed = parseFloat(value);
-  return isNaN(parsed) ? defaultValue : parsed;
-};
-
-// Define type for search params
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
-
-export default async function InterestRateCalculator({
-  searchParams: params,
+// Function to generate metadata dynamically
+export async function generateMetadata({
+  searchParams,
 }: {
-  searchParams: SearchParams;
-}) {
-  const initialData: InvestmentCalculatorData = { ...defaultValues };
+  searchParams: { [key: string]: string | string[] | undefined };
+}): Promise<Metadata> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"; // Fallback for local dev
+  const ogUrl = new URL("/api/og/investment", baseUrl);
 
-  const searchParams = await params;
+  // Append parameters only if they differ from defaults, matching the client-side logic
+  const initialDeposit = searchParams?.i
+    ? Number(searchParams.i)
+    : defaultValues.initialDeposit;
+  const monthlyContribution = searchParams?.m
+    ? Number(searchParams.m)
+    : defaultValues.monthlyContribution;
+  const period = searchParams?.p
+    ? Number(searchParams.p)
+    : defaultValues.period;
+  const periodType = searchParams?.pt
+    ? String(searchParams.pt)
+    : defaultValues.periodType;
+  const interestRate = searchParams?.r
+    ? Number(searchParams.r)
+    : defaultValues.interestRate;
 
-  // Read individual params using short keys and validate
-  const initialDepositParam = searchParams?.i; // Use 'i'
-  if (initialDepositParam !== undefined) {
-    initialData.initialDeposit = safeParseFloat(
-      initialDepositParam,
-      defaultValues.initialDeposit
-    );
-  }
-
-  const monthlyContributionParam = searchParams?.m; // Use 'm'
-  if (monthlyContributionParam !== undefined) {
-    initialData.monthlyContribution = safeParseFloat(
-      monthlyContributionParam,
-      defaultValues.monthlyContribution
-    );
-  }
-
-  const periodParam = searchParams?.p; // Use 'p'
-  if (periodParam !== undefined) {
-    initialData.period = safeParseFloat(periodParam, defaultValues.period);
-  }
-
-  const periodTypeParam = searchParams?.pt; // Use 'pt'
+  // Validate and only add valid, non-default params to the OG image URL
   if (
-    typeof periodTypeParam === "string" &&
-    (periodTypeParam === "meses" || periodTypeParam === "anos")
+    !isNaN(initialDeposit) &&
+    initialDeposit !== defaultValues.initialDeposit
   ) {
-    initialData.periodType = periodTypeParam;
+    ogUrl.searchParams.set("i", String(initialDeposit));
+  }
+  if (
+    !isNaN(monthlyContribution) &&
+    monthlyContribution !== defaultValues.monthlyContribution
+  ) {
+    ogUrl.searchParams.set("m", String(monthlyContribution));
+  }
+  if (!isNaN(period) && period !== defaultValues.period) {
+    ogUrl.searchParams.set("p", String(period));
+  }
+  if (
+    (periodType === "meses" || periodType === "anos") &&
+    periodType !== defaultValues.periodType
+  ) {
+    ogUrl.searchParams.set("pt", periodType);
+  }
+  if (!isNaN(interestRate) && interestRate !== defaultValues.interestRate) {
+    ogUrl.searchParams.set("r", String(interestRate));
   }
 
-  const interestRateParam = searchParams?.r; // Use 'r'
-  if (interestRateParam !== undefined) {
-    initialData.interestRate = safeParseFloat(
-      interestRateParam,
-      defaultValues.interestRate
-    );
+  const title = "Calculadora de Juros Compostos | Dev na Gringa";
+  const description =
+    "Simule o crescimento do seu patrimônio com nossa calculadora de juros compostos online e gratuita. Veja o poder dos juros sobre juros em ação!";
+
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+      images: [
+        {
+          url: ogUrl.toString(),
+          width: 1200,
+          height: 630,
+          alt: "Resultado da Simulação de Investimento",
+        },
+      ],
+      locale: "pt_BR",
+      type: "website",
+      url: `${baseUrl}/calculadora-juros-compostos`, // Canonical URL
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [ogUrl.toString()],
+    },
+  };
+}
+
+export default function CalculadoraJurosCompostosPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  // Parse initial data from searchParams for the client component
+  // Use Partial and only include values present in searchParams
+  const initialData: Partial<InvestmentCalculatorData> = {};
+  if (searchParams?.i && !isNaN(Number(searchParams.i))) {
+    initialData.initialDeposit = Number(searchParams.i);
+  }
+  if (searchParams?.m && !isNaN(Number(searchParams.m))) {
+    initialData.monthlyContribution = Number(searchParams.m);
+  }
+  if (searchParams?.p && !isNaN(Number(searchParams.p))) {
+    initialData.period = Number(searchParams.p);
+  }
+  if (
+    searchParams?.pt &&
+    typeof searchParams.pt === "string" &&
+    (searchParams.pt === "meses" || searchParams.pt === "anos") // Validate periodType
+  ) {
+    initialData.periodType = searchParams.pt;
+  }
+  if (searchParams?.r && !isNaN(Number(searchParams.r))) {
+    initialData.interestRate = Number(searchParams.r);
   }
 
   return (
-    <PageWrapper className="flex flex-col gap-32">
-      <div>
-        <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-bold">Calculadora de Juros Compostos</h1>
-          <p className="pb-12 text-slate-300">
-            Use essa calculadora de juros compostos para planejar seus objetivos
-            financeiros. Calcule como suas economias podem crescer com
-            diferentes valores de depósito, taxas de juros e períodos de tempo.
-          </p>
-        </div>
-        <InvestmentCalculator initialData={initialData} />
+    <PageWrapper className="flex flex-col gap-8 md:gap-16">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-3xl md:text-4xl font-bold">
+          Calculadora de Juros Compostos
+        </h1>{" "}
+        {/* Responsive heading */}
+      </div>
+      {/* Pass potentially partial initialData combined with defaults in the client component */}
+      <InvestmentCalculator initialData={initialData} />
+      {/* Added explanatory text */}
+      <div className="mt-8 text-center text-slate-400 text-sm">
+        <p>
+          Use esta calculadora para simular seus investimentos e visualizar o
+          crescimento ao longo do tempo.
+        </p>
+        <p>Ajuste os valores e compartilhe os resultados!</p>
       </div>
       <Comments slug="calculadora-juros-compostos" />
     </PageWrapper>

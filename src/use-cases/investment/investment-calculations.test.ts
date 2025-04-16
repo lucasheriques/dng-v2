@@ -1,4 +1,4 @@
-import { calculateInvestmentResults } from "@/app/calculadora-juros-compostos/investment-calculator"; // Adjust path if moved
+import { calculateInvestmentResults } from "@/app/calculadora-juros-compostos/lib";
 import { describe, expect, it } from "vitest";
 
 describe("calculateInvestmentResults", () => {
