@@ -263,7 +263,7 @@ export default function InvestmentCalculator({
   }, []);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-4">
       {/* Add Recent Comparisons Section */}
       <RecentComparisons
         historyItems={history}
@@ -495,11 +495,11 @@ export default function InvestmentCalculator({
           </div>
 
           {/* Breakdown */}
-          <div className="flex-1 flex flex-col">
-            <h2 className="text-xl font-bold mb-4 text-slate-100">
-              Detalhamento ao final do período:
-            </h2>
+          <div className="flex-1 flex flex-col justify-between">
             <div className="space-y-3">
+              <h2 className="text-xl font-bold text-slate-100">
+                Detalhamento ao final do período:
+              </h2>
               <div className="flex items-center justify-between py-2 border-b border-slate-700">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-sm bg-[#10b981]"></div>
@@ -539,31 +539,35 @@ export default function InvestmentCalculator({
                 </span>
               </div>
             </div>
+            <div className="text-right">
+              <h3 className="text-base sm:text-lg font-medium">
+                Seu montante final
+              </h3>
+              <div className="text-xl sm:text-5xl font-bold text-white pb-2">
+                <NumberFlow
+                  value={results.finalAmount}
+                  format={{
+                    style: "currency",
+                    currency: "BRL",
+                    trailingZeroDisplay: "stripIfInteger",
+                  }}
+                  data-testid="final-amount"
+                  data-testvalue={results.finalAmount}
+                />
+              </div>
+              <Button
+                variant="outline"
+                onClick={handleShare}
+                className="self-end"
+              >
+                <Copy className="w-4 h-4 mr-1" />
+                Compartilhar resultados
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Second row: Total savings */}
-        <div className="text-right">
-          <h3 className="text-base sm:text-lg font-medium">
-            Seu montante final
-          </h3>
-          <div className="text-xl sm:text-5xl font-bold text-white pb-2">
-            <NumberFlow
-              value={results.finalAmount}
-              format={{
-                style: "currency",
-                currency: "BRL",
-                trailingZeroDisplay: "stripIfInteger",
-              }}
-              data-testid="final-amount"
-              data-testvalue={results.finalAmount}
-            />
-          </div>
-          <Button variant="outline" onClick={handleShare} className="self-end">
-            <Copy className="w-4 h-4 mr-1" />
-            Compartilhar resultados
-          </Button>
-        </div>
       </div>
     </div>
   );

@@ -128,7 +128,7 @@ export default async function CalculadoraJurosCompostosPage({
   }
 
   return (
-    <PageWrapper className="flex flex-col gap-4 md:gap-8">
+    <PageWrapper className="flex flex-col gap-2 md:gap-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl md:text-4xl font-bold">
           Calculadora de Juros Compostos
