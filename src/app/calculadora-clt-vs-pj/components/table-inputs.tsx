@@ -32,7 +32,7 @@ export function TableRow({
     <div
       className={`grid grid-cols-2 items-stretch border-b border-slate-700 ${className}`}
     >
-      <div className="px-3 py-2 bg-slate-800/50 border-r border-slate-700 text-sm text-slate-300 flex justify-between items-center">
+      <div className="px-3 py-2 bg-slate-800/50 border-r border-slate-700 text-sm flex justify-between items-center">
         {label}
         {tooltipContent && (
           <>

@@ -1,8 +1,8 @@
 import { CalculatorFormData } from "@/app/calculadora-clt-vs-pj/types";
 import { decompress } from "@/app/calculadora-clt-vs-pj/utils";
+import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
 import { SalaryCalculatorClient } from "./calculator";
-
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 export const metadata = {
@@ -37,6 +37,7 @@ export default async function SalaryCalculator({
         initialData={initialData}
         defaultInterestRate={SELIC_RATE}
       />
+      <Comments slug="calculadora-clt-vs-pj" />
     </PageWrapper>
   );
 }

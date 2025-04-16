@@ -24,7 +24,7 @@ export function NonSubscriberView() {
         <h2 className="text-3xl font-bold mb-3">
           Conteúdo Exclusivo para Assinantes
         </h2>
-        <p className="text-slate-300 mb-8 max-w-lg text-lg">
+        <p className="mb-8 max-w-lg text-lg">
           Esta página contém recursos exclusivos para assinantes pagos da
           newsletter Dev na Gringa, incluindo eventos, recursos premium e
           conteúdo exclusivo.

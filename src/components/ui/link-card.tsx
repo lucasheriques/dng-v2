@@ -12,7 +12,7 @@ const linkCardVariants = cva(
         default:
           "border border-primary/20 bg-emerald-500/10 text-emerald-50 hover:bg-emerald-500/20 hover:border-emerald-500/30 shadow-sm",
         outline:
-          "border border-slate-800/80 bg-slate-800/40 hover:border-emerald-500/30 hover:bg-emerald-500/10 text-slate-300 hover:text-emerald-200",
+          "border border-slate-800/80 bg-slate-800/40 hover:border-emerald-500/30 hover:bg-emerald-500/10 hover:text-emerald-200",
         ghost:
           "border-transparent hover:bg-muted/50 text-foreground hover:text-primary",
         destructive:
@@ -45,7 +45,7 @@ const iconVariants = cva(
         ghost: "bg-muted text-muted-foreground group-hover:text-primary",
         destructive:
           "bg-destructive/20 text-destructive group-hover:text-destructive",
-        event: "bg-slate-800/60 text-slate-300 group-hover:text-slate-200",
+        event: "bg-slate-800/60 group-hover:text-slate-200",
       },
     },
     defaultVariants: {

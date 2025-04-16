@@ -8,6 +8,7 @@ import {
   Briefcase,
   Calculator,
   Calendar,
+  ChartNoAxesCombined,
   FileText,
   History as HistoryIcon,
   Mail,
@@ -116,6 +117,11 @@ export const TOOLS = {
     title: "Gerador de Invoice",
     href: "/gerador-de-invoice",
     icon: Receipt,
+  },
+  investmentCalculator: {
+    title: "Calculadora de Juros Compostos",
+    href: "/calculadora-juros-compostos",
+    icon: ChartNoAxesCombined,
   },
 };
 

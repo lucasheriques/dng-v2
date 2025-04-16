@@ -97,7 +97,7 @@ export default async function Hero() {
           </Button>
           <Link
             href="https://newsletter.nagringa.dev/p/como-funciona-a-mentoria"
-            className="text-sm border-white text-slate-300 font-medium text-center transition-colors hover:text-primary"
+            className="text-sm border-white font-medium text-center transition-colors hover:text-primary"
             target="_blank"
           >
             Como funciona a mentoria?

@@ -170,10 +170,7 @@ export function SalaryCalculatorClient({
                 <span>CLT</span>
                 <div className="">
                   <div className="flex items-center gap-2">
-                    <label
-                      htmlFor="fgts-checkbox"
-                      className="text-sm text-slate-300"
-                    >
+                    <label htmlFor="fgts-checkbox" className="text-sm">
                       Incluir FGTS
                     </label>
                     <Checkbox

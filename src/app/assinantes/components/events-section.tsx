@@ -56,9 +56,7 @@ export async function EventsSection() {
 
       {events.length === 0 && (
         <Card className="p-3 text-center border border-slate-800 bg-slate-900/50 rounded">
-          <p className="text-slate-300 text-sm">
-            Não há eventos programados no momento.
-          </p>
+          <p className="text-sm">Não há eventos programados no momento.</p>
         </Card>
       )}
 

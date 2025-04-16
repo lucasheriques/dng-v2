@@ -1,17 +1,11 @@
 "use client";
 import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
-import { MENTORSHIP_LINKS, SOCIALS } from "@/lib/constants";
+import { MENTORSHIP_LINKS, SOCIALS, TOOLS } from "@/lib/constants";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import {
-  ChevronDown,
-  CircleDollarSign,
-  Mail,
-  PhoneCall,
-  Receipt,
-} from "lucide-react";
+import { ChevronDown, Mail, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,20 +20,11 @@ import { usePathname } from "next/navigation";
 dayjs.locale("pt-br");
 
 const comunidade = [
-  {
-    name: "Calculadora de Salário CLT vs PJ",
-    href: "/calculadora-clt-vs-pj",
-    icon: CircleDollarSign,
-  },
-  {
-    name: "Gerador de Invoice",
-    href: "/gerador-de-invoice",
-    icon: Receipt,
-  },
-  { name: "Newsletter", href: SOCIALS.newsletter, icon: Mail },
-  { name: "YouTube", href: SOCIALS.youtube, icon: SiYoutube },
-  { name: "Discord", href: SOCIALS.discord, icon: SiDiscord },
-  { name: "Fale comigo", href: SOCIALS.calendar, icon: PhoneCall },
+  ...Object.values(TOOLS),
+  { title: "Newsletter", href: SOCIALS.newsletter, icon: Mail },
+  { title: "YouTube", href: SOCIALS.youtube, icon: SiYoutube },
+  { title: "Discord", href: SOCIALS.discord, icon: SiDiscord },
+  { title: "Fale comigo", href: SOCIALS.calendar, icon: PhoneCall },
 ];
 
 interface HeaderProps {
@@ -107,7 +92,7 @@ export default function Header({ articles }: HeaderProps) {
                     <div className="-my-2">
                       {comunidade.map((item) => (
                         <Link
-                          key={item.name}
+                          key={item.href}
                           href={item.href}
                           className="flex gap-x-4 py-2 text-sm/6 font-semibold text-gray-200 hover:transition-all hover:bg-white/5 px-3 -mx-3 rounded-lg group"
                           onClick={close}
@@ -117,7 +102,7 @@ export default function Header({ articles }: HeaderProps) {
                             aria-hidden="true"
                             className="h-6 w-6 flex-none text-gray-500 group-hover:text-gray-300 transition-colors"
                           />
-                          {item.name}
+                          {item.title}
                         </Link>
                       ))}
                     </div>

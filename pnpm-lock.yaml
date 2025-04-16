@@ -27,6 +27,9 @@ importers:
       '@headlessui/react':
         specifier: ^2.2.0
         version: 2.2.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@hyvor/hyvor-talk-react':
+        specifier: ^1.0.2
+        version: 1.0.2(react@19.0.0)
       '@icons-pack/react-simple-icons':
         specifier: 10.2.0
         version: 10.2.0(react@19.0.0)
@@ -877,6 +880,14 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
+
+  '@hyvor/hyvor-talk-base@1.0.1':
+    resolution: {integrity: sha512-/Y7hDJ0rRODHjzFvv6jsqiSkJYpvZyLhEeO4PN0NnDGhcnLSIPTqB1VoaoA3aFedMz2YVcL8G80ciOrIeC9C+A==}
+
+  '@hyvor/hyvor-talk-react@1.0.2':
+    resolution: {integrity: sha512-kD2RvygGbwOtvLRsJyshyOgFRY1j4Qzd591Oj30NsksU46fC1j7nrmuvVRh1A+dnUZdVsJeGl6dlhy0LCEI3lA==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@icons-pack/react-simple-icons@10.2.0':
     resolution: {integrity: sha512-QDUxup8D3GdIIzwGpxQs6bjeFV5mJes25qqf4aqP/PaBYQNCar7AiyD8C14636TosCG0A/QqAUwm/Hviep4d4g==}
@@ -5816,6 +5827,13 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/object-schema@2.0.3': {}
+
+  '@hyvor/hyvor-talk-base@1.0.1': {}
+
+  '@hyvor/hyvor-talk-react@1.0.2(react@19.0.0)':
+    dependencies:
+      '@hyvor/hyvor-talk-base': 1.0.1
+      react: 19.0.0
 
   '@icons-pack/react-simple-icons@10.2.0(react@19.0.0)':
     dependencies:

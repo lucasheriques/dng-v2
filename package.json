@@ -20,6 +20,7 @@
     "@convex-dev/auth": "^0.0.75",
     "@convex-dev/rate-limiter": "^0.2.6",
     "@headlessui/react": "^2.2.0",
+    "@hyvor/hyvor-talk-react": "^1.0.2",
     "@icons-pack/react-simple-icons": "10.2.0",
     "@lexical/code": "^0.21.0",
     "@lexical/link": "^0.21.0",

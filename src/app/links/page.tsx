@@ -30,7 +30,7 @@ export default function LinksPage() {
             <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-500 to-teal-400 text-transparent bg-clip-text">
               Dev na Gringa
             </h1>
-            <p className="text-slate-300 max-w-md mx-auto mt-4">
+            <p className="max-w-md mx-auto mt-4">
               Todos os links importantes para você acompanhar o conteúdo e
               recursos do Dev na Gringa.
             </p>

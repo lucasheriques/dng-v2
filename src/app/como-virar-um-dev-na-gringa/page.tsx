@@ -1,3 +1,4 @@
+import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
 import { Button } from "@/components/ui/button";
 import { getContent } from "@/use-cases/get-content";
@@ -17,6 +18,7 @@ export default async function Curso() {
       <article className="prose max-w-full text-lg dark:prose-invert">
         <MDXRemote source={content} components={{ Button: Button }} />
       </article>
+      <Comments slug="como-virar-um-dev-na-gringa" />
     </PageWrapper>
   );
 }
