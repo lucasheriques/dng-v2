@@ -24,7 +24,7 @@ export function UserDropdown() {
 
   if (isLoading) return null;
 
-  if (isAuthenticated) {
+  if (isAuthenticated && (user?.email || user?._id)) {
     posthog.identify(user?.email ?? user?._id, {
       email: user?.email,
       name: user?.name,

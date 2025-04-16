@@ -1,13 +1,15 @@
-import Features from "@/app/components/features";
 import Hero from "@/app/components/hero";
-import Timeline from "@/app/components/timeline";
-import About from "@/components/about";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 import HeroImage from "@public/hero.webp";
 import YtThumbnail from "@public/thumb-yt.jpg";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 
-export default function Home() {
+const Features = dynamic(() => import("@/app/components/features"));
+const About = dynamic(() => import("@/components/about"));
+const Timeline = dynamic(() => import("@/app/components/timeline"));
+
+export default async function Home() {
   return (
     <>
       <div className="relative min-h-[75dvh] pt-8 md:pt-0 flex items-center">
@@ -16,7 +18,7 @@ export default function Home() {
             src={HeroImage}
             alt="Mapa mundi artístico com Brasil em destaque"
             fill
-            className="object-cover opacity-90 pointer-events-none select-none motion-duration-1500 motion-scale-in-[0.4] motion-opacity-in-[10%] motion-blur-in-[30px] motion-ease-spring-bouncy"
+            className="object-cover opacity-90 pointer-events-none select-none motion-duration-700 motion-scale-in-[0.4] motion-opacity-in-[10%] motion-blur-in-[30px] motion-ease-spring-smooth"
             priority
             placeholder="blur"
           />

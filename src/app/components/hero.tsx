@@ -1,47 +1,82 @@
-import { AnimatedStat } from "@/app/components/animated-stat";
-import AnimatedText from "@/app/components/animated-text";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SOCIALS } from "@/lib/constants";
-import { api } from "@convex/_generated/api";
-import { fetchAction, fetchQuery } from "convex/nextjs";
-import { ArrowRight, Link2, Rocket } from "lucide-react";
+import { ArrowRight, Rocket } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
+import Stats from "@/app/components/stats";
+import { cn } from "@/lib/utils";
+
+// Company logos
+import AmazonLogo from "@public/logos/amazon.svg";
+import GoogleLogo from "@public/logos/google.svg";
+import MicrosoftLogo from "@public/logos/microsoft.svg";
+import NubankLogo from "@public/logos/nubank.svg";
+import PosthogLogo from "@public/logos/posthog.svg";
+
+type Props = {
+  text: string;
+  delay?: number;
+  className?: string;
+};
+
+function AnimatedText({ text, className = "" }: Props) {
+  return (
+    <span
+      className={cn(
+        "inline-block",
+        "motion-opacity-in-0 motion-translate-y-in-100 motion-blur-in-md motion-delay-500",
+        className
+      )}
+    >
+      {text}
+    </span>
+  );
+}
+
+const companies = [
+  { name: "Nubank", logo: NubankLogo },
+  { name: "Google", logo: GoogleLogo },
+  { name: "Microsoft", logo: MicrosoftLogo },
+  { name: "Amazon", logo: AmazonLogo },
+  { name: "PostHog", logo: PosthogLogo },
+];
+
+function CompanyLogos() {
+  return (
+    <div className="w-full motion-preset-fade motion-preset-slide-up motion-duration-300 motion-delay-[1.5s]">
+      <p className="text-sm text-slate-400 mb-4">
+        Nossos leitores trabalham em empresas como:
+      </p>
+      <div className="flex flex-wrap items-center gap-x-8 gap-y-6 justify-center sm:justify-start">
+        {companies.map((company) => (
+          <div key={company.name} className="relative h-7 w-[120px] ">
+            <Image
+              src={company.logo}
+              alt={`${company.name} logo`}
+              fill
+              className="object-contain object-left"
+              sizes="120px"
+              priority
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default async function Hero() {
-  const { totalSubscribers, paidSubscribers } = await fetchQuery(
-    api.subscribers.getSubscriberStats
-  );
-
-  const { totalMembers: totalDiscordMembers } = await fetchAction(
-    api.discord.getDiscordMembers
-  );
-
   return (
     <div className="w-full max-w-7xl mx-auto px-4 relative z-10 space-y-4 md:space-y-8">
       <div>
-        <Badge
-          variant="outline"
-          className="border-primary/30 text-primary backdrop-blur-sm motion-delay-[500ms] motion-preset-fade"
-        >
-          <Link2 className="mr-2 h-4 w-4" />
-          <Link
-            href="https://www.linkedin.com/feed/update/urn:li:activity:7257725748344438784?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7257725748344438784%2C7257748302866071552%29&replyUrn=urn%3Ali%3Acomment%3A%28activity%3A7257725748344438784%2C7257751314724491264%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287257748302866071552%2Curn%3Ali%3Aactivity%3A7257725748344438784%29&dashReplyUrn=urn%3Ali%3Afsd_comment%3A%287257751314724491264%2Curn%3Ali%3Aactivity%3A7257725748344438784%29"
-            target="_blank"
-            className="motion-preset-typewriter-[42] motion-duration-[10s]"
-          >
-            prometo que não tô vendendo nenhuma ilusão
-          </Link>
-        </Badge>
         <h1 className="font-bold text-white text-3xl md:text-4xl">
           <Balancer>
-            <AnimatedText text="De Dev no Brasil" delay={0.3} />
+            <AnimatedText text="O melhor conteúdo" />
             <br />
             <AnimatedText
-              text="a Dev Internacional"
-              separatedWords={false}
-              delay={15}
+              text="para devs ambiciosos"
               className="bg-gradient-to-r from-primary via-yellow-400 to-accent-secondary text-transparent bg-clip-text inline-block animate-gradient text-4xl md:text-5xl"
             />
           </Balancer>
@@ -49,13 +84,10 @@ export default async function Hero() {
       </div>
       <h2 className="text-xl text-slate-200 max-w-2xl">
         <Balancer>
-          <AnimatedText
-            text={`Junte-se a ${Math.floor(totalSubscribers / 50) * 50}+ devs brasileiros aprendendo, compartilhando experiências e construindo carreiras internacionais juntos.`}
-            delay={0.9}
-          />
+          <AnimatedText text="Junte-se a 2550+ devs brasileiros aprendendo, compartilhando experiências e construindo carreiras internacionais juntos." />
         </Balancer>
       </h2>
-      <div className="flex flex-col sm:flex-row gap-4 motion-preset-fade motion-preset-slide-up motion-duration-300 motion-delay-[2s]">
+      <div className="flex flex-col sm:flex-row gap-4 motion-preset-fade motion-preset-slide-up motion-duration-300 motion-delay-1000">
         <div className="flex flex-col gap-1">
           <Button size="xl" asChild className="min-w-80">
             <Link href={`${SOCIALS.newsletter}/subscribe?ref=nagringa.dev`}>
@@ -78,34 +110,7 @@ export default async function Hero() {
           </Link>
         </Button>
       </div>
-
-      {/* Stats */}
-      {/* <motion.div
-        className="mt-16 flex justify-center items-center border-t border-white/10 pt-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.5 }}
-      > */}
-      <div className="mt-16 flex justify-center items-center border-t border-white/10 pt-8">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl w-full">
-          <AnimatedStat
-            value={totalSubscribers ?? 1300}
-            label="inscritos na newsletter"
-            color="text-primary"
-          />
-          <AnimatedStat
-            value={totalDiscordMembers ?? 150}
-            label="membros na comunidade"
-            color="text-yellow-400"
-          />
-          <AnimatedStat
-            value={paidSubscribers ?? 30}
-            label="assinantes da mentoria"
-            color="text-accent-secondary"
-          />
-        </div>
-      </div>
-      {/* </motion.div> */}
+      <Stats />
     </div>
   );
 }

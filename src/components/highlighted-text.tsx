@@ -1,20 +1,31 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { useAnimation } from "motion/react";
 import * as m from "motion/react-m";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
+const bgColors = {
+  primary: "bg-primary/40",
+  pink: "bg-pink-500/40",
+  yellow: "bg-yellow-500/40",
+  emerald: "bg-emerald-500/40",
+  blue: "bg-blue-500/40",
+  purple: "bg-purple-500/40",
+  red: "bg-red-500/40",
+} as const;
+
 interface HighlightedTextProps {
   children: React.ReactNode;
   className?: string;
-  bgColor?: string;
+  color?: keyof typeof bgColors;
   delay?: number;
 }
 
 export function HighlightedText({
   children,
   className = "",
-  bgColor = "bg-primary/40",
+  color = "primary",
   delay = 300,
 }: HighlightedTextProps) {
   const controls = useAnimation();
@@ -33,8 +44,8 @@ export function HighlightedText({
   }, [controls, inView, delay]);
 
   return (
-    <span className={`relative px-1 ${className}`} ref={ref}>
-      {children}
+    <span className={cn("relative px-1", className)} ref={ref}>
+      <span className="relative z-10 font-semibold">{children}</span>
       <m.span
         initial="hidden"
         animate={controls}
@@ -52,7 +63,10 @@ export function HighlightedText({
             },
           },
         }}
-        className={`absolute bottom-0 left-0 -z-10 h-full rounded ${bgColor}`}
+        className={cn(
+          "absolute bottom-0 left-0 h-full rounded",
+          bgColors[color]
+        )}
       />
     </span>
   );

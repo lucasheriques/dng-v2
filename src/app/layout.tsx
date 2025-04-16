@@ -1,16 +1,12 @@
 import { Providers } from "@/app/providers";
-import { BottomSearchFab } from "@/components/bottom-search-fab";
 import { Footer } from "@/components/footer";
 import Header from "@/components/header";
 import LastArticleBanner from "@/components/last-article-banner";
-import PostHogPageView from "@/components/posthog-page-view";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
-import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import { getRandomArticles } from "@/use-cases/get-articles";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import { Inter } from "next/font/google";
-import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 const inter = Inter({
@@ -46,25 +42,11 @@ export default function RootLayout({
             inter.variable
           )}
         >
-          <NextTopLoader
-            color="#FF4D8E"
-            height={3}
-            crawl={true}
-            crawlSpeed={200}
-            initialPosition={0.08}
-            easing="ease"
-            speed={200}
-            zIndex={1000}
-            showAtBottom={false}
-          />
           <Providers>
             <LastArticleBanner />
             <Header articles={randomArticles} />
             <main className="min-h-dvh bg-slate-950">{children}</main>
             <Footer />
-            <BottomSearchFab />
-            <Toaster />
-            <PostHogPageView />
           </Providers>
           <TailwindIndicator />
         </body>

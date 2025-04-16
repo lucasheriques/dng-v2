@@ -103,7 +103,7 @@ export default function About() {
                 <span>
                   <HighlightedText
                     className="font-semibold text-white px-1 rounded"
-                    bgColor="bg-lime-400/60"
+                    color="yellow"
                   >
                     Conciso
                   </HighlightedText>{" "}
@@ -121,7 +121,7 @@ export default function About() {
                 <span>
                   <HighlightedText
                     className="font-semibold text-white px-1 rounded"
-                    bgColor="bg-rose-600/60"
+                    color="red"
                   >
                     Feito sob medida
                   </HighlightedText>{" "}

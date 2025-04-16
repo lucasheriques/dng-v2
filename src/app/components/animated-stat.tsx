@@ -1,23 +1,23 @@
 "use client";
 
 import { useAnimate, useInView } from "motion/react";
-import * as m from "motion/react-m";
 
 import { ReactNode, useEffect, useRef } from "react";
 
 interface AnimatedStatProps {
-  value: number;
+  value?: number;
   label: ReactNode;
   color: string;
+  isLoading?: boolean;
 }
 
 export function AnimatedStat({ value, label, color }: AnimatedStatProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [scope, animate] = useAnimate();
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(containerRef, { once: true });
 
   useEffect(() => {
-    if (isInView) {
+    if (isInView && value) {
       animate(0, value, {
         type: "spring",
         stiffness: 100,
@@ -30,16 +30,14 @@ export function AnimatedStat({ value, label, color }: AnimatedStatProps) {
   }, [isInView, value, animate, scope]);
 
   return (
-    <m.div
-      ref={ref}
-      className="text-center group"
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.2 }}
+    <div
+      ref={containerRef}
+      className="text-center group hover:scale-110 transition-transform duration-200"
     >
-      <div ref={scope} className={`text-3xl font-bold ${color}`}>
+      <span ref={scope} className={`text-3xl font-bold ${color}`}>
         0
-      </div>
+      </span>
       <div className="text-slate-400">{label}</div>
-    </m.div>
+    </div>
   );
 }

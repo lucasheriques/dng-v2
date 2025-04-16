@@ -9,6 +9,7 @@ import { NextResponse } from "next/server";
 const isLoginPage = createRouteMatcher(["/login"]);
 const isProtectedRoute = createRouteMatcher(["/perfil(.*)", "/assinantes(.*)"]);
 const isSubscribePage = createRouteMatcher(["/sub"]);
+const isCursoPage = createRouteMatcher(["/curso"]);
 
 export default convexAuthNextjsMiddleware(
   async (request, { convexAuth }) => {
@@ -18,6 +19,16 @@ export default convexAuthNextjsMiddleware(
 
     if (isSubscribePage(request)) {
       const response = NextResponse.redirect(SUBSCRIBE_LINK);
+      // Copy headers to the redirect response
+      requestHeaders.forEach((value, key) => {
+        response.headers.set(key, value);
+      });
+      return response;
+    }
+    if (isCursoPage(request)) {
+      const response = NextResponse.redirect(
+        new URL("/como-virar-um-dev-na-gringa", request.url)
+      );
       // Copy headers to the redirect response
       requestHeaders.forEach((value, key) => {
         response.headers.set(key, value);

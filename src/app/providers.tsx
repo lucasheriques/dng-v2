@@ -1,5 +1,8 @@
 "use client";
 
+import { BottomSearchFab } from "@/components/bottom-search-fab";
+import PostHogPageView from "@/components/posthog-page-view";
+import { Toaster } from "@/components/ui/toaster";
 import { env } from "@/env";
 import { ConvexAuthNextjsProvider } from "@convex-dev/auth/nextjs";
 import { ConvexQueryCacheProvider } from "convex-helpers/react/cache/provider";
@@ -41,7 +44,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
           </ConvexQueryCacheProvider>
         </ConvexAuthNextjsProvider>
       </PostHogProvider>
-      o
+      <Toaster />
+      <BottomSearchFab />
+      <PostHogPageView />
     </LazyMotion>
   );
 }

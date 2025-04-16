@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "picsum.photos",
       },
+      {
+        hostname: "img.logo.dev",
+      },
     ],
   },
   transpilePackages: ["next-mdx-remote"],
