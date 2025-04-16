@@ -5,9 +5,13 @@ import {
   TableInput,
   TableRow,
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/hooks/use-toast";
+import { InvestmentCalculatorData } from "@/lib/compression";
 import { formatCurrency } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
+import { Copy } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import {
   Bar,
@@ -25,6 +29,20 @@ interface ChartData {
   initialDeposit: number;
   contributions: number;
   interest: number;
+}
+
+// Default values (can be moved or duplicated if compression.ts is removed)
+const defaultValues: InvestmentCalculatorData = {
+  initialDeposit: 10000,
+  monthlyContribution: 1000,
+  period: 10,
+  periodType: "anos",
+  interestRate: 5.5,
+};
+
+// Component Props Interface
+interface InvestmentCalculatorProps {
+  initialData?: InvestmentCalculatorData;
 }
 
 // Extracted pure calculation function
@@ -94,13 +112,27 @@ const calculateInvestmentResults = ({
   };
 };
 
-export default function InvestmentCalculator() {
-  // Immediate state for inputs
-  const [initialDeposit, setInitialDeposit] = useState(10000);
-  const [monthlyContribution, setMonthlyContribution] = useState(1000);
-  const [period, setPeriod] = useState(10);
-  const [periodType, setPeriodType] = useState("anos");
-  const [interestRate, setInterestRate] = useState(5.5);
+export default function InvestmentCalculator({
+  initialData,
+}: InvestmentCalculatorProps) {
+  const { toast } = useToast();
+
+  // Initialize state using initialData or defaults
+  const [initialDeposit, setInitialDeposit] = useState(
+    initialData?.initialDeposit ?? defaultValues.initialDeposit
+  );
+  const [monthlyContribution, setMonthlyContribution] = useState(
+    initialData?.monthlyContribution ?? defaultValues.monthlyContribution
+  );
+  const [period, setPeriod] = useState(
+    initialData?.period ?? defaultValues.period
+  );
+  const [periodType, setPeriodType] = useState(
+    initialData?.periodType ?? defaultValues.periodType
+  );
+  const [interestRate, setInterestRate] = useState(
+    initialData?.interestRate ?? defaultValues.interestRate
+  );
 
   // Debounced state for calculation inputs
   const [debouncedInputs, setDebouncedInputs] = useState({
@@ -139,9 +171,53 @@ export default function InvestmentCalculator() {
   const { interestPercent, contributionsPercent, initialDepositPercent } =
     results;
 
+  // Share function
+  const handleShare = () => {
+    const params = new URLSearchParams();
+
+    // Use short keys for parameters
+    if (initialDeposit !== defaultValues.initialDeposit) {
+      params.set("i", String(initialDeposit)); // Use 'i'
+    }
+    if (monthlyContribution !== defaultValues.monthlyContribution) {
+      params.set("m", String(monthlyContribution)); // Use 'm'
+    }
+    if (period !== defaultValues.period) {
+      params.set("p", String(period)); // Use 'p'
+    }
+    if (periodType !== defaultValues.periodType) {
+      params.set("pt", periodType); // Use 'pt'
+    }
+    if (interestRate !== defaultValues.interestRate) {
+      params.set("r", String(interestRate)); // Use 'r'
+    }
+
+    const url = new URL(window.location.pathname, window.location.origin);
+    url.search = params.toString();
+
+    window.history.replaceState({}, "", url.toString());
+
+    navigator.clipboard
+      .writeText(url.toString())
+      .then(() => {
+        toast({
+          title: "Link de compartilhamento copiado!",
+          description:
+            "O link com a sua simulação foi copiado para a área de transferência.",
+        });
+      })
+      .catch((err) => {
+        console.error("Failed to copy URL: ", err);
+        toast({
+          variant: "destructive",
+          title: "Falha ao copiar o link.",
+          description: "Ocorreu um erro ao tentar copiar o link.",
+        });
+      });
+  };
+
   return (
     <div className="flex flex-col gap-8">
-      {/* Form on the left */}
       <div className="border border-slate-700 rounded-lg overflow-hidden bg-slate-900/50">
         <TableHeader>Configurações</TableHeader>
         <TableRow label="Depósito inicial">
@@ -192,7 +268,7 @@ export default function InvestmentCalculator() {
         </TableRow>
       </div>
       {/* Results on the right */}
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* First row: Chart and Breakdown side by side */}
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Chart */}
@@ -291,7 +367,7 @@ export default function InvestmentCalculator() {
           </div>
 
           {/* Breakdown */}
-          <div className="flex-1 ">
+          <div className="flex-1 flex flex-col">
             <h2 className="text-xl font-bold mb-4 text-slate-100">
               Detalhamento:
             </h2>
@@ -339,9 +415,9 @@ export default function InvestmentCalculator() {
         </div>
 
         {/* Second row: Total savings */}
-        <div className="text-right mt-4">
+        <div className="text-right">
           <h3 className="text-lg font-medium">Seu montante final</h3>
-          <div className="text-5xl font-bold text-white">
+          <div className="text-5xl font-bold text-white pb-2">
             <NumberFlow
               value={results.finalAmount}
               format={{
@@ -351,6 +427,10 @@ export default function InvestmentCalculator() {
               }}
             />
           </div>
+          <Button variant="outline" onClick={handleShare} className="self-end">
+            <Copy className="w-4 h-4 mr-1" />
+            Compartilhar resultados
+          </Button>
         </div>
       </div>
     </div>
