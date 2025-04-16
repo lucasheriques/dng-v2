@@ -7,7 +7,7 @@ describe("calculateInvestmentResults", () => {
       initialDeposit: 10000,
       monthlyContribution: 500,
       period: 10, // years
-      periodType: "anos",
+      periodType: "years",
       interestRate: 5, // 5%
     });
 
@@ -23,7 +23,7 @@ describe("calculateInvestmentResults", () => {
       initialDeposit: 5000,
       monthlyContribution: 200,
       period: 24, // months
-      periodType: "meses",
+      periodType: "months",
       interestRate: 6, // 6%
     });
 
@@ -39,7 +39,7 @@ describe("calculateInvestmentResults", () => {
       initialDeposit: 0,
       monthlyContribution: 1000,
       period: 5, // years
-      periodType: "anos",
+      periodType: "years",
       interestRate: 7,
     });
 
@@ -55,7 +55,7 @@ describe("calculateInvestmentResults", () => {
       initialDeposit: 20000,
       monthlyContribution: 0,
       period: 15, // years
-      periodType: "anos",
+      periodType: "years",
       interestRate: 4,
     });
 
@@ -71,7 +71,7 @@ describe("calculateInvestmentResults", () => {
       initialDeposit: 10000,
       monthlyContribution: 500,
       period: 10, // years
-      periodType: "anos",
+      periodType: "years",
       interestRate: 0,
     });
 
@@ -86,7 +86,7 @@ describe("calculateInvestmentResults", () => {
       initialDeposit: 10000,
       monthlyContribution: 1000,
       period: 10,
-      periodType: "anos",
+      periodType: "years",
       interestRate: 5.5,
     });
 
@@ -115,7 +115,7 @@ describe("calculateInvestmentResults", () => {
       initialDeposit: 0,
       monthlyContribution: 0,
       period: 0,
-      periodType: "anos",
+      periodType: "years",
       interestRate: 5,
     });
 
