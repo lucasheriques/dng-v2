@@ -2,7 +2,7 @@ export interface InvestmentCalculatorData {
   initialDeposit: number;
   monthlyContribution: number;
   period: number;
-  periodType: string;
+  periodType: "months" | "years";
   interestRate: number;
 }
 

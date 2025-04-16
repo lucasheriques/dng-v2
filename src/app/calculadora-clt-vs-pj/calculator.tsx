@@ -9,10 +9,11 @@ import {
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { formatCurrency } from "@/lib/utils"; // Import formatCurrency
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import { Share2 } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { CalculationResults, CalculatorFormData } from "./types";
 
@@ -89,6 +90,15 @@ const safeParseBoolean = (
 ): boolean => {
   if (typeof value !== "string") return defaultValue;
   return value === "1" ? true : value === "0" ? false : defaultValue;
+};
+
+// Helper to get param value, needed for renderHistoryItem
+const getParamValue = (
+  params: URLSearchParams,
+  key: string,
+  defaultValue: string = ""
+): string => {
+  return params.get(key) ?? defaultValue;
 };
 
 export function SalaryCalculatorClient({
@@ -241,6 +251,20 @@ export function SalaryCalculatorClient({
     window.history.replaceState({}, "", url.toString());
   };
 
+  // Function to render history items for Salary Calculator
+  const renderSalaryHistoryItem = useCallback(
+    (paramString: string) => {
+      const params = new URLSearchParams(paramString);
+      const cltGrossDisplay = getParamValue(params, "gs", "0");
+      const pjGrossDisplay = getParamValue(params, "pjs") || cltGrossDisplay;
+      return {
+        title: `CLT: ${formatCurrency(Number(cltGrossDisplay) || 0)}`,
+        subtitle: `PJ: ${formatCurrency(Number(pjGrossDisplay) || 0)}`,
+      };
+    },
+    [] // No dependencies needed as it only uses formatCurrency and getParamValue
+  );
+
   return (
     <>
       <div className="grid gap-4">
@@ -272,6 +296,7 @@ export function SalaryCalculatorClient({
         <RecentComparisons
           historyItems={history}
           onLoadHistory={handleLoadHistory}
+          renderHistoryItem={renderSalaryHistoryItem} // Pass the render function
         />
 
         <div className="grid md:grid-cols-2 gap-8">

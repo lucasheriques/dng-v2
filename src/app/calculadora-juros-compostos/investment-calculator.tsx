@@ -20,18 +20,48 @@ import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
 import { Copy } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Payload } from "recharts/types/component/DefaultLegendContent";
+import { useLocalStorage } from "usehooks-ts";
 import { ChartData, InvestmentCalculatorData } from "./types";
+
+// Dynamically import RecentComparisons
+const RecentComparisons = dynamic(
+  () => import("@/app/calculadora-clt-vs-pj/components/recent-comparisons"),
+  {
+    ssr: false,
+  }
+);
 
 // Default values (can be moved or duplicated if compression.ts is removed)
 const defaultValues: InvestmentCalculatorData = {
   initialDeposit: 10000,
   monthlyContribution: 1000,
   period: 10,
-  periodType: "anos",
+  periodType: "years",
   interestRate: 5.5,
+};
+
+// Helper functions for parsing (needed for loading history)
+const safeParseNumber = (
+  value: string | null | undefined,
+  defaultValue: number
+): number => {
+  if (value === null || value === undefined) return defaultValue;
+  const num = Number(value);
+  return isNaN(num) ? defaultValue : num;
+};
+
+const safeParsePeriodType = (
+  value: string | null | undefined,
+  defaultValue: "months" | "years"
+): "months" | "years" => {
+  if (value === "months" || value === "years") {
+    return value;
+  }
+  return defaultValue;
 };
 
 // Component Props Interface
@@ -70,11 +100,17 @@ export default function InvestmentCalculator({
   const [period, setPeriod] = useState(
     initialData?.period ?? defaultValues.period
   );
-  const [periodType, setPeriodType] = useState(
+  const [periodType, setPeriodType] = useState<"months" | "years">(
     initialData?.periodType ?? defaultValues.periodType
   );
   const [interestRate, setInterestRate] = useState(
     initialData?.interestRate ?? defaultValues.interestRate
+  );
+
+  // Use localStorage to store an array of parameter strings
+  const [history, setHistory] = useLocalStorage<string[]>(
+    "investment-calculator-history",
+    []
   );
 
   // Debounced state for calculation inputs
@@ -114,6 +150,15 @@ export default function InvestmentCalculator({
   const { interestPercent, contributionsPercent, initialDepositPercent } =
     results;
 
+  // Helper to get param value, needed for renderHistoryItem
+  const getParamValue = (
+    params: URLSearchParams,
+    key: string,
+    defaultValue: string = ""
+  ): string => {
+    return params.get(key) ?? defaultValue;
+  };
+
   // Share function
   const handleShare = () => {
     const params = new URLSearchParams();
@@ -140,6 +185,18 @@ export default function InvestmentCalculator({
 
     window.history.replaceState({}, "", url.toString());
 
+    // Update history in localStorage
+    const paramString = params.toString();
+
+    // Check if the item already exists in history
+    if (!history.includes(paramString)) {
+      const newHistory = [
+        paramString,
+        ...history, // Add existing history after the new item
+      ].slice(0, 6); // Keep last 5 entries
+      setHistory(newHistory);
+    }
+
     navigator.clipboard
       .writeText(url.toString())
       .then(() => {
@@ -159,8 +216,61 @@ export default function InvestmentCalculator({
       });
   };
 
+  // Function to load state from history
+  const handleLoadHistory = (paramString: string) => {
+    const searchParams = new URLSearchParams(paramString);
+
+    setInitialDeposit(
+      safeParseNumber(searchParams.get("i"), defaultValues.initialDeposit)
+    );
+    setMonthlyContribution(
+      safeParseNumber(searchParams.get("m"), defaultValues.monthlyContribution)
+    );
+    setPeriod(safeParseNumber(searchParams.get("p"), defaultValues.period));
+    setPeriodType(
+      safeParsePeriodType(searchParams.get("pt"), defaultValues.periodType)
+    );
+    setInterestRate(
+      safeParseNumber(searchParams.get("r"), defaultValues.interestRate)
+    );
+
+    // Also update the URL bar to reflect the loaded state
+    const url = new URL(window.location.pathname, window.location.origin);
+    url.search = paramString;
+    window.history.replaceState({}, "", url.toString());
+  };
+
+  // Function to render history items for Investment Calculator
+  const renderInvestmentHistoryItem = useCallback((paramString: string) => {
+    const params = new URLSearchParams(paramString);
+    const initial = getParamValue(
+      params,
+      "i",
+      String(defaultValues.initialDeposit)
+    );
+    const monthly = getParamValue(
+      params,
+      "m",
+      String(defaultValues.monthlyContribution)
+    );
+    const periodVal = getParamValue(params, "p", String(defaultValues.period));
+    const periodT = getParamValue(params, "pt", defaultValues.periodType);
+
+    return {
+      title: `Inicial: ${formatCurrency(Number(initial) || 0)} / Mensal: ${formatCurrency(Number(monthly) || 0)}`,
+      subtitle: `Período: ${periodVal} ${periodT === "years" ? "anos" : "meses"}`,
+    };
+  }, []);
+
   return (
     <div className="flex flex-col gap-8">
+      {/* Add Recent Comparisons Section */}
+      <RecentComparisons
+        historyItems={history}
+        onLoadHistory={handleLoadHistory}
+        renderHistoryItem={renderInvestmentHistoryItem}
+      />
+
       <div className="border border-slate-700 rounded-lg overflow-hidden bg-slate-900/50">
         <TableHeader>Configurações</TableHeader>
         <TableRow label="Depósito inicial" inputId="initial-deposit-input">
@@ -193,17 +303,17 @@ export default function InvestmentCalculator({
               />
             </div>
             <Tabs
-              defaultValue="anos"
+              defaultValue="years"
               value={periodType}
-              onValueChange={setPeriodType}
+              onValueChange={(v) => setPeriodType(v as "months" | "years")}
               className="p-2"
             >
               <TabsList className="grid w-full grid-cols-2 bg-slate-800 text-slate-300 h-8">
-                <TabsTrigger value="meses" className="text-xs p-1">
-                  Meses
+                <TabsTrigger value="months" className="text-xs p-1">
+                  Months
                 </TabsTrigger>
-                <TabsTrigger value="anos" className="text-xs p-1">
-                  Anos
+                <TabsTrigger value="years" className="text-xs p-1">
+                  Years
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -434,8 +544,10 @@ export default function InvestmentCalculator({
 
         {/* Second row: Total savings */}
         <div className="text-right">
-          <h3 className="text-lg font-medium">Seu montante final</h3>
-          <div className="text-5xl font-bold text-white pb-2">
+          <h3 className="text-base sm:text-lg font-medium">
+            Seu montante final
+          </h3>
+          <div className="text-xl sm:text-5xl font-bold text-white pb-2">
             <NumberFlow
               value={results.finalAmount}
               format={{

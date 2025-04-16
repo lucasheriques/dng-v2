@@ -9,7 +9,7 @@ const defaultValues: InvestmentCalculatorData = {
   initialDeposit: 10000,
   monthlyContribution: 1000,
   period: 10,
-  periodType: "anos",
+  periodType: "years",
   interestRate: 5.5,
 };
 
@@ -56,7 +56,7 @@ export async function generateMetadata({
     ogUrl.searchParams.set("p", String(period));
   }
   if (
-    (periodType === "meses" || periodType === "anos") &&
+    (periodType === "months" || periodType === "years") &&
     periodType !== defaultValues.periodType
   ) {
     ogUrl.searchParams.set("pt", periodType);
@@ -116,7 +116,7 @@ export default function CalculadoraJurosCompostosPage({
   if (
     searchParams?.pt &&
     typeof searchParams.pt === "string" &&
-    (searchParams.pt === "meses" || searchParams.pt === "anos") // Validate periodType
+    (searchParams.pt === "months" || searchParams.pt === "years") // Validate periodType
   ) {
     initialData.periodType = searchParams.pt;
   }
@@ -125,7 +125,7 @@ export default function CalculadoraJurosCompostosPage({
   }
 
   return (
-    <PageWrapper className="flex flex-col gap-8 md:gap-16">
+    <PageWrapper className="flex flex-col gap-4 md:gap-8">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl md:text-4xl font-bold">
           Calculadora de Juros Compostos

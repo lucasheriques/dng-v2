@@ -1,11 +1,7 @@
-import { InvestmentCalculatorData } from "@/app/calculadora-juros-compostos/types";
-
-interface ChartData {
-  month: number;
-  initialDeposit: number;
-  contributions: number;
-  interest: number;
-}
+import {
+  ChartData,
+  InvestmentCalculatorData,
+} from "@/app/calculadora-juros-compostos/types";
 
 export const calculateInvestmentResults = ({
   initialDeposit,
@@ -14,7 +10,7 @@ export const calculateInvestmentResults = ({
   periodType,
   interestRate,
 }: InvestmentCalculatorData) => {
-  const months = periodType === "anos" ? period * 12 : period;
+  const months = periodType === "years" ? period * 12 : period;
   let currentAmount = initialDeposit;
   let totalContributions = 0; // Tracks only monthly contributions
   let totalInterest = 0;
