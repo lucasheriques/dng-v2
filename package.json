@@ -69,7 +69,7 @@
     "nuqs": "^2.1.1",
     "pako": "^2.1.0",
     "pdf-parse": "^1.1.1",
-    "posthog-js": "file:../posthog-js",
+    "posthog-js": "^1.236.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-intersection-observer": "^9.13.1",
