@@ -129,7 +129,7 @@ export default function InvestmentCalculator() {
               onValueChange={setPeriodType}
               className="w-[160px] p-2"
             >
-              <TabsList className="grid w-full grid-cols-2 h-10 bg-slate-800">
+              <TabsList className="grid w-full grid-cols-2 h-10 bg-slate-800 text-slate-300">
                 <TabsTrigger value="meses">Meses</TabsTrigger>
                 <TabsTrigger value="anos">Anos</TabsTrigger>
               </TabsList>
@@ -150,9 +150,9 @@ export default function InvestmentCalculator() {
       {/* Results on the right */}
       <div className="space-y-6">
         {/* First row: Chart and Breakdown side by side */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="flex flex-col sm:flex-row gap-4">
           {/* Chart */}
-          <div>
+          <div className="flex-1">
             <h2 className="text-xl font-bold mb-4 text-slate-100">
               Composição do investimento:
             </h2>
@@ -161,6 +161,7 @@ export default function InvestmentCalculator() {
                 <BarChart
                   data={results.chartData}
                   margin={{ top: 10, right: 10, left: 10, bottom: 5 }}
+                  maxBarSize={128}
                 >
                   <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
                   <XAxis tick={false} axisLine={{ stroke: "#475569" }} />
@@ -235,7 +236,7 @@ export default function InvestmentCalculator() {
           </div>
 
           {/* Breakdown */}
-          <div>
+          <div className="flex-1 ">
             <h2 className="text-xl font-bold mb-4 text-slate-100">
               Detalhamento:
             </h2>
