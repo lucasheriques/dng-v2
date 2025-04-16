@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { SOCIALS } from "@/lib/constants";
 import { ArrowRight, Rocket } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
@@ -9,11 +9,11 @@ import Stats from "@/app/components/stats";
 import { cn } from "@/lib/utils";
 
 // Company logos
-import AmazonLogo from "@public/logos/amazon.svg";
-import GoogleLogo from "@public/logos/google.svg";
-import MicrosoftLogo from "@public/logos/microsoft.svg";
-import NubankLogo from "@public/logos/nubank.svg";
-import PosthogLogo from "@public/logos/posthog.svg";
+// import AmazonLogo from "@public/logos/amazon.svg";
+// import GoogleLogo from "@public/logos/google.svg";
+// import MicrosoftLogo from "@public/logos/microsoft.svg";
+// import NubankLogo from "@public/logos/nubank.svg";
+// import PosthogLogo from "@public/logos/posthog.svg";
 
 type Props = {
   text: string;
@@ -35,37 +35,37 @@ function AnimatedText({ text, className = "" }: Props) {
   );
 }
 
-const companies = [
-  { name: "Nubank", logo: NubankLogo },
-  { name: "Google", logo: GoogleLogo },
-  { name: "Microsoft", logo: MicrosoftLogo },
-  { name: "Amazon", logo: AmazonLogo },
-  { name: "PostHog", logo: PosthogLogo },
-];
+// const companies = [
+//   { name: "Nubank", logo: NubankLogo },
+//   { name: "Google", logo: GoogleLogo },
+//   { name: "Microsoft", logo: MicrosoftLogo },
+//   { name: "Amazon", logo: AmazonLogo },
+//   { name: "PostHog", logo: PosthogLogo },
+// ];
 
-function CompanyLogos() {
-  return (
-    <div className="w-full motion-preset-fade motion-preset-slide-up motion-duration-300 motion-delay-[1.5s]">
-      <p className="text-sm text-slate-400 mb-4">
-        Nossos leitores trabalham em empresas como:
-      </p>
-      <div className="flex flex-wrap items-center gap-x-8 gap-y-6 justify-center sm:justify-start">
-        {companies.map((company) => (
-          <div key={company.name} className="relative h-7 w-[120px] ">
-            <Image
-              src={company.logo}
-              alt={`${company.name} logo`}
-              fill
-              className="object-contain object-left"
-              sizes="120px"
-              priority
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+// function CompanyLogos() {
+//   return (
+//     <div className="w-full motion-preset-fade motion-preset-slide-up motion-duration-300 motion-delay-[1.5s]">
+//       <p className="text-sm text-slate-400 mb-4">
+//         Nossos leitores trabalham em empresas como:
+//       </p>
+//       <div className="flex flex-wrap items-center gap-x-8 gap-y-6 justify-center sm:justify-start">
+//         {companies.map((company) => (
+//           <div key={company.name} className="relative h-7 w-[120px] ">
+//             <Image
+//               src={company.logo}
+//               alt={`${company.name} logo`}
+//               fill
+//               className="object-contain object-left"
+//               sizes="120px"
+//               priority
+//             />
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
 
 export default async function Hero() {
   return (
