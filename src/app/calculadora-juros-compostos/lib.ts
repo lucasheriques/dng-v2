@@ -47,9 +47,12 @@ export const calculateInvestmentResults = ({
     } else if (months <= 1200) {
       // Record yearly for medium durations (> 3 years and <= 100 years)
       shouldRecord = i % 12 === 0 || i === months;
-    } else {
-      // Record every 10 years for long durations (> 100 years)
+    } else if (months <= 4800) {
+      // Record every 10 years for long durations (> 100 years and <= 400 years)
       shouldRecord = i % 120 === 0 || i === months;
+    } else {
+      // Record every 50 years for very long durations (> 400 years)
+      shouldRecord = i % 600 === 0 || i === months;
     }
 
     if (shouldRecord) {
