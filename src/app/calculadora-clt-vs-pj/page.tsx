@@ -3,68 +3,14 @@ import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
 import { Metadata } from "next";
 import { SalaryCalculatorClient } from "./calculator";
-
-const defaultFormData: CalculatorFormData = {
-  grossSalary: "",
-  pjGrossSalary: "",
-  mealAllowance: "",
-  transportAllowance: "",
-  healthInsurance: "",
-  otherBenefits: "",
-  includeFGTS: true,
-  yearsAtCompany: "",
-  accountingFee: "189",
-  inssContribution: String(1412 * 0.11),
-  taxRate: "10",
-  otherExpenses: "",
-  taxableBenefits: "",
-  nonTaxableBenefits: "",
-  plr: "",
-};
-
-const paramMap: { [K in keyof CalculatorFormData]?: string } = {
-  grossSalary: "gs",
-  pjGrossSalary: "pjs",
-  mealAllowance: "ma",
-  transportAllowance: "ta",
-  healthInsurance: "hi",
-  otherBenefits: "ob",
-  includeFGTS: "fgts",
-  yearsAtCompany: "yc",
-  accountingFee: "af",
-  inssContribution: "inss",
-  taxRate: "tr",
-  otherExpenses: "oe",
-  taxableBenefits: "tb",
-  nonTaxableBenefits: "nb",
-  plr: "plr",
-};
-
-const reverseParamMap: { [key: string]: keyof CalculatorFormData } = {};
-for (const key in paramMap) {
-  const formKey = key as keyof CalculatorFormData;
-  const shortKey = paramMap[formKey];
-  if (shortKey) {
-    reverseParamMap[shortKey] = formKey;
-  }
-}
+import {
+  defaultFormData,
+  reverseParamMap,
+  safeParseBoolean,
+  safeParseNumberString,
+} from "./types";
 
 const SELIC_RATE = 12.25;
-
-const safeParseString = (
-  value: string | string[] | undefined,
-  defaultValue: string
-): string => {
-  return typeof value === "string" ? value : defaultValue;
-};
-
-const safeParseBoolean = (
-  value: string | string[] | undefined,
-  defaultValue: boolean
-): boolean => {
-  if (typeof value !== "string") return defaultValue;
-  return value === "1" ? true : value === "0" ? false : defaultValue;
-};
 
 export async function generateMetadata({
   searchParams,
@@ -86,7 +32,10 @@ export async function generateMetadata({
           ogUrl.searchParams.set(shortKey, boolValue ? "1" : "0");
         }
       } else {
-        const stringValue = safeParseString(value, defaultValue as string);
+        const stringValue = safeParseNumberString(
+          value,
+          defaultValue as string
+        );
         if (stringValue !== defaultValue && stringValue !== "") {
           ogUrl.searchParams.set(shortKey, stringValue);
         }
@@ -128,13 +77,15 @@ export async function generateMetadata({
 export default async function SalaryCalculatorPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const initialData: CalculatorFormData = { ...defaultFormData };
 
+  const params = await searchParams;
+
   for (const shortKey in reverseParamMap) {
     const formKey = reverseParamMap[shortKey];
-    const value = searchParams[shortKey];
+    const value = params[shortKey];
 
     if (value !== undefined) {
       if (formKey === "includeFGTS") {
@@ -143,7 +94,10 @@ export default async function SalaryCalculatorPage({
           defaultFormData[formKey]
         );
       } else {
-        const stringValue = safeParseString(value, "");
+        const stringValue = safeParseNumberString(
+          value,
+          defaultFormData[formKey] as string
+        );
         if (stringValue !== "") {
           initialData[formKey] = stringValue;
         }

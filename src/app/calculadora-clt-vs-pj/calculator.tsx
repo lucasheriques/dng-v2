@@ -15,7 +15,15 @@ import { Share2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import { CalculationResults, CalculatorFormData } from "./types";
+import {
+  CalculationResults,
+  CalculatorFormData,
+  defaultFormData,
+  paramMap,
+  reverseParamMap,
+  safeParseBoolean,
+  safeParseNumberString,
+} from "./types";
 
 const RecentComparisons = dynamic(
   () => import("@/app/calculadora-clt-vs-pj/components/recent-comparisons"),
@@ -28,69 +36,6 @@ interface SalaryCalculatorProps {
   initialData?: CalculatorFormData;
   defaultInterestRate: number;
 }
-
-const defaultFormData: CalculatorFormData = {
-  grossSalary: "",
-  pjGrossSalary: "",
-  mealAllowance: "",
-  transportAllowance: "",
-  healthInsurance: "",
-  otherBenefits: "",
-  includeFGTS: true,
-  yearsAtCompany: "",
-  accountingFee: "189",
-  inssContribution: String(1412 * 0.11),
-  taxRate: "10",
-  otherExpenses: "",
-  taxableBenefits: "",
-  nonTaxableBenefits: "",
-  plr: "",
-};
-
-// Mapping from formData keys to URL short keys
-const paramMap: { [K in keyof CalculatorFormData]?: string } = {
-  grossSalary: "gs",
-  pjGrossSalary: "pjs",
-  mealAllowance: "ma",
-  transportAllowance: "ta",
-  healthInsurance: "hi",
-  otherBenefits: "ob",
-  includeFGTS: "fgts",
-  yearsAtCompany: "yc",
-  accountingFee: "af",
-  inssContribution: "inss",
-  taxRate: "tr",
-  otherExpenses: "oe",
-  taxableBenefits: "tb",
-  nonTaxableBenefits: "nb",
-  plr: "plr",
-};
-
-// Reverse map needed for loading history
-const reverseParamMap: { [key: string]: keyof CalculatorFormData } = {};
-for (const key in paramMap) {
-  const formKey = key as keyof CalculatorFormData;
-  const shortKey = paramMap[formKey];
-  if (shortKey) {
-    reverseParamMap[shortKey] = formKey;
-  }
-}
-
-// Helper functions for parsing (needed for loading history)
-const safeParseString = (
-  value: string | null | undefined,
-  defaultValue: string
-): string => {
-  return typeof value === "string" ? value : defaultValue;
-};
-
-const safeParseBoolean = (
-  value: string | null | undefined,
-  defaultValue: boolean
-): boolean => {
-  if (typeof value !== "string") return defaultValue;
-  return value === "1" ? true : value === "0" ? false : defaultValue;
-};
 
 // Helper to get param value, needed for renderHistoryItem
 const getParamValue = (
@@ -212,22 +157,18 @@ export function SalaryCalculatorClient({
 
       if (value !== null) {
         if (formKey === "includeFGTS") {
+          // Use imported helper
           loadedData.includeFGTS = safeParseBoolean(
             value,
             defaultFormData.includeFGTS
           );
         } else {
-          // For all other keys, which are strings in CalculatorFormData
-          const stringValue = safeParseString(value, "");
-          const defaultValue = defaultFormData[formKey] as string;
-
-          if (stringValue !== "" || defaultValue === "") {
-            // Assign string value to the corresponding key in loadedData
-            // TypeScript knows formKey corresponds to a string key here because we excluded 'includeFGTS'
-            loadedData[formKey] = stringValue;
-          } else {
-            loadedData[formKey] = defaultValue;
-          }
+          // Use imported helper
+          const stringValue = safeParseNumberString(
+            value,
+            defaultFormData[formKey] as string
+          );
+          loadedData[formKey] = stringValue;
         }
       }
       // No else needed: if value is null, the default from the initial spread is kept.
@@ -323,7 +264,12 @@ export function SalaryCalculatorClient({
             <TableRow label="Salário Bruto Mensal">
               <TableInput
                 value={formData.grossSalary}
-                onChange={(v) => handleInputChange("grossSalary", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "grossSalary",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 required
                 prefix="R$"
                 placeholder={
@@ -338,21 +284,36 @@ export function SalaryCalculatorClient({
             <TableRow label="Vale Refeição/Alimentação">
               <TableInput
                 value={formData.mealAllowance}
-                onChange={(v) => handleInputChange("mealAllowance", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "mealAllowance",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 prefix="R$"
               />
             </TableRow>
             <TableRow label="Vale-Transporte">
               <TableInput
                 value={formData.transportAllowance}
-                onChange={(v) => handleInputChange("transportAllowance", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "transportAllowance",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 prefix="R$"
               />
             </TableRow>
             <TableRow label="Plano de Saúde">
               <TableInput
                 value={formData.healthInsurance}
-                onChange={(v) => handleInputChange("healthInsurance", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "healthInsurance",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 prefix="R$"
               />
             </TableRow>
@@ -362,7 +323,9 @@ export function SalaryCalculatorClient({
             >
               <TableInput
                 value={formData.plr}
-                onChange={(v) => handleInputChange("plr", v)}
+                onChange={(v) =>
+                  handleInputChange("plr", typeof v === "string" ? v : "")
+                }
                 prefix="R$"
               />
             </TableRow>
@@ -372,7 +335,12 @@ export function SalaryCalculatorClient({
             >
               <TableInput
                 value={formData.otherBenefits}
-                onChange={(v) => handleInputChange("otherBenefits", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "otherBenefits",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 prefix="R$"
               />
             </TableRow>
@@ -384,7 +352,12 @@ export function SalaryCalculatorClient({
             >
               <TableInput
                 value={formData.yearsAtCompany}
-                onChange={(v) => handleInputChange("yearsAtCompany", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "yearsAtCompany",
+                    typeof v === "string" ? v : ""
+                  )
+                }
               />
             </TableRow>
 
@@ -404,7 +377,12 @@ export function SalaryCalculatorClient({
             <TableRow label="Salário Bruto Mensal">
               <TableInput
                 value={formData.pjGrossSalary}
-                onChange={(v) => handleInputChange("pjGrossSalary", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "pjGrossSalary",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 placeholder={
                   formData.grossSalary === ""
                     ? ""
@@ -421,7 +399,12 @@ export function SalaryCalculatorClient({
             >
               <TableInput
                 value={formData.accountingFee}
-                onChange={(v) => handleInputChange("accountingFee", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "accountingFee",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 prefix="R$"
               />
             </TableRow>
@@ -431,7 +414,12 @@ export function SalaryCalculatorClient({
             >
               <TableInput
                 value={formData.inssContribution}
-                onChange={(v) => handleInputChange("inssContribution", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "inssContribution",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 prefix="R$"
               />
             </TableRow>
@@ -443,14 +431,21 @@ export function SalaryCalculatorClient({
             >
               <TableInput
                 value={formData.taxRate}
-                onChange={(v) => handleInputChange("taxRate", v)}
+                onChange={(v) =>
+                  handleInputChange("taxRate", typeof v === "string" ? v : "")
+                }
                 prefix="%"
               />
             </TableRow>
             <TableRow label="Outras Despesas">
               <TableInput
                 value={formData.otherExpenses}
-                onChange={(v) => handleInputChange("otherExpenses", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "otherExpenses",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 prefix="R$"
               />
             </TableRow>
@@ -462,7 +457,12 @@ export function SalaryCalculatorClient({
             >
               <TableInput
                 value={formData.taxableBenefits}
-                onChange={(v) => handleInputChange("taxableBenefits", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "taxableBenefits",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 prefix="R$"
               />
             </TableRow>
@@ -472,7 +472,12 @@ export function SalaryCalculatorClient({
             >
               <TableInput
                 value={formData.nonTaxableBenefits}
-                onChange={(v) => handleInputChange("nonTaxableBenefits", v)}
+                onChange={(v) =>
+                  handleInputChange(
+                    "nonTaxableBenefits",
+                    typeof v === "string" ? v : ""
+                  )
+                }
                 prefix="R$"
               />
             </TableRow>

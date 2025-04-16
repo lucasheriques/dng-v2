@@ -298,8 +298,10 @@ export default function InvestmentCalculator({
             <div className="flex-1">
               <TableInput
                 id="period-input"
-                value={String(period)}
+                value={period}
                 onChange={(v) => setPeriod(Number(v) || 0)}
+                min={1}
+                max={100}
               />
             </div>
             <Tabs
@@ -308,12 +310,12 @@ export default function InvestmentCalculator({
               onValueChange={(v) => setPeriodType(v as "months" | "years")}
               className="p-2"
             >
-              <TabsList className="grid w-full grid-cols-2 bg-slate-800 text-slate-300 h-8">
-                <TabsTrigger value="months" className="text-xs p-1">
-                  Months
+              <TabsList className="bg-slate-800 text-slate-300">
+                <TabsTrigger value="months" className="text-sm py-1 px-2">
+                  Meses
                 </TabsTrigger>
-                <TabsTrigger value="years" className="text-xs p-1">
-                  Years
+                <TabsTrigger value="years" className="text-sm py-1 px-2">
+                  Anos
                 </TabsTrigger>
               </TabsList>
             </Tabs>

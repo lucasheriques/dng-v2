@@ -96,32 +96,34 @@ export async function generateMetadata({
   };
 }
 
-export default function CalculadoraJurosCompostosPage({
+export default async function CalculadoraJurosCompostosPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   // Parse initial data from searchParams for the client component
   // Use Partial and only include values present in searchParams
+
+  const params = await searchParams;
   const initialData: Partial<InvestmentCalculatorData> = {};
-  if (searchParams?.i && !isNaN(Number(searchParams.i))) {
-    initialData.initialDeposit = Number(searchParams.i);
+  if (params?.i && !isNaN(Number(params.i))) {
+    initialData.initialDeposit = Number(params.i);
   }
-  if (searchParams?.m && !isNaN(Number(searchParams.m))) {
-    initialData.monthlyContribution = Number(searchParams.m);
+  if (params?.m && !isNaN(Number(params.m))) {
+    initialData.monthlyContribution = Number(params.m);
   }
-  if (searchParams?.p && !isNaN(Number(searchParams.p))) {
-    initialData.period = Number(searchParams.p);
+  if (params?.p && !isNaN(Number(params.p))) {
+    initialData.period = Number(params.p);
   }
   if (
-    searchParams?.pt &&
-    typeof searchParams.pt === "string" &&
-    (searchParams.pt === "months" || searchParams.pt === "years") // Validate periodType
+    params?.pt &&
+    typeof params.pt === "string" &&
+    (params.pt === "months" || params.pt === "years") // Validate periodType
   ) {
-    initialData.periodType = searchParams.pt;
+    initialData.periodType = params.pt;
   }
-  if (searchParams?.r && !isNaN(Number(searchParams.r))) {
-    initialData.interestRate = Number(searchParams.r);
+  if (params?.r && !isNaN(Number(params.r))) {
+    initialData.interestRate = Number(params.r);
   }
 
   return (
