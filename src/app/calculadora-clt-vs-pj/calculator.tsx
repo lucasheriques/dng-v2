@@ -15,23 +15,17 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { CalculationResults, CalculatorFormData } from "./types";
-import { compress } from "./utils";
 
 const RecentComparisons = dynamic(
-  () =>
-    import("./components/recent-comparisons").then(
-      (mod) => mod.RecentComparisons
-    ),
-  { ssr: false }
+  () => import("@/app/calculadora-clt-vs-pj/components/recent-comparisons"),
+  {
+    ssr: false,
+  }
 );
 
 interface SalaryCalculatorProps {
   initialData?: CalculatorFormData;
   defaultInterestRate: number;
-}
-
-interface CalculatorHistory {
-  hashes: string[];
 }
 
 const defaultFormData: CalculatorFormData = {
@@ -52,6 +46,51 @@ const defaultFormData: CalculatorFormData = {
   plr: "",
 };
 
+// Mapping from formData keys to URL short keys
+const paramMap: { [K in keyof CalculatorFormData]?: string } = {
+  grossSalary: "gs",
+  pjGrossSalary: "pjs",
+  mealAllowance: "ma",
+  transportAllowance: "ta",
+  healthInsurance: "hi",
+  otherBenefits: "ob",
+  includeFGTS: "fgts",
+  yearsAtCompany: "yc",
+  accountingFee: "af",
+  inssContribution: "inss",
+  taxRate: "tr",
+  otherExpenses: "oe",
+  taxableBenefits: "tb",
+  nonTaxableBenefits: "nb",
+  plr: "plr",
+};
+
+// Reverse map needed for loading history
+const reverseParamMap: { [key: string]: keyof CalculatorFormData } = {};
+for (const key in paramMap) {
+  const formKey = key as keyof CalculatorFormData;
+  const shortKey = paramMap[formKey];
+  if (shortKey) {
+    reverseParamMap[shortKey] = formKey;
+  }
+}
+
+// Helper functions for parsing (needed for loading history)
+const safeParseString = (
+  value: string | null | undefined,
+  defaultValue: string
+): string => {
+  return typeof value === "string" ? value : defaultValue;
+};
+
+const safeParseBoolean = (
+  value: string | null | undefined,
+  defaultValue: boolean
+): boolean => {
+  if (typeof value !== "string") return defaultValue;
+  return value === "1" ? true : value === "0" ? false : defaultValue;
+};
+
 export function SalaryCalculatorClient({
   initialData,
   defaultInterestRate,
@@ -65,11 +104,11 @@ export function SalaryCalculatorClient({
   );
   const [isDetailsExpanded, setIsDetailsExpanded] = useState(true);
   const [shareButtonText, setShareButtonText] = useState("Compartilhar");
-  const [history, setHistory] = useLocalStorage<CalculatorHistory>(
-    "calculator-history",
-    {
-      hashes: [],
-    }
+
+  // Use localStorage to store an array of parameter strings
+  const [history, setHistory] = useLocalStorage<string[]>(
+    "calculator-clt-pj-history",
+    []
   );
 
   const handleFGTSChange = (value: boolean) => {
@@ -95,39 +134,111 @@ export function SalaryCalculatorClient({
   };
 
   const handleShare = async () => {
-    const hash = compress(formData);
+    const params = new URLSearchParams();
 
-    const newHashes = [hash, ...history.hashes.filter((h) => h !== hash)].slice(
-      0,
-      3
-    );
-    setHistory({ hashes: newHashes });
+    // Iterate over formData and add non-default values to params
+    for (const key in formData) {
+      const formKey = key as keyof CalculatorFormData;
+      const shortKey = paramMap[formKey];
+      const value = formData[formKey];
+      const defaultValue = defaultFormData[formKey];
 
-    const url = new URL(window.location.href);
-    url.searchParams.set("d", hash);
+      if (shortKey && value !== defaultValue) {
+        if (typeof value === "boolean") {
+          params.set(shortKey, value ? "1" : "0");
+        } else if (value !== "") {
+          // Only add non-empty strings
+          params.set(shortKey, String(value));
+        }
+      }
+    }
+
+    const paramString = params.toString();
+    const url = new URL(window.location.pathname, window.location.origin);
+    url.search = paramString;
+
+    // Update history in localStorage
+    const newHistory = [
+      paramString,
+      ...history.filter((h) => h !== paramString), // Remove duplicates
+    ].slice(0, 5); // Keep last 5 entries
+    setHistory(newHistory);
 
     window.history.replaceState({}, "", url.toString());
 
-    await navigator.clipboard.writeText(url.toString());
-
-    setShareButtonText("URL copiada!");
-    setTimeout(() => {
-      setShareButtonText("Compartilhar");
-    }, 3000);
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      setShareButtonText("URL copiada!");
+      setTimeout(() => {
+        setShareButtonText("Compartilhar");
+      }, 3000);
+    } catch (err) {
+      console.error("Failed to copy URL: ", err);
+      // Add user feedback here if desired (e.g., using a toast notification)
+      setShareButtonText("Erro ao copiar");
+      setTimeout(() => {
+        setShareButtonText("Compartilhar");
+      }, 3000);
+    }
   };
 
   const handleClear = () => {
     setFormData(defaultFormData);
     setResults(null);
-    // Remove query param and update URL
-    const url = new URL(window.location.href);
-    url.searchParams.delete("d");
+    // Remove query params and update URL
+    const url = new URL(window.location.pathname, window.location.origin); // Use pathname and origin
+    url.search = ""; // Clear search params
     window.history.replaceState({}, "", url.toString());
   };
 
-  const handleLoadHistory = (data: CalculatorFormData) => {
-    setFormData(data);
-    setResults(calculateResults(data));
+  // Re-add handleLoadHistory - takes the param string
+  const handleLoadHistory = (paramString: string) => {
+    const searchParams = new URLSearchParams(paramString);
+    const loadedData: CalculatorFormData = { ...defaultFormData };
+
+    for (const shortKey in reverseParamMap) {
+      const formKey = reverseParamMap[shortKey];
+      const value = searchParams.get(shortKey);
+
+      if (value !== null) {
+        if (formKey === "includeFGTS") {
+          loadedData.includeFGTS = safeParseBoolean(
+            value,
+            defaultFormData.includeFGTS
+          );
+        } else {
+          // For all other keys, which are strings in CalculatorFormData
+          const stringValue = safeParseString(value, "");
+          const defaultValue = defaultFormData[formKey] as string;
+
+          if (stringValue !== "" || defaultValue === "") {
+            // Assign string value to the corresponding key in loadedData
+            // TypeScript knows formKey corresponds to a string key here because we excluded 'includeFGTS'
+            loadedData[formKey] = stringValue;
+          } else {
+            loadedData[formKey] = defaultValue;
+          }
+        }
+      }
+      // No else needed: if value is null, the default from the initial spread is kept.
+    }
+
+    setFormData(loadedData);
+    // Ensure calculateResults handles potential invalid number strings gracefully
+    const calculated = calculateResults(loadedData);
+    if (calculated) {
+      // Check if calculation was successful
+      setResults(calculated);
+    } else {
+      // Handle case where calculation fails (e.g., show error, reset results)
+      setResults(null);
+      console.error("Calculation failed with loaded history data:", loadedData);
+    }
+
+    // Also update the URL bar to reflect the loaded state
+    const url = new URL(window.location.pathname, window.location.origin);
+    url.search = paramString;
+    window.history.replaceState({}, "", url.toString());
   };
 
   return (
@@ -159,7 +270,7 @@ export function SalaryCalculatorClient({
         </div>
 
         <RecentComparisons
-          hashes={history.hashes}
+          historyItems={history}
           onLoadHistory={handleLoadHistory}
         />
 
