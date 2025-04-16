@@ -599,18 +599,18 @@ export default function InvestmentCalculator({
             {results.monthlyBreakdown && results.monthlyBreakdown.length > 0 ? (
               <div className="max-h-96 overflow-y-auto">
                 <Table className="w-full text-sm">
-                  <ShadcnTableHeader className="sticky top-0 bg-slate-800">
-                    <ShadcnTableRow className="hover:bg-slate-700/50">
-                      <TableHead className="w-[60px] text-slate-300">
+                  <ShadcnTableHeader className="sticky top-0 bg-slate-800 z-10">
+                    <ShadcnTableRow className="hover:bg-slate-700/50 border-slate-700">
+                      <TableHead className="w-[60px] text-slate-300 py-2 px-4">
                         Mês
                       </TableHead>
-                      <TableHead className="text-right text-slate-300">
+                      <TableHead className="text-right text-slate-300 py-2 px-4">
                         Valor Investido
                       </TableHead>
-                      <TableHead className="text-right text-slate-300">
+                      <TableHead className="text-right text-slate-300 py-2 px-4">
                         Juros (Valor / %)
                       </TableHead>
-                      <TableHead className="text-right text-slate-300">
+                      <TableHead className="text-right text-slate-300 py-2 px-4">
                         Total no Mês
                       </TableHead>
                     </ShadcnTableRow>
@@ -619,21 +619,21 @@ export default function InvestmentCalculator({
                     {results.monthlyBreakdown.map((item) => (
                       <ShadcnTableRow
                         key={item.month}
-                        className="hover:bg-slate-800/50"
+                        className="hover:bg-slate-700/50 even:bg-slate-800/50 border-slate-700"
                       >
-                        <TableCell className="font-medium">
+                        <TableCell className="font-medium py-2 px-4">
                           {item.month}
                         </TableCell>
-                        <TableCell className="text-right">
+                        <TableCell className="text-right py-2 px-4">
                           {formatCurrency(item.cumulativeInvested, "BRL")}
                         </TableCell>
-                        <TableCell className="text-right">
+                        <TableCell className="text-right py-2 px-4">
                           {formatCurrency(item.monthlyInterestValue, "BRL")}
                           <span className="ml-1 text-xs opacity-70">
                             ({item.monthlyInterestPercent.toFixed(2)}%)
                           </span>
                         </TableCell>
-                        <TableCell className="text-right font-medium">
+                        <TableCell className="text-right font-medium py-2 px-4">
                           {formatCurrency(item.endOfMonthTotal, "BRL")}
                         </TableCell>
                       </ShadcnTableRow>
