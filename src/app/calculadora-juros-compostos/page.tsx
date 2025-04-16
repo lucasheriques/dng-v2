@@ -29,17 +29,19 @@ const safeParseFloat = (
 };
 
 // Define type for search params
-type SearchParams = { [key: string]: string | string[] | undefined };
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
-export default function InterestRateCalculator({
-  searchParams,
+export default async function InterestRateCalculator({
+  searchParams: params,
 }: {
   searchParams: SearchParams;
 }) {
   const initialData: InvestmentCalculatorData = { ...defaultValues };
 
+  const searchParams = await params;
+
   // Read individual params using short keys and validate
-  const initialDepositParam = searchParams.i; // Use 'i'
+  const initialDepositParam = searchParams?.i; // Use 'i'
   if (initialDepositParam !== undefined) {
     initialData.initialDeposit = safeParseFloat(
       initialDepositParam,
@@ -47,7 +49,7 @@ export default function InterestRateCalculator({
     );
   }
 
-  const monthlyContributionParam = searchParams.m; // Use 'm'
+  const monthlyContributionParam = searchParams?.m; // Use 'm'
   if (monthlyContributionParam !== undefined) {
     initialData.monthlyContribution = safeParseFloat(
       monthlyContributionParam,
@@ -55,12 +57,12 @@ export default function InterestRateCalculator({
     );
   }
 
-  const periodParam = searchParams.p; // Use 'p'
+  const periodParam = searchParams?.p; // Use 'p'
   if (periodParam !== undefined) {
     initialData.period = safeParseFloat(periodParam, defaultValues.period);
   }
 
-  const periodTypeParam = searchParams.pt; // Use 'pt'
+  const periodTypeParam = searchParams?.pt; // Use 'pt'
   if (
     typeof periodTypeParam === "string" &&
     (periodTypeParam === "meses" || periodTypeParam === "anos")
@@ -68,7 +70,7 @@ export default function InterestRateCalculator({
     initialData.periodType = periodTypeParam;
   }
 
-  const interestRateParam = searchParams.r; // Use 'r'
+  const interestRateParam = searchParams?.r; // Use 'r'
   if (interestRateParam !== undefined) {
     initialData.interestRate = safeParseFloat(
       interestRateParam,

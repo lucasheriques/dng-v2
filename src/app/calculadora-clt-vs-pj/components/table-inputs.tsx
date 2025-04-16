@@ -22,18 +22,22 @@ export function TableRow({
   children,
   className = "",
   tooltipContent,
+  inputId,
 }: {
   label: string;
   children: React.ReactNode;
   className?: string;
   tooltipContent?: string;
+  inputId?: string;
 }) {
   return (
     <div
       className={`grid grid-cols-2 items-stretch border-b border-slate-700 ${className}`}
     >
       <div className="px-3 py-2 bg-slate-800/50 border-r border-slate-700 text-sm flex justify-between items-center">
-        {label}
+        <label htmlFor={inputId} className="flex-1 cursor-pointer">
+          {label}
+        </label>
         {tooltipContent && (
           <>
             <TooltipProvider delayDuration={100}>
@@ -70,6 +74,7 @@ interface TableInputProps {
   prefix?: string;
   suffix?: string;
   autoFocus?: boolean;
+  id?: string;
 }
 
 export function TableInput({
@@ -80,6 +85,7 @@ export function TableInput({
   prefix,
   suffix,
   autoFocus = false,
+  id,
 }: TableInputProps) {
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -107,6 +113,7 @@ export function TableInput({
         </span>
       )}
       <Input
+        id={id}
         type="number"
         value={value}
         onChange={handleChange}
@@ -149,8 +156,14 @@ export function DetailRow({
     neutral: "text-slate-400",
   };
 
+  const potentialInputId = label.toLowerCase().replace(/\s+/g, "-");
+
   return (
-    <TableRow label={label} tooltipContent={tooltipContent}>
+    <TableRow
+      label={label}
+      tooltipContent={tooltipContent}
+      inputId={potentialInputId}
+    >
       <div
         className={cn("px-3 py-2 text-right", valueClassName[type], className)}
       >

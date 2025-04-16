@@ -6,6 +6,14 @@ import {
   TableRow,
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { Button } from "@/components/ui/button";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { InvestmentCalculatorData } from "@/lib/compression";
@@ -13,16 +21,8 @@ import { formatCurrency } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
 import { Copy } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Payload } from "recharts/types/component/DefaultLegendContent";
 
 interface ChartData {
   month: number;
@@ -30,6 +30,88 @@ interface ChartData {
   contributions: number;
   interest: number;
 }
+
+// Extracted pure calculation function
+export const calculateInvestmentResults = ({
+  initialDeposit,
+  monthlyContribution,
+  period,
+  periodType,
+  interestRate,
+}: {
+  initialDeposit: number;
+  monthlyContribution: number;
+  period: number;
+  periodType: string;
+  interestRate: number;
+}) => {
+  const months = periodType === "anos" ? period * 12 : period;
+  let currentAmount = initialDeposit;
+  let totalContributions = 0; // Tracks only monthly contributions
+  let totalInterest = 0;
+  const chartData: ChartData[] = [];
+
+  // Add initial state (month 0)
+  chartData.push({
+    month: 0,
+    initialDeposit: initialDeposit,
+    contributions: 0,
+    interest: 0,
+  });
+
+  // Calculate month by month from 1 up to 'months'
+  for (let i = 1; i <= months; i++) {
+    // 1. Add monthly contribution
+    currentAmount += monthlyContribution;
+    totalContributions += monthlyContribution;
+
+    // 2. Calculate interest for the month
+    const monthlyInterestRate = interestRate / 100 / 12;
+    const interestEarned = currentAmount * monthlyInterestRate;
+    totalInterest += interestEarned;
+
+    // 3. Update current amount with interest
+    currentAmount += interestEarned;
+
+    // 4. Record data for the chart
+    // Record data only at the end of each year (i % 12 === 0)
+    // or for the very last month (i === months).
+    if (i % 12 === 0 || i === months) {
+      // Always use yearly/final month aggregation
+      chartData.push({
+        month: i,
+        initialDeposit: initialDeposit, // Keep initial deposit constant for chart stack
+        contributions: totalContributions, // Cumulative monthly contributions
+        interest: totalInterest, // Cumulative interest
+      });
+    }
+  }
+
+  // Final amount is the last calculated currentAmount
+  const finalAmount = currentAmount;
+
+  // Calculate percentages based on the final amount
+  const interestPercent = finalAmount ? (totalInterest / finalAmount) * 100 : 0;
+  const contributionsPercent = finalAmount
+    ? (totalContributions / finalAmount) * 100 // Percentage of *monthly* contributions
+    : 0;
+  const initialDepositPercent = finalAmount
+    ? (initialDeposit / finalAmount) * 100
+    : 0;
+
+  return {
+    months,
+    totalInterest,
+    totalContributions,
+    initialDeposit,
+    finalAmount,
+    chartData,
+    // Add percentages to the return object
+    interestPercent,
+    contributionsPercent,
+    initialDepositPercent,
+  };
+};
 
 // Default values (can be moved or duplicated if compression.ts is removed)
 const defaultValues: InvestmentCalculatorData = {
@@ -45,72 +127,21 @@ interface InvestmentCalculatorProps {
   initialData?: InvestmentCalculatorData;
 }
 
-// Extracted pure calculation function
-const calculateInvestmentResults = ({
-  initialDeposit,
-  monthlyContribution,
-  period,
-  periodType,
-  interestRate,
-}: {
-  initialDeposit: number;
-  monthlyContribution: number;
-  period: number;
-  periodType: string;
-  interestRate: number;
-}) => {
-  const months = periodType === "anos" ? period * 12 : period;
-  let currentAmount = initialDeposit;
-  let totalContributions = 0;
-  let totalInterest = 0;
-  const chartData: ChartData[] = [];
-
-  for (let i = 0; i <= months; i++) {
-    if (i === months) {
-      chartData.push({
-        month: i,
-        initialDeposit: initialDeposit,
-        contributions: totalContributions,
-        interest: totalInterest,
-      });
-    }
-
-    if (i < months) {
-      const monthlyInterest = currentAmount * (interestRate / 100 / 12);
-      totalInterest += monthlyInterest;
-
-      if (i > 0) {
-        totalContributions += monthlyContribution;
-      }
-
-      const contributionToAdd = i > 0 ? monthlyContribution : 0;
-      currentAmount += contributionToAdd + monthlyInterest;
-    }
-  }
-
-  const finalAmount = initialDeposit + totalContributions + totalInterest;
-
-  // Calculate percentages inside the function
-  const interestPercent = finalAmount ? (totalInterest / finalAmount) * 100 : 0;
-  const contributionsPercent = finalAmount
-    ? (totalContributions / finalAmount) * 100
-    : 0;
-  const initialDepositPercent = finalAmount
-    ? (initialDeposit / finalAmount) * 100
-    : 0;
-
-  return {
-    totalInterest,
-    totalContributions,
-    initialDeposit,
-    finalAmount,
-    chartData,
-    // Add percentages to the return object
-    interestPercent,
-    contributionsPercent,
-    initialDepositPercent,
-  };
-};
+// Chart configuration mapping data keys to labels and CSS variables for colors
+const chartConfig = {
+  initialDeposit: {
+    label: "Depósito inicial",
+    color: "#4338ca", // Use CSS variables
+  },
+  contributions: {
+    label: "Contribuições mensais",
+    color: "#0ea5e9", // Use CSS variables
+  },
+  interest: {
+    label: "Juros acumulados",
+    color: "#10b981", // Use CSS variables
+  },
+} satisfies ChartConfig;
 
 export default function InvestmentCalculator({
   initialData,
@@ -220,25 +251,31 @@ export default function InvestmentCalculator({
     <div className="flex flex-col gap-8">
       <div className="border border-slate-700 rounded-lg overflow-hidden bg-slate-900/50">
         <TableHeader>Configurações</TableHeader>
-        <TableRow label="Depósito inicial">
+        <TableRow label="Depósito inicial" inputId="initial-deposit-input">
           <TableInput
+            id="initial-deposit-input"
             prefix="R$"
             value={String(initialDeposit)}
             onChange={(v) => setInitialDeposit(Number(v) || 0)}
             autoFocus
           />
         </TableRow>
-        <TableRow label="Contribuição mensal">
+        <TableRow
+          label="Contribuição mensal"
+          inputId="monthly-contribution-input"
+        >
           <TableInput
+            id="monthly-contribution-input"
             prefix="R$"
             value={String(monthlyContribution)}
             onChange={(v) => setMonthlyContribution(Number(v) || 0)}
           />
         </TableRow>
-        <TableRow label="Período">
+        <TableRow label="Período" inputId="period-input">
           <div className="flex items-center gap-0">
             <div className="flex-1">
               <TableInput
+                id="period-input"
                 value={String(period)}
                 onChange={(v) => setPeriod(Number(v) || 0)}
               />
@@ -247,11 +284,15 @@ export default function InvestmentCalculator({
               defaultValue="anos"
               value={periodType}
               onValueChange={setPeriodType}
-              className="w-[160px] p-2"
+              className="p-2"
             >
-              <TabsList className="grid w-full grid-cols-2 h-10 bg-slate-800 text-slate-300">
-                <TabsTrigger value="meses">Meses</TabsTrigger>
-                <TabsTrigger value="anos">Anos</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 bg-slate-800 text-slate-300 h-8">
+                <TabsTrigger value="meses" className="text-xs p-1">
+                  Meses
+                </TabsTrigger>
+                <TabsTrigger value="anos" className="text-xs p-1">
+                  Anos
+                </TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
@@ -259,8 +300,10 @@ export default function InvestmentCalculator({
         <TableRow
           label="Taxa de juros anual"
           tooltipContent="A taxa média de juros para investimentos no Brasil varia entre 3% e 12% ao ano, dependendo do tipo de investimento."
+          inputId="interest-rate-input"
         >
           <TableInput
+            id="interest-rate-input"
             suffix="%"
             value={String(interestRate)}
             onChange={(v) => setInterestRate(Number(v) || 0)}
@@ -277,99 +320,149 @@ export default function InvestmentCalculator({
               Composição do investimento:
             </h2>
             <div className="h-[250px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
+              <ChartContainer config={chartConfig} className="w-full h-full">
                 <BarChart
+                  accessibilityLayer
                   data={results.chartData}
                   margin={{ top: 10, right: 10, left: 10, bottom: 5 }}
                   maxBarSize={128}
                 >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
-                  <XAxis tick={false} axisLine={{ stroke: "#475569" }} />
+                  <CartesianGrid vertical={false} stroke="#475569" />
+                  <XAxis
+                    axisLine={false}
+                    tickLine={false}
+                    tickMargin={10}
+                    dataKey="month"
+                    tickFormatter={(month) => {
+                      if (month === 0) return "Início";
+                      const year = Math.ceil(month / 12);
+                      if (month === results.months && results.months % 12 !== 0)
+                        return `Mês ${results.months}`;
+                      return `Ano ${year}`;
+                    }}
+                    tick={{ fontSize: 11, fill: "#cbd5e1" }}
+                    stroke="#cbd5e1"
+                    interval="preserveStartEnd"
+                  />
                   <YAxis
                     tickFormatter={(value) =>
                       `R$ ${(value / 1000).toLocaleString("pt-BR")}k`
                     }
-                    tick={{ fontSize: 11, fill: "#cbd5e1" }} // slate-300
+                    tick={{ fontSize: 11, fill: "#cbd5e1" }}
                     axisLine={{ stroke: "#475569" }}
                     stroke="#cbd5e1"
                   />
-                  <Tooltip
-                    formatter={(value, name) => [
-                      `${formatCurrency(Number(value), "BRL")}`,
-                      name === "initialDeposit"
-                        ? "Depósito inicial"
-                        : name === "contributions"
-                          ? "Contribuições mensais"
-                          : "Juros acumulados",
-                    ]}
-                    labelFormatter={() => ""} // Remove label
-                    contentStyle={{
-                      fontSize: "12px",
-                      backgroundColor: "#0f172a", // slate-900
-                      borderColor: "#334155", // slate-700
-                      color: "#e2e8f0", // slate-200
-                    }}
-                    itemStyle={{ color: "#e2e8f0" }} // slate-200
-                    cursor={{ fill: "rgba(203, 213, 225, 0.1)" }} // slate-300 with alpha
+                  <ChartTooltip
+                    cursor={{ fill: "rgba(203, 213, 225, 0.1)" }}
+                    content={
+                      <ChartTooltipContent
+                        formatter={(value, name, item) => {
+                          const payload = item.payload as ChartData;
+                          const totalForMonth =
+                            payload.initialDeposit +
+                            payload.contributions +
+                            payload.interest;
+                          const percentage =
+                            totalForMonth > 0
+                              ? ((Number(value) / totalForMonth) * 100).toFixed(
+                                  1
+                                )
+                              : 0;
+                          return (
+                            <div className="flex flex-col gap-0.5">
+                              <span className="font-medium">
+                                {formatCurrency(Number(value), "BRL")}
+                                <span className="ml-1 opacity-70">
+                                  ({percentage}%)
+                                </span>
+                              </span>
+                            </div>
+                          );
+                        }}
+                        labelFormatter={() => ""}
+                        itemStyle={{ fontSize: "12px" }}
+                      />
+                    }
                   />
-                  <Legend
+                  <ChartLegend
+                    content={(
+                      props // Access props provided by ChartLegend
+                    ) => {
+                      const { payload } = props;
+                      if (!payload) return null;
+
+                      return (
+                        <ChartLegendContent>
+                          {payload.map((entry: Payload, index: number) => {
+                            const key =
+                              entry.dataKey as keyof typeof chartConfig;
+                            if (!key) return null;
+                            const label =
+                              chartConfig[key]?.label ?? entry.value;
+                            const percentages: Record<string, number> = {
+                              initialDeposit: initialDepositPercent,
+                              contributions: contributionsPercent,
+                              interest: interestPercent,
+                            };
+                            const percent =
+                              percentages[key as keyof typeof percentages] ?? 0;
+                            return (
+                              <div
+                                key={`item-${index}`}
+                                className="flex items-center space-x-2 text-xs"
+                              >
+                                <span
+                                  className="w-2 h-2 rounded-full"
+                                  style={{ backgroundColor: entry.color }}
+                                />
+                                <span className="text-slate-300">
+                                  {label}
+                                  <span className="ml-1 opacity-70">
+                                    ({percent.toFixed(1)}%)
+                                  </span>
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </ChartLegendContent>
+                      );
+                    }}
                     verticalAlign="top"
                     wrapperStyle={{
                       paddingBottom: "10px",
                       fontSize: "10px",
-                      color: "#cbd5e1", // slate-300
-                    }}
-                    formatter={(value) => {
-                      const labels: Record<string, string> = {
-                        initialDeposit: "Depósito inicial",
-                        contributions: "Contribuições mensais",
-                        interest: "Juros acumulados",
-                      };
-                      const percentages: Record<string, number> = {
-                        initialDeposit: initialDepositPercent,
-                        contributions: contributionsPercent,
-                        interest: interestPercent,
-                      };
-                      const percent =
-                        percentages[value as keyof typeof percentages] ?? 0;
-
-                      return (
-                        <span style={{ fontSize: "11px", color: "#cbd5e1" }}>
-                          {labels[value as keyof typeof labels]}
-                          <span className="ml-1 opacity-70">
-                            ({percent.toFixed(1)}%)
-                          </span>
-                        </span>
-                      );
+                      color: "#cbd5e1",
                     }}
                   />
                   <Bar
                     dataKey="initialDeposit"
                     stackId="a"
-                    fill="#4338ca" // indigo-700
+                    fill="var(--color-initialDeposit)"
                     name="initialDeposit"
+                    radius={[0, 0, 4, 4]}
                   />
                   <Bar
                     dataKey="contributions"
                     stackId="a"
-                    fill="#0ea5e9" // sky-500
+                    fill="var(--color-contributions)"
                     name="contributions"
                   />
                   <Bar
                     dataKey="interest"
                     stackId="a"
-                    fill="#10b981" // emerald-500
+                    fill="var(--color-interest)"
                     name="interest"
+                    radius={[4, 4, 0, 0]}
                   />
                 </BarChart>
-              </ResponsiveContainer>
+              </ChartContainer>
             </div>
           </div>
 
           {/* Breakdown */}
           <div className="flex-1 flex flex-col">
             <h2 className="text-xl font-bold mb-4 text-slate-100">
-              Detalhamento:
+              Detalhamento ao final do período:
             </h2>
             <div className="space-y-3">
               <div className="flex items-center justify-between py-2 border-b border-slate-700">
@@ -425,6 +518,8 @@ export default function InvestmentCalculator({
                 currency: "BRL",
                 trailingZeroDisplay: "stripIfInteger",
               }}
+              data-testid="final-amount"
+              data-testvalue={results.finalAmount}
             />
           </div>
           <Button variant="outline" onClick={handleShare} className="self-end">
