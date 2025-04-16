@@ -15,10 +15,11 @@ const defaultValues: InvestmentCalculatorData = {
 
 // Function to generate metadata dynamically
 export async function generateMetadata({
-  searchParams,
+  searchParams: params,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
+  const searchParams = await params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"; // Fallback for local dev
   const ogUrl = new URL("/api/og/investment", baseUrl);
 

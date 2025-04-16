@@ -13,10 +13,11 @@ import {
 const SELIC_RATE = 12.25;
 
 export async function generateMetadata({
-  searchParams,
+  searchParams: params,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
+  const searchParams = await params;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const ogUrl = new URL("/api/og/clt-vs-pj", baseUrl);
 

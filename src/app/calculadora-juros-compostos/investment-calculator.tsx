@@ -298,10 +298,8 @@ export default function InvestmentCalculator({
             <div className="flex-1">
               <TableInput
                 id="period-input"
-                value={period}
+                value={String(period)}
                 onChange={(v) => setPeriod(Number(v) || 0)}
-                min={1}
-                max={100}
               />
             </div>
             <Tabs
@@ -343,7 +341,7 @@ export default function InvestmentCalculator({
             <h2 className="text-xl font-bold mb-4 text-slate-100">
               Composição do investimento:
             </h2>
-            <div className="h-[250px] w-full">
+            <div>
               <ChartContainer config={chartConfig} className="w-full h-full">
                 <BarChart
                   accessibilityLayer
