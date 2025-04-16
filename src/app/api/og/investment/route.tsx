@@ -94,6 +94,41 @@ export async function GET(req: NextRequest) {
           <div
             style={{
               display: "flex",
+              justifyContent: "center",
+              gap: "40px",
+              fontSize: "22px",
+              color: "#94a3b8",
+              marginBottom: "30px",
+              textAlign: "center",
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontSize: "16px", color: "#64748b" }}>
+                Período
+              </span>
+              <span>{`${calculationParams.period} ${
+                calculationParams.periodType === "years" ? "anos" : "meses"
+              }`}</span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontSize: "16px", color: "#64748b" }}>
+                Investimento mensal
+              </span>
+              <span>
+                {formatCurrency(calculationParams.monthlyContribution, "BRL")}
+              </span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontSize: "16px", color: "#64748b" }}>
+                Taxa de Juros (Anual)
+              </span>
+              <span>{calculationParams.interestRate}%</span>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
               flexDirection: "column",
               alignItems: "center",
               flexGrow: 1,
