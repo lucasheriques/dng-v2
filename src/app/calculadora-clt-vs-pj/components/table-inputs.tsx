@@ -69,6 +69,7 @@ interface TableInputProps {
   placeholder?: string;
   prefix?: string;
   suffix?: string;
+  autoFocus?: boolean;
 }
 
 export function TableInput({
@@ -78,6 +79,7 @@ export function TableInput({
   placeholder,
   prefix,
   suffix,
+  autoFocus = false,
 }: TableInputProps) {
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -117,6 +119,7 @@ export function TableInput({
           [&::-webkit-inner-spin-button]:appearance-none`}
         placeholder={placeholder}
         required={required}
+        autoFocus={autoFocus}
       />
       {suffix && (
         <span className="absolute right-2 text-slate-400 pointer-events-none">

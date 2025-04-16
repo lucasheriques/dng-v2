@@ -7,8 +7,8 @@ import {
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatCurrency } from "@/lib/utils";
-import NumberFlow from "@number-flow/react";
-import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useMemo, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -19,7 +19,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useDebounceValue } from "usehooks-ts";
+
+const NumberFlow = dynamic(() => import("@number-flow/react"), { ssr: false });
 
 interface ChartData {
   month: number;
@@ -90,20 +91,53 @@ export default function InvestmentCalculator() {
   const [periodType, setPeriodType] = useState("anos");
   const [interestRate, setInterestRate] = useState(5.5);
 
-  // Create an object with current input values
-  const currentInputs = {
+  // Debounced state for calculation inputs
+  const [debouncedInputs, setDebouncedInputs] = useState({
     initialDeposit,
     monthlyContribution,
     period,
     periodType,
     interestRate,
-  };
+  });
 
-  // Get debounced version of inputs
-  const [results] = useDebounceValue(
-    calculateInvestmentResults(currentInputs),
-    200
-  );
+  // Effect to update debounced inputs after a delay
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedInputs({
+        initialDeposit,
+        monthlyContribution,
+        period,
+        periodType,
+        interestRate,
+      });
+    }, 300); // 300ms debounce
+
+    // Cleanup function to clear the timeout if inputs change before it fires
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [initialDeposit, monthlyContribution, period, periodType, interestRate]);
+
+  // Calculate results using useMemo based on debounced inputs
+  const results = useMemo(() => {
+    return calculateInvestmentResults(debouncedInputs);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedInputs]);
+
+  // Calculate percentages
+  const {
+    totalInterest,
+    totalContributions,
+    initialDeposit: resultInitialDeposit,
+    finalAmount,
+  } = results;
+  const interestPercent = finalAmount ? (totalInterest / finalAmount) * 100 : 0;
+  const contributionsPercent = finalAmount
+    ? (totalContributions / finalAmount) * 100
+    : 0;
+  const initialDepositPercent = finalAmount
+    ? (resultInitialDeposit / finalAmount) * 100
+    : 0;
 
   return (
     <div className="flex flex-col gap-8">
@@ -115,6 +149,7 @@ export default function InvestmentCalculator() {
             prefix="R$"
             value={String(initialDeposit)}
             onChange={(v) => setInitialDeposit(Number(v) || 0)}
+            autoFocus
           />
         </TableRow>
         <TableRow label="Contribuição mensal">
@@ -209,14 +244,25 @@ export default function InvestmentCalculator() {
                       color: "#cbd5e1", // slate-300
                     }}
                     formatter={(value) => {
-                      const labels = {
+                      const labels: Record<string, string> = {
                         initialDeposit: "Depósito inicial",
                         contributions: "Contribuições mensais",
                         interest: "Juros acumulados",
                       };
+                      const percentages: Record<string, number> = {
+                        initialDeposit: initialDepositPercent,
+                        contributions: contributionsPercent,
+                        interest: interestPercent,
+                      };
+                      const percent =
+                        percentages[value as keyof typeof percentages] ?? 0;
+
                       return (
                         <span style={{ fontSize: "11px", color: "#cbd5e1" }}>
                           {labels[value as keyof typeof labels]}
+                          <span className="ml-1 opacity-70">
+                            ({percent.toFixed(1)}%)
+                          </span>
                         </span>
                       );
                     }}
@@ -257,6 +303,9 @@ export default function InvestmentCalculator() {
                 </div>
                 <span className="font-medium text-sm text-slate-100">
                   {formatCurrency(results.totalInterest, "BRL")}
+                  <span className="ml-1 opacity-70">
+                    ({interestPercent.toFixed(1)}%)
+                  </span>
                 </span>
               </div>
 
@@ -267,6 +316,9 @@ export default function InvestmentCalculator() {
                 </div>
                 <span className="font-medium text-sm text-slate-100">
                   + {formatCurrency(results.totalContributions, "BRL")}
+                  <span className="ml-1 opacity-70">
+                    ({contributionsPercent.toFixed(1)}%)
+                  </span>
                 </span>
               </div>
 
@@ -277,6 +329,9 @@ export default function InvestmentCalculator() {
                 </div>
                 <span className="font-medium text-sm text-slate-100">
                   + {formatCurrency(results.initialDeposit, "BRL")}
+                  <span className="ml-1 opacity-70">
+                    ({initialDepositPercent.toFixed(1)}%)
+                  </span>
                 </span>
               </div>
             </div>
