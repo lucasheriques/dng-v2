@@ -337,8 +337,8 @@ export default function InvestmentCalculator({
         {/* First row: Chart and Breakdown side by side */}
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Chart */}
-          <div className="flex-1">
-            <h2 className="text-xl font-bold mb-4 text-slate-100">
+          <div className="flex-1 flex flex-col gap-4">
+            <h2 className="text-xl font-bold text-slate-100">
               Composição do investimento:
             </h2>
             <div>
@@ -406,7 +406,12 @@ export default function InvestmentCalculator({
                           return (
                             <div className="flex flex-col gap-0.5">
                               <span className="font-medium">
-                                {formatCurrency(Number(value), "BRL")}
+                                {name === "initialDeposit"
+                                  ? "Depósito inicial"
+                                  : name === "contributions"
+                                    ? "Contribuições mensais"
+                                    : "Juros acumulados"}
+                                : {formatCurrency(Number(value), "BRL")}
                                 <span className="ml-1 opacity-70">
                                   ({percentage}%)
                                 </span>
@@ -495,7 +500,7 @@ export default function InvestmentCalculator({
           </div>
 
           {/* Breakdown */}
-          <div className="flex-1 flex flex-col justify-between">
+          <div className="flex-1 flex flex-col justify-between gap-4">
             <div className="space-y-3">
               <h2 className="text-xl font-bold text-slate-100">
                 Detalhamento ao final do período:

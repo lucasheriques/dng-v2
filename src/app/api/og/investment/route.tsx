@@ -241,7 +241,7 @@ export async function GET(req: NextRequest) {
           <div
             style={footerStyle} // Use shared style
           >
-            Calculadora de Juros Compostos - nagringa.dev
+            www.nagringa.dev
           </div>
         </div>
       ),

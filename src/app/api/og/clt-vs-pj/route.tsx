@@ -315,7 +315,7 @@ export async function GET(req: NextRequest) {
           <div
             style={footerStyle} // Use shared style
           >
-            Calculadora CLT vs PJ - nagringa.dev
+            www.nagringa.dev
           </div>
         </div>
       ),
