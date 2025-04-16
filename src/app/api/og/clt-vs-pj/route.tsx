@@ -165,22 +165,57 @@ export async function GET(req: NextRequest) {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "10px",
+                gap: "8px", // Adjusted gap
               }}
             >
               <span style={{ fontSize: "24px", color: "#cbd5e1" }}>CLT 💼</span>
-              <span
+              {/* Gross Salary */}
+              <div
                 style={{
-                  fontSize: "56px",
-                  fontWeight: "bold",
-                  color: "#f8fafc",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: "10px",
                 }}
               >
-                {formatCurrency(netCLT, "BRL")}
-              </span>
-              <span style={{ fontSize: "18px", color: "#94a3b8" }}>
-                Total Mensal
-              </span>
+                <span style={{ fontSize: "18px", color: "#94a3b8" }}>
+                  Salário Bruto
+                </span>
+                <span
+                  style={{
+                    fontSize: "28px",
+                    fontWeight: "normal",
+                    color: "#e2e8f0",
+                  }}
+                >
+                  {formatCurrency(
+                    parseFloat(formData.grossSalary || "0"),
+                    "BRL"
+                  )}
+                </span>
+              </div>
+              {/* Total Monthly */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: "15px",
+                }}
+              >
+                <span style={{ fontSize: "18px", color: "#94a3b8" }}>
+                  Total Mensal
+                </span>
+                <span
+                  style={{
+                    fontSize: "56px",
+                    fontWeight: "bold",
+                    color: "#f8fafc",
+                  }}
+                >
+                  {formatCurrency(netCLT, "BRL")}
+                </span>
+              </div>
             </div>
 
             {/* PJ Section */}
@@ -189,22 +224,57 @@ export async function GET(req: NextRequest) {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "10px",
+                gap: "8px", // Adjusted gap
               }}
             >
               <span style={{ fontSize: "24px", color: "#cbd5e1" }}>PJ 🏢</span>
-              <span
+              {/* Gross Revenue */}
+              <div
                 style={{
-                  fontSize: "56px",
-                  fontWeight: "bold",
-                  color: "#f8fafc",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: "10px",
                 }}
               >
-                {formatCurrency(netPJ, "BRL")}
-              </span>
-              <span style={{ fontSize: "18px", color: "#94a3b8" }}>
-                Total Mensal
-              </span>
+                <span style={{ fontSize: "18px", color: "#94a3b8" }}>
+                  Receita Bruta
+                </span>
+                <span
+                  style={{
+                    fontSize: "28px",
+                    fontWeight: "normal",
+                    color: "#e2e8f0",
+                  }}
+                >
+                  {formatCurrency(
+                    parseFloat(formData.pjGrossSalary || "0"),
+                    "BRL"
+                  )}
+                </span>
+              </div>
+              {/* Total Monthly */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: "15px",
+                }}
+              >
+                <span style={{ fontSize: "18px", color: "#94a3b8" }}>
+                  Total Mensal
+                </span>
+                <span
+                  style={{
+                    fontSize: "56px",
+                    fontWeight: "bold",
+                    color: "#f8fafc",
+                  }}
+                >
+                  {formatCurrency(netPJ, "BRL")}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -219,11 +289,13 @@ export async function GET(req: NextRequest) {
             }}
           >
             <span style={{ fontSize: "22px", color: "#cbd5e1" }}>
-              {advantage} é{" "}
+              {`${advantage} é\u00A0`}
+              {/* Use non-breaking space */}
               <span style={{ color: advantageColor, fontWeight: "bold" }}>
                 {formatCurrency(Math.abs(difference), "BRL")}
-              </span>{" "}
-              {difference >= 0 ? "maior" : "menor"} por mês
+              </span>
+              {`\u00A0${difference >= 0 ? "maior" : "menor"} por mês`}
+              {/* Use non-breaking space */}
             </span>
           </div>
 
