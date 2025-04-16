@@ -1,6 +1,7 @@
 import {
   ChartData,
   InvestmentCalculatorData,
+  MonthlyBreakdownData,
 } from "@/app/calculadora-juros-compostos/types";
 
 export const calculateInvestmentResults = ({
@@ -15,6 +16,7 @@ export const calculateInvestmentResults = ({
   let totalContributions = 0; // Tracks only monthly contributions
   let totalInterest = 0;
   const chartData: ChartData[] = [];
+  const monthlyBreakdown: MonthlyBreakdownData[] = [];
 
   // Add initial state (month 0)
   chartData.push({
@@ -24,11 +26,14 @@ export const calculateInvestmentResults = ({
     interest: 0,
   });
 
+  // Keep track of amount at the start of the month for interest % calc
+  let amountAtStartOfMonth = initialDeposit;
+
   // Calculate month by month from 1 up to 'months'
   for (let i = 1; i <= months; i++) {
     // 1. Calculate interest for the month based on the current amount BEFORE contribution
     const monthlyInterestRate = interestRate / 100 / 12;
-    const interestEarned = currentAmount * monthlyInterestRate;
+    const interestEarned = amountAtStartOfMonth * monthlyInterestRate;
     totalInterest += interestEarned;
 
     // 2. Update current amount with interest
@@ -38,7 +43,28 @@ export const calculateInvestmentResults = ({
     currentAmount += monthlyContribution;
     totalContributions += monthlyContribution;
 
-    // 4. Record data for the chart based on the total number of months
+    // Calculate cumulative invested amount
+    const cumulativeInvested = initialDeposit + totalContributions;
+
+    // Calculate monthly interest percentage
+    const monthlyInterestPercent =
+      amountAtStartOfMonth > 0
+        ? (interestEarned / amountAtStartOfMonth) * 100
+        : 0;
+
+    // 4. Record monthly breakdown data
+    monthlyBreakdown.push({
+      month: i,
+      cumulativeInvested: cumulativeInvested,
+      monthlyInterestValue: interestEarned,
+      monthlyInterestPercent: monthlyInterestPercent,
+      endOfMonthTotal: currentAmount,
+    });
+
+    // Update amount at start of next month
+    amountAtStartOfMonth = currentAmount;
+
+    // 5. Record data for the chart based on the total number of months
     // Determine the recording frequency based on the total duration
     let shouldRecord = false;
     if (months <= 36) {
@@ -88,5 +114,6 @@ export const calculateInvestmentResults = ({
     interestPercent,
     contributionsPercent,
     initialDepositPercent,
+    monthlyBreakdown,
   };
 };

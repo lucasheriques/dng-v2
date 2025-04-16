@@ -6,6 +6,12 @@ import {
   TableRow,
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { calculateInvestmentResults } from "@/app/calculadora-juros-compostos/lib";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   ChartConfig,
@@ -15,6 +21,14 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import {
+  TableHeader as ShadcnTableHeader,
+  TableRow as ShadcnTableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+} from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
@@ -574,6 +588,67 @@ export default function InvestmentCalculator({
 
         {/* Second row: Total savings */}
       </div>
+
+      <Accordion type="single" collapsible className="p-0">
+        <AccordionItem
+          value="item-1"
+          className="rounded px-3 py-2 bg-slate-900/75"
+        >
+          <AccordionTrigger>Detalhamento mensal</AccordionTrigger>
+          <AccordionContent>
+            {results.monthlyBreakdown && results.monthlyBreakdown.length > 0 ? (
+              <div className="max-h-96 overflow-y-auto">
+                <Table className="w-full text-sm">
+                  <ShadcnTableHeader className="sticky top-0 bg-slate-800">
+                    <ShadcnTableRow className="hover:bg-slate-700/50">
+                      <TableHead className="w-[60px] text-slate-300">
+                        Mês
+                      </TableHead>
+                      <TableHead className="text-right text-slate-300">
+                        Valor Investido
+                      </TableHead>
+                      <TableHead className="text-right text-slate-300">
+                        Juros (Valor / %)
+                      </TableHead>
+                      <TableHead className="text-right text-slate-300">
+                        Total no Mês
+                      </TableHead>
+                    </ShadcnTableRow>
+                  </ShadcnTableHeader>
+                  <TableBody>
+                    {results.monthlyBreakdown.map((item) => (
+                      <ShadcnTableRow
+                        key={item.month}
+                        className="hover:bg-slate-800/50"
+                      >
+                        <TableCell className="font-medium">
+                          {item.month}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          {formatCurrency(item.cumulativeInvested, "BRL")}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          {formatCurrency(item.monthlyInterestValue, "BRL")}
+                          <span className="ml-1 text-xs opacity-70">
+                            ({item.monthlyInterestPercent.toFixed(2)}%)
+                          </span>
+                        </TableCell>
+                        <TableCell className="text-right font-medium">
+                          {formatCurrency(item.endOfMonthTotal, "BRL")}
+                        </TableCell>
+                      </ShadcnTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            ) : (
+              <p className="text-slate-400 text-sm p-4">
+                Nenhum dado para exibir.
+              </p>
+            )}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 }
