@@ -19,7 +19,6 @@ import {
   ChartLegend,
   ChartLegendContent,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
 import {
   TableHeader as ShadcnTableHeader,
@@ -403,40 +402,87 @@ export default function InvestmentCalculator({
                   />
                   <ChartTooltip
                     cursor={{ fill: "rgba(203, 213, 225, 0.1)" }}
-                    content={
-                      <ChartTooltipContent
-                        formatter={(value, name, item) => {
-                          const payload = item.payload as ChartData;
-                          const totalForMonth =
-                            payload.initialDeposit +
-                            payload.contributions +
-                            payload.interest;
-                          const percentage =
-                            totalForMonth > 0
-                              ? ((Number(value) / totalForMonth) * 100).toFixed(
-                                  1
-                                )
-                              : 0;
-                          return (
-                            <div className="flex flex-col gap-0.5">
-                              <span className="font-medium">
-                                {name === "initialDeposit"
-                                  ? "Depósito inicial"
-                                  : name === "contributions"
-                                    ? "Contribuições mensais"
-                                    : "Juros acumulados"}
-                                : {formatCurrency(Number(value), "BRL")}
-                                <span className="ml-1 opacity-70">
-                                  ({percentage}%)
-                                </span>
+                    content={(props) => {
+                      if (!props.payload || props.payload.length === 0) {
+                        return null;
+                      }
+                      // Calculate total from the first payload item (all items in a stack share the same base data)
+                      const payloadData = props.payload[0].payload as ChartData;
+                      const totalForMonth =
+                        payloadData.initialDeposit +
+                        payloadData.contributions +
+                        payloadData.interest;
+
+                      // Return the complete custom tooltip structure
+                      return (
+                        <div className="min-w-[180px] rounded-lg border border-slate-700 bg-slate-900 p-2 shadow-sm text-slate-200">
+                          {/* Render each item line */}
+                          <div className="flex flex-col gap-1 text-xs">
+                            {props.payload.map((item) => {
+                              const color = item.color;
+                              const label =
+                                chartConfig[
+                                  item.name as keyof typeof chartConfig
+                                ]?.label ?? item.name;
+                              const formattedValue = formatCurrency(
+                                Number(item.value),
+                                "BRL"
+                              );
+                              // Calculate percentage for this item
+                              const percentage =
+                                totalForMonth > 0
+                                  ? (
+                                      (Number(item.value) / totalForMonth) *
+                                      100
+                                    ).toFixed(1)
+                                  : 0;
+
+                              return (
+                                <div
+                                  key={item.dataKey}
+                                  className="flex items-center justify-between text-xs gap-1"
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <span
+                                      className="w-2.5 h-2.5 shrink-0 rounded-[0.2rem]"
+                                      style={{ backgroundColor: color }}
+                                    />
+                                    <span>
+                                      {label === "Contribuições mensais"
+                                        ? "Contribuições"
+                                        : label}
+                                      :
+                                    </span>
+                                  </div>
+                                  <span>
+                                    {formattedValue}
+                                    <span className="opacity-70 ml-1">
+                                      ({percentage}%)
+                                    </span>
+                                  </span>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Render the total section */}
+                          <div className="mt-2 pt-2 border-t border-slate-700">
+                            <div className="flex items-center justify-between font-bold text-xs">
+                              <span>
+                                Total no{" "}
+                                {periodType === "months"
+                                  ? `mês ${payloadData.month}`
+                                  : `ano ${payloadData.month / 12}`}
+                                :
+                              </span>
+                              <span>
+                                {formatCurrency(totalForMonth, "BRL")}
                               </span>
                             </div>
-                          );
-                        }}
-                        labelFormatter={() => ""}
-                        itemStyle={{ fontSize: "12px" }}
-                      />
-                    }
+                          </div>
+                        </div>
+                      );
+                    }}
                   />
                   <ChartLegend
                     content={(
