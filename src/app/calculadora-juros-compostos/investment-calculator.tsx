@@ -306,13 +306,20 @@ export default function InvestmentCalculator({
             onChange={(v) => setMonthlyContribution(Number(v) || 0)}
           />
         </TableRow>
-        <TableRow label="Período" inputId="period-input">
+        <TableRow
+          label="Período"
+          inputId="period-input"
+          tooltipContent="Máximo de 999 anos"
+        >
           <div className="flex items-center gap-0">
             <div className="flex-1">
               <TableInput
                 id="period-input"
                 value={String(period)}
-                onChange={(v) => setPeriod(Number(v) || 0)}
+                onChange={(v) => {
+                  const num = Number(v) || 0;
+                  setPeriod(num > 999 && periodType === "years" ? 999 : num);
+                }}
               />
             </div>
             <Tabs
@@ -470,9 +477,9 @@ export default function InvestmentCalculator({
                             <div className="flex items-center justify-between font-bold text-xs">
                               <span>
                                 Total no{" "}
-                                {periodType === "months"
+                                {results.monthlyBreakdown.length <= 36
                                   ? `mês ${payloadData.month}`
-                                  : `ano ${payloadData.month / 12}`}
+                                  : `ano ${Math.ceil(payloadData.month / 12)}`}
                                 :
                               </span>
                               <span>
