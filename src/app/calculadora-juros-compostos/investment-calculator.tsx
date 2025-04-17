@@ -54,7 +54,7 @@ const defaultValues: InvestmentCalculatorData = {
   monthlyContribution: 1000,
   period: 10,
   periodType: "years",
-  interestRate: 5.5,
+  interestRate: 6,
 };
 
 // Helper functions for parsing (needed for loading history)
