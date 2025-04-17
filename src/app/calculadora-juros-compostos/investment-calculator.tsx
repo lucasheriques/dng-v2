@@ -309,7 +309,7 @@ export default function InvestmentCalculator({
         <TableRow
           label="Período"
           inputId="period-input"
-          tooltipContent="Máximo de 999 anos"
+          tooltipContent="Máximo de 999 anos ou 10 mil meses"
         >
           <div className="flex items-center gap-0">
             <div className="flex-1">
@@ -318,7 +318,10 @@ export default function InvestmentCalculator({
                 value={String(period)}
                 onChange={(v) => {
                   const num = Number(v) || 0;
-                  setPeriod(num > 999 && periodType === "years" ? 999 : num);
+                  if (periodType === "years") {
+                    return setPeriod(num > 999 ? 999 : num);
+                  }
+                  setPeriod(num > 10000 ? 10000 : num);
                 }}
               />
             </div>
