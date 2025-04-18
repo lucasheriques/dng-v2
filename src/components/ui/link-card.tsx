@@ -65,67 +65,67 @@ export interface LinkCardProps
   secondaryAction?: React.ReactNode;
 }
 
-const LinkCard = React.forwardRef<HTMLAnchorElement, LinkCardProps>(
-  (
-    {
-      className,
-      variant = "default",
-      size,
-      asChild = false,
-      icon: Icon,
-      showExternalIcon = true,
-      cardTitle,
-      subtitle,
-      secondaryAction,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const Comp = asChild ? Slot : "a";
+const LinkCard = (
+  {
+    ref,
+    className,
+    variant = "default",
+    size,
+    asChild = false,
+    icon: Icon,
+    showExternalIcon = true,
+    cardTitle,
+    subtitle,
+    secondaryAction,
+    children,
+    ...props
+  }: LinkCardProps & {
+    ref: React.RefObject<HTMLAnchorElement>;
+  }
+) => {
+  const Comp = asChild ? Slot : "a";
 
-    return (
-      <Comp
-        ref={ref}
-        className={cn(linkCardVariants({ variant, size, className }))}
-        {...props}
-      >
-        {Icon && (
-          <div className={cn(iconVariants({ variant }))}>
-            <Icon className="w-5 h-5" />
+  return (
+    <Comp
+      ref={ref}
+      className={cn(linkCardVariants({ variant, size, className }))}
+      {...props}
+    >
+      {Icon && (
+        <div className={cn(iconVariants({ variant }))}>
+          <Icon className="w-5 h-5" />
+        </div>
+      )}
+      <div className="flex-1 min-w-0">
+        <h3 className="font-medium transition-colors truncate">
+          {cardTitle}
+        </h3>
+        {subtitle && (
+          <span className="text-xs transition-colors text-muted-foreground group-hover:text-current/80">
+            {subtitle}
+          </span>
+        )}
+        {children}
+      </div>
+      <div className="flex items-center gap-2">
+        {secondaryAction}
+        {showExternalIcon && (
+          <div className="relative flex items-center">
+            <ExternalLinkIcon
+              className={cn(
+                "w-4 h-4 transition-all transform opacity-0 group-hover:opacity-100 group-hover:translate-x-0 absolute right-0",
+                "text-current"
+              )}
+            />
+            <div className="w-4 h-4 transition-all transform opacity-0 group-hover:opacity-0 group-hover:translate-x-1 absolute right-0">
+              <ExternalLinkIcon className="w-4 h-4 text-current/30" />
+            </div>
           </div>
         )}
-        <div className="flex-1 min-w-0">
-          <h3 className="font-medium transition-colors truncate">
-            {cardTitle}
-          </h3>
-          {subtitle && (
-            <span className="text-xs transition-colors text-muted-foreground group-hover:text-current/80">
-              {subtitle}
-            </span>
-          )}
-          {children}
-        </div>
-        <div className="flex items-center gap-2">
-          {secondaryAction}
-          {showExternalIcon && (
-            <div className="relative flex items-center">
-              <ExternalLinkIcon
-                className={cn(
-                  "w-4 h-4 transition-all transform opacity-0 group-hover:opacity-100 group-hover:translate-x-0 absolute right-0",
-                  "text-current"
-                )}
-              />
-              <div className="w-4 h-4 transition-all transform opacity-0 group-hover:opacity-0 group-hover:translate-x-1 absolute right-0">
-                <ExternalLinkIcon className="w-4 h-4 text-current/30" />
-              </div>
-            </div>
-          )}
-        </div>
-      </Comp>
-    );
-  }
-);
+      </div>
+    </Comp>
+  );
+};
 LinkCard.displayName = "LinkCard";
 
 export { LinkCard, linkCardVariants };
