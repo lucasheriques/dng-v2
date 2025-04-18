@@ -44,20 +44,18 @@ export interface ButtonProps
   loading?: boolean;
 }
 
-const Button = (
-  {
-    ref,
-    className,
-    variant = "default",
-    size,
-    asChild = false,
-    loading = false,
-    children,
-    ...props
-  }: ButtonProps & {
-    ref: React.RefObject<HTMLButtonElement>;
-  }
-) => {
+const Button = ({
+  ref,
+  className,
+  variant = "default",
+  size,
+  asChild = false,
+  loading = false,
+  children,
+  ...props
+}: ButtonProps & {
+  ref?: React.RefObject<HTMLButtonElement>;
+}) => {
   const Comp = asChild ? Slot : "button";
 
   const loadingColors = {

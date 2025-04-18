@@ -124,8 +124,8 @@ const data: TimelineEntry[] = [
                   <AvatarFallback>DG</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-semibold text-white">Daiane Galvão</p>
-                  <p className="text-sm text-white/60">
+                  <p className="font-semibold">Daiane Galvão</p>
+                  <p className="text-sm text-slate-400">
                     Senior Software Engineer @ Hotmart
                   </p>
                 </div>
@@ -187,8 +187,8 @@ const data: TimelineEntry[] = [
                     <AvatarFallback>MG</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-semibold text-white">Matheus Gomes</p>
-                    <p className="text-sm text-white/60">
+                    <p className="font-semibold">Matheus Gomes</p>
+                    <p className="text-sm text-slate-400">
                       Technical Lead @ MoOngy
                     </p>
                   </div>
@@ -266,8 +266,8 @@ const data: TimelineEntry[] = [
                   <AvatarFallback>LC</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-semibold text-white">Lorenzo Corrêa</p>
-                  <p className="text-sm text-white/60">
+                  <p className="font-semibold">Lorenzo Corrêa</p>
+                  <p className="text-sm text-slate-400">
                     Software Developer @ MOST Specialist Technologies
                   </p>
                 </div>
@@ -352,8 +352,8 @@ const data: TimelineEntry[] = [
                   <AvatarFallback>GC</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-semibold text-white">Gabriel Viana</p>
-                  <p className="text-sm text-white/60">Senior Data Analyst</p>
+                  <p className="font-semibold">Gabriel Viana</p>
+                  <p className="text-sm text-slate-400">Senior Data Analyst</p>
                 </div>
               </Link>
             }
@@ -455,8 +455,8 @@ const data: TimelineEntry[] = [
                   <AvatarFallback>GC</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-semibold text-white">Gustavo Almeida</p>
-                  <p className="text-sm text-white/60">Fullstack Developer</p>
+                  <p className="font-semibold">Gustavo Almeida</p>
+                  <p className="text-sm text-slate-400">Fullstack Developer</p>
                 </div>
               </Link>
             }

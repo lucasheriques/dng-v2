@@ -139,9 +139,10 @@ export function Combobox({
                     className={({ active }) =>
                       cn(
                         "relative cursor-pointer select-none py-2 pl-10 pr-4",
-                        active ? "bg-accent text-accent-foreground" : ""
+                        active && "bg-accent text-accent-foreground"
                       )
                     }
+                    aria-autocomplete="none"
                     value={CREATE_NEW_VALUE}
                   >
                     {() => (
@@ -176,9 +177,10 @@ export function Combobox({
                   className={({ active }) =>
                     cn(
                       "relative cursor-default select-none py-2 pl-10 pr-4 ",
-                      active ? "bg-accent text-accent-foreground" : ""
+                      active && "bg-accent text-accent-foreground"
                     )
                   }
+                  aria-autocomplete="none"
                   value={option.value}
                 >
                   {({ selected, active }) => (

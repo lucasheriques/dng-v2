@@ -143,23 +143,18 @@ export function ContactCard({ type, info, onSelect }: ContactCardProps) {
             >
               <DialogHeader>
                 <DialogTitle>
-                  {type === "vendor"
-                    ? "Informações da empresa"
-                    : "Informações do cliente"}
+                  {existingContactIndex >= 0
+                    ? type === "vendor"
+                      ? "Editar informações da empresa"
+                      : "Editar informações do cliente"
+                    : type === "vendor"
+                      ? "Adicionar nova empresa"
+                      : "Adicionar novo cliente"}
                 </DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSave} className="space-y-6">
                 {/* Edit Form */}
                 <div className="space-y-4">
-                  <span className="font-semibold">
-                    {existingContactIndex >= 0
-                      ? type === "vendor"
-                        ? "Editar informações da empresa"
-                        : "Editar informações do cliente"
-                      : type === "vendor"
-                        ? "Adicionar nova empresa"
-                        : "Adicionar novo cliente"}
-                  </span>
                   <div className="space-y-4">
                     <div className="grid items-center gap-2">
                       <Label htmlFor="name">

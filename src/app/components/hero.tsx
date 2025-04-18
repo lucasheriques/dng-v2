@@ -71,7 +71,7 @@ export default async function Hero() {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 relative z-10 space-y-4 md:space-y-8">
       <div>
-        <h1 className="font-bold text-white text-3xl md:text-4xl">
+        <h1 className="font-bold text-3xl md:text-4xl">
           <Balancer>
             <AnimatedText text="O melhor conteúdo" />
             <br />

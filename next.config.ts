@@ -19,6 +19,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "img.logo.dev",
       },
+      {
+        hostname: "substack-post-media.s3.amazonaws.com",
+      },
     ],
   },
   transpilePackages: ["next-mdx-remote"],

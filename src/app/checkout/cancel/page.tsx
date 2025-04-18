@@ -31,7 +31,7 @@ export default function CheckoutCancelPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/checkout/guia-completo"
-            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            className="bg-blue-600 px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
           >
             Tentar Novamente
           </Link>

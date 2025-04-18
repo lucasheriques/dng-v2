@@ -29,7 +29,7 @@ export default function About() {
           <Badge className="text-sm" variant="outline">
             Não vou desperdiçar seu tempo por aqui
           </Badge>
-          <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tight sm:text-5xl">
             Conteúdo que faz sentido
           </h1>
           <p className="mt-6 text-xl/8 text-white/70">

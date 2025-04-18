@@ -11,28 +11,28 @@ const labelVariants = cva(
   "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 );
 
-const Label = (
-  {
-    ref,
-    className,
-    ...props
-  }
-) => (<LabelPrimitive.Root
-  ref={ref}
-  className={cn(labelVariants(), className)}
-  {...props}
-/>);
+const Label = ({
+  ref,
+  className,
+  ...props
+}: React.ComponentPropsWithRef<typeof LabelPrimitive.Root> &
+  VariantProps<typeof labelVariants>) => (
+  <LabelPrimitive.Root
+    ref={ref}
+    className={cn(labelVariants(), className)}
+    {...props}
+  />
+);
 Label.displayName = LabelPrimitive.Root.displayName;
 
-const HeadlessLabel = (
-  {
-    ref,
-    className,
-    ...props
-  }: React.ComponentPropsWithoutRef<typeof HLabel> & {
-    ref: React.RefObject<React.ElementRef<typeof HLabel>>;
-  }
-) => (<HLabel ref={ref} className={cn(labelVariants(), className)} {...props} />);
+const HeadlessLabel = ({
+  ref,
+  className,
+  ...props
+}: React.ComponentPropsWithRef<typeof HLabel> &
+  VariantProps<typeof labelVariants>) => (
+  <HLabel ref={ref} className={cn(labelVariants(), className)} {...props} />
+);
 HeadlessLabel.displayName = HLabel.displayName;
 
 export { HeadlessLabel, Label };

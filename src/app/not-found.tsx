@@ -23,12 +23,12 @@ export default function NotFound() {
       {/* Content */}
       <div className="relative z-10 flex min-h-screen mx-auto max-w-7xl px-4 flex-col items-center justify-center sm:items-start sm:px-8">
         <div className="">
-          <h1 className="mb-4 text-7xl font-bold text-white sm:text-8xl">
+          <h1 className="mb-4 text-7xl font-bold sm:text-8xl">
             <span className="bg-linear-to-r from-pink-500 to-teal-500 bg-clip-text text-transparent">
               404
             </span>
           </h1>
-          <h2 className="mb-4 text-3xl font-semibold text-white sm:text-4xl">
+          <h2 className="mb-4 text-3xl font-semibold sm:text-4xl">
             Página não encontrada
           </h2>
           <p className="mb-8 text-lg text-gray-300">

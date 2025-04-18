@@ -618,7 +618,7 @@ export default function InvestmentCalculator({
               <h3 className="text-base sm:text-lg font-medium">
                 Seu montante final
               </h3>
-              <div className="text-xl sm:text-5xl font-bold text-white pb-2">
+              <div className="text-xl sm:text-5xl font-bold pb-2">
                 <NumberFlow
                   value={results.finalAmount}
                   format={{

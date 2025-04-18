@@ -39,7 +39,7 @@ export default function LinksPage() {
 
         {/* Social Links */}
         <section className="space-y-4 motion-preset-fade motion-duration-700 motion-delay-100">
-          <h2 className="text-xl font-semibold text-white">Redes Sociais</h2>
+          <h2 className="text-xl font-semibold">Redes Sociais</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {Object.values(SOCIAL_LINKS).map((link, index) => (
               <Link
@@ -55,7 +55,7 @@ export default function LinksPage() {
                     <div className="bg-slate-800 p-2 rounded-full">
                       <link.icon className="h-5 w-5 text-pink-500" />
                     </div>
-                    <span className="font-medium text-white">{link.title}</span>
+                    <span className="font-medium">{link.title}</span>
                   </CardContent>
                 </Card>
               </Link>
@@ -65,7 +65,7 @@ export default function LinksPage() {
 
         {/* Tools */}
         <section className="space-y-4 motion-preset-fade motion-duration-700 motion-delay-200">
-          <h2 className="text-xl font-semibold text-white">Ferramentas</h2>
+          <h2 className="text-xl font-semibold">Ferramentas</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {Object.values(TOOLS).map((tool, index) => (
               <Link
@@ -79,7 +79,7 @@ export default function LinksPage() {
                     <div className="bg-slate-800 p-2 rounded-full">
                       <tool.icon className="h-5 w-5 text-teal-500" />
                     </div>
-                    <span className="font-medium text-white">{tool.title}</span>
+                    <span className="font-medium">{tool.title}</span>
                   </CardContent>
                 </Card>
               </Link>
@@ -90,9 +90,7 @@ export default function LinksPage() {
         {/* Mentorship Links - For Paid Subscribers */}
         <section className="space-y-4 motion-preset-fade motion-duration-700 motion-delay-300">
           <div className="flex items-center space-x-2">
-            <h2 className="text-xl font-semibold text-white">
-              Recursos da Mentoria
-            </h2>
+            <h2 className="text-xl font-semibold">Recursos da Mentoria</h2>
             <Badge variant="outline" className="border-pink-500 text-pink-500">
               <Lock className="h-3 w-3 mr-1" />
               Assinantes
@@ -113,7 +111,7 @@ export default function LinksPage() {
                     <div className="bg-slate-800 p-2 rounded-full">
                       <link.icon className="h-5 w-5 text-pink-500" />
                     </div>
-                    <span className="font-medium text-white">{link.title}</span>
+                    <span className="font-medium">{link.title}</span>
                   </CardContent>
                 </Card>
               </Link>
@@ -122,7 +120,7 @@ export default function LinksPage() {
           <div className="flex justify-center motion-preset-fade motion-duration-700 motion-delay-500">
             <Button
               asChild
-              className="bg-linear-to-r from-pink-500 to-teal-400 hover:from-pink-600 hover:to-teal-500 text-white"
+              className="bg-linear-to-r from-pink-500 to-teal-400 hover:from-pink-600 hover:to-teal-500"
             >
               <Link
                 href={SOCIAL_LINKS.newsletter.href}
@@ -137,7 +135,7 @@ export default function LinksPage() {
 
         {/* Articles */}
         <section className="space-y-4 motion-preset-fade motion-duration-700 motion-delay-400">
-          <h2 className="text-xl font-semibold text-white">Artigos</h2>
+          <h2 className="text-xl font-semibold">Artigos</h2>
           <div className="grid grid-cols-1 gap-4">
             {articles.slice(0, 10).map((article, index) => (
               <Link
@@ -160,7 +158,7 @@ export default function LinksPage() {
                     </div>
                     <CardContent className="p-4 md:w-2/3">
                       <div className="space-y-2">
-                        <h3 className="font-medium text-white line-clamp-2">
+                        <h3 className="font-medium line-clamp-2">
                           {article.title}
                         </h3>
                         <p className="text-slate-400 text-sm line-clamp-2">

@@ -63,26 +63,23 @@ export interface LinkCardProps
   cardTitle: React.ReactNode;
   subtitle?: React.ReactNode;
   secondaryAction?: React.ReactNode;
+  ref?: React.RefObject<HTMLAnchorElement>;
 }
 
-const LinkCard = (
-  {
-    ref,
-    className,
-    variant = "default",
-    size,
-    asChild = false,
-    icon: Icon,
-    showExternalIcon = true,
-    cardTitle,
-    subtitle,
-    secondaryAction,
-    children,
-    ...props
-  }: LinkCardProps & {
-    ref: React.RefObject<HTMLAnchorElement>;
-  }
-) => {
+const LinkCard = ({
+  ref,
+  className,
+  variant = "default",
+  size,
+  asChild = false,
+  icon: Icon,
+  showExternalIcon = true,
+  cardTitle,
+  subtitle,
+  secondaryAction,
+  children,
+  ...props
+}: LinkCardProps) => {
   const Comp = asChild ? Slot : "a";
 
   return (
@@ -97,9 +94,7 @@ const LinkCard = (
         </div>
       )}
       <div className="flex-1 min-w-0">
-        <h3 className="font-medium transition-colors truncate">
-          {cardTitle}
-        </h3>
+        <h3 className="font-medium transition-colors truncate">{cardTitle}</h3>
         {subtitle && (
           <span className="text-xs transition-colors text-muted-foreground group-hover:text-current/80">
             {subtitle}

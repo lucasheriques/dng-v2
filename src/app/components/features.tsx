@@ -30,7 +30,7 @@ export default function Features() {
       <div className="relative isolate overflow-hidden bg-slate-900 px-6 py-20 sm:rounded-3xl sm:px-10 sm:py-24 lg:py-24 xl:px-24">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-0">
           <div className="lg:row-start-2 lg:max-w-md">
-            <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
               Uma <HighlightedText color="pink">comunidade</HighlightedText> que
               te ajuda a conquistar oportunidades globais e{" "}
               <HighlightedText color="primary">
@@ -61,7 +61,7 @@ export default function Features() {
             <dl className="max-w-xl space-y-8 text-base/7 text-gray-300 lg:max-w-none">
               {features.map((feature) => (
                 <div key={feature.name} className="relative">
-                  <dt className="ml-9 inline-block font-semibold text-white">
+                  <dt className="ml-9 inline-block font-bold text-white">
                     <feature.icon
                       aria-hidden="true"
                       className="absolute left-1 top-1 h-5 w-5 text-accent-secondary"

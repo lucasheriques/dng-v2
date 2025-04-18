@@ -31,7 +31,7 @@ export function AccessGate({
             href={SUBSCRIBE_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors text-center"
+            className="bg-blue-600 px-6 py-2 rounded-md hover:bg-blue-700 transition-colors text-center"
           >
             Assinar no Substack
           </a>
