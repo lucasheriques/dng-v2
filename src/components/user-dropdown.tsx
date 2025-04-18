@@ -66,7 +66,7 @@ export function UserDropdown() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/perfil" className="focus:outline-none">
+                <Link href="/perfil" className="focus:outline-hidden">
                   <User className="mr-2 h-4 w-4" />
                   <span>Perfil</span>
                 </Link>
@@ -79,7 +79,7 @@ export function UserDropdown() {
                 <Link
                   href={MANAGE_SUBSCRIPTION_LINK}
                   target="_blank"
-                  className="focus:outline-none"
+                  className="focus:outline-hidden"
                 >
                   <CreditCard className="mr-2 h-4 w-4" />
                   <span>Gerenciar assinatura</span>

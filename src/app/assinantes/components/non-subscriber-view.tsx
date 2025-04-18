@@ -12,7 +12,7 @@ export function NonSubscriberView() {
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}
-              className="h-48 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900"
+              className="h-48 rounded-lg bg-linear-to-br from-slate-800 to-slate-900"
             />
           ))}
         </div>
@@ -33,7 +33,7 @@ export function NonSubscriberView() {
           <Link href={SUBSCRIBE_LINK} target="_blank" rel="noopener noreferrer">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
+              className="bg-linear-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
             >
               Tornar-se Assinante
             </Button>

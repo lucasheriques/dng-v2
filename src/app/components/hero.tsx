@@ -77,7 +77,7 @@ export default async function Hero() {
             <br />
             <AnimatedText
               text="para devs ambiciosos"
-              className="bg-gradient-to-r from-primary via-yellow-400 to-accent-secondary text-transparent bg-clip-text inline-block animate-gradient text-4xl md:text-5xl"
+              className="bg-linear-to-r from-primary via-yellow-400 to-accent-secondary text-transparent bg-clip-text inline-block text-4xl md:text-5xl"
             />
           </Balancer>
         </h1>

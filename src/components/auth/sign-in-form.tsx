@@ -215,7 +215,7 @@ function EmailAppLinks({ email }: { email: string }) {
 
       window.location.href = appUrl;
 
-      window.addEventListener("blur", () => {
+      window.addEventListener("blur-sm", () => {
         clearTimeout(appTimeout);
       });
     } else {

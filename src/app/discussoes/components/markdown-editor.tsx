@@ -58,7 +58,7 @@ export function MarkdownEditor({ onChange, placeholder }: MarkdownEditorProps) {
       <div className="relative max-h-[60vh] overflow-auto nice-scrollbar">
         <RichTextPlugin
           contentEditable={
-            <ContentEditable className="min-h-[200px] outline-none prose prose-slate dark:prose-invert max-w-none" />
+            <ContentEditable className="min-h-[200px] outline-hidden prose prose-slate dark:prose-invert max-w-none" />
           }
           placeholder={
             <div className="absolute top-0 left-0 text-muted-foreground">

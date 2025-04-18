@@ -40,7 +40,7 @@ export default function Header({ articles }: HeaderProps) {
 
   return (
     <Popover
-      className="z-50 backdrop-blur-sm bg-slate-950/25 shadow-lg sticky top-0 w-full border-b border-slate-800/20"
+      className="z-50 backdrop-blur-xs bg-slate-950/25 shadow-lg sticky top-0 w-full border-b border-slate-800/20"
       as="header"
     >
       {({ close }) => (
@@ -74,7 +74,7 @@ export default function Header({ articles }: HeaderProps) {
           <PopoverPanel
             transition
             className={cn(
-              "absolute inset-x-0 top-0 -z-10 bg-slate-900 pt-16 shadow-2xl ring-1 ring-slate-500/30 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in max-h-[calc(100vh-4rem)] overflow-y-auto"
+              "absolute inset-x-0 top-0 -z-10 bg-slate-900 pt-16 shadow-2xl ring-1 ring-slate-500/30 transition data-closed:-translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-leave:duration-150 data-enter:ease-out data-leave:ease-in max-h-[calc(100vh-4rem)] overflow-y-auto"
             )}
           >
             <div
@@ -145,7 +145,7 @@ export default function Header({ articles }: HeaderProps) {
                         width={280}
                         height={180}
                         src={post.coverImage ?? "https://picsum.photos/280/180"}
-                        className="aspect-[2/1] w-full rounded-xl bg-gray-800 object-cover sm:aspect-[16/9] sm:h-32 lg:h-auto shadow-lg transition-transform group-hover:scale-[1.02]"
+                        className="aspect-2/1 w-full rounded-xl bg-gray-800 object-cover sm:aspect-16/9 sm:h-32 lg:h-auto shadow-lg transition-transform group-hover:scale-[1.02]"
                       />
                       <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-700/50 group-hover:ring-gray-700 transition-colors" />
                     </div>
@@ -159,7 +159,7 @@ export default function Header({ articles }: HeaderProps) {
                         </time>
                         <a
                           href={`${SOCIALS.newsletter}/t/${post.postTags?.[0]?.slug}`}
-                          className="relative z-10 rounded-full bg-slate-800/50 backdrop-blur px-3 py-1.5 text-xs font-medium text-gray-300 hover:bg-slate-700 transition-colors"
+                          className="relative z-10 rounded-full bg-slate-800/50 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-gray-300 hover:bg-slate-700 transition-colors"
                         >
                           {post.postTags?.[0]?.name}
                         </a>

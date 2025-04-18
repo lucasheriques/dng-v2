@@ -124,7 +124,7 @@ const GlowingEffect = memo(
             "pointer-events-none absolute -inset-px hidden rounded-[inherit] border opacity-0 transition-opacity",
             glow && "opacity-100",
             variant === "white" && "border-white",
-            disabled && "!block"
+            disabled && "block!"
           )}
         />
         <div
@@ -163,7 +163,7 @@ const GlowingEffect = memo(
             glow && "opacity-100",
             blur > 0 && "blur-[var(--blur)] ",
             className,
-            disabled && "!hidden"
+            disabled && "hidden!"
           )}
         >
           <div

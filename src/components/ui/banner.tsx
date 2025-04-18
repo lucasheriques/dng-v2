@@ -8,7 +8,7 @@ import { type VariantProps, tv } from "tailwind-variants";
 import { useLocalStorage } from "usehooks-ts";
 
 const banner = tv({
-  base: "flex items-center justify-between p-4 rounded-lg shadow-sm border backdrop-blur-sm",
+  base: "flex items-center justify-between p-4 rounded-lg shadow-xs border backdrop-blur-xs",
   variants: {
     intent: {
       info: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900/30 dark:text-blue-200 dark:border-blue-800",

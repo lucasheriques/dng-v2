@@ -27,7 +27,7 @@ export default function LinksPage() {
           <ShareButton />
           <BorderBeam className="absolute inset-0 -z-10" />
           <div className="py-8">
-            <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-500 to-teal-400 text-transparent bg-clip-text">
+            <h1 className="text-3xl md:text-5xl font-bold bg-linear-to-r from-pink-500 to-teal-400 text-transparent bg-clip-text">
               Dev na Gringa
             </h1>
             <p className="max-w-md mx-auto mt-4">
@@ -122,7 +122,7 @@ export default function LinksPage() {
           <div className="flex justify-center motion-preset-fade motion-duration-700 motion-delay-500">
             <Button
               asChild
-              className="bg-gradient-to-r from-pink-500 to-teal-400 hover:from-pink-600 hover:to-teal-500 text-white"
+              className="bg-linear-to-r from-pink-500 to-teal-400 hover:from-pink-600 hover:to-teal-500 text-white"
             >
               <Link
                 href={SOCIAL_LINKS.newsletter.href}

@@ -248,7 +248,7 @@ export function ContactCard({ type, info, onSelect }: ContactCardProps) {
       {info.email && (
         <button
           className={cn(
-            "space-y-1 p-4 rounded-lg border border-dashed border-slate-700 hover:border-primary transition-colors focus:border-primary focus:outline-none min-w-full text-left"
+            "space-y-1 p-4 rounded-lg border border-dashed border-slate-700 hover:border-primary transition-colors focus:border-primary focus:outline-hidden min-w-full text-left"
           )}
           onClick={() => {
             setContactInfo(info);

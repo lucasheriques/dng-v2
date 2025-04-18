@@ -25,7 +25,7 @@ export default function LoginPage() {
           placeholder="blur"
         />
       </HeroImageGradientOverlay>
-      <div className="z-10 flex flex-col justify-between p-4 pt-8 rounded-xl backdrop-blur-sm bg-black/40 border border-white/10 shadow-lg gap-8 w-full max-w-[95%] md:max-w-md ">
+      <div className="z-10 flex flex-col justify-between p-4 pt-8 rounded-xl backdrop-blur-xs bg-black/40 border border-white/10 shadow-lg gap-8 w-full max-w-[95%] md:max-w-md ">
         <div className="flex items-center gap-2 flex-col justify-center">
           <Image src={DngLogo} alt="Dev na Gringa" width={64} height={64} />
           <Balancer>
@@ -33,7 +33,7 @@ export default function LoginPage() {
               Use o mesmo email que você assinou a{" "}
               <a
                 href={SOCIALS.newsletter}
-                className="border-b border-slate-600 hover:border-b-2 focus:outline-none"
+                className="border-b border-slate-600 hover:border-b-2 focus:outline-hidden"
               >
                 newsletter
               </a>
@@ -47,7 +47,7 @@ export default function LoginPage() {
           Ao entrar, você concorda com nossa{" "}
           <Link
             href="/politica-de-privacidade"
-            className="border-b border-slate-600 hover:border-b-2 focus:outline-none"
+            className="border-b border-slate-600 hover:border-b-2 focus:outline-hidden"
           >
             Política de Privacidade
           </Link>

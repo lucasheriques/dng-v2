@@ -425,7 +425,7 @@ export default function InvestmentCalculator({
 
                       // Return the complete custom tooltip structure
                       return (
-                        <div className="min-w-[180px] rounded-lg border border-slate-700 bg-slate-900 p-2 shadow-sm text-slate-200">
+                        <div className="min-w-[180px] rounded-lg border border-slate-700 bg-slate-900 p-2 shadow-xs text-slate-200">
                           {/* Render each item line */}
                           <div className="flex flex-col gap-1 text-xs">
                             {props.payload.map((item) => {
@@ -653,7 +653,7 @@ export default function InvestmentCalculator({
           <AccordionTrigger>Detalhamento mensal</AccordionTrigger>
           <AccordionContent>
             {results.monthlyBreakdown && results.monthlyBreakdown.length > 0 ? (
-              <div className="max-h-96 overflow-y-auto">
+              <div className="max-h-96 overflow-y-auto nice-scrollbar">
                 <Table className="w-full text-sm">
                   <ShadcnTableHeader className="sticky top-0 bg-slate-800 z-10">
                     <ShadcnTableRow className="hover:bg-slate-700/50 border-slate-700">

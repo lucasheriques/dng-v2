@@ -32,7 +32,7 @@ const CommandDialog = ({ children, ...props }: DialogProps) => {
   return (
     <Dialog {...props}>
       <DialogPortal>
-        <DialogOverlay className="fixed inset-0 bg-slate-900/30 z-50 backdrop-blur-sm" />
+        <DialogOverlay className="fixed inset-0 bg-slate-900/30 z-50 backdrop-blur-xs" />
         <DialogContent className="overflow-hidden p-0 shadow-2xl shadow-primary/10 max-w-[95%] sm:max-w-lg border border-white/10">
           <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
             {children}
@@ -55,7 +55,7 @@ const CommandInput = React.forwardRef<
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
-        "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none text-white placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-hidden text-white placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
@@ -129,9 +129,9 @@ const CommandItem = React.forwardRef<
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none text-white/70 transition-colors duration-75",
+      "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-hidden text-white/70 transition-colors duration-75",
       "data-[disabled=true]:pointer-events-none",
-      "data-[selected='true']:bg-gradient-to-r from-primary/20 via-primary/10 to-transparent",
+      "data-[selected='true']:bg-linear-to-r from-primary/20 via-primary/10 to-transparent",
       "data-[selected=true]:text-white",
       "data-[disabled=true]:opacity-50",
       "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-teal-300",

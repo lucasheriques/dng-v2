@@ -32,7 +32,7 @@ export function Footer() {
             fill
             className="object-cover opacity-90 pointer-events-none select-none"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0118] via-[#0A0118]/80 to-[#0A0118]/60" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#0A0118] via-[#0A0118]/80 to-[#0A0118]/60" />
         </div>
       </div>
 

@@ -5,12 +5,12 @@ import { ExternalLinkIcon } from "lucide-react";
 import * as React from "react";
 
 const linkCardVariants = cva(
-  "group relative flex items-center gap-3 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary/70 focus:ring-offset-2 focus:ring-offset-background",
+  "group relative flex items-center gap-3 rounded-lg transition-all focus:outline-hidden focus:ring-2 focus:ring-primary/70 focus:ring-offset-2 focus:ring-offset-background",
   {
     variants: {
       variant: {
         default:
-          "border border-primary/20 bg-emerald-500/10 text-emerald-50 hover:bg-emerald-500/20 hover:border-emerald-500/30 shadow-sm",
+          "border border-primary/20 bg-emerald-500/10 text-emerald-50 hover:bg-emerald-500/20 hover:border-emerald-500/30 shadow-xs",
         outline:
           "border border-slate-800/80 bg-slate-800/40 hover:border-emerald-500/30 hover:bg-emerald-500/10 hover:text-emerald-200",
         ghost:

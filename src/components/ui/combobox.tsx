@@ -95,12 +95,12 @@ export function Combobox({
             <ComboboxButton className="w-full">
               <div
                 className={cn(
-                  "flex h-10 w-full items-center justify-between rounded-md border border-slate-700 bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+                  "flex h-10 w-full items-center justify-between rounded-md border border-slate-700 bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
                   className
                 )}
               >
                 <ComboboxInput
-                  className="w-full border-none bg-transparent p-0 focus:outline-none focus:ring-0"
+                  className="w-full border-none bg-transparent p-0 focus:outline-hidden focus:ring-0"
                   onChange={(event) => {
                     const newValue = event.target.value;
                     setQuery(newValue);
@@ -130,7 +130,7 @@ export function Combobox({
 
           <ComboboxOptions
             transition
-            className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-slate-700 bg-background py-1 shadow-lg focus:outline-none origin-top transition duration-200 ease-out empty:invisible data-[closed]:scale-95 data-[closed]:opacity-0 text-base md:text-sm"
+            className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-slate-700 bg-background py-1 shadow-lg focus:outline-hidden origin-top transition duration-200 ease-out empty:invisible data-closed:scale-95 data-closed:opacity-0 text-base md:text-sm"
           >
             {filteredOptions.length === 0 && query !== "" ? (
               <>
