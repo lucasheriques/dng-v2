@@ -9,7 +9,7 @@ import { ChevronDown, Mail, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import Logo from "../../public/logo-no-bg-small.webp";
+import Logo from "../../public/logo-v2-no-bg.webp";
 
 import { UserDropdown } from "@/components/user-dropdown";
 import { Article } from "@/lib/types";
