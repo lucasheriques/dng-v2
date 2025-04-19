@@ -1,7 +1,6 @@
 import { CalculatorFormData } from "@/app/calculadora-clt-vs-pj/types";
 import { formatCurrency } from "@/lib/utils";
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
-import Image from "next/image";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 import {
@@ -127,7 +126,7 @@ export async function GET(req: NextRequest) {
         <div style={baseContainerStyle}>
           {/* Logo */}
           <div style={logoContainerStyle}>
-            <Image
+            <img
               src="http://localhost:3000/logo-v2-no-bg-compressed-small.png" // Replace with your actual logo URL
               alt="nagringa.dev logo"
               height="128" // Adjust size as needed
