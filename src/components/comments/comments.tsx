@@ -13,7 +13,7 @@ type CommentsProps = {
 
 export default function Comments({ slug, ...props }: CommentsProps) {
   return (
-    <div className="pt-12">
+    <div className="pt-12" id="hyvor-comments">
       <CommentsProvider
         page-id={slug}
         colors="dark"

@@ -211,6 +211,17 @@ export function SalaryCalculatorClient({ initialData }: SalaryCalculatorProps) {
             </h1>
           </div>
           <div className="flex gap-2">
+            <Button
+              variant="default"
+              onClick={() => {
+                // scroll to .hyvor-talk-container
+                const hyvorTalkContainer =
+                  document.querySelector("#hyvor-comments");
+                hyvorTalkContainer?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Deixar feedback
+            </Button>
             <Button variant="ghost" onClick={handleClear}>
               Limpar valores
             </Button>
