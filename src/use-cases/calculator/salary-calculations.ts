@@ -271,3 +271,169 @@ export function calculateResults(
 
   return { clt: cltResults, pj: pjResults };
 }
+
+interface EmployerCostOptions {
+  riskLevel?: "low" | "medium" | "high"; // For RAT calculation
+  industryType?:
+    | "technology"
+    | "manufacturing"
+    | "commerce"
+    | "services"
+    | "other"; // For System S
+  healthInsurance?: number; // Optional employer-provided health insurance
+  otherBenefits?: number; // Any other benefits provided by employer
+}
+
+// This function will take the output of calculateCLT and additional options
+export function calculateEmployerCost(
+  cltResult: ReturnType<typeof calculateCLT>,
+  options: EmployerCostOptions = {}
+) {
+  const {
+    riskLevel = "low",
+    industryType = "technology",
+    healthInsurance = 0,
+    otherBenefits = 0,
+  } = options;
+
+  const { grossSalary } = cltResult;
+
+  // INSS (Social Security) - mandatory 20% employer contribution
+  const inssRate = 0.2;
+  const inssContribution = grossSalary * inssRate;
+
+  // FGTS (Guarantee Fund) - already calculated in cltResult but from employee perspective
+  // Here we're calculating it as an employer cost
+  const fgtsRate = 0.08;
+  const fgtsContribution = grossSalary * fgtsRate;
+
+  // RAT (Work Accident Insurance) - varies by industry risk level
+  let ratRate: number;
+  switch (riskLevel) {
+    case "low":
+      ratRate = 0.01; // Most tech companies
+      break;
+    case "medium":
+      ratRate = 0.02; // Some tech hardware companies
+      break;
+    case "high":
+      ratRate = 0.03; // Manufacturing, high-risk industries
+      break;
+    default:
+      ratRate = 0.01;
+  }
+  const ratContribution = grossSalary * ratRate;
+
+  // System S Contribution (varies by industry)
+  let systemSRate: number;
+  switch (industryType) {
+    case "technology":
+      systemSRate = 0.058; // Tech industry rate (SESI/SENAI focused)
+      break;
+    case "commerce":
+      systemSRate = 0.055; // Commercial establishments (SESC/SENAC)
+      break;
+    case "manufacturing":
+      systemSRate = 0.06; // Manufacturing industries
+      break;
+    case "services":
+      systemSRate = 0.055; // Service providers
+      break;
+    default:
+      systemSRate = 0.058;
+  }
+  const systemSContribution = grossSalary * systemSRate;
+
+  // 13th salary (Christmas bonus) - already calculated in cltResults but as benefit
+  // Here we calculate it as an employer cost
+  const thirteenthSalary = grossSalary;
+
+  // Additional social charges on 13th salary
+  const thirteenthInss = thirteenthSalary * inssRate;
+  const thirteenthFgts = thirteenthSalary * fgtsRate;
+  const thirteenthRat = thirteenthSalary * ratRate;
+  const thirteenthSystemS = thirteenthSalary * systemSRate;
+
+  // Vacation (base salary + 1/3 bonus)
+  const vacationSalary = grossSalary;
+  const vacationBonus = grossSalary / 3; // 1/3 additional
+
+  // Additional social charges on vacation
+  const vacationInss = (vacationSalary + vacationBonus) * inssRate;
+  const vacationFgts = (vacationSalary + vacationBonus) * fgtsRate;
+  const vacationRat = (vacationSalary + vacationBonus) * ratRate;
+  const vacationSystemS = (vacationSalary + vacationBonus) * systemSRate;
+
+  // Extract benefits from cltResult that represent employer costs
+  const mealAllowance = cltResult.detailedBenefits?.mealAllowance || 0;
+  const transportAllowance =
+    cltResult.detailedBenefits?.transportAllowance || 0;
+
+  // Amortize annual costs into monthly values
+  const monthlyThirteenthSalary = thirteenthSalary / 12;
+  const monthlyThirteenthCharges =
+    (thirteenthInss + thirteenthFgts + thirteenthRat + thirteenthSystemS) / 12;
+
+  const monthlyVacationSalary = vacationSalary / 12;
+  const monthlyVacationBonus = vacationBonus / 12;
+  const monthlyVacationCharges =
+    (vacationInss + vacationFgts + vacationRat + vacationSystemS) / 12;
+
+  // Basic monthly mandatory costs (salary + direct charges)
+  const basicMonthlyCost =
+    grossSalary +
+    inssContribution +
+    fgtsContribution +
+    ratContribution +
+    systemSContribution;
+
+  // Add prorated 13th and vacation costs
+  const totalMonthlyMandatoryCost =
+    basicMonthlyCost +
+    monthlyThirteenthSalary +
+    monthlyThirteenthCharges +
+    monthlyVacationSalary +
+    monthlyVacationBonus +
+    monthlyVacationCharges;
+
+  // Add benefits to get total cost
+  const totalBenefits =
+    mealAllowance + transportAllowance + healthInsurance + otherBenefits;
+  const totalMonthlyCost = totalMonthlyMandatoryCost + totalBenefits;
+
+  // Calculate percentages for easier understanding
+  const mandatoryAdditionPercentage =
+    (totalMonthlyMandatoryCost / grossSalary - 1) * 100;
+  const totalAdditionPercentage = (totalMonthlyCost / grossSalary - 1) * 100;
+
+  return {
+    grossSalary,
+    mandatoryContributions: {
+      inss: inssContribution,
+      fgts: fgtsContribution,
+      rat: ratContribution,
+      systemS: systemSContribution,
+      monthlyThirteenthSalary,
+      monthlyThirteenthCharges,
+      monthlyVacationSalary,
+      monthlyVacationBonus,
+      monthlyVacationCharges,
+    },
+    benefits: {
+      transportAllowance,
+      mealAllowance,
+      healthInsurance,
+      otherBenefits,
+      total: totalBenefits,
+    },
+    monthlyCosts: {
+      basic: basicMonthlyCost,
+      mandatory: totalMonthlyMandatoryCost,
+      total: totalMonthlyCost,
+    },
+    percentages: {
+      mandatoryAdditionPercentage: mandatoryAdditionPercentage.toFixed(2) + "%",
+      totalAdditionPercentage: totalAdditionPercentage.toFixed(2) + "%",
+    },
+  };
+}
