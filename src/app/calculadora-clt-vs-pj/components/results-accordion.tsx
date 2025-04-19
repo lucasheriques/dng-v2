@@ -1,8 +1,8 @@
 import {
-  DetailRow,
   TableHeader,
   TableRow,
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
+import { DataFormHeader, DataFormInfoRow } from "@/components/data-forms";
 import {
   Accordion,
   AccordionContent,
@@ -58,15 +58,15 @@ export default function ResultsAccordion({
                 ? "Ocultar cálculo detalhado"
                 : "Ver cálculo detalhado"}
             </AccordionTrigger>
-            <AccordionContent className="pb-0">
-              <DetailRow
+            <AccordionContent className="pb-0 text-sm">
+              <DataFormInfoRow
                 label="Salário Bruto Mensal"
                 value={formatCurrency(results.clt.grossSalary)}
                 type="addition"
               />
-              <TableHeader>Benefícios</TableHeader>
+              <DataFormHeader>Benefícios</DataFormHeader>
               {results.clt.detailedBenefits.transportAllowance > 0 && (
-                <DetailRow
+                <DataFormInfoRow
                   label="Vale-Transporte"
                   value={formatCurrency(
                     results.clt.detailedBenefits.transportAllowance
@@ -75,7 +75,7 @@ export default function ResultsAccordion({
                 />
               )}
               {results.clt.detailedBenefits.mealAllowance > 0 && (
-                <DetailRow
+                <DataFormInfoRow
                   label="Vale Refeição/Alimentação"
                   value={formatCurrency(
                     results.clt.detailedBenefits.mealAllowance
@@ -84,7 +84,7 @@ export default function ResultsAccordion({
                 />
               )}
               {results.clt.detailedBenefits.healthInsurance > 0 && (
-                <DetailRow
+                <DataFormInfoRow
                   label="Plano de Saúde"
                   value={formatCurrency(
                     results.clt.detailedBenefits.healthInsurance
@@ -93,7 +93,7 @@ export default function ResultsAccordion({
                 />
               )}
               {results.clt.detailedBenefits.otherBenefits > 0 && (
-                <DetailRow
+                <DataFormInfoRow
                   label="Outros Benefícios"
                   value={formatCurrency(
                     results.clt.detailedBenefits.otherBenefits
@@ -101,14 +101,14 @@ export default function ResultsAccordion({
                   type="addition"
                 />
               )}
-              <DetailRow
+              <DataFormInfoRow
                 label="13º Salário (proporcional)"
                 value={formatCurrency(
                   results.clt.detailedBenefits.thirteenthSalary
                 )}
                 type="addition"
               />
-              <DetailRow
+              <DataFormInfoRow
                 label="Férias (proporcional)"
                 value={formatCurrency(
                   results.clt.detailedBenefits.vacationBonus
@@ -116,7 +116,7 @@ export default function ResultsAccordion({
                 type="addition"
               />
               {results.clt.detailedBenefits.plrGross > 0 && (
-                <DetailRow
+                <DataFormInfoRow
                   label="PLR (proporcional)"
                   value={formatCurrency(
                     results.clt.detailedBenefits.plrGross / 12
@@ -124,7 +124,7 @@ export default function ResultsAccordion({
                   type="addition"
                 />
               )}
-              <DetailRow
+              <DataFormInfoRow
                 label={
                   results.clt.includeFGTS
                     ? "FGTS Mensal"
@@ -134,7 +134,7 @@ export default function ResultsAccordion({
                 type={results.clt.includeFGTS ? "addition" : "neutral"}
               />
               {results.clt.detailedBenefits.severance > 0 && (
-                <DetailRow
+                <DataFormInfoRow
                   label="Indenização em caso de demissão"
                   tooltipContent="Valor mensal proporcional da multa de 40% do FGTS em caso de demissão sem justa causa"
                   value={formatCurrency(results.clt.detailedBenefits.severance)}
@@ -143,19 +143,19 @@ export default function ResultsAccordion({
                 />
               )}
 
-              <TableHeader>Deduções</TableHeader>
-              <DetailRow
+              <DataFormHeader>Deduções</DataFormHeader>
+              <DataFormInfoRow
                 label="INSS"
                 value={formatCurrency(results.clt.deductions.inss)}
                 type="deduction"
               />
-              <DetailRow
+              <DataFormInfoRow
                 label="IRPF"
                 value={formatCurrency(results.clt.deductions.ir)}
                 type="deduction"
               />
               {results.clt.detailedBenefits.transportDeduction > 0 && (
-                <DetailRow
+                <DataFormInfoRow
                   label="Desconto VT (6%)"
                   value={formatCurrency(
                     results.clt.detailedBenefits.transportDeduction
@@ -164,7 +164,7 @@ export default function ResultsAccordion({
                 />
               )}
               {results.clt.deductions.plrTax > 0 && (
-                <DetailRow
+                <DataFormInfoRow
                   label="Desconto PLR (IRPF)"
                   value={formatCurrency(results.clt.deductions.plrTax / 12)}
                   type="deduction"
@@ -214,21 +214,21 @@ export default function ResultsAccordion({
             {isExpanded ? "Ocultar cálculo detalhado" : "Ver cálculo detalhado"}
           </AccordionTrigger>
           <AccordionContent className="pb-0">
-            <DetailRow
+            <DataFormInfoRow
               label="Faturamento Bruto"
               value={formatCurrency(results.pj.grossSalary)}
               type="addition"
             />
             {isThereAnyPJBenefits && <TableHeader>Benefícios</TableHeader>}
             {results.pj.benefits.taxable > 0 && (
-              <DetailRow
+              <DataFormInfoRow
                 label="Benefícios Tributáveis"
                 value={formatCurrency(results.pj.benefits.taxable)}
                 type="addition"
               />
             )}
             {results.pj.benefits.nonTaxable > 0 && (
-              <DetailRow
+              <DataFormInfoRow
                 label="Benefícios Não Tributáveis"
                 value={formatCurrency(results.pj.benefits.nonTaxable)}
                 type="addition"
@@ -236,23 +236,23 @@ export default function ResultsAccordion({
             )}
 
             <TableHeader>Deduções</TableHeader>
-            <DetailRow
+            <DataFormInfoRow
               label="Impostos"
               value={formatCurrency(results.pj.deductions.taxes)}
               type="deduction"
             />
-            <DetailRow
+            <DataFormInfoRow
               label="Honorários Contador"
               value={formatCurrency(results.pj.deductions.accountingFee)}
               type="deduction"
             />
-            <DetailRow
+            <DataFormInfoRow
               label="INSS Pró-Labore"
               value={formatCurrency(results.pj.deductions.inssContribution)}
               type="deduction"
             />
             {results.pj.deductions.otherExpenses > 0 && (
-              <DetailRow
+              <DataFormInfoRow
                 label="Outras Despesas"
                 value={formatCurrency(results.pj.deductions.otherExpenses)}
                 type="deduction"

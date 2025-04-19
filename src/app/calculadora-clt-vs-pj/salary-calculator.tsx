@@ -3,10 +3,11 @@
 import Results from "@/app/calculadora-clt-vs-pj/components/results";
 import ResultsAccordion from "@/app/calculadora-clt-vs-pj/components/results-accordion";
 import {
-  TableHeader,
-  TableInput,
-  TableRow,
-} from "@/app/calculadora-clt-vs-pj/components/table-inputs";
+  DataForm,
+  DataFormHeader,
+  DataFormInput,
+  DataFormRow,
+} from "@/components/data-forms";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
@@ -232,8 +233,8 @@ export function SalaryCalculatorClient({
         />
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="border  rounded-lg overflow-hidden bg-slate-900/50">
-            <TableHeader>
+          <DataForm>
+            <DataFormHeader>
               <div className="flex justify-between items-center">
                 <span>CLT</span>
                 <div className="">
@@ -250,10 +251,13 @@ export function SalaryCalculatorClient({
                   </div>
                 </div>
               </div>
-            </TableHeader>
-            <TableHeader>Salário Base</TableHeader>
-            <TableRow label="Salário Bruto Mensal">
-              <TableInput
+            </DataFormHeader>
+            <DataFormHeader>Salário Base</DataFormHeader>
+            <DataFormRow
+              label="Salário Bruto Mensal"
+              inputId="gross-salary-input"
+            >
+              <DataFormInput
                 value={formData.grossSalary}
                 onChange={(v) =>
                   handleInputChange(
@@ -268,12 +272,17 @@ export function SalaryCalculatorClient({
                     ? ""
                     : `${formData.pjGrossSalary}. Clique para alterar.`
                 }
+                id="gross-salary-input"
+                autoFocus
               />
-            </TableRow>
+            </DataFormRow>
 
-            <TableHeader>Benefícios</TableHeader>
-            <TableRow label="Vale Refeição/Alimentação">
-              <TableInput
+            <DataFormHeader>Benefícios</DataFormHeader>
+            <DataFormRow
+              label="Vale Refeição/Alimentação"
+              inputId="meal-allowance-input"
+            >
+              <DataFormInput
                 value={formData.mealAllowance}
                 onChange={(v) =>
                   handleInputChange(
@@ -282,10 +291,14 @@ export function SalaryCalculatorClient({
                   )
                 }
                 prefix="R$"
+                id="meal-allowance-input"
               />
-            </TableRow>
-            <TableRow label="Vale-Transporte">
-              <TableInput
+            </DataFormRow>
+            <DataFormRow
+              label="Vale-Transporte"
+              inputId="transport-allowance-input"
+            >
+              <DataFormInput
                 value={formData.transportAllowance}
                 onChange={(v) =>
                   handleInputChange(
@@ -294,10 +307,14 @@ export function SalaryCalculatorClient({
                   )
                 }
                 prefix="R$"
+                id="transport-allowance-input"
               />
-            </TableRow>
-            <TableRow label="Plano de Saúde">
-              <TableInput
+            </DataFormRow>
+            <DataFormRow
+              label="Plano de Saúde"
+              inputId="health-insurance-input"
+            >
+              <DataFormInput
                 value={formData.healthInsurance}
                 onChange={(v) =>
                   handleInputChange(
@@ -306,25 +323,29 @@ export function SalaryCalculatorClient({
                   )
                 }
                 prefix="R$"
+                id="health-insurance-input"
               />
-            </TableRow>
-            <TableRow
+            </DataFormRow>
+            <DataFormRow
               label="PLR Anual"
               tooltipContent="Participação nos Lucros e Resultados (valor bruto anual)"
+              inputId="plr-input"
             >
-              <TableInput
+              <DataFormInput
                 value={formData.plr}
                 onChange={(v) =>
                   handleInputChange("plr", typeof v === "string" ? v : "")
                 }
                 prefix="R$"
+                id="plr-input"
               />
-            </TableRow>
-            <TableRow
+            </DataFormRow>
+            <DataFormRow
               label="Outros Benefícios"
               tooltipContent="Qualquer benefício não-taxável que você queira adicionar."
+              inputId="other-benefits-input"
             >
-              <TableInput
+              <DataFormInput
                 value={formData.otherBenefits}
                 onChange={(v) =>
                   handleInputChange(
@@ -333,15 +354,17 @@ export function SalaryCalculatorClient({
                   )
                 }
                 prefix="R$"
+                id="other-benefits-input"
               />
-            </TableRow>
+            </DataFormRow>
 
-            <TableHeader>Outros dados</TableHeader>
-            <TableRow
+            <DataFormHeader>Outros dados</DataFormHeader>
+            <DataFormRow
               label="Anos na empresa"
               tooltipContent="Usado para calcular a multa rescisória em caso de demissão sem justa causa."
+              inputId="years-at-company-input"
             >
-              <TableInput
+              <DataFormInput
                 value={formData.yearsAtCompany}
                 onChange={(v) =>
                   handleInputChange(
@@ -349,8 +372,9 @@ export function SalaryCalculatorClient({
                     typeof v === "string" ? v : ""
                   )
                 }
+                id="years-at-company-input"
               />
-            </TableRow>
+            </DataFormRow>
 
             {results && (
               <ResultsAccordion
@@ -360,13 +384,16 @@ export function SalaryCalculatorClient({
                 onToggle={() => setIsDetailsExpanded(!isDetailsExpanded)}
               />
             )}
-          </div>
+          </DataForm>
 
           <div className="border  rounded-lg overflow-hidden bg-slate-900/50">
-            <TableHeader>PJ</TableHeader>
-            <TableHeader>Salário Base</TableHeader>
-            <TableRow label="Salário Bruto Mensal">
-              <TableInput
+            <DataFormHeader>PJ</DataFormHeader>
+            <DataFormHeader>Salário Base</DataFormHeader>
+            <DataFormRow
+              label="Salário Bruto Mensal"
+              inputId="pj-gross-salary-input"
+            >
+              <DataFormInput
                 value={formData.pjGrossSalary}
                 onChange={(v) =>
                   handleInputChange(
@@ -380,15 +407,17 @@ export function SalaryCalculatorClient({
                     : `${formData.grossSalary}. Clique para alterar.`
                 }
                 prefix="R$"
+                id="pj-gross-salary-input"
               />
-            </TableRow>
+            </DataFormRow>
 
-            <TableHeader>Despesas</TableHeader>
-            <TableRow
+            <DataFormHeader>Despesas</DataFormHeader>
+            <DataFormRow
               label="Honorários Contador"
               tooltipContent="Baseado no valor da mensalidade da Contabilizei."
+              inputId="accounting-fee-input"
             >
-              <TableInput
+              <DataFormInput
                 value={formData.accountingFee}
                 onChange={(v) =>
                   handleInputChange(
@@ -397,13 +426,15 @@ export function SalaryCalculatorClient({
                   )
                 }
                 prefix="R$"
+                id="accounting-fee-input"
               />
-            </TableRow>
-            <TableRow
+            </DataFormRow>
+            <DataFormRow
               label="Contribuição INSS"
               tooltipContent="O valor padrão é 11% do salário mínimo."
+              inputId="inss-contribution-input"
             >
-              <TableInput
+              <DataFormInput
                 value={formData.inssContribution}
                 onChange={(v) =>
                   handleInputChange(
@@ -412,24 +443,27 @@ export function SalaryCalculatorClient({
                   )
                 }
                 prefix="R$"
+                id="inss-contribution-input"
               />
-            </TableRow>
-            <TableRow
+            </DataFormRow>
+            <DataFormRow
               label="Alíquota de Impostos (%)"
               tooltipContent={
                 "PJ tem muitos cenários que não são cobertos aqui. Simplifiquei de forma que você mesmo pode o valor que faz sentido pra você."
               }
+              inputId="tax-rate-input"
             >
-              <TableInput
+              <DataFormInput
                 value={formData.taxRate}
                 onChange={(v) =>
                   handleInputChange("taxRate", typeof v === "string" ? v : "")
                 }
                 prefix="%"
+                id="tax-rate-input"
               />
-            </TableRow>
-            <TableRow label="Outras Despesas">
-              <TableInput
+            </DataFormRow>
+            <DataFormRow label="Outras Despesas" inputId="other-expenses-input">
+              <DataFormInput
                 value={formData.otherExpenses}
                 onChange={(v) =>
                   handleInputChange(
@@ -438,15 +472,17 @@ export function SalaryCalculatorClient({
                   )
                 }
                 prefix="R$"
+                id="other-expenses-input"
               />
-            </TableRow>
+            </DataFormRow>
 
-            <TableHeader>Benefícios</TableHeader>
-            <TableRow
+            <DataFormHeader>Benefícios</DataFormHeader>
+            <DataFormRow
               label="Benefícios Tributáveis"
               tooltipContent="Benefícios que são somados ao salário bruto para fins de tributação"
+              inputId="taxable-benefits-input"
             >
-              <TableInput
+              <DataFormInput
                 value={formData.taxableBenefits}
                 onChange={(v) =>
                   handleInputChange(
@@ -455,13 +491,15 @@ export function SalaryCalculatorClient({
                   )
                 }
                 prefix="R$"
+                id="taxable-benefits-input"
               />
-            </TableRow>
-            <TableRow
+            </DataFormRow>
+            <DataFormRow
               label="Benefícios Não-Tributáveis"
               tooltipContent="Benefícios que você recebe mas não são tributados"
+              inputId="non-taxable-benefits-input"
             >
-              <TableInput
+              <DataFormInput
                 value={formData.nonTaxableBenefits}
                 onChange={(v) =>
                   handleInputChange(
@@ -470,8 +508,9 @@ export function SalaryCalculatorClient({
                   )
                 }
                 prefix="R$"
+                id="non-taxable-benefits-input"
               />
-            </TableRow>
+            </DataFormRow>
 
             {results && (
               <ResultsAccordion

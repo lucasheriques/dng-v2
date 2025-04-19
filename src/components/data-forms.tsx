@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Info } from "lucide-react";
+import React from "react";
 
 export function DataForm({
   children,
@@ -40,33 +41,41 @@ export function DataFormHeader({
   className?: string;
 }) {
   return (
-    <div
-      className={cn("bg-muted px-3 py-2 font-semibold text-base", className)}
-    >
+    <div className={cn("bg-muted px-3 py-2 font-semibold", className)}>
       {children}
     </div>
   );
 }
 
-export function DataFormRow({
+export function DataFormRow<T extends React.ElementType = "label">({
+  as,
   label,
   children,
   className = "",
   tooltipContent,
   inputId,
+  ...props
 }: {
-  label: string;
+  as?: T;
+  label: React.ReactNode;
   children: React.ReactNode;
   className?: string;
   tooltipContent?: string;
   inputId?: string;
-}) {
+} & Omit<React.ComponentPropsWithoutRef<T>, "as">) {
+  const Component = as || "label";
+  const labelProps = Component === "label" ? { htmlFor: inputId } : {};
+
   return (
     <div
       className={`grid grid-cols-2 items-stretch border-b last:border-b-0 ${className}`}
     >
-      <div className="px-3 py-2 bg-slate-800/50 border-r text-sm flex justify-between items-center">
-        <label htmlFor={inputId}>{label}</label>
+      <Component
+        {...labelProps}
+        className="px-3 py-2 bg-slate-800/50 border-r text-sm flex justify-between items-center"
+        {...props}
+      >
+        {label}
         {tooltipContent && (
           <>
             <TooltipProvider delayDuration={100}>
@@ -89,7 +98,7 @@ export function DataFormRow({
             </Popover>
           </>
         )}
-      </div>
+      </Component>
       <div>{children}</div>
     </div>
   );
@@ -195,6 +204,7 @@ export function DataFormInfoRow({
   return (
     <DataFormRow
       label={label}
+      as="div"
       tooltipContent={tooltipContent}
       inputId={potentialInputId}
     >
