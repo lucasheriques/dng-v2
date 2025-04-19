@@ -214,7 +214,6 @@ export function SalaryCalculatorClient({ initialData }: SalaryCalculatorProps) {
             <Button
               variant="default"
               onClick={() => {
-                // scroll to .hyvor-talk-container
                 const hyvorTalkContainer =
                   document.querySelector("#hyvor-comments");
                 hyvorTalkContainer?.scrollIntoView({ behavior: "smooth" });
