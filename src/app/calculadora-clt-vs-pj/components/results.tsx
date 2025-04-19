@@ -190,7 +190,7 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
                 value={formatCurrency(employerCost.mandatoryContributions.rat)}
                 type="addition"
                 className="text-sm"
-                tooltipContent="Seguro de Acidente de Trabalho (alíquota varia de 1% a 3% conforme o risco da atividade)."
+                tooltipContent="Seguro de Acidente de Trabalho (alíquota varia de 1% a 3% conforme o risco da atividade). Aqui estou usando a alíquota de 1%."
               />
               <DataFormInfoRow
                 label="Sistema S"
@@ -199,7 +199,7 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
                 )}
                 type="addition"
                 className="text-sm"
-                tooltipContent="Contribuições para entidades como SESI, SENAI, SESC, SENAC (alíquota varia conforme o setor)."
+                tooltipContent="Contribuições para entidades como SESI, SENAI, SESC, SENAC (alíquota varia conforme o setor). Aqui estou usando a alíquota do SENAI de 5,8%."
               />
               <DataFormInfoRow
                 label="13º Salário (provisão mensal)"
