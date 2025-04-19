@@ -87,15 +87,15 @@ interface InvestmentCalculatorProps {
 const chartConfig = {
   initialDeposit: {
     label: "Depósito inicial",
-    color: "#4338ca", // Use CSS variables
+    color: "var(--color-chart-indigo)", // Use CSS variables
   },
   contributions: {
     label: "Contribuições mensais",
-    color: "#0ea5e9", // Use CSS variables
+    color: "var(--color-chart-sky)", // Use CSS variables
   },
   interest: {
     label: "Juros acumulados",
-    color: "#10b981", // Use CSS variables
+    color: "var(--color-chart-emerald)", // Use CSS variables
   },
 } satisfies ChartConfig;
 
@@ -362,9 +362,7 @@ export default function InvestmentCalculator({
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Chart */}
           <div className="flex-1 flex flex-col gap-4">
-            <h2 className="text-xl font-bold text-slate-100">
-              Composição do investimento:
-            </h2>
+            <h2 className="text-xl font-bold">Composição do investimento:</h2>
             <div>
               <ChartContainer config={chartConfig} className="w-full h-full">
                 <BarChart
@@ -467,7 +465,7 @@ export default function InvestmentCalculator({
                                   </div>
                                   <span>
                                     {formattedValue}
-                                    <span className="opacity-70 ml-1">
+                                    <span className="text-tertiary-text ml-1">
                                       ({percentage}%)
                                     </span>
                                   </span>
@@ -528,7 +526,7 @@ export default function InvestmentCalculator({
                                 />
                                 <span className="text-slate-300">
                                   {label}
-                                  <span className="ml-1 opacity-70">
+                                  <span className="ml-1 text-tertiary-text">
                                     ({percent.toFixed(1)}%)
                                   </span>
                                 </span>
@@ -573,17 +571,17 @@ export default function InvestmentCalculator({
           {/* Breakdown */}
           <div className="flex-1 flex flex-col justify-between gap-4">
             <div className="space-y-3">
-              <h2 className="text-xl font-bold text-slate-100">
+              <h2 className="text-xl font-bold">
                 Detalhamento ao final do período:
               </h2>
               <div className="flex items-center justify-between py-2 border-b ">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-sm bg-[#10b981]"></div>
+                  <div className="w-3 h-3 rounded-sm bg-chart-emerald"></div>
                   <span className="text-sm">Juros acumulados</span>
                 </div>
-                <span className="font-medium text-sm text-slate-100">
+                <span className="font-medium text-sm">
                   {formatCurrency(results.totalInterest, "BRL")}
-                  <span className="ml-1 opacity-70">
+                  <span className="ml-1 text-tertiary-text">
                     ({interestPercent.toFixed(1)}%)
                   </span>
                 </span>
@@ -591,12 +589,12 @@ export default function InvestmentCalculator({
 
               <div className="flex items-center justify-between py-2 border-b ">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-sm bg-[#0ea5e9]"></div>
+                  <div className="w-3 h-3 rounded-sm bg-chart-sky"></div>
                   <span className="text-sm">Contribuições mensais</span>
                 </div>
-                <span className="font-medium text-sm text-slate-100">
+                <span className="font-medium text-sm">
                   + {formatCurrency(results.totalContributions, "BRL")}
-                  <span className="ml-1 opacity-70">
+                  <span className="ml-1 text-tertiary-text">
                     ({contributionsPercent.toFixed(1)}%)
                   </span>
                 </span>
@@ -604,12 +602,12 @@ export default function InvestmentCalculator({
 
               <div className="flex items-center justify-between py-2 border-b ">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-sm bg-[#4338ca]"></div>
+                  <div className="w-3 h-3 rounded-sm bg-chart-indigo"></div>
                   <span className="text-sm">Depósito inicial</span>
                 </div>
-                <span className="font-medium text-sm text-slate-100">
+                <span className="font-medium text-sm">
                   + {formatCurrency(results.initialDeposit, "BRL")}
-                  <span className="ml-1 opacity-70">
+                  <span className="ml-1 text-tertiary-text">
                     ({initialDepositPercent.toFixed(1)}%)
                   </span>
                 </span>
@@ -677,7 +675,7 @@ export default function InvestmentCalculator({
                         </TableCell>
                         <TableCell className="text-right">
                           {formatCurrency(item.monthlyInterestValue, "BRL")}
-                          <span className="ml-1 text-xs opacity-70">
+                          <span className="ml-1 text-xs text-tertiary-text">
                             ({item.monthlyInterestPercent.toFixed(2)}%)
                           </span>
                         </TableCell>

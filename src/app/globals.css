@@ -87,6 +87,15 @@
   --main-text: var(--color-slate-200);
   --secondary-text: var(--color-slate-300);
   --tertiary-text: var(--color-slate-400);
+
+  --chart-green: var(--color-green-400);
+  --chart-emerald: var(--color-emerald-400);
+  --chart-sky: var(--color-sky-500);
+  --chart-blue: var(--color-blue-400);
+  --chart-pink: var(--color-pink-400);
+  --chart-purple: var(--color-purple-400);
+  --chart-violet: var(--color-violet-400);
+  --chart-indigo: var(--color-indigo-600);
 }
 
 @theme {
@@ -135,7 +144,12 @@
 
   --color-chart-blue: var(--chart-blue);
   --color-chart-pink: var(--chart-pink);
-
+  --color-chart-green: var(--chart-green);
+  --color-chart-emerald: var(--chart-emerald);
+  --color-chart-sky: var(--chart-sky);
+  --color-chart-violet: var(--chart-violet);
+  --color-chart-purple: var(--chart-purple);
+  --color-chart-indigo: var(--chart-indigo);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
