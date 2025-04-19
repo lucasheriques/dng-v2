@@ -35,7 +35,7 @@ export function TableRow({
       className={`grid grid-cols-2 items-stretch border-b border-slate-700 ${className}`}
     >
       <div className="px-3 py-2 bg-slate-800/50 border-r border-slate-700 text-sm flex justify-between items-center">
-        <label htmlFor={inputId} className="flex-1 cursor-pointer">
+        <label htmlFor={inputId} className="">
           {label}
         </label>
         {tooltipContent && (
