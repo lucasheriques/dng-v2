@@ -1,6 +1,5 @@
 "use client";
 
-import { TableInput } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { calculateInvestmentResults } from "@/app/calculadora-juros-compostos/lib";
 import {
   DataForm,
@@ -289,7 +288,7 @@ export default function InvestmentCalculator({
       <DataForm>
         <DataFormHeader>Configurações</DataFormHeader>
         <DataFormRow label="Depósito inicial" inputId="initial-deposit-input">
-          <TableInput
+          <DataFormInput
             id="initial-deposit-input"
             prefix="R$"
             value={String(initialDeposit)}
@@ -301,7 +300,7 @@ export default function InvestmentCalculator({
           label="Contribuição mensal"
           inputId="monthly-contribution-input"
         >
-          <TableInput
+          <DataFormInput
             id="monthly-contribution-input"
             prefix="R$"
             value={String(monthlyContribution)}
@@ -349,7 +348,7 @@ export default function InvestmentCalculator({
           tooltipContent="A taxa média de juros para investimentos no Brasil varia entre 3% e 12% ao ano, dependendo do tipo de investimento."
           inputId="interest-rate-input"
         >
-          <TableInput
+          <DataFormInput
             id="interest-rate-input"
             suffix="%"
             value={String(interestRate)}

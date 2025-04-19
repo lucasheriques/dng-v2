@@ -1,7 +1,3 @@
-import {
-  TableHeader,
-  TableRow,
-} from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { DataFormHeader, DataFormInfoRow } from "@/components/data-forms";
 import {
   Accordion,
@@ -26,24 +22,19 @@ export default function ResultsAccordion({
   if (type === "clt") {
     return (
       <div>
-        <TableHeader>Resultados</TableHeader>
-        <TableRow
+        <DataFormHeader>Resultados</DataFormHeader>
+        <DataFormInfoRow
           label="Salário Líquido Mensal"
           className="font-semibold"
           tooltipContent="Esse é o valor que vai entrar na sua conta, todo mês, depois de todos os descontos, sem contar com os benefícios."
-        >
-          <div className="px-3 py-2 text-right">
-            {formatCurrency(results.clt.netSalary)}
-          </div>
-        </TableRow>
-        <TableRow
+          value={formatCurrency(results.clt.netSalary)}
+          type="neutral"
+        />
+        <DataFormInfoRow
           label="Salário Líquido + Benefícios Acumulados"
           className="font-semibold text-emerald-400"
-        >
-          <div className="px-3 py-2 text-right">
-            {formatCurrency(results.clt.total)}
-          </div>
-        </TableRow>
+          value={formatCurrency(results.clt.total)}
+        />
         <Accordion
           type="single"
           value={isExpanded ? "details" : ""}
@@ -182,24 +173,18 @@ export default function ResultsAccordion({
 
   return (
     <div>
-      <TableHeader>Resultados</TableHeader>
-      <TableRow
+      <DataFormHeader>Resultados</DataFormHeader>
+      <DataFormInfoRow
         label="Total Líquido"
         className={`font-semibold ${results.pj.benefits.nonTaxable > 0 ? "text-slate-200" : "text-emerald-400"}`}
-      >
-        <div className="px-3 py-2 text-right">
-          {formatCurrency(results.pj.netSalary)}
-        </div>
-      </TableRow>
+        value={formatCurrency(results.pj.netSalary)}
+      />
       {results.pj.benefits.nonTaxable > 0 && (
-        <TableRow
+        <DataFormInfoRow
           label="Líquido + Benefícios Não Tributáveis"
           className="font-semibold text-emerald-400"
-        >
-          <div className="px-3 py-2 text-right">
-            {formatCurrency(results.pj.total)}
-          </div>
-        </TableRow>
+          value={formatCurrency(results.pj.total)}
+        />
       )}
       <Accordion
         type="single"
@@ -219,7 +204,9 @@ export default function ResultsAccordion({
               value={formatCurrency(results.pj.grossSalary)}
               type="addition"
             />
-            {isThereAnyPJBenefits && <TableHeader>Benefícios</TableHeader>}
+            {isThereAnyPJBenefits && (
+              <DataFormHeader>Benefícios</DataFormHeader>
+            )}
             {results.pj.benefits.taxable > 0 && (
               <DataFormInfoRow
                 label="Benefícios Tributáveis"
@@ -235,7 +222,7 @@ export default function ResultsAccordion({
               />
             )}
 
-            <TableHeader>Deduções</TableHeader>
+            <DataFormHeader>Deduções</DataFormHeader>
             <DataFormInfoRow
               label="Impostos"
               value={formatCurrency(results.pj.deductions.taxes)}

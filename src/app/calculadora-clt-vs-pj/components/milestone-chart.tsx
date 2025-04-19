@@ -1,6 +1,6 @@
 "use client";
 
-import { TableHeader } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
+import { DataForm, DataFormHeader } from "@/components/data-forms";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatCurrency } from "@/lib/utils";
 import {
@@ -170,16 +170,18 @@ export function MilestoneChart({
         </p>
       </div>
 
-      <div className="hidden md:block border  rounded-lg overflow-hidden bg-slate-900/50">
-        <TableHeader>Marcos Financeiros e Tempo de Investimento</TableHeader>
-        <div className="grid grid-cols-4 border-b ">
-          <div className="p-3 border-r  font-medium">
-            <span className="text-sm">Objetivo</span>
+      <DataForm className="hidden md:block">
+        <DataFormHeader>
+          Marcos Financeiros e Tempo de Investimento
+        </DataFormHeader>
+        <div className="grid grid-cols-4 border-b">
+          <div className="p-3 border-r font-medium">
+            <span className="ate">Objetivo</span>
           </div>
-          <div className="p-3 border-r  text-right font-medium">
+          <div className="p-3 border-r text-right font-medium">
             <span className="text-sm">Valor</span>
           </div>
-          <div className="p-3 border-r  text-right font-medium">
+          <div className="p-3 border-r text-right font-medium">
             <span className="text-sm text-chart-blue">Tempo CLT</span>
           </div>
           <div className="p-3 text-right font-medium">
@@ -220,7 +222,7 @@ export function MilestoneChart({
             </div>
           );
         })}
-      </div>
+      </DataForm>
 
       <div className="md:hidden space-y-4">
         <h3 className="text-lg font-semibold">
