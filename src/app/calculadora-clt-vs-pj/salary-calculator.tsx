@@ -59,7 +59,6 @@ export function SalaryCalculatorClient({
     initialData ? calculateResults(initialData) : null
   );
   const [isDetailsExpanded, setIsDetailsExpanded] = useState(true);
-  const [shareButtonText, setShareButtonText] = useState("Compartilhar");
 
   // Use localStorage to store an array of parameter strings
   const [history, setHistory] = useLocalStorage<string[]>(
@@ -133,11 +132,10 @@ export function SalaryCalculatorClient({
       });
     } catch (err) {
       console.error("Failed to copy URL: ", err);
-      // Add user feedback here if desired (e.g., using a toast notification)
-      setShareButtonText("Erro ao copiar");
-      setTimeout(() => {
-        setShareButtonText("Compartilhar");
-      }, 3000);
+      toast({
+        title: "Erro ao copiar link",
+        description: "Por favor, tente copiar manualmente.",
+      });
     }
   };
 
