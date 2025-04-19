@@ -9,9 +9,9 @@ import {
 } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils"; // Import formatCurrency
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
-import { Share2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
@@ -88,6 +88,8 @@ export function SalaryCalculatorClient({
     setResults(calculateResults(newFormData));
   };
 
+  const { toast } = useToast();
+
   const handleShare = async () => {
     const params = new URLSearchParams();
 
@@ -123,10 +125,11 @@ export function SalaryCalculatorClient({
 
     try {
       await navigator.clipboard.writeText(url.toString());
-      setShareButtonText("URL copiada!");
-      setTimeout(() => {
-        setShareButtonText("Compartilhar");
-      }, 3000);
+      toast({
+        title: "Link de compartilhamento copiado!",
+        description:
+          "O link com a sua simulação foi copiado para a área de transferência.",
+      });
     } catch (err) {
       console.error("Failed to copy URL: ", err);
       // Add user feedback here if desired (e.g., using a toast notification)
@@ -216,22 +219,8 @@ export function SalaryCalculatorClient({
             </h1>
           </div>
           <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="gap-2"
-              onClick={handleClear}
-            >
+            <Button variant="ghost" onClick={handleClear}>
               Limpar valores
-            </Button>
-            <Button
-              variant="default"
-              size="sm"
-              className="gap-2"
-              onClick={handleShare}
-            >
-              <Share2 className="w-4 h-4" />
-              {shareButtonText}
             </Button>
           </div>
         </div>
@@ -500,6 +489,7 @@ export function SalaryCalculatorClient({
             defaultInterestRate={defaultInterestRate}
             results={results}
             formData={formData}
+            onShare={handleShare}
           />
         )}
       </div>

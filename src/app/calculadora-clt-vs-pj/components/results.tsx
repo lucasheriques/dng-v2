@@ -1,4 +1,5 @@
 import { ComparisonCard } from "@/app/calculadora-clt-vs-pj/components/comparison-card";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -12,18 +13,21 @@ import {
   findCLTEquivalentForPJ,
   findPJEquivalentForCLT,
 } from "@/use-cases/calculator/salary-calculations";
+import { Share2 } from "lucide-react";
 import { CalculationResults, CalculatorFormData } from "../types";
 
 interface ResultsProps {
   results: CalculationResults;
   defaultInterestRate: number;
   formData: CalculatorFormData;
+  onShare: () => void;
 }
 
 export default function Results({
   results,
   defaultInterestRate,
   formData,
+  onShare,
 }: ResultsProps) {
   const monthlyDifference = results.pj.total - results.clt.total;
   const yearlyDifference = monthlyDifference * 12;
@@ -41,7 +45,13 @@ export default function Results({
 
   return (
     <div className="space-y-4 relative w-full overflow-auto">
-      <h2 className="text-2xl font-bold">Comparação</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold">Comparação</h2>
+        <Button variant="outline" onClick={onShare}>
+          <Share2 className="size-4 mr-2" />
+          Compartilhar resultado
+        </Button>
+      </div>
 
       <Table>
         <TableHeader>
