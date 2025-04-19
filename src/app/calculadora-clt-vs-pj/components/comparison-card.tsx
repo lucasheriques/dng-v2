@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SELIC_RATE } from "@/lib/constants";
+import Link from "next/link";
 import { useState } from "react";
 import { CalculationResults } from "../types";
 import { InvestmentConfig } from "./investment-config";
@@ -27,36 +28,42 @@ export function ComparisonCard({ results }: ComparisonCardProps) {
 
   return (
     <>
-      <Accordion type="single" collapsible defaultValue="investment-projection">
+      <Accordion type="single" collapsible>
         <AccordionItem value="investment-projection">
-          <AccordionTrigger>Simular Projeção de Investimento</AccordionTrigger>
-          <AccordionContent className="pb-0">
-            <div className="space-y-4">
-              {results.pj.total > 0 && results.clt.total > 0 ? (
-                <>
-                  <InvestmentConfig
-                    cltMonthlyTotal={results.clt.total}
-                    pjMonthlyTotal={results.pj.total}
-                    investmentRate={investmentRate}
-                    interestRate={interestRate}
-                    onInvestmentRateChange={setInvestmentRate}
-                    onInterestRateChange={setInterestRate}
-                  />
+          <AccordionTrigger>
+            <h3>Simular Projeção de Investimento</h3>
+          </AccordionTrigger>
+          <AccordionContent className="pb-0 space-y-4">
+            <Link
+              href="/calculadora-juros-compostos"
+              className="hover:border-b hover:border-b-primary hover:text-primary transition-all inline-block"
+            >
+              Veja também minha calculadora de juros compostos.
+            </Link>
+            {results.pj.total > 0 && results.clt.total > 0 ? (
+              <>
+                <InvestmentConfig
+                  cltMonthlyTotal={results.clt.total}
+                  pjMonthlyTotal={results.pj.total}
+                  investmentRate={investmentRate}
+                  interestRate={interestRate}
+                  onInvestmentRateChange={setInvestmentRate}
+                  onInterestRateChange={setInterestRate}
+                />
 
-                  <MilestoneChart
-                    cltMonthlyTotal={results.clt.total}
-                    pjMonthlyTotal={results.pj.total}
-                    investmentRate={Number(investmentRate)}
-                    interestRate={Number(interestRate) / 100}
-                    milestones={MILESTONES}
-                  />
-                </>
-              ) : (
-                <p className="text-sm text-slate-400">
-                  Você só consegue investir se o teu salário for maior que 0. 😅
-                </p>
-              )}
-            </div>
+                <MilestoneChart
+                  cltMonthlyTotal={results.clt.total}
+                  pjMonthlyTotal={results.pj.total}
+                  investmentRate={Number(investmentRate)}
+                  interestRate={Number(interestRate) / 100}
+                  milestones={MILESTONES}
+                />
+              </>
+            ) : (
+              <p className="text-sm text-slate-400">
+                Você só consegue investir se o teu salário for maior que 0. 😅
+              </p>
+            )}
           </AccordionContent>
         </AccordionItem>
       </Accordion>
