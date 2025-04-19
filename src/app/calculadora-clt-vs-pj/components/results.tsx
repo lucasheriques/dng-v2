@@ -160,11 +160,6 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
                 <h3>CLT</h3>
               </DataFormHeader>
               <DataFormInfoRow
-                label="Total mensal"
-                value={formatCurrency(employerCost.monthlyCosts.total)}
-                className="font-semibold text-accent-secondary"
-              />
-              <DataFormInfoRow
                 label="Salário base"
                 value={formatCurrency(employerCost.grossSalary)}
                 type="addition"
@@ -286,6 +281,11 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
                   tooltipContent="Custo de outros benefícios acordados (Ex: auxílio creche, seguro de vida)."
                 />
               )}
+              <DataFormInfoRow
+                label="Total mensal"
+                value={formatCurrency(employerCost.monthlyCosts.total)}
+                className="font-semibold text-accent-secondary"
+              />
 
               <DataFormHeader>
                 <h3>PJ</h3>
