@@ -1,7 +1,7 @@
 import { Providers } from "@/app/providers";
 import { Footer } from "@/components/footer";
+import GeneralHeaderBanner from "@/components/general-header-banner";
 import Header from "@/components/header";
-import LastArticleBanner from "@/components/last-article-banner";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { cn } from "@/lib/utils";
 import { getRandomArticles } from "@/use-cases/get-articles";
@@ -43,7 +43,8 @@ export default function RootLayout({
           )}
         >
           <Providers>
-            <LastArticleBanner />
+            {/* <LastArticleBanner /> */}
+            <GeneralHeaderBanner />
             <Header articles={randomArticles} />
             <main className="min-h-dvh">{children}</main>
             <Footer />

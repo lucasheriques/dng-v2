@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
@@ -36,18 +37,30 @@ interface BaseBannerProps extends VariantProps<typeof banner> {
   children: React.ReactNode;
   cta?: React.ReactNode;
   className?: string;
+  containerClassName?: string;
 }
 
-export function Banner({ children, intent = "info", cta }: BaseBannerProps) {
+export function Banner({
+  children,
+  intent = "info",
+  cta,
+  className,
+  containerClassName,
+}: BaseBannerProps) {
   const Icon = IconMap[intent];
 
   return (
     <m.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={banner({ intent })}
+      className={cn(banner({ intent }), className)}
     >
-      <div className="flex flex-1 items-center gap-3 text-sm font-medium">
+      <div
+        className={cn(
+          "flex flex-1 items-center gap-3 text-sm font-medium",
+          containerClassName
+        )}
+      >
         <Icon size={20} className="min-w-fit" />
         {children}
       </div>
@@ -64,10 +77,13 @@ export function DismissableBanner({
   children,
   intent = "info",
   onDismiss,
+  className,
+  containerClassName,
 }: DismissableBannerProps) {
   const [isVisible, setIsVisible] = useState(true);
 
-  const handleDismiss = () => {
+  const handleDismiss = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setIsVisible(false);
     onDismiss?.();
   };
@@ -86,6 +102,8 @@ export function DismissableBanner({
               <X size={18} />
             </button>
           }
+          className={className}
+          containerClassName={containerClassName}
         >
           {children}
         </Banner>
