@@ -655,18 +655,18 @@ export default function InvestmentCalculator({
             {results.monthlyBreakdown && results.monthlyBreakdown.length > 0 ? (
               <div className="max-h-96 overflow-y-auto nice-scrollbar">
                 <Table className="w-full text-sm">
-                  <ShadcnTableHeader className="sticky top-0 bg-slate-800 z-10">
+                  <ShadcnTableHeader className="bg-slate-800 z-10">
                     <ShadcnTableRow className="hover:bg-slate-700/50 border-slate-700">
-                      <TableHead className="w-[60px] text-slate-300 py-2 px-4">
+                      <TableHead className="w-[60px] text-tertiary-text py-2 px-4">
                         Mês
                       </TableHead>
-                      <TableHead className="text-right text-slate-300 py-2 px-4">
+                      <TableHead className="text-right text-tertiary-text py-2 px-4">
                         Valor Investido
                       </TableHead>
-                      <TableHead className="text-right text-slate-300 py-2 px-4">
+                      <TableHead className="text-right text-tertiary-text py-2 px-4">
                         Juros (Valor / %)
                       </TableHead>
-                      <TableHead className="text-right text-slate-300 py-2 px-4">
+                      <TableHead className="text-right text-tertiary-text py-2 px-4">
                         Total no Mês
                       </TableHead>
                     </ShadcnTableRow>

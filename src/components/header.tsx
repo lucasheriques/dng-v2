@@ -47,7 +47,7 @@ export default function Header({ articles }: HeaderProps) {
         <>
           <div
             className={cn(
-              "py-2 mx-auto w-full px-4 relative flex items-center justify-between max-w-7xl"
+              "py-2 w-full relative flex items-center justify-between container"
             )}
           >
             <Link href="/" className="items-center gap-2 flex">

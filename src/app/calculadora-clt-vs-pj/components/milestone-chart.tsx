@@ -73,12 +73,12 @@ export function MilestoneChart({
 
   const chartConfig: ChartConfig = {
     clt: {
-      label: "CLT",
-      color: "#3b82f6",
+      label: "CLTkkkkkkkkkkk",
+      color: "white",
     },
     pj: {
       label: "PJ",
-      color: "#ec4899",
+      color: "white",
     },
   };
 
@@ -131,26 +131,26 @@ export function MilestoneChart({
                 type="monotone"
                 dataKey="clt"
                 name="CLT"
-                stroke="#3b82f6"
+                stroke="var(--chart-blue)"
                 fill="url(#cltGradient)"
                 strokeWidth={2}
                 dot={false}
                 activeDot={{
                   r: 6,
-                  fill: "#3b82f6",
+                  fill: "var(--chart-blue)",
                 }}
               />
               <Area
                 type="monotone"
                 dataKey="pj"
                 name="PJ"
-                stroke="#ec4899"
+                stroke="var(--chart-pink)"
                 fill="url(#pjGradient)"
                 strokeWidth={2}
                 dot={false}
                 activeDot={{
                   r: 6,
-                  fill: "#ec4899",
+                  fill: "var(--chart-pink)",
                 }}
               />
               <defs>
@@ -182,10 +182,10 @@ export function MilestoneChart({
             <span className="text-sm">Valor</span>
           </div>
           <div className="p-3 border-r border-slate-700 text-right font-medium">
-            <span className="text-sm text-blue-400">Tempo CLT</span>
+            <span className="text-sm text-chart-blue">Tempo CLT</span>
           </div>
           <div className="p-3 text-right font-medium">
-            <span className="text-sm text-pink-400">Tempo PJ</span>
+            <span className="text-sm text-chart-pink">Tempo PJ</span>
           </div>
         </div>
         {milestones.map((milestone) => {
@@ -210,12 +210,12 @@ export function MilestoneChart({
                 </span>
               </div>
               <div className="p-3 border-r border-slate-700 text-right">
-                <span className="text-sm text-blue-400">
+                <span className="text-sm text-chart-blue">
                   {formatTime(cltMonthsToReach)}
                 </span>
               </div>
               <div className="p-3 text-right">
-                <span className="text-sm text-pink-400">
+                <span className="text-sm text-chart-pink">
                   {formatTime(pjMonthsToReach)}
                 </span>
               </div>

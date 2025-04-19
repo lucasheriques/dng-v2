@@ -11,7 +11,7 @@ const Timeline = dynamic(() => import("@/app/components/timeline"));
 
 export default async function Home() {
   return (
-    <>
+    <div className="pb-16">
       <div className="relative min-h-[75dvh] pt-8 md:pt-0 flex items-center">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
@@ -28,7 +28,7 @@ export default async function Home() {
         <Hero />
       </div>
       <div
-        className="container motion-preset-fade motion-preset-slide-up motion-duration-1500 motion-delay- md:max-w-3xl md:mx-auto md:px-0 py-8"
+        className="motion-preset-fade motion-preset-slide-up motion-duration-1500 motion-delay- md:max-w-3xl md:mx-auto md:px-0 py-8"
         id="youtube-hero"
       >
         <HeroVideoDialog
@@ -41,6 +41,6 @@ export default async function Home() {
       <Features />
       <About />
       <Timeline />
-    </>
+    </div>
   );
 }

@@ -140,9 +140,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="mt-16 pt-8 border-t border-white/10 flex justify-between text-xs md:flex-row flex-col gap-4">
-          <Link href="/politica-de-privacidade" className="">
-            Política de privacidade
-          </Link>
+          <Link href="/politica-de-privacidade">Política de privacidade</Link>
           <p className="">
             &copy; {new Date().getFullYear()}. Criado por{" "}
             <Link

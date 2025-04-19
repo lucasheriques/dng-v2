@@ -44,6 +44,9 @@
   --chart-3: hsl(197 37% 24%);
   --chart-4: hsl(43 74% 66%);
   --chart-5: hsl(27 87% 67%);
+
+  --chart-blue: #3b82f6;
+  --chart-pink: #ec4899;
 }
 
 .dark {
@@ -119,6 +122,9 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
+  --color-chart-blue: var(--chart-blue);
+  --color-chart-pink: var(--chart-pink);
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -187,13 +193,23 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: var(--color-slate-200, currentcolor);
+  }
+
+  .dark {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+      border-color: var(--color-slate-700, currentcolor);
+    }
   }
 }
 
 @layer base {
   a {
-    @apply focus:outline-primary/70 focus:outline-2 focus:outline-offset-2 transition-all;
+    @apply focus:outline-primary/70 focus:outline-2 focus:outline-offset-2 transition-all duration-300;
   }
 
   [type="date"]::-webkit-calendar-picker-indicator {
