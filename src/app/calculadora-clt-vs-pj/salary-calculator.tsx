@@ -35,7 +35,6 @@ const RecentComparisons = dynamic(
 
 interface SalaryCalculatorProps {
   initialData?: CalculatorFormData;
-  defaultInterestRate: number;
 }
 
 // Helper to get param value, needed for renderHistoryItem
@@ -47,10 +46,7 @@ const getParamValue = (
   return params.get(key) ?? defaultValue;
 };
 
-export function SalaryCalculatorClient({
-  initialData,
-  defaultInterestRate,
-}: SalaryCalculatorProps) {
+export function SalaryCalculatorClient({ initialData }: SalaryCalculatorProps) {
   const [formData, setFormData] = useState<CalculatorFormData>(
     initialData ?? defaultFormData
   );
@@ -444,7 +440,7 @@ export function SalaryCalculatorClient({
             <DataFormRow
               label="Alíquota de Impostos (%)"
               tooltipContent={
-                "PJ tem muitos cenários que não são cobertos aqui. Simplifiquei de forma que você mesmo pode o valor que faz sentido pra você."
+                "10% (valor padrão) é uma estimativa para receita anual menor que R$180k, com o pró-labore acima de 28% do faturamento para redução dos impostos. Para quem trabalha pro exterior, esse valor pode ser ainda menor."
               }
               inputId="tax-rate-input"
             >
@@ -520,7 +516,6 @@ export function SalaryCalculatorClient({
 
         {results && (
           <Results
-            defaultInterestRate={defaultInterestRate}
             results={results}
             formData={formData}
             onShare={handleShare}

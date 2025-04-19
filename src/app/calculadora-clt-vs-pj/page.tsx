@@ -11,8 +11,6 @@ import {
   safeParseNumberString,
 } from "./types";
 
-const SELIC_RATE = 12.25;
-
 export async function generateMetadata({
   searchParams: params,
 }: {

@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Info } from "lucide-react";
 import React from "react";
+import Balancer from "react-wrap-balancer";
 
 export function DataForm({
   children,
@@ -83,8 +84,8 @@ export function DataFormRow<T extends React.ElementType = "label">({
                 <TooltipTrigger className="hidden lg:block">
                   <Info size={16} />
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p>{tooltipContent}</p>
+                <TooltipContent className="max-w-[250px]">
+                  <Balancer>{tooltipContent}</Balancer>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
