@@ -31,10 +31,10 @@ export default function RootLayout({
     <ConvexAuthNextjsServerProvider>
       <html lang="pt-BR" className="nice-scrollbar dark">
         <head>
-          {/* <script
+          <script
             src="https://unpkg.com/react-scan/dist/auto.global.js"
             async
-          /> */}
+          />
         </head>
         <body
           className={cn(

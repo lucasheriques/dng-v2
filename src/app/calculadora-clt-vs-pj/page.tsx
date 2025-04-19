@@ -109,10 +109,7 @@ export default async function SalaryCalculatorPage({
 
   return (
     <PageWrapper>
-      <SalaryCalculatorClient
-        initialData={initialData}
-        defaultInterestRate={SELIC_RATE}
-      />
+      <SalaryCalculatorClient initialData={initialData} />
       <Comments slug="calculadora-clt-vs-pj" />
     </PageWrapper>
   );

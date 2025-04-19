@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { SELIC_RATE } from "@/lib/constants";
 import { useState } from "react";
 import { CalculationResults } from "../types";
 import { InvestmentConfig } from "./investment-config";
@@ -18,15 +19,11 @@ const MILESTONES = [
 
 interface ComparisonCardProps {
   results: CalculationResults;
-  defaultInterestRate: number;
 }
 
-export function ComparisonCard({
-  results,
-  defaultInterestRate,
-}: ComparisonCardProps) {
+export function ComparisonCard({ results }: ComparisonCardProps) {
   const [investmentRate, setInvestmentRate] = useState("20");
-  const [interestRate, setInterestRate] = useState(String(defaultInterestRate));
+  const [interestRate, setInterestRate] = useState(String(SELIC_RATE));
 
   return (
     <>

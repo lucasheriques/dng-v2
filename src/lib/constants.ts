@@ -35,6 +35,8 @@ export const SOCIALS = {
   personalWebsite: "https://lucasfaria.dev",
 };
 
+export const SELIC_RATE = 14.25;
+
 export const SOCIAL_LINKS = {
   newsletter: {
     title: "Newsletter",

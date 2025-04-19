@@ -195,18 +195,15 @@ export function SalaryCalculatorClient({
   };
 
   // Function to render history items for Salary Calculator
-  const renderSalaryHistoryItem = useCallback(
-    (paramString: string) => {
-      const params = new URLSearchParams(paramString);
-      const cltGrossDisplay = getParamValue(params, "gs", "0");
-      const pjGrossDisplay = getParamValue(params, "pjs") || cltGrossDisplay;
-      return {
-        title: `CLT: ${formatCurrency(Number(cltGrossDisplay) || 0)}`,
-        subtitle: `PJ: ${formatCurrency(Number(pjGrossDisplay) || 0)}`,
-      };
-    },
-    [] // No dependencies needed as it only uses formatCurrency and getParamValue
-  );
+  const renderSalaryHistoryItem = useCallback((paramString: string) => {
+    const params = new URLSearchParams(paramString);
+    const cltGrossDisplay = getParamValue(params, "gs", "0");
+    const pjGrossDisplay = getParamValue(params, "pjs") || cltGrossDisplay;
+    return {
+      title: `CLT: ${formatCurrency(Number(cltGrossDisplay) || 0)}`,
+      subtitle: `PJ: ${formatCurrency(Number(pjGrossDisplay) || 0)}`,
+    };
+  }, []);
 
   return (
     <>
