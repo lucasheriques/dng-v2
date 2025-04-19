@@ -211,7 +211,9 @@ export function SalaryCalculatorClient({
       <div className="grid gap-4">
         <div className="flex md:items-center justify-between md:flex-row flex-col gap-2 md:gap-4">
           <div className="space-y-2">
-            <h1 className="text-4xl font-bold">Calculadora CLT vs. PJ</h1>
+            <h1 className="text-4xl font-bold text-highlight-text">
+              Calculadora CLT vs. PJ
+            </h1>
           </div>
           <div className="flex gap-2">
             <Button

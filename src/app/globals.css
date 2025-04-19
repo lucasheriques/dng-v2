@@ -47,10 +47,15 @@
 
   --chart-blue: #3b82f6;
   --chart-pink: #ec4899;
+
+  --highlight-text: var(--color-slate-100);
+  --main-text: var(--color-slate-200);
+  --secondary-text: var(--color-slate-300);
+  --tertiary-text: var(--color-slate-400);
 }
 
 .dark {
-  --background: var(--text-slate-500);
+  --background: var(--color-slate-950);
   --foreground: hsl(0 0% 98%);
 
   --card: hsl(240 10% 3.9%);
@@ -65,7 +70,7 @@
   --secondary: hsl(240 3.7% 15.9%);
   --secondary-foreground: hsl(0 0% 98%);
 
-  --muted: hsl(240 3.7% 15.9%);
+  --muted: var(--color-slate-800);
   --muted-foreground: hsl(240 5% 64.9%);
 
   --accent: hsl(168 100% 56% / 0.1);
@@ -77,15 +82,21 @@
   --border: hsl(222 47% 11%);
   --input: hsl(229 84% 5%);
   --ring: hsl(215 19% 35%);
+
+  --highlight-text: var(--color-slate-100);
+  --main-text: var(--color-slate-200);
+  --secondary-text: var(--color-slate-300);
+  --tertiary-text: var(--color-slate-400);
 }
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 
-  --color-main-text: var(--color-slate-200);
-  --color-secondary-text: var(--color-slate-300);
-  --color-tertiary-text: var(--color-slate-400);
+  --color-highlight-text: var(--highlight-text);
+  --color-main-text: var(--main-text);
+  --color-secondary-text: var(--secondary-text);
+  --color-tertiary-text: var(--tertiary-text);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

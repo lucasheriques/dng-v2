@@ -38,14 +38,14 @@ export default function RootLayout({
         </head>
         <body
           className={cn(
-            "font-sans antialiased selection:bg-teal-500 selection:text-slate-950 bg-slate-950 dark:text-main-text",
+            "font-sans antialiased selection:bg-teal-500 selection:text-slate-950 bg-background dark:text-main-text",
             inter.variable
           )}
         >
           <Providers>
             <LastArticleBanner />
             <Header articles={randomArticles} />
-            <main className="min-h-dvh bg-slate-950">{children}</main>
+            <main className="min-h-dvh">{children}</main>
             <Footer />
           </Providers>
           <TailwindIndicator />

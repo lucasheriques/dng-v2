@@ -26,7 +26,11 @@ const TableHeader = ({
 }: React.HTMLAttributes<HTMLTableSectionElement> & {
   ref?: React.RefObject<HTMLTableSectionElement>;
 }) => (
-  <thead ref={ref} className={cn("[&_tr]:border-b", className)} {...props} />
+  <thead
+    ref={ref}
+    className={cn("[&_tr]:border-b bg-slate-900 text-tertiary-text", className)}
+    {...props}
+  />
 );
 TableHeader.displayName = "TableHeader";
 
@@ -66,14 +70,17 @@ TableFooter.displayName = "TableFooter";
 const TableRow = ({
   ref,
   className,
+  isSplit = false,
   ...props
 }: React.HTMLAttributes<HTMLTableRowElement> & {
   ref?: React.RefObject<HTMLTableRowElement>;
+  isSplit?: boolean;
 }) => (
   <tr
     ref={ref}
     className={cn(
-      "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+      "border-b transition-colors hover:bg-muted data-[state=selected]:bg-muted",
+      isSplit && "even:bg-slate-900",
       className
     )}
     {...props}
@@ -91,7 +98,7 @@ const TableHead = ({
   <th
     ref={ref}
     className={cn(
-      "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      "p-2 md:px-4 text-left align-middle font-medium text-secondary-text [&:has([role=checkbox])]:pr-0",
       className
     )}
     {...props}
@@ -108,7 +115,10 @@ const TableCell = ({
 }) => (
   <td
     ref={ref}
-    className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
+    className={cn(
+      "p-2 md:p-4 align-middle [&:has([role=checkbox])]:pr-0",
+      className
+    )}
     {...props}
   />
 );

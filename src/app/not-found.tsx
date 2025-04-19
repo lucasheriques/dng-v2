@@ -8,7 +8,7 @@ import Image404 from "@public/404-v2.webp";
 
 export default function NotFound() {
   return (
-    <div className="relative min-h-screen w-ful overflow-hidden bg-slate-950">
+    <div className="relative min-h-screen overflow-hidden">
       {/* Background image */}
       <HeroImageGradientOverlay>
         <Image

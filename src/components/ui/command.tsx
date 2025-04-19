@@ -21,7 +21,7 @@ const Command = ({
   <CommandPrimitive
     ref={ref}
     className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-md text-popover-foreground bg-slate-950",
+      "flex h-full w-full flex-col overflow-hidden rounded-md text-popover-foreground bg-background",
       className
     )}
     {...props}

@@ -32,10 +32,8 @@ export function ComparisonCard({
     <>
       <Accordion type="single" collapsible defaultValue="investment-projection">
         <AccordionItem value="investment-projection">
-          <AccordionTrigger className="bg-slate-800/50 p-4">
-            Simular Projeção de Investimento
-          </AccordionTrigger>
-          <AccordionContent className="pb-0 bg-slate-800/50 p-4">
+          <AccordionTrigger>Simular Projeção de Investimento</AccordionTrigger>
+          <AccordionContent className="pb-0">
             <div className="space-y-4">
               {results.pj.total > 0 && results.clt.total > 0 ? (
                 <>

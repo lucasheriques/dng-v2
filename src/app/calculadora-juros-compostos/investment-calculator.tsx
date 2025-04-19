@@ -646,50 +646,41 @@ export default function InvestmentCalculator({
       </div>
 
       <Accordion type="single" collapsible className="p-0">
-        <AccordionItem
-          value="item-1"
-          className="rounded px-3 py-2 bg-slate-900/75"
-        >
+        <AccordionItem value="item-1">
           <AccordionTrigger>Detalhamento mensal</AccordionTrigger>
           <AccordionContent>
             {results.monthlyBreakdown && results.monthlyBreakdown.length > 0 ? (
               <div className="max-h-96 overflow-y-auto nice-scrollbar">
                 <Table className="w-full text-sm">
-                  <ShadcnTableHeader className="bg-slate-800 z-10">
-                    <ShadcnTableRow className="hover:bg-slate-700/50 border-slate-700">
-                      <TableHead className="w-[60px] text-tertiary-text py-2 px-4">
-                        Mês
-                      </TableHead>
-                      <TableHead className="text-right text-tertiary-text py-2 px-4">
+                  <ShadcnTableHeader>
+                    <ShadcnTableRow>
+                      <TableHead className="w-[60px]">Mês</TableHead>
+                      <TableHead className="text-right">
                         Valor Investido
                       </TableHead>
-                      <TableHead className="text-right text-tertiary-text py-2 px-4">
+                      <TableHead className="text-right">
                         Juros (Valor / %)
                       </TableHead>
-                      <TableHead className="text-right text-tertiary-text py-2 px-4">
-                        Total no Mês
-                      </TableHead>
+                      <TableHead className="text-right">Total no Mês</TableHead>
                     </ShadcnTableRow>
                   </ShadcnTableHeader>
                   <TableBody>
                     {results.monthlyBreakdown.map((item) => (
                       <ShadcnTableRow
                         key={item.month}
-                        className="hover:bg-slate-700/50 even:bg-slate-800/50 border-slate-700"
+                        className="even:bg-slate-800/50"
                       >
-                        <TableCell className="font-medium py-2 px-4">
-                          {item.month}
-                        </TableCell>
-                        <TableCell className="text-right py-2 px-4">
+                        <TableCell>{item.month}</TableCell>
+                        <TableCell className="text-right">
                           {formatCurrency(item.cumulativeInvested, "BRL")}
                         </TableCell>
-                        <TableCell className="text-right py-2 px-4">
+                        <TableCell className="text-right">
                           {formatCurrency(item.monthlyInterestValue, "BRL")}
                           <span className="ml-1 text-xs opacity-70">
                             ({item.monthlyInterestPercent.toFixed(2)}%)
                           </span>
                         </TableCell>
-                        <TableCell className="text-right font-medium py-2 px-4">
+                        <TableCell className="text-right font-medium">
                           {formatCurrency(item.endOfMonthTotal, "BRL")}
                         </TableCell>
                       </ShadcnTableRow>

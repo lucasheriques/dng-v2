@@ -46,40 +46,38 @@ export default function Results({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px] px-0">Regime</TableHead>
+            <TableHead className="w-[100px]">Regime</TableHead>
             <TableHead className="text-right w-[250px]">
               Salário Líquido Mensal
             </TableHead>
             <TableHead className="text-right w-[250px]">
               Salário Líquido Anual
             </TableHead>
-            <TableHead className="text-right w-[250px] px-0">
-              Equivalente
-            </TableHead>
+            <TableHead className="text-right w-[250px]">Equivalente</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell className="px-0">CLT</TableCell>
+            <TableCell className="">CLT</TableCell>
             <TableCell className="text-right w-[250px]">
               {formatCurrency(results.clt.total)}
             </TableCell>
             <TableCell className="text-right w-[250px]">
               {formatCurrency(results.clt.total * 12)}
             </TableCell>
-            <TableCell className="text-right w-[250px] px-0">
+            <TableCell className="text-right w-[250px] ">
               Valor PJ: {formatCurrency(cltToPJEquivalent)}
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className="px-0">PJ</TableCell>
+            <TableCell className="">PJ</TableCell>
             <TableCell className="text-right w-[250px]">
               {formatCurrency(results.pj.total)}
             </TableCell>
             <TableCell className="text-right w-[250px]">
               {formatCurrency(results.pj.total * 12)}
             </TableCell>
-            <TableCell className="text-right w-[250px] px-0">
+            <TableCell className="text-right w-[250px] ">
               Valor CLT: {formatCurrency(pjToCLTEquivalent)}
             </TableCell>
           </TableRow>
@@ -89,28 +87,28 @@ export default function Results({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px] px-0">Vencedor</TableHead>
+            <TableHead className="w-[100px] ">Vencedor</TableHead>
             <TableHead className="text-right w-[250px]">
               Diferença Mensal
             </TableHead>
             <TableHead className="text-right w-[250px]">
               Diferença Anual
             </TableHead>
-            <TableHead className="text-right w-[250px] px-0">
+            <TableHead className="text-right w-[250px] ">
               Aumento Relativo
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell className="font-bold px-0">{betterOption}</TableCell>
+            <TableCell className="font-bold ">{betterOption}</TableCell>
             <TableCell className="text-right w-[250px]">
               {formatCurrency(Math.abs(monthlyDifference))}
             </TableCell>
             <TableCell className="text-right w-[250px]">
               {formatCurrency(Math.abs(yearlyDifference))}
             </TableCell>
-            <TableCell className="text-right w-[250px] px-0">
+            <TableCell className="text-right w-[250px] ">
               {relativeIncrease.toFixed(1)}%
             </TableCell>
           </TableRow>
