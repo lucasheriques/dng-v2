@@ -25,17 +25,11 @@ import { CalculationResults, CalculatorFormData } from "../types";
 
 interface ResultsProps {
   results: CalculationResults;
-  defaultInterestRate: number;
   formData: CalculatorFormData;
   onShare: () => void;
 }
 
-export default function Results({
-  results,
-  defaultInterestRate,
-  formData,
-  onShare,
-}: ResultsProps) {
+export default function Results({ results, formData, onShare }: ResultsProps) {
   const monthlyDifference = results.pj.total - results.clt.total;
   const yearlyDifference = monthlyDifference * 12;
   const betterOption = monthlyDifference > 0 ? "PJ" : "CLT";
@@ -306,10 +300,7 @@ export default function Results({
         />
       </DataForm>
 
-      <ComparisonCard
-        results={results}
-        defaultInterestRate={defaultInterestRate}
-      />
+      <ComparisonCard results={results} />
     </div>
   );
 }
