@@ -13,6 +13,7 @@ const bgColors = {
   blue: "bg-blue-500/40",
   purple: "bg-purple-500/40",
   red: "bg-red-500/40",
+  "accent-secondary": "bg-accent-secondary",
 } as const;
 
 interface HighlightedTextProps {
@@ -45,7 +46,7 @@ export function HighlightedText({
 
   return (
     <span className={cn("relative px-1", className)} ref={ref}>
-      <span className="relative z-10 font-semibold">{children}</span>
+      <span className="relative z-10 font-semibold text-white">{children}</span>
       <m.span
         initial="hidden"
         animate={controls}

@@ -24,7 +24,7 @@ const data: TimelineEntry[] = [
     date: "Maio 2024",
     content: (
       <div className="space-y-8">
-        <div className="prose dark:prose-invert">
+        <div className="prose prose-slate dark:prose-invert">
           <p>Tudo começou com a newsletter.</p>
           <p>
             Apesar de texto não ser tão popular no Brasil quanto outros
@@ -71,7 +71,7 @@ const data: TimelineEntry[] = [
     date: "Novembro 2024",
     content: (
       <div>
-        <div className="prose dark:prose-invert mb-8">
+        <div className="prose prose-slate dark:prose-invert mb-8">
           <p>E aqui vem a parte mais gratificante.</p>
           <p>
             Ver como as pessoas estão evoluindo, e como a comunidade e o meu
@@ -86,7 +86,7 @@ const data: TimelineEntry[] = [
                     referência técnica gigante e uma fonte de energia para quem
                     deseja crescer na área."
             fullContent={
-              <div className="prose dark:prose-invert">
+              <div className="prose prose-slate dark:prose-invert">
                 <p>O Lucas é um mentor muito prático e direto ao ponto.</p>
                 <p>
                   Ele procura entender meus objetivos antes de me orientar, dá
@@ -136,7 +136,7 @@ const data: TimelineEntry[] = [
             title="Mentoria em grupo"
             summary="Meu campo de visão era bem restrito, mas os artigos e mentorias do Lucas me ajudaram a expandi-lo, tanto em aspectos técnicos quanto em questões sociais e de comunicação."
             fullContent={
-              <div className="prose dark:prose-invert">
+              <div className="prose prose-slate dark:prose-invert">
                 <p>
                   Conheci o Lucas através de um dos primeiros artigos dele. Já
                   estava trabalhando no exterior e me identifiquei muito com os
@@ -205,7 +205,7 @@ const data: TimelineEntry[] = [
                   mesma procura. Foi a melhor decisão que eu tomei nesse tempo
                   todo."
             fullContent={
-              <div className="prose dark:prose-invert">
+              <div className="prose prose-slate dark:prose-invert">
                 <p>
                   Eu fiquei aproximadamente 1 ano em busca de uma melhora
                   salarial. Fui aos poucos me aprimorando, estudando, tentando
@@ -278,7 +278,7 @@ const data: TimelineEntry[] = [
             title="Mentoria em grupo"
             summary="Sou profundamente grato ao Lucas por criar um espaço tão autêntico e por ser um mentor que acredita no potencial de cada membro. E também à comunidade, que perpetua esse legado ao compartilhar suas experiências e apoiar uns aos outros. Juntos, estamos construindo algo grande."
             fullContent={
-              <div className="prose dark:prose-invert">
+              <div className="prose prose-slate dark:prose-invert">
                 <p>
                   Minha jornada na Dev na Gringa ainda está no meio do caminho,
                   mas já posso dizer que tem sido profundamente transformadora.
@@ -368,7 +368,7 @@ const data: TimelineEntry[] = [
               </>
             }
             fullContent={
-              <div className="prose dark:prose-invert">
+              <div className="prose prose-slate dark:prose-invert">
                 <p>
                   Após cerca de quatro meses de mentoria, é o momento de
                   refletir sobre tudo que aprendi e vivenciei até aqui. Antes de
@@ -533,7 +533,10 @@ const Timeline = () => {
     <div ref={containerRef}>
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
         {data.map((item, index) => (
-          <div key={index} className="flex justify-start pt-10 md:gap-10">
+          <div
+            key={index}
+            className="flex justify-start pt-10 md:gap-10 text-tertiary-text"
+          >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
               <TimelineCircle
                 scrollYProgress={scrollYProgress}
@@ -541,23 +544,15 @@ const Timeline = () => {
                 total={data.length}
               />
               <div className="hidden md:block md:pl-20">
-                <h3 className="text-xl md:text-5xl font-bold text-neutral-500 dark:text-neutral-400">
-                  {item.title}
-                </h3>
-                {item.date && (
-                  <span className="text-sm text-neutral-400">{item.date}</span>
-                )}
+                <h3 className="text-xl md:text-5xl font-bold">{item.title}</h3>
+                {item.date && <span className="text-sm">{item.date}</span>}
               </div>
             </div>
 
             <div className="relative pl-20 pr-4 md:pl-4 w-full">
               <div className="md:hidden block mb-4 text-left">
-                <h3 className="text-2xl font-bold text-neutral-500 dark:text-neutral-400">
-                  {item.title}
-                </h3>
-                {item.date && (
-                  <span className="text-sm text-neutral-400">{item.date}</span>
-                )}
+                <h3 className="text-2xl font-bold">{item.title}</h3>
+                {item.date && <span className="text-sm">{item.date}</span>}
               </div>
               {item.content}
             </div>

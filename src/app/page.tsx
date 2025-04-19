@@ -28,7 +28,7 @@ export default async function Home() {
         <Hero />
       </div>
       <div
-        className="content-wrapper motion-preset-fade motion-preset-slide-up motion-duration-1500 motion-delay- md:max-w-3xl md:mx-auto md:px-0 py-8"
+        className="container motion-preset-fade motion-preset-slide-up motion-duration-1500 motion-delay- md:max-w-3xl md:mx-auto md:px-0 py-8"
         id="youtube-hero"
       >
         <HeroVideoDialog

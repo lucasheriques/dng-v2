@@ -21,10 +21,8 @@ export default function CheckoutCancelPage() {
           </svg>
         </div>
 
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">
-          Pagamento Cancelado
-        </h1>
-        <p className="text-gray-600 mb-6">
+        <h1 className="text-2xl font-bold mb-2">Pagamento Cancelado</h1>
+        <p className="mb-6">
           Seu pagamento foi cancelado. Nenhum valor foi cobrado.
         </p>
 
@@ -37,7 +35,7 @@ export default function CheckoutCancelPage() {
           </Link>
           <Link
             href="/"
-            className="bg-gray-100 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-200 transition-colors"
+            className="bg-gray-100 px-6 py-2 rounded-md hover:bg-gray-200 transition-colors"
           >
             Voltar para a Página Inicial
           </Link>

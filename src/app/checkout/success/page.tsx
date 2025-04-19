@@ -21,10 +21,8 @@ export default function CheckoutSuccessPage() {
           </svg>
         </div>
 
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">
-          Pagamento Confirmado!
-        </h1>
-        <p className="text-gray-600 mb-6">
+        <h1 className="text-2xl font-bold mb-2">Pagamento Confirmado!</h1>
+        <p className="mb-6">
           Seu pagamento foi processado com sucesso. Você já tem acesso ao
           conteúdo adquirido.
         </p>
@@ -38,7 +36,7 @@ export default function CheckoutSuccessPage() {
           </Link>
           <Link
             href="/"
-            className="bg-gray-100 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-200 transition-colors"
+            className="bg-gray-100 px-6 py-2 rounded-md hover:bg-gray-200 transition-colors"
           >
             Voltar para a Página Inicial
           </Link>

@@ -8,8 +8,6 @@ export function PageWrapper({
   className?: string;
 }) {
   return (
-    <div className={cn("content-wrapper pb-20 pt-4 md:pt-8", className)}>
-      {children}
-    </div>
+    <div className={cn("container py-4 md:py-8", className)}>{children}</div>
   );
 }

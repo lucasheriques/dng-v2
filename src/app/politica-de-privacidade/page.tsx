@@ -13,7 +13,7 @@ export default async function PrivacyPolicy() {
   const content = await getContent("politica-de-privacidade.mdx");
   return (
     <PageWrapper>
-      <article className="prose max-w-full text-lg dark:prose-invert">
+      <article className="prose prose-slate max-w-full text-lg dark:prose-invert">
         <MDXRemote source={content} />
       </article>
     </PageWrapper>

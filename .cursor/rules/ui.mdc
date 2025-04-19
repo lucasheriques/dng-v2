@@ -1,9 +1,12 @@
 ---
 description: For creating amazing components
-globs: **/*.{ts,tsx,js,jsx}
+globs: *.tsx,*.ts,*.css
 alwaysApply: false
 ---
 UI:
 - use shadcn and tailwindcss
 - for animations, use motion and rombo (tailwind plugin)
 - use only snake-case files for components (test-component.tsx for TestComponent)
+- Do not use RAW tailwind colors like text-gray-700. Use the CSS variables defined in the globals.css file, like text-primary, text-main-text, etc.
+
+Styling:

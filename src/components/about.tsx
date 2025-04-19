@@ -24,7 +24,7 @@ export default function About() {
           className="aspect-801/1036 w-[50.0625rem] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-20"
         />
       </div>
-      <div className="content-wrapper">
+      <div className="container">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <Badge className="text-sm" variant="outline">
             Não vou desperdiçar seu tempo por aqui
@@ -32,7 +32,7 @@ export default function About() {
           <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tight sm:text-5xl">
             Conteúdo que faz sentido
           </h1>
-          <p className="mt-6 text-xl/8 text-white/70">
+          <p className="mt-6 text-xl/8">
             Meu primeiro trabalho como Software Developer foi em 2016. E, desde
             2020, estou sempre trabalhando pra empresas gringas.
           </p>
@@ -68,8 +68,8 @@ export default function About() {
                     key={stat.label}
                     className="flex flex-col-reverse gap-y-4"
                   >
-                    <dt className="text-base/7 text-white/60">{stat.label}</dt>
-                    <dd className="text-5xl font-semibold tracking-tight text-white">
+                    <dt className="text-base/7">{stat.label}</dt>
+                    <dd className="text-5xl font-semibold tracking-tight">
                       {stat.value}
                     </dd>
                   </div>
@@ -77,16 +77,16 @@ export default function About() {
               </dl>
             </div>
           </div>
-          <div className="max-w-xl text-base/7 text-white/70 lg:col-span-7">
+          <div className="max-w-xl text-base/7 lg:col-span-7">
             <p>Todo o conteúdo que eu faço é pensando nesses três itens:</p>
-            <ul role="list" className="mt-8 max-w-xl space-y-8 text-white/70">
+            <ul role="list" className="mt-8 max-w-xl space-y-8">
               <li className="flex gap-x-3">
                 <SearchIcon
                   aria-hidden="true"
                   className="mt-1 h-5 w-5 flex-none text-primary motion-preset-pulse motion-duration-[3s]"
                 />
                 <span>
-                  <HighlightedText className="font-semibold text-white ">
+                  <HighlightedText className="font-semibold">
                     Pesquisável
                   </HighlightedText>{" "}
                   Meu conteúdo é composto primariamente de artigos e imagens. O
@@ -102,7 +102,7 @@ export default function About() {
                 />
                 <span>
                   <HighlightedText
-                    className="font-semibold text-white px-1 rounded"
+                    className="font-semibold  px-1 rounded"
                     color="blue"
                   >
                     Conciso
@@ -120,7 +120,7 @@ export default function About() {
                 />
                 <span>
                   <HighlightedText
-                    className="font-semibold text-white px-1 rounded"
+                    className="font-semibold  px-1 rounded"
                     color="red"
                   >
                     Feito sob medida
@@ -137,7 +137,7 @@ export default function About() {
               ou consumir. Ou, pior ainda, que tente apenas te vender uma
               promessa vazia.
             </p>
-            <h2 className="mt-16 text-2xl font-bold tracking-tight text-white">
+            <h2 className="mt-16 text-2xl font-bold tracking-tight ">
               Por que eu faço isso?
             </h2>
             <p className="mt-6">

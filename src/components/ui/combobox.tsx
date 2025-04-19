@@ -188,7 +188,7 @@ export function Combobox({
                       <span
                         className={cn(
                           "block truncate",
-                          selected ? "font-medium text-white" : "font-normal"
+                          selected ? "font-medium" : "font-normal"
                         )}
                       >
                         {option.label}
@@ -197,7 +197,7 @@ export function Combobox({
                         <span
                           className={cn(
                             "absolute inset-y-0 left-0 flex items-center pl-3",
-                            active ? "text-white" : "text-primary"
+                            active ? "" : "text-primary"
                           )}
                         >
                           <Check className="h-4 w-4" aria-hidden="true" />

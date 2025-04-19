@@ -47,7 +47,7 @@
 }
 
 .dark {
-  --background: hsl(240 10% 3.9%);
+  --background: var(--text-slate-500);
   --foreground: hsl(0 0% 98%);
 
   --card: hsl(240 10% 3.9%);
@@ -79,6 +79,10 @@
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+
+  --color-main-text: var(--color-slate-200);
+  --color-secondary-text: var(--color-slate-300);
+  --color-tertiary-text: var(--color-slate-400);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -164,6 +168,11 @@
   }
 }
 
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -183,23 +192,12 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-
   a {
     @apply focus:outline-primary/70 focus:outline-2 focus:outline-offset-2 transition-all;
   }
 
   [type="date"]::-webkit-calendar-picker-indicator {
     display: none;
-  }
-
-  .content-wrapper {
-    @apply mx-auto max-w-7xl px-4;
   }
 
   .nice-scrollbar {

@@ -57,8 +57,8 @@ export default function Header({ articles }: HeaderProps) {
               </span>
             </Link>
             <div className="flex items-center gap-x-3">
-              <Button variant="link" asChild className="text-white px-0">
-                <PopoverButton className="focus:outline focus:outline-primary focus:outline-2 focus:outline-offset-2">
+              <Button variant="link" asChild className="text-main-text px-0">
+                <PopoverButton className="focus:outline-primary focus:outline-2 focus:outline-offset-2">
                   Menu
                   <ChevronDown aria-hidden="true" className="h-5 w-5" />
                 </PopoverButton>
@@ -85,7 +85,7 @@ export default function Header({ articles }: HeaderProps) {
             >
               <div className="grid gap-y-4 sm:grid-cols-2 gap-x-6 sm:gap-x-8">
                 <div>
-                  <h3 className="text-sm/6 font-medium text-gray-400">
+                  <h3 className="text-sm/6 font-medium text-tertiary-text">
                     Comunidade e ferramentas
                   </h3>
                   <div className="mt-6 flow-root">
@@ -94,13 +94,13 @@ export default function Header({ articles }: HeaderProps) {
                         <Link
                           key={item.href}
                           href={item.href}
-                          className="flex gap-x-4 py-2 text-sm/6 font-semibold text-gray-200 hover:transition-all hover:bg-white/5 px-3 -mx-3 rounded-lg group"
+                          className="flex gap-x-4 py-2 text-sm/6 font-semibold hover:transition-all hover:bg-white/5 px-3 -mx-3 rounded-lg group"
                           onClick={close}
                           prefetch={true}
                         >
                           <item.icon
                             aria-hidden="true"
-                            className="h-6 w-6 flex-none text-gray-500 group-hover:text-gray-300 transition-colors"
+                            className="size-6 flex-none text-tertiary-text group-hover:text-main-text transition-colors"
                           />
                           {item.title}
                         </Link>
@@ -109,7 +109,7 @@ export default function Header({ articles }: HeaderProps) {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-sm/6 font-medium text-gray-400">
+                  <h3 className="text-sm/6 font-medium text-tertiary-text">
                     Links para assinantes
                   </h3>
                   <div className="mt-6 flow-root">
@@ -118,12 +118,12 @@ export default function Header({ articles }: HeaderProps) {
                         <a
                           key={item.href}
                           href={item.href}
-                          className="flex gap-x-4 py-2 text-sm/6 font-semibold text-gray-200 hover:transition-all hover:bg-white/5 px-3 -mx-3 rounded-lg group"
+                          className="flex gap-x-4 py-2 text-sm/6 font-semibold hover:transition-all hover:bg-white/5 px-3 -mx-3 rounded-lg group"
                           target="_blank"
                         >
                           <item.icon
                             aria-hidden="true"
-                            className="h-6 w-6 flex-none text-gray-500 group-hover:text-gray-300 transition-colors"
+                            className="size-6 flex-none text-tertiary-text group-hover:text-main-text transition-colors"
                           />
                           {item.title}
                         </a>
@@ -153,24 +153,24 @@ export default function Header({ articles }: HeaderProps) {
                       <div className="flex items-center gap-x-4">
                         <time
                           dateTime={post.postDate}
-                          className="text-sm/6 text-gray-400"
+                          className="text-sm/6 text-tertiary-text"
                         >
                           {dayjs(post.postDate).format("MMM. D, YYYY")}
                         </time>
                         <a
                           href={`${SOCIALS.newsletter}/t/${post.postTags?.[0]?.slug}`}
-                          className="relative z-10 rounded-full bg-slate-800/50 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-gray-300 hover:bg-slate-700 transition-colors"
+                          className="relative z-10 rounded-full bg-slate-800/50 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-secondary-text hover:bg-slate-700 transition-colors"
                         >
                           {post.postTags?.[0]?.name}
                         </a>
                       </div>
-                      <h4 className="mt-2 text-sm/6 font-semibold text-gray-200 group-hover:text-white transition-colors">
+                      <h4 className="mt-2 text-sm/6 font-semibold group-hover:text-primary transition-colors">
                         <a href={post.canonical_url}>
                           <span className="absolute inset-0" />
                           {post.title}
                         </a>
                       </h4>
-                      <p className="mt-2 text-sm/6 text-gray-400 group-hover:text-gray-300 transition-colors">
+                      <p className="mt-2 text-sm/6 text-tertiary-text group-hover:text-main-text transition-colors">
                         {post.description}
                       </p>
                     </div>

@@ -35,16 +35,16 @@ export function ExpandableCard({
           <Card className="w-full cursor-pointer group transition-all duration-300 bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10 hover:shadow-lg">
             <CardHeader>
               {title && (
-                <CardTitle className="text-white group-hover:text-primary transition-colors">
+                <CardTitle className="group-hover:text-primary transition-colors">
                   {title}
                 </CardTitle>
               )}
             </CardHeader>
             <CardContent>
-              <p className="text-white/80">{summary}</p>
+              <p className="text-secondary-text">{summary}</p>
             </CardContent>
             {footer && <CardFooter>{footer}</CardFooter>}
-            <div className="absolute bottom-4 right-4 text-white/60 group-hover:text-primary transition-colors">
+            <div className="absolute bottom-4 right-4 group-hover:text-primary transition-colors">
               <ChevronDown className="w-5 h-5" />
             </div>
           </Card>

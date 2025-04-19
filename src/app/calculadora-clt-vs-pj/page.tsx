@@ -1,8 +1,9 @@
 import { CalculatorFormData } from "@/app/calculadora-clt-vs-pj/types";
 import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
+import { env } from "@/env";
 import { Metadata } from "next";
-import { SalaryCalculatorClient } from "./calculator";
+import { SalaryCalculatorClient } from "./salary-calculator";
 import {
   defaultFormData,
   reverseParamMap,
@@ -18,7 +19,7 @@ export async function generateMetadata({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
   const searchParams = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const baseUrl = env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const ogUrl = new URL("/api/og/clt-vs-pj", baseUrl);
 
   for (const shortKey in reverseParamMap) {

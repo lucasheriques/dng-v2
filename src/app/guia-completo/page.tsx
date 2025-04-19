@@ -53,7 +53,7 @@ export default function BookPage() {
               href={SUBSCRIBE_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors text-center"
+              className="bg-blue-600 px-6 py-2 rounded-md hover:bg-blue-700 transition-colors text-center"
             >
               Assinar no Substack
             </a>
@@ -65,10 +65,10 @@ export default function BookPage() {
         {/* Preview section */}
         <div className="mt-8">
           <h2 className="text-2xl font-bold mb-4">Prévia</h2>
-          <p className="text-gray-700 mb-4">
+          <p className="mb-4">
             Aqui está uma prévia do que você obterá com este livro:
           </p>
-          <div className="prose max-w-none">
+          <div className="prose prose-slate max-w-none">
             {/* This would be the first chapter content */}
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
@@ -108,7 +108,7 @@ export default function BookPage() {
 
       <h1 className="text-3xl font-bold mb-6">{product.name}</h1>
 
-      <div className="prose max-w-none">
+      <div className="prose prose-slate dark:prose-invert max-w-none">
         {/* This would be the actual book content */}
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam

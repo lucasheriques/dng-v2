@@ -26,7 +26,7 @@ const features = [
 
 export default function Features() {
   return (
-    <div className="content-wrapper py-8 motion-preset-fade motion-preset-slide-up motion-duration-1500">
+    <div className="container py-8 motion-preset-fade motion-preset-slide-up motion-duration-1500">
       <div className="relative isolate overflow-hidden bg-slate-900 px-6 py-20 sm:rounded-3xl sm:px-10 sm:py-24 lg:py-24 xl:px-24">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-0">
           <div className="lg:row-start-2 lg:max-w-md">
@@ -37,12 +37,12 @@ export default function Features() {
                 crescer profissionalmente
               </HighlightedText>
             </h2>
-            <p className="mt-6 text-lg/8 text-gray-300">
+            <p className="mt-6 text-lg/8">
               Faça parte de uma comunidade vibrante de devs brasileiros. Tenha
               acesso a conteúdo exclusivo sobre a carreira na engenharia de
               software.
             </p>
-            <p className="mt-6 text-lg/8 text-gray-300">
+            <p className="mt-6 text-lg/8">
               Seja para você que quer crescer para se tornar sênior ou staff, ou
               pra quem esteja buscando uma oportunidade no exterior.
             </p>
@@ -58,15 +58,17 @@ export default function Features() {
           />
 
           <div className="max-w-xl lg:row-start-3 lg:mt-10 lg:max-w-md lg:border-t lg:border-white/10 lg:pt-10">
-            <dl className="max-w-xl space-y-8 text-base/7 text-gray-300 lg:max-w-none">
+            <dl className="max-w-xl space-y-8 text-base/7 lg:max-w-none">
               {features.map((feature) => (
                 <div key={feature.name} className="relative">
-                  <dt className="ml-9 inline-block font-bold text-white">
+                  <dt className="ml-9 inline-block font-bold">
                     <feature.icon
                       aria-hidden="true"
                       className="absolute left-1 top-1 h-5 w-5 text-accent-secondary"
                     />
-                    {feature.name}
+                    <HighlightedText color="pink">
+                      {feature.name}
+                    </HighlightedText>
                   </dt>{" "}
                   <dd className="inline">{feature.description}</dd>
                 </div>

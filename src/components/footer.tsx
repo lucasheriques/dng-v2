@@ -37,16 +37,16 @@ export function Footer() {
       </div>
 
       {/* Footer Content */}
-      <div className="relative z-10 content-wrapper py-24">
+      <div className="relative z-10 container py-24">
         {/* CTA Section */}
         <div className="mx-auto max-w-2xl text-center mb-16">
           <h2 className="text-primary text-lg font-semibold">
             Faça parte da mentoria
           </h2>
-          <p className="mt-2 text-4xl font-semibold text-white">
+          <p className="mt-2 text-4xl font-semibold">
             Desenvolva sua carreira internacional em engenharia de software
           </p>
-          <p className="mt-6 text-lg text-gray-300">
+          <p className="mt-6 text-lg text-secondary-text">
             Você receberá um e-mail sobre como participar depois de se
             inscrever.
             <br />
@@ -64,7 +64,7 @@ export function Footer() {
                 🛸
               </div>
             </SubscribeButton>
-            <p className="text-xs text-gray-300">
+            <p className="text-xs text-secondary-text">
               Para os devs deste e de outros mundos também.
             </p>
           </div>
@@ -74,15 +74,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-12 border-t border-white/10">
           {/* Popular Posts */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6">
-              Artigos populares
-            </h3>
+            <h3 className="text-lg font-semibold mb-6">Artigos populares</h3>
             <div className="space-y-4">
               {popularArticles.map((post) => (
                 <Link
                   href={`${SOCIALS.newsletter}/p/${post.slug}`}
                   key={post.slug}
-                  className="block text-gray-300 hover:text-primary"
+                  className="block hover:text-primary"
                   target="_blank"
                 >
                   {post.title}
@@ -93,15 +91,13 @@ export function Footer() {
 
           {/* Tools */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6">
-              Ferramentas
-            </h3>
+            <h3 className="text-lg font-semibold mb-6">Ferramentas</h3>
             <ul className="space-y-4">
               {tools.map((tool) => (
                 <li key={tool.name}>
                   <Link
                     href={tool.href}
-                    className="text-gray-300 hover:text-primary"
+                    className="hover:text-primary"
                     prefetch={true}
                   >
                     {tool.name}
@@ -113,10 +109,8 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6">Contato</h3>
-            <p className="text-gray-300 mb-4">
-              Tem alguma dúvida? Fale comigo aqui:
-            </p>
+            <h3 className="text-lg font-semibold mb-6">Contato</h3>
+            <p className="mb-4">Tem alguma dúvida? Fale comigo aqui:</p>
             <a
               className="text-primary block mb-6"
               href="mailto:hi@lucasfaria.dev"
@@ -127,7 +121,7 @@ export function Footer() {
               <a
                 key={SOCIAL_LINKS.linkedin.href}
                 href={SOCIAL_LINKS.linkedin.href}
-                className="text-gray-400 hover:text-primary"
+                className=" hover:text-primary"
               >
                 <span className="sr-only">{SOCIAL_LINKS.linkedin.title}</span>
                 <SOCIAL_LINKS.linkedin.icon className="h-6 w-6" />
@@ -135,7 +129,7 @@ export function Footer() {
               <a
                 key={SOCIAL_LINKS.instagram.href}
                 href={SOCIAL_LINKS.instagram.href}
-                className="text-gray-400 hover:text-primary"
+                className=" hover:text-primary"
               >
                 <span className="sr-only">{SOCIAL_LINKS.instagram.title}</span>
                 <SOCIAL_LINKS.instagram.icon className="h-6 w-6" />
@@ -146,10 +140,10 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="mt-16 pt-8 border-t border-white/10 flex justify-between text-xs md:flex-row flex-col gap-4">
-          <Link href="/politica-de-privacidade" className="text-gray-400">
+          <Link href="/politica-de-privacidade" className="">
             Política de privacidade
           </Link>
-          <p className="text-gray-400">
+          <p className="">
             &copy; {new Date().getFullYear()}. Criado por{" "}
             <Link
               href={SOCIALS.personalWebsite}

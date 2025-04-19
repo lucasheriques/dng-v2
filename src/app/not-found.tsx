@@ -31,7 +31,7 @@ export default function NotFound() {
           <h2 className="mb-4 text-3xl font-semibold sm:text-4xl">
             Página não encontrada
           </h2>
-          <p className="mb-8 text-lg text-gray-300">
+          <p className="mb-8 text-lg text-secondary-text">
             Oops! Parece que esta página foi transportada para outro universo.
           </p>
           <div className="flex gap-4">

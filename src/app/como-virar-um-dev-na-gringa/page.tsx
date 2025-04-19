@@ -15,7 +15,7 @@ export default async function Curso() {
   const content = await getContent("curso-abril.mdx");
   return (
     <PageWrapper>
-      <article className="prose max-w-full text-lg dark:prose-invert">
+      <article className="prose prose-slate max-w-full text-lg dark:prose-invert">
         <MDXRemote source={content} components={{ Button: Button }} />
       </article>
       <Comments slug="como-virar-um-dev-na-gringa" />

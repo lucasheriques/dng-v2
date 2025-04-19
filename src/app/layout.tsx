@@ -29,7 +29,7 @@ export default function RootLayout({
   const randomArticles = getRandomArticles(2);
   return (
     <ConvexAuthNextjsServerProvider>
-      <html lang="pt-BR" className="nice-scrollbar">
+      <html lang="pt-BR" className="nice-scrollbar dark">
         <head>
           {/* <script
             src="https://unpkg.com/react-scan/dist/auto.global.js"
@@ -38,7 +38,7 @@ export default function RootLayout({
         </head>
         <body
           className={cn(
-            "font-sans antialiased dark selection:bg-teal-500 selection:text-slate-950 bg-slate-950 dark:text-slate-300",
+            "font-sans antialiased selection:bg-teal-500 selection:text-slate-950 bg-slate-950 dark:text-main-text",
             inter.variable
           )}
         >

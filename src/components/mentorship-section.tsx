@@ -25,7 +25,7 @@ const mentorshipItems = [
     ),
     title: "Mentoria em Grupo",
     content: (
-      <section className="prose dark:prose-invert">
+      <section className="prose prose-slate dark:prose-invert">
         <h3>Mentoria em Grupo</h3>
         <p>
           Três encontros mensais para resolver dúvidas e compartilhar
@@ -78,7 +78,7 @@ const mentorshipItems = [
     ),
     title: "Mentoria Individual",
     content: (
-      <section className="prose dark:prose-invert">
+      <section className="prose prose-slate dark:prose-invert">
         <h3>Mentoria Individual</h3>
         <p>Sessões 1:1 personalizadas para os seus objetivos:</p>
         <ul>
@@ -131,7 +131,7 @@ const mentorshipItems = [
     ),
     title: "Grupo de Responsabilidade",
     content: (
-      <section className="prose dark:prose-invert">
+      <section className="prose prose-slate dark:prose-invert">
         <h3>Grupo de Responsabilidade</h3>
         <p>
           Encontros mensais para acompanhamento de metas e crescimento
@@ -170,7 +170,7 @@ const mentorshipItems = [
     ),
     title: "Conteúdo Exclusivo",
     content: (
-      <section className="prose dark:prose-invert">
+      <section className="prose prose-slate dark:prose-invert">
         <h3>Conteúdo Exclusivo</h3>
         <p>
           Biblioteca completa de recursos para impulsionar sua carreira
@@ -199,7 +199,7 @@ const mentorshipItems = [
 export function MentorshipSection({ newsletterUrl }: MentorshipSectionProps) {
   return (
     <div id="mentorship">
-      <div className="prose dark:prose-invert mb-8">
+      <div className="prose prose-slate dark:prose-invert mb-8">
         <p>
           Com a demanda do conteúdo, vi uma oportunidade algo que eu sempre
           quis. Uma comunidade exclusiva para profissionais de TI que estão
