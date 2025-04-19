@@ -101,9 +101,8 @@ export default function Results({
 
       <Card className="dark:bg-emerald-900/30 dark:text-emerald-200 dark:border-emerald-800">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="flex items-center gap-2 text-base font-semibold">
-            <CheckCircle className="text-emerald-400" size={20} /> Vencedor:{" "}
-            {betterOption}
+          <CardTitle className="flex items-center gap-2 text-lg font-semibold text-emerald-200">
+            <CheckCircle size={20} /> Melhor opção: {betterOption}
           </CardTitle>
           <Button variant="ghost" size="sm" onClick={onShare}>
             <Share2 className="size-4 mr-2" />
