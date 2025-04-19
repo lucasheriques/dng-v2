@@ -35,6 +35,7 @@ const IconMap = {
 interface BaseBannerProps extends VariantProps<typeof banner> {
   children: React.ReactNode;
   cta?: React.ReactNode;
+  className?: string;
 }
 
 export function Banner({ children, intent = "info", cta }: BaseBannerProps) {

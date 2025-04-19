@@ -100,35 +100,58 @@ export default function Results({
       </Table>
 
       <Card className="dark:bg-emerald-900/30 dark:text-emerald-200 dark:border-emerald-800">
-        <CardHeader className="flex flex-row justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <CheckCircle size={20} /> Vencedor: {betterOption}
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="flex items-center gap-2 text-base font-semibold">
+            <CheckCircle className="text-emerald-400" size={20} /> Vencedor:{" "}
+            {betterOption}
           </CardTitle>
-          <Button variant="ghost" onClick={onShare}>
+          <Button variant="ghost" size="sm" onClick={onShare}>
             <Share2 className="size-4 mr-2" />
-            Compartilhar resultado
+            Compartilhar
           </Button>
         </CardHeader>
         <CardContent>
-          <dl>
-            <div className="flex items-center gap-2">
-              <dt>Diferença mensal</dt>
-              <dd>{formatCurrency(Math.abs(monthlyDifference))}</dd>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
+            <div>
+              <p className="text-xs text-emerald-50">Diferença mensal</p>
+              <p className="text-lg font-medium text-primary">
+                {formatCurrency(Math.abs(monthlyDifference))}
+              </p>
             </div>
-            <div className="flex items-center gap-2">
-              <dt>Diferença anual</dt>
-              <dd>{formatCurrency(Math.abs(yearlyDifference))}</dd>
+            <div>
+              <p className="text-xs text-emerald-50">Diferença anual</p>
+              <p className="text-lg font-medium text-primary">
+                {formatCurrency(Math.abs(yearlyDifference))}
+              </p>
             </div>
-            <div className="flex items-center gap-2">
-              <dt>Aumento relativo</dt>
-              <dd>{relativeIncrease.toFixed(1)}%</dd>
+            <div>
+              <p className="text-xs text-emerald-50">Aumento relativo</p>
+              <p className="text-lg font-medium text-primary">
+                {relativeIncrease.toFixed(1)}%
+              </p>
             </div>
-          </dl>
+            <div>
+              <p className="text-xs text-emerald-50">
+                Equivalente {betterOption === "PJ" ? "CLT" : "PJ"}
+              </p>
+              <p className="text-lg font-medium text-primary">
+                {formatCurrency(
+                  betterOption === "PJ" ? pjToCLTEquivalent : cltToPJEquivalent
+                )}
+              </p>
+            </div>
+          </div>
         </CardContent>
       </Card>
 
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between flex-col">
         <h2 className="text-2xl font-bold">Custo para o empregador</h2>
+        <p className="text-secondary-text">
+          Esses números são uma estimativa com base nas leis atuais brasileiras.
+          Ainda assim, é importante consultar um advogado ou contador para
+          verificar se os valores estão corretos e se há outras deduções ou
+          contribuições obrigatórias.
+        </p>
       </div>
 
       <DataForm>
@@ -269,6 +292,7 @@ export default function Results({
               results.pj.benefits.nonTaxable +
               results.pj.benefits.taxable
           )}
+          tooltipContent="Faturamento mensal do PJ, mais benefícios que você pode oferecer no contrato."
         />
         <DataFormInfoRow
           label="Economia comparado à CLT"
@@ -279,6 +303,7 @@ export default function Results({
                 results.pj.benefits.taxable)
           )}
           className="font-semibold text-emerald-400"
+          tooltipContent="Não contrate PJ querendo um funcionário CLT mais barato. Isso dá processo trabalhista e é ilegal. PJ não deve ser usado como substituto de CLT. Na dúvida, consulte um advogado."
         />
       </DataForm>
 
