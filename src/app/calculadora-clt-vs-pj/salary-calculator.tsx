@@ -232,7 +232,7 @@ export function SalaryCalculatorClient({
         />
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="border border-slate-700 rounded-lg overflow-hidden bg-slate-900/50">
+          <div className="border  rounded-lg overflow-hidden bg-slate-900/50">
             <TableHeader>
               <div className="flex justify-between items-center">
                 <span>CLT</span>
@@ -362,7 +362,7 @@ export function SalaryCalculatorClient({
             )}
           </div>
 
-          <div className="border border-slate-700 rounded-lg overflow-hidden bg-slate-900/50">
+          <div className="border  rounded-lg overflow-hidden bg-slate-900/50">
             <TableHeader>PJ</TableHeader>
             <TableHeader>Salário Base</TableHeader>
             <TableRow label="Salário Bruto Mensal">

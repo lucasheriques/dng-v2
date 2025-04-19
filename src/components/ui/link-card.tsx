@@ -18,7 +18,7 @@ const linkCardVariants = cva(
         destructive:
           "border border-destructive/30 bg-destructive/10 hover:bg-destructive/20 hover:border-destructive/50 text-destructive",
         event:
-          "border border-slate-800/60 bg-slate-900/30 hover:bg-slate-800/50 hover:border-slate-700/80 text-slate-100",
+          "border border-slate-800/60 bg-slate-900/30 hover:bg-slate-800/50 hover:/80 text-slate-100",
       },
       size: {
         default: "p-4",

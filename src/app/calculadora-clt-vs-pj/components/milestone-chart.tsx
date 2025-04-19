@@ -170,16 +170,16 @@ export function MilestoneChart({
         </p>
       </div>
 
-      <div className="hidden md:block border border-slate-700 rounded-lg overflow-hidden bg-slate-900/50">
+      <div className="hidden md:block border  rounded-lg overflow-hidden bg-slate-900/50">
         <TableHeader>Marcos Financeiros e Tempo de Investimento</TableHeader>
-        <div className="grid grid-cols-4 border-b border-slate-700">
-          <div className="p-3 border-r border-slate-700 font-medium">
+        <div className="grid grid-cols-4 border-b ">
+          <div className="p-3 border-r  font-medium">
             <span className="text-sm">Objetivo</span>
           </div>
-          <div className="p-3 border-r border-slate-700 text-right font-medium">
+          <div className="p-3 border-r  text-right font-medium">
             <span className="text-sm">Valor</span>
           </div>
-          <div className="p-3 border-r border-slate-700 text-right font-medium">
+          <div className="p-3 border-r  text-right font-medium">
             <span className="text-sm text-chart-blue">Tempo CLT</span>
           </div>
           <div className="p-3 text-right font-medium">
@@ -197,17 +197,17 @@ export function MilestoneChart({
           return (
             <div
               key={milestone.name}
-              className="grid grid-cols-4 border-b border-slate-700 last:border-b-0"
+              className="grid grid-cols-4 border-b  last:border-b-0"
             >
-              <div className="p-3 border-r border-slate-700">
+              <div className="p-3 border-r ">
                 <span className="text-sm">{milestone.name}</span>
               </div>
-              <div className="p-3 border-r border-slate-700 text-right">
+              <div className="p-3 border-r  text-right">
                 <span className="text-sm text-slate-400">
                   {formatCurrency(milestone.value)}
                 </span>
               </div>
-              <div className="p-3 border-r border-slate-700 text-right">
+              <div className="p-3 border-r  text-right">
                 <span className="text-sm text-chart-blue">
                   {formatTime(cltMonthsToReach)}
                 </span>
@@ -237,7 +237,7 @@ export function MilestoneChart({
           return (
             <div
               key={milestone.name}
-              className="p-4 border border-slate-700 rounded-lg bg-slate-900/50"
+              className="p-4 border  rounded-lg bg-slate-900/50"
             >
               <div className="flex justify-between items-center mb-2">
                 <span className="font-medium">{milestone.name}</span>

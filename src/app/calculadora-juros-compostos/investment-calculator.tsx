@@ -1,11 +1,13 @@
 "use client";
 
-import {
-  TableHeader,
-  TableInput,
-  TableRow,
-} from "@/app/calculadora-clt-vs-pj/components/table-inputs";
+import { TableInput } from "@/app/calculadora-clt-vs-pj/components/table-inputs";
 import { calculateInvestmentResults } from "@/app/calculadora-juros-compostos/lib";
+import {
+  DataForm,
+  DataFormHeader,
+  DataFormInput,
+  DataFormRow,
+} from "@/components/data-forms";
 import {
   Accordion,
   AccordionContent,
@@ -284,9 +286,9 @@ export default function InvestmentCalculator({
         renderHistoryItem={renderInvestmentHistoryItem}
       />
 
-      <div className="border border-slate-700 rounded-lg overflow-hidden bg-slate-900/50">
-        <TableHeader>Configurações</TableHeader>
-        <TableRow label="Depósito inicial" inputId="initial-deposit-input">
+      <DataForm>
+        <DataFormHeader>Configurações</DataFormHeader>
+        <DataFormRow label="Depósito inicial" inputId="initial-deposit-input">
           <TableInput
             id="initial-deposit-input"
             prefix="R$"
@@ -294,8 +296,8 @@ export default function InvestmentCalculator({
             onChange={(v) => setInitialDeposit(Number(v) || 0)}
             autoFocus
           />
-        </TableRow>
-        <TableRow
+        </DataFormRow>
+        <DataFormRow
           label="Contribuição mensal"
           inputId="monthly-contribution-input"
         >
@@ -305,15 +307,15 @@ export default function InvestmentCalculator({
             value={String(monthlyContribution)}
             onChange={(v) => setMonthlyContribution(Number(v) || 0)}
           />
-        </TableRow>
-        <TableRow
+        </DataFormRow>
+        <DataFormRow
           label="Período"
           inputId="period-input"
           tooltipContent="Máximo de 999 anos ou 10 mil meses"
         >
           <div className="flex items-center gap-0">
             <div className="flex-1">
-              <TableInput
+              <DataFormInput
                 id="period-input"
                 value={String(period)}
                 onChange={(v) => {
@@ -341,8 +343,8 @@ export default function InvestmentCalculator({
               </TabsList>
             </Tabs>
           </div>
-        </TableRow>
-        <TableRow
+        </DataFormRow>
+        <DataFormRow
           label="Taxa de juros anual"
           tooltipContent="A taxa média de juros para investimentos no Brasil varia entre 3% e 12% ao ano, dependendo do tipo de investimento."
           inputId="interest-rate-input"
@@ -353,8 +355,8 @@ export default function InvestmentCalculator({
             value={String(interestRate)}
             onChange={(v) => setInterestRate(Number(v) || 0)}
           />
-        </TableRow>
-      </div>
+        </DataFormRow>
+      </DataForm>
       {/* Results on the right */}
       <div className="space-y-4">
         {/* First row: Chart and Breakdown side by side */}
@@ -425,7 +427,7 @@ export default function InvestmentCalculator({
 
                       // Return the complete custom tooltip structure
                       return (
-                        <div className="min-w-[180px] rounded-lg border border-slate-700 bg-slate-900 p-2 shadow-xs text-slate-200">
+                        <div className="min-w-[180px] rounded-lg border  bg-slate-900 p-2 shadow-xs text-slate-200">
                           {/* Render each item line */}
                           <div className="flex flex-col gap-1 text-xs">
                             {props.payload.map((item) => {
@@ -476,7 +478,7 @@ export default function InvestmentCalculator({
                           </div>
 
                           {/* Render the total section */}
-                          <div className="mt-2 pt-2 border-t border-slate-700">
+                          <div className="mt-2 pt-2 border-t ">
                             <div className="flex items-center justify-between font-bold text-xs">
                               <span>
                                 Total no{" "}
@@ -575,7 +577,7 @@ export default function InvestmentCalculator({
               <h2 className="text-xl font-bold text-slate-100">
                 Detalhamento ao final do período:
               </h2>
-              <div className="flex items-center justify-between py-2 border-b border-slate-700">
+              <div className="flex items-center justify-between py-2 border-b ">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-sm bg-[#10b981]"></div>
                   <span className="text-sm">Juros acumulados</span>
@@ -588,7 +590,7 @@ export default function InvestmentCalculator({
                 </span>
               </div>
 
-              <div className="flex items-center justify-between py-2 border-b border-slate-700">
+              <div className="flex items-center justify-between py-2 border-b ">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-sm bg-[#0ea5e9]"></div>
                   <span className="text-sm">Contribuições mensais</span>
@@ -601,7 +603,7 @@ export default function InvestmentCalculator({
                 </span>
               </div>
 
-              <div className="flex items-center justify-between py-2 border-b border-slate-700">
+              <div className="flex items-center justify-between py-2 border-b ">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-sm bg-[#4338ca]"></div>
                   <span className="text-sm">Depósito inicial</span>

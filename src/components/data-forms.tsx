@@ -13,11 +13,42 @@ import {
 import { cn } from "@/lib/utils";
 import { Info } from "lucide-react";
 
-export function TableHeader({ children }: { children: React.ReactNode }) {
-  return <div className="bg-slate-800 px-3 py-2 font-semibold">{children}</div>;
+export function DataForm({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "border rounded-lg overflow-hidden dark:bg-slate-900/50",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
 }
 
-export function TableRow({
+export function DataFormHeader({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn("bg-muted px-3 py-2 font-semibold text-base", className)}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function DataFormRow({
   label,
   children,
   className = "",
@@ -31,8 +62,10 @@ export function TableRow({
   inputId?: string;
 }) {
   return (
-    <div className={`grid grid-cols-2 items-stretch border-b  ${className}`}>
-      <div className="px-3 py-2 bg-slate-800/50 border-r  text-sm flex justify-between items-center">
+    <div
+      className={`grid grid-cols-2 items-stretch border-b last:border-b-0 ${className}`}
+    >
+      <div className="px-3 py-2 bg-slate-800/50 border-r text-sm flex justify-between items-center">
         <label htmlFor={inputId}>{label}</label>
         {tooltipContent && (
           <>
@@ -71,9 +104,10 @@ interface TableInputProps {
   suffix?: string;
   autoFocus?: boolean;
   id?: string;
+  className?: string;
 }
 
-export function TableInput({
+export function DataFormInput({
   value,
   onChange,
   required,
@@ -82,6 +116,7 @@ export function TableInput({
   suffix,
   autoFocus = false,
   id,
+  className,
 }: TableInputProps) {
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -104,7 +139,7 @@ export function TableInput({
   return (
     <div className="relative flex items-center w-full">
       {prefix && (
-        <span className="absolute left-2 text-slate-400 pointer-events-none">
+        <span className="absolute left-2 text-tertiary-text pointer-events-none">
           {prefix}
         </span>
       )}
@@ -114,18 +149,21 @@ export function TableInput({
         value={value}
         onChange={handleChange}
         onPaste={handlePaste}
-        className={`w-full bg-transparent p-2 focus-visible:ring-offset-0 border-none rounded
-          ${prefix ? "pl-8" : "pl-2"}
-          ${suffix ? "pr-8" : "pr-2"}
-          [appearance:textfield]
-          [&::-webkit-outer-spin-button]:appearance-none
-          [&::-webkit-inner-spin-button]:appearance-none`}
+        className={cn(
+          "w-full bg-transparent p-2 focus-visible:ring-offset-0 border-none rounded",
+          prefix ? "pl-8" : "pl-2",
+          suffix ? "pr-8" : "pr-2",
+          "[appearance:textfield]",
+          "[&::-webkit-outer-spin-button]:appearance-none",
+          "[&::-webkit-inner-spin-button]:appearance-none",
+          className
+        )}
         placeholder={placeholder}
         required={required}
         autoFocus={autoFocus}
       />
       {suffix && (
-        <span className="absolute right-2 text-slate-400 pointer-events-none">
+        <span className="absolute right-2 text-tertiary-text pointer-events-none">
           {suffix}
         </span>
       )}
@@ -133,7 +171,7 @@ export function TableInput({
   );
 }
 
-export function DetailRow({
+export function DataFormInfoRow({
   label,
   value,
   type = "neutral",
@@ -149,13 +187,13 @@ export function DetailRow({
   const valueClassName = {
     addition: "text-green-400",
     deduction: "text-red-400",
-    neutral: "text-slate-400",
+    neutral: "text-secondary-text",
   };
 
   const potentialInputId = label.toLowerCase().replace(/\s+/g, "-");
 
   return (
-    <TableRow
+    <DataFormRow
       label={label}
       tooltipContent={tooltipContent}
       inputId={potentialInputId}
@@ -166,6 +204,6 @@ export function DetailRow({
         {type === "addition" ? "+" : type === "deduction" ? "-" : ""}
         {value}
       </div>
-    </TableRow>
+    </DataFormRow>
   );
 }

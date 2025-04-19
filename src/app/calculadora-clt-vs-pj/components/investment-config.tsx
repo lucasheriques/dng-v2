@@ -1,8 +1,9 @@
 import {
-  TableHeader,
-  TableInput,
-  TableRow,
-} from "@/app/calculadora-clt-vs-pj/components/table-inputs";
+  DataForm,
+  DataFormHeader,
+  DataFormInput,
+  DataFormRow,
+} from "@/components/data-forms";
 import { formatCurrency } from "@/lib/utils";
 
 interface InvestmentConfigProps {
@@ -26,40 +27,40 @@ export function InvestmentConfig({
   const pjInvestment = (pjMonthlyTotal * Number(investmentRate)) / 100;
 
   return (
-    <div className="border border-slate-700 rounded-lg overflow-hidden bg-slate-900/50">
-      <TableHeader>Configurações de Investimento</TableHeader>
-      <TableRow
+    <DataForm>
+      <DataFormHeader>Configurações de Investimento</DataFormHeader>
+      <DataFormRow
         label="Taxa de Juros ao Ano"
         tooltipContent="O valor padrão é taxa SELIC."
       >
-        <TableInput
+        <DataFormInput
           value={interestRate}
           onChange={onInterestRateChange}
           prefix="%"
         />
-      </TableRow>
-      <TableRow
+      </DataFormRow>
+      <DataFormRow
         label="Percentual do Salário Total"
         tooltipContent="Quanto do salário total será investido mensalmente"
       >
-        <TableInput
+        <DataFormInput
           value={investmentRate}
           onChange={onInvestmentRateChange}
           prefix="%"
         />
-      </TableRow>
+      </DataFormRow>
 
-      <TableHeader>Valor Mensal Investido</TableHeader>
-      <TableRow label="CLT">
+      <DataFormHeader>Valor Mensal Investido</DataFormHeader>
+      <DataFormRow label="CLT">
         <div className="py-2 px-3 text-right">
           {formatCurrency(cltInvestment)}
         </div>
-      </TableRow>
-      <TableRow label="PJ">
+      </DataFormRow>
+      <DataFormRow label="PJ">
         <div className="py-2 px-3 text-right">
           {formatCurrency(pjInvestment)}
         </div>
-      </TableRow>
-    </div>
+      </DataFormRow>
+    </DataForm>
   );
 }
