@@ -25,8 +25,8 @@ const formatYAxis = (value: number) => {
   return `R$${value.toFixed(0)}`;
 };
 
-export const formatTime = (months: number) => {
-  if (months === -1) return "Mais de 30 anos";
+export const formatTime = (months: number, period: number) => {
+  if (months === -1) return `Mais de ${period} anos`;
   const years = Math.floor(months / 12);
   const remainingMonths = months % 12;
   if (years === 0) return `${remainingMonths}m`;

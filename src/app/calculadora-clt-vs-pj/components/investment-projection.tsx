@@ -15,8 +15,6 @@ const MILESTONES = [
   { name: "Aposentadoria de 15k/mês (regra dos 4%)", value: 4500000 },
 ];
 
-const YEARS = 30;
-
 interface InvestmentProjectionProps {
   results: CalculationResults;
 }
@@ -25,7 +23,7 @@ export function InvestmentProjection({ results }: InvestmentProjectionProps) {
   const [cltInvestmentRate, setCltInvestmentRate] = useState("20");
   const [pjInvestmentRate, setPjInvestmentRate] = useState("20");
   const [interestRate, setInterestRate] = useState(String(SELIC_RATE));
-  const [years, setYears] = useState(String(YEARS));
+  const [years, setYears] = useState(String("30"));
 
   const monthlyRate = Math.pow(1 + Number(interestRate) / 100, 1 / 12) - 1;
   const cltMonthlyInvestment =
@@ -117,12 +115,12 @@ export function InvestmentProjection({ results }: InvestmentProjectionProps) {
                   </div>
                   <div className="p-3 border-r  text-right">
                     <span className="text-sm text-chart-blue">
-                      {formatTime(cltMonthsToReach)}
+                      {formatTime(cltMonthsToReach, Number(years))}
                     </span>
                   </div>
                   <div className="p-3 text-right">
                     <span className="text-sm text-chart-pink">
-                      {formatTime(pjMonthsToReach)}
+                      {formatTime(pjMonthsToReach, Number(years))}
                     </span>
                   </div>
                 </div>
