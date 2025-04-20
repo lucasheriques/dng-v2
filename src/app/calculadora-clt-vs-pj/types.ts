@@ -19,6 +19,7 @@ export type CalculatorFormData = {
   taxableBenefits: string;
   nonTaxableBenefits: string;
   plr: string;
+  otherCltExpenses: string;
 };
 
 // Moved from calculator.tsx and page.tsx
@@ -38,6 +39,7 @@ export const defaultFormData: CalculatorFormData = {
   taxableBenefits: "",
   nonTaxableBenefits: "",
   plr: "",
+  otherCltExpenses: "",
 };
 
 // Mapping from formData keys to URL short keys
@@ -57,6 +59,7 @@ export const paramMap: { [K in keyof CalculatorFormData]?: string } = {
   taxableBenefits: "tb",
   nonTaxableBenefits: "nb",
   plr: "plr",
+  otherCltExpenses: "oce",
 };
 
 // Reverse map needed for loading history and parsing params

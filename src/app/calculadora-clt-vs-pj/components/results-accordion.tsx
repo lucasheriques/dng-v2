@@ -161,6 +161,15 @@ export default function ResultsAccordion({
                   type="deduction"
                 />
               )}
+              {results.clt.deductions.otherCltExpenses > 0 && (
+                <DataFormInfoRow
+                  label="Outras Despesas"
+                  value={formatCurrency(
+                    results.clt.deductions.otherCltExpenses
+                  )}
+                  type="deduction"
+                />
+              )}
             </AccordionContent>
           </AccordionItem>
         </Accordion>

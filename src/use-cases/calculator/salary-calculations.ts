@@ -12,6 +12,7 @@ interface SalaryInput {
   includeFGTS?: boolean;
   yearsAtCompany?: number;
   plr?: number;
+  otherCltExpenses?: number;
 }
 
 interface PJInput {
@@ -75,7 +76,12 @@ function calculatePLRTax(plrAmount: number): number {
 }
 
 export function calculateCLT(input: SalaryInput) {
-  const { grossSalary, includeFGTS = true, yearsAtCompany = 0 } = input;
+  const {
+    grossSalary,
+    includeFGTS = true,
+    yearsAtCompany = 0,
+    otherCltExpenses = 0,
+  } = input;
 
   // Calculate INSS and IR for base salary
   const baseINSS = calculateINSS(grossSalary);
@@ -87,7 +93,8 @@ export function calculateCLT(input: SalaryInput) {
     : 0;
 
   // Calculate net base salary
-  const netSalary = grossSalary - baseINSS - baseIR - transportDeduction;
+  const netSalary =
+    grossSalary - baseINSS - baseIR - transportDeduction - otherCltExpenses;
 
   // Calculate FGTS including potential severance
   const monthlyFGTS = grossSalary * 0.08;
@@ -128,6 +135,7 @@ export function calculateCLT(input: SalaryInput) {
       ir: baseIR,
       transportDeduction,
       plrTax,
+      otherCltExpenses: input.otherCltExpenses || 0,
     },
     benefits,
     detailedBenefits: {
@@ -254,6 +262,7 @@ export function calculateResults(
     includeFGTS: formData.includeFGTS,
     yearsAtCompany: Number(formData.yearsAtCompany) || 0,
     plr: Number(formData.plr) || undefined,
+    otherCltExpenses: Number(formData.otherCltExpenses) || 0,
   };
 
   const pjInput = {
