@@ -30,7 +30,7 @@ export default async function Page({ params }: PageProps) {
     <ProductPage
       preloadedProduct={preloadedProduct}
       content={
-        <article className="prose dark:prose-invert">
+        <article className="prose prose-slate dark:prose-invert">
           <MDXRemote source={content} />
         </article>
       }

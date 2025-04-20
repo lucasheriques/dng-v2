@@ -1,30 +1,36 @@
 import {
   DataForm,
   DataFormHeader,
+  DataFormInfoRow,
   DataFormInput,
   DataFormRow,
 } from "@/components/data-forms";
 import { formatCurrency } from "@/lib/utils";
+import { DotIcon } from "lucide-react";
 
 interface InvestmentConfigProps {
   cltMonthlyTotal: number;
   pjMonthlyTotal: number;
-  investmentRate: string;
+  cltInvestmentRate: string;
+  pjInvestmentRate: string;
   interestRate: string;
-  onInvestmentRateChange: (value: string) => void;
+  onCltInvestmentRateChange: (value: string) => void;
+  onPjInvestmentRateChange: (value: string) => void;
   onInterestRateChange: (value: string) => void;
 }
 
 export function InvestmentConfig({
   cltMonthlyTotal,
   pjMonthlyTotal,
-  investmentRate,
+  cltInvestmentRate,
+  pjInvestmentRate,
   interestRate,
-  onInvestmentRateChange,
+  onCltInvestmentRateChange,
+  onPjInvestmentRateChange,
   onInterestRateChange,
 }: InvestmentConfigProps) {
-  const cltInvestment = (cltMonthlyTotal * Number(investmentRate)) / 100;
-  const pjInvestment = (pjMonthlyTotal * Number(investmentRate)) / 100;
+  const cltInvestment = (cltMonthlyTotal * Number(cltInvestmentRate)) / 100;
+  const pjInvestment = (pjMonthlyTotal * Number(pjInvestmentRate)) / 100;
 
   return (
     <DataForm>
@@ -40,27 +46,55 @@ export function InvestmentConfig({
         />
       </DataFormRow>
       <DataFormRow
-        label="Percentual do Salário Total"
-        tooltipContent="Quanto do salário total será investido mensalmente"
+        label="Percentual do Salário Total CLT"
+        tooltipContent="Quanto do salário total CLT será investido mensalmente"
       >
         <DataFormInput
-          value={investmentRate}
-          onChange={onInvestmentRateChange}
+          value={cltInvestmentRate}
+          onChange={onCltInvestmentRateChange}
+          prefix="%"
+        />
+      </DataFormRow>
+      <DataFormRow
+        label="Percentual do Salário Total PJ"
+        tooltipContent="Quanto do salário total PJ será investido mensalmente"
+      >
+        <DataFormInput
+          value={pjInvestmentRate}
+          onChange={onPjInvestmentRateChange}
           prefix="%"
         />
       </DataFormRow>
 
       <DataFormHeader>Valor Mensal Investido</DataFormHeader>
-      <DataFormRow label="CLT">
-        <div className="py-2 px-3 text-right">
-          {formatCurrency(cltInvestment)}
-        </div>
-      </DataFormRow>
-      <DataFormRow label="PJ">
-        <div className="py-2 px-3 text-right">
-          {formatCurrency(pjInvestment)}
-        </div>
-      </DataFormRow>
+      <DataFormInfoRow
+        label="CLT"
+        value={
+          <div className="flex items-center justify-end">
+            <span className="text-emerald-400 font-semibold">
+              {formatCurrency(cltInvestment)}
+            </span>
+            <DotIcon className="size-6" />
+            <span className="text-tertiary-text">
+              Sobram {formatCurrency(cltMonthlyTotal - cltInvestment)}
+            </span>
+          </div>
+        }
+      />
+      <DataFormInfoRow
+        label="PJ"
+        value={
+          <div className="flex items-center justify-end">
+            <span className="text-emerald-400 font-semibold">
+              {formatCurrency(pjInvestment)}
+            </span>
+            <DotIcon className="size-6" />
+            <span className="text-tertiary-text">
+              Sobram {formatCurrency(pjMonthlyTotal - pjInvestment)}
+            </span>
+          </div>
+        }
+      />
     </DataForm>
   );
 }

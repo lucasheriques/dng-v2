@@ -31,6 +31,7 @@ const defaultFormData: CalculatorFormData = {
   taxableBenefits: "",
   nonTaxableBenefits: "",
   plr: "",
+  otherCltExpenses: "",
 };
 
 // Mapping from formData keys to URL short keys (same as in client component)
@@ -50,6 +51,7 @@ const paramMap: { [K in keyof CalculatorFormData]?: string } = {
   taxableBenefits: "tb",
   nonTaxableBenefits: "nb",
   plr: "plr",
+  otherCltExpenses: "oce",
 };
 
 // Reverse map for easy lookup: short key -> long key

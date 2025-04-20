@@ -189,7 +189,7 @@ export function DataFormInfoRow({
   className = "",
 }: {
   label: string;
-  value: string;
+  value: React.ReactNode;
   type?: "addition" | "deduction" | "neutral";
   tooltipContent?: string;
   className?: string;

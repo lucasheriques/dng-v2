@@ -20,7 +20,8 @@ interface Milestone {
 interface MilestoneChartProps {
   cltMonthlyTotal: number;
   pjMonthlyTotal: number;
-  investmentRate: number;
+  cltInvestmentRate: number;
+  pjInvestmentRate: number;
   interestRate: number;
   milestones: Milestone[];
 }
@@ -46,15 +47,16 @@ const formatTime = (months: number) => {
 export function MilestoneChart({
   cltMonthlyTotal,
   pjMonthlyTotal,
-  investmentRate,
+  cltInvestmentRate,
+  pjInvestmentRate,
   interestRate,
   milestones,
 }: MilestoneChartProps) {
   const YEARS = 30;
   const monthlyRate = Math.pow(1 + interestRate, 1 / 12) - 1;
 
-  const cltMonthlyInvestment = (cltMonthlyTotal * investmentRate) / 100;
-  const pjMonthlyInvestment = (pjMonthlyTotal * investmentRate) / 100;
+  const cltMonthlyInvestment = (cltMonthlyTotal * cltInvestmentRate) / 100;
+  const pjMonthlyInvestment = (pjMonthlyTotal * pjInvestmentRate) / 100;
 
   const data = Array.from({ length: YEARS * 12 }, (_, month) => {
     const cltPatrimony =
@@ -165,8 +167,9 @@ export function MilestoneChart({
           </AreaChart>
         </ChartContainer>
         <p className="text-sm text-secondary-text mt-4">
-          Projeção baseada em {investmentRate}% do salário investido a{" "}
-          {interestRate * 100}% ao ano ao longo de {YEARS} anos.
+          Projeção baseada em {cltInvestmentRate}% (CLT) e {pjInvestmentRate}%
+          (PJ) do salário investido a {interestRate * 100}% ao ano ao longo de{" "}
+          {YEARS} anos.
         </p>
       </div>
 

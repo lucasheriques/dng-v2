@@ -23,7 +23,8 @@ interface ComparisonCardProps {
 }
 
 export function ComparisonCard({ results }: ComparisonCardProps) {
-  const [investmentRate, setInvestmentRate] = useState("20");
+  const [cltInvestmentRate, setCltInvestmentRate] = useState("20");
+  const [pjInvestmentRate, setPjInvestmentRate] = useState("20");
   const [interestRate, setInterestRate] = useState(String(SELIC_RATE));
 
   return (
@@ -45,16 +46,19 @@ export function ComparisonCard({ results }: ComparisonCardProps) {
                 <InvestmentConfig
                   cltMonthlyTotal={results.clt.total}
                   pjMonthlyTotal={results.pj.total}
-                  investmentRate={investmentRate}
+                  cltInvestmentRate={cltInvestmentRate}
+                  pjInvestmentRate={pjInvestmentRate}
                   interestRate={interestRate}
-                  onInvestmentRateChange={setInvestmentRate}
+                  onCltInvestmentRateChange={setCltInvestmentRate}
+                  onPjInvestmentRateChange={setPjInvestmentRate}
                   onInterestRateChange={setInterestRate}
                 />
 
                 <MilestoneChart
                   cltMonthlyTotal={results.clt.total}
                   pjMonthlyTotal={results.pj.total}
-                  investmentRate={Number(investmentRate)}
+                  cltInvestmentRate={Number(cltInvestmentRate)}
+                  pjInvestmentRate={Number(pjInvestmentRate)}
                   interestRate={Number(interestRate) / 100}
                   milestones={MILESTONES}
                 />
