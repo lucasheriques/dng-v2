@@ -155,13 +155,13 @@ export function InvestmentProjection({ results }: InvestmentProjectionProps) {
                     <div className="flex flex-col">
                       <span className="text-sm text-slate-400">Tempo CLT</span>
                       <span className="text-blue-400">
-                        {formatTime(cltMonthsToReach)}
+                        {formatTime(cltMonthsToReach, Number(years))}
                       </span>
                     </div>
                     <div className="flex flex-col items-end">
                       <span className="text-sm text-slate-400">Tempo PJ</span>
                       <span className="text-pink-400">
-                        {formatTime(pjMonthsToReach)}
+                        {formatTime(pjMonthsToReach, Number(years))}
                       </span>
                     </div>
                   </div>
