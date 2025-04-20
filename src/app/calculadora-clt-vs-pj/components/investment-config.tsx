@@ -17,6 +17,8 @@ interface InvestmentConfigProps {
   onCltInvestmentRateChange: (value: string) => void;
   onPjInvestmentRateChange: (value: string) => void;
   onInterestRateChange: (value: string) => void;
+  years: string;
+  onYearsChange: (value: string) => void;
 }
 
 export function InvestmentConfig({
@@ -28,6 +30,8 @@ export function InvestmentConfig({
   onCltInvestmentRateChange,
   onPjInvestmentRateChange,
   onInterestRateChange,
+  years,
+  onYearsChange,
 }: InvestmentConfigProps) {
   const cltInvestment = (cltMonthlyTotal * Number(cltInvestmentRate)) / 100;
   const pjInvestment = (pjMonthlyTotal * Number(pjInvestmentRate)) / 100;
@@ -64,6 +68,12 @@ export function InvestmentConfig({
           onChange={onPjInvestmentRateChange}
           prefix="%"
         />
+      </DataFormRow>
+      <DataFormRow
+        label="Prazo (anos)"
+        tooltipContent="Quanto tempo você vai investir"
+      >
+        <DataFormInput value={years} onChange={onYearsChange} />
       </DataFormRow>
 
       <DataFormHeader>Valor Mensal Investido</DataFormHeader>

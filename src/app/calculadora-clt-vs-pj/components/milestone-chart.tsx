@@ -1,6 +1,5 @@
 "use client";
 
-import { DataForm, DataFormHeader } from "@/components/data-forms";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { formatCurrency } from "@/lib/utils";
 import {
@@ -12,18 +11,9 @@ import {
   YAxis,
 } from "recharts";
 
-interface Milestone {
-  name: string;
-  value: number;
-}
-
 interface MilestoneChartProps {
-  cltMonthlyTotal: number;
-  pjMonthlyTotal: number;
-  cltInvestmentRate: number;
-  pjInvestmentRate: number;
-  interestRate: number;
-  milestones: Milestone[];
+  data: Array<{ month: number; clt: number; pj: number }>;
+  chartConfig: ChartConfig;
 }
 
 const formatYAxis = (value: number) => {
@@ -35,7 +25,7 @@ const formatYAxis = (value: number) => {
   return `R$${value.toFixed(0)}`;
 };
 
-const formatTime = (months: number) => {
+export const formatTime = (months: number) => {
   if (months === -1) return "Mais de 30 anos";
   const years = Math.floor(months / 12);
   const remainingMonths = months % 12;
@@ -44,49 +34,10 @@ const formatTime = (months: number) => {
   return `${years}a ${remainingMonths}m`;
 };
 
-export function MilestoneChart({
-  cltMonthlyTotal,
-  pjMonthlyTotal,
-  cltInvestmentRate,
-  pjInvestmentRate,
-  interestRate,
-  milestones,
-}: MilestoneChartProps) {
-  const YEARS = 30;
-  const monthlyRate = Math.pow(1 + interestRate, 1 / 12) - 1;
-
-  const cltMonthlyInvestment = (cltMonthlyTotal * cltInvestmentRate) / 100;
-  const pjMonthlyInvestment = (pjMonthlyTotal * pjInvestmentRate) / 100;
-
-  const data = Array.from({ length: YEARS * 12 }, (_, month) => {
-    const cltPatrimony =
-      cltMonthlyInvestment *
-      ((Math.pow(1 + monthlyRate, month + 1) - 1) / monthlyRate);
-    const pjPatrimony =
-      pjMonthlyInvestment *
-      ((Math.pow(1 + monthlyRate, month + 1) - 1) / monthlyRate);
-
-    return {
-      month: month + 1,
-      clt: cltPatrimony,
-      pj: pjPatrimony,
-    };
-  });
-
-  const chartConfig: ChartConfig = {
-    clt: {
-      label: "CLTkkkkkkkkkkk",
-      color: "white",
-    },
-    pj: {
-      label: "PJ",
-      color: "white",
-    },
-  };
-
+export function MilestoneChart({ data, chartConfig }: MilestoneChartProps) {
   return (
-    <div className="space-y-8">
-      <div className="md:max-w-[80%] mx-auto">
+    <div>
+      <div className="mx-auto">
         <ChartContainer config={chartConfig} className="h-full w-full">
           <AreaChart
             data={data}
@@ -166,107 +117,6 @@ export function MilestoneChart({
             </defs>
           </AreaChart>
         </ChartContainer>
-        <p className="text-sm text-secondary-text mt-4">
-          Projeção baseada em {cltInvestmentRate}% (CLT) e {pjInvestmentRate}%
-          (PJ) do salário investido a {interestRate * 100}% ao ano ao longo de{" "}
-          {YEARS} anos.
-        </p>
-      </div>
-
-      <DataForm className="hidden md:block">
-        <DataFormHeader>
-          Marcos Financeiros e Tempo de Investimento
-        </DataFormHeader>
-        <div className="grid grid-cols-4 border-b">
-          <div className="p-3 border-r font-medium">
-            <span className="ate">Objetivo</span>
-          </div>
-          <div className="p-3 border-r text-right font-medium">
-            <span className="text-sm">Valor</span>
-          </div>
-          <div className="p-3 border-r text-right font-medium">
-            <span className="text-sm text-chart-blue">Tempo CLT</span>
-          </div>
-          <div className="p-3 text-right font-medium">
-            <span className="text-sm text-chart-pink">Tempo PJ</span>
-          </div>
-        </div>
-        {milestones.map((milestone) => {
-          const cltMonthsToReach = data.findIndex(
-            (d) => d.clt >= milestone.value
-          );
-          const pjMonthsToReach = data.findIndex(
-            (d) => d.pj >= milestone.value
-          );
-
-          return (
-            <div
-              key={milestone.name}
-              className="grid grid-cols-4 border-b  last:border-b-0"
-            >
-              <div className="p-3 border-r ">
-                <span className="text-sm">{milestone.name}</span>
-              </div>
-              <div className="p-3 border-r  text-right">
-                <span className="text-sm text-slate-400">
-                  {formatCurrency(milestone.value)}
-                </span>
-              </div>
-              <div className="p-3 border-r  text-right">
-                <span className="text-sm text-chart-blue">
-                  {formatTime(cltMonthsToReach)}
-                </span>
-              </div>
-              <div className="p-3 text-right">
-                <span className="text-sm text-chart-pink">
-                  {formatTime(pjMonthsToReach)}
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </DataForm>
-
-      <div className="md:hidden space-y-4">
-        <h3 className="text-lg font-semibold">
-          Marcos Financeiros e Tempo de Investimento
-        </h3>
-        {milestones.map((milestone) => {
-          const cltMonthsToReach = data.findIndex(
-            (d) => d.clt >= milestone.value
-          );
-          const pjMonthsToReach = data.findIndex(
-            (d) => d.pj >= milestone.value
-          );
-
-          return (
-            <div
-              key={milestone.name}
-              className="p-4 border  rounded-lg bg-slate-900/50"
-            >
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-medium">{milestone.name}</span>
-                <span className="text-slate-400">
-                  {formatCurrency(milestone.value)}
-                </span>
-              </div>
-              <div className="flex justify-between items-center">
-                <div className="flex flex-col">
-                  <span className="text-sm text-slate-400">Tempo CLT</span>
-                  <span className="text-blue-400">
-                    {formatTime(cltMonthsToReach)}
-                  </span>
-                </div>
-                <div className="flex flex-col items-end">
-                  <span className="text-sm text-slate-400">Tempo PJ</span>
-                  <span className="text-pink-400">
-                    {formatTime(pjMonthsToReach)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
       </div>
     </div>
   );
