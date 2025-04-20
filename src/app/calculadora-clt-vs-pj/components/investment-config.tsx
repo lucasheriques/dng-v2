@@ -93,6 +93,7 @@ export function InvestmentConfig({
       />
       <DataFormInfoRow
         label="PJ"
+        className="lg:last:border-b"
         value={
           <div className="flex items-center justify-end">
             <span className="text-emerald-400 font-semibold">
