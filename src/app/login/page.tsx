@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 import HeroImage from "../../../public/login-bg-hq.webp";
-import DngLogo from "../../../public/logo-no-bg-small.webp";
+import DngLogo from "../../../public/logo-v2-no-bg.webp";
 
 export const metadata = {
   title: "Login | Dev na Gringa",
