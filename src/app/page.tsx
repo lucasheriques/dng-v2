@@ -4,10 +4,10 @@ import { getMostPopularArticles } from "@/use-cases/get-articles";
 import HeroImage from "@public/hero.webp";
 import AmazonLogo from "@public/logos/amazon.svg";
 import BrexLogo from "@public/logos/brex.svg";
-import GoogleLogo from "@public/logos/google-brand.svg";
+import GoogleLogo from "@public/logos/google.svg";
 import MicrosoftLogo from "@public/logos/microsoft.svg";
 import NubankLogo from "@public/logos/nubank.svg";
-import PostHogLogo from "@public/logos/posthog-logo-white.svg";
+import PostHogLogo from "@public/logos/posthog.svg";
 import YtThumbnail from "@public/thumb-yt.jpg";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -49,7 +49,7 @@ export default async function Home() {
                 unoptimized
                 alt="Microsoft"
                 src={MicrosoftLogo.src}
-                className="h-8 w-auto object-contain"
+                className="h-8 min-w-full object-contain hover:scale-115 transition-all duration-300"
               />
             </div>
             <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
@@ -59,7 +59,7 @@ export default async function Home() {
                 unoptimized
                 alt="Google"
                 src={GoogleLogo.src}
-                className="h-8 w-auto object-contain"
+                className="h-8 min-w-full object-contain hover:scale-115 transition-all duration-300"
               />
             </div>
             <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
@@ -69,7 +69,7 @@ export default async function Home() {
                 unoptimized
                 alt="Brex"
                 src={BrexLogo.src}
-                className="h-8 w-auto object-contain"
+                className="h-8 min-w-full object-contain hover:scale-115 transition-all duration-300"
               />
             </div>
             <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
@@ -79,7 +79,7 @@ export default async function Home() {
                 unoptimized
                 alt="PostHog"
                 src={PostHogLogo.src}
-                className="h-8 w-auto object-contain"
+                className="h-8 min-w-full object-contain hover:scale-115 transition-all duration-300"
               />
             </div>
             <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
@@ -89,7 +89,7 @@ export default async function Home() {
                 unoptimized
                 alt="Amazon"
                 src={AmazonLogo.src}
-                className="h-8 w-auto object-contain"
+                className="h-8 min-w-full object-contain hover:scale-115 transition-all duration-300"
               />
             </div>
             <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
@@ -99,7 +99,7 @@ export default async function Home() {
                 unoptimized
                 alt="Nubank"
                 src={NubankLogo.src}
-                className="h-8 w-auto object-contain"
+                className="h-8 min-w-full object-contain hover:scale-115 transition-all duration-300"
               />
             </div>
           </div>
