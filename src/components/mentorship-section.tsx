@@ -102,9 +102,9 @@ const mentorshipItems = [
           </strong>
         </p>
         <p>
-          Apenas 2 vagas disponíveis. Para uma sessão avulsa,{" "}
+          Para uma sessão avulsa,{" "}
           <a
-            href="https://cal.com/lucasfaria/mentoria-individual"
+            href="https://cal.com/lucasfaria/mentoria"
             className="underline"
             target="_blank"
           >
