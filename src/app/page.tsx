@@ -2,6 +2,12 @@ import Hero from "@/app/components/hero";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 import { getMostPopularArticles } from "@/use-cases/get-articles";
 import HeroImage from "@public/hero.webp";
+import AmazonLogo from "@public/logos/amazon.svg";
+import BrexLogo from "@public/logos/brex.svg";
+import GoogleLogo from "@public/logos/google-brand.svg";
+import MicrosoftLogo from "@public/logos/microsoft.svg";
+import NubankLogo from "@public/logos/nubank.svg";
+import PostHogLogo from "@public/logos/posthog-logo-white.svg";
 import YtThumbnail from "@public/thumb-yt.jpg";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -29,6 +35,75 @@ export default async function Home() {
           <div className="absolute inset-0 bg-linear-to-t from-[#0A0118] via-[#0A0118]/50 to-transparent" />
         </div>
         <Hero />
+      </div>
+      <div className="container space-y-4 py-12">
+        <h2 className="text-lg/8 font-semibold">
+          A newsletter lida por pessoas que trabalham nessas empresas:
+        </h2>
+        <div className="">
+          <div className="grid grid-cols-2 gap-0.5 overflow-hidden md:rounded-2xl md:grid-cols-3 lg:grid-cols-6">
+            <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center text-white">
+              <Image
+                width={32}
+                height={32}
+                unoptimized
+                alt="Microsoft"
+                src={MicrosoftLogo.src}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+            <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
+              <Image
+                width={32}
+                height={32}
+                unoptimized
+                alt="Google"
+                src={GoogleLogo.src}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+            <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
+              <Image
+                width={32}
+                height={32}
+                unoptimized
+                alt="Brex"
+                src={BrexLogo.src}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+            <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
+              <Image
+                width={32}
+                height={32}
+                unoptimized
+                alt="PostHog"
+                src={PostHogLogo.src}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+            <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
+              <Image
+                width={32}
+                height={32}
+                unoptimized
+                alt="Amazon"
+                src={AmazonLogo.src}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+            <div className="bg-white/5 p-6 md:p-10 flex items-center justify-center">
+              <Image
+                width={32}
+                height={32}
+                unoptimized
+                alt="Nubank"
+                src={NubankLogo.src}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <div
         className="motion-preset-fade motion-preset-slide-up motion-duration-1500 motion-delay- md:max-w-3xl md:mx-auto md:px-0 py-8"

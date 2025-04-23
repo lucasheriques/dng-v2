@@ -82,7 +82,7 @@ export default async function Hero() {
           </Balancer>
         </h1>
       </div>
-      <h2 className="text-xl text-secondary-text max-w-2xl">
+      <h2 className="text-xl max-w-2xl">
         <Balancer>
           <AnimatedText text="Junte-se a melhor comunidade de devs brasileiros aprendendo, compartilhando experiências e construindo carreiras internacionais juntos." />
         </Balancer>
