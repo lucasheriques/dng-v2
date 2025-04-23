@@ -1,5 +1,6 @@
 import Hero from "@/app/components/hero";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
+import { getMostPopularArticles } from "@/use-cases/get-articles";
 import HeroImage from "@public/hero.webp";
 import YtThumbnail from "@public/thumb-yt.jpg";
 import dynamic from "next/dynamic";
@@ -10,6 +11,8 @@ const About = dynamic(() => import("@/components/about"));
 const Timeline = dynamic(() => import("@/app/components/timeline"));
 
 export default async function Home() {
+  const topFourMostPopularArticles = getMostPopularArticles().slice(0, 4);
+
   return (
     <div className="pb-16">
       <div className="relative min-h-[75dvh] pt-8 md:pt-0 flex items-center">
@@ -40,7 +43,7 @@ export default async function Home() {
       </div>
       <Features />
       <About />
-      <Timeline />
+      <Timeline articles={topFourMostPopularArticles} />
     </div>
   );
 }

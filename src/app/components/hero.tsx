@@ -84,7 +84,7 @@ export default async function Hero() {
       </div>
       <h2 className="text-xl text-secondary-text max-w-2xl">
         <Balancer>
-          <AnimatedText text="Junte-se a 2550+ devs brasileiros aprendendo, compartilhando experiências e construindo carreiras internacionais juntos." />
+          <AnimatedText text="Junte-se a melhor comunidade de devs brasileiros aprendendo, compartilhando experiências e construindo carreiras internacionais juntos." />
         </Balancer>
       </h2>
       <div className="flex flex-col sm:flex-row gap-4 motion-preset-fade motion-preset-slide-up motion-duration-300 motion-delay-1000">

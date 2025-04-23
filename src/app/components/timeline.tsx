@@ -5,7 +5,8 @@ import { ExpandableCard } from "@/components/expandable-card";
 import { MentorshipSection } from "@/components/mentorship-section";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { POPULAR_ARTICLES, SOCIALS } from "@/lib/constants";
+import { SOCIALS } from "@/lib/constants";
+import { Article } from "@/lib/types";
 import { ArrowRight } from "lucide-react";
 import { MotionValue, useScroll, useTransform } from "motion/react";
 import * as m from "motion/react-m";
@@ -18,7 +19,7 @@ interface TimelineEntry {
   content: React.ReactNode;
 }
 
-const data: TimelineEntry[] = [
+const data = (articles: Article[]): TimelineEntry[] => [
   {
     title: "Newsletter",
     date: "Maio 2024",
@@ -31,22 +32,11 @@ const data: TimelineEntry[] = [
             conteúdos visuais (vídeos, fotos, etc), eu acho que é uma ferramenta
             muito poderosa para compartilhar conhecimento
           </p>
-          <p>
-            A maior parte desses artigos serão de graça, pra sempre. Pois o meu
-            objetivo é aprender cada vez mais para repassar todo meu
-            conhecimento.
-          </p>
+          <p>Veja meus artigos mais populares aqui:</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {POPULAR_ARTICLES.map((article, index) => (
-            <ArticleCard
-              key={index}
-              title={article.title}
-              description={article.description}
-              link={article.link}
-              readingTime={article.readingTime}
-              views={article.views}
-            />
+          {articles.map((article, index) => (
+            <ArticleCard key={index} article={article} />
           ))}
         </div>
         <Button className="w-full md:w-auto min-w-64" variant="outline" asChild>
@@ -509,7 +499,7 @@ const TimelineCircle = ({
   );
 };
 
-const Timeline = () => {
+const Timeline = ({ articles }: { articles: Article[] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -532,7 +522,7 @@ const Timeline = () => {
   return (
     <div ref={containerRef} className="container px-0">
       <div ref={ref} className="relative">
-        {data.map((item, index) => (
+        {data(articles).map((item, index) => (
           <div
             key={index}
             className="flex justify-start pt-10 md:gap-10 text-tertiary-text"
