@@ -1,108 +1,12 @@
 import { v } from "convex/values";
+import {
+  createAbacatePixPayment,
+  type AbacatePayWebhookPayload,
+} from "../lib/abacatepay";
 import { internal } from "./_generated/api";
 import { Id } from "./_generated/dataModel";
 import { action, internalAction } from "./_generated/server";
 import { checkIfProductCanBePurchased } from "./actionHelpers";
-
-interface PixWebhookResponse {
-  data: {
-    billing: {
-      amount: number;
-      couponsUsed: string[];
-      customer: {
-        id: string;
-        metadata: {
-          cellphone: string;
-          email: string;
-          name: string;
-          taxId: string;
-        };
-      };
-      frequency: "ONE_TIME";
-      id: string;
-      kind: ["PIX"];
-      paidAmount: number;
-      products: {
-        externalId: string;
-        id: string;
-        quantity: number;
-      }[];
-      status: "PAID";
-    };
-    payment: {
-      amount: number;
-      fee: number;
-      method: "PIX";
-    };
-  };
-  devMode: boolean;
-  event: "billing.paid";
-}
-
-const API_URL = "https://api.abacatepay.com/v1";
-
-const endpoints = {
-  createPayment: `${API_URL}/billing/create`,
-};
-
-interface Product {
-  externalId: Id<"purchases">;
-  name: string;
-  description: string;
-  quantity: number; // >=1
-  price: number; // in cents, minimum 100 (1 BRL)
-}
-
-interface Customer {
-  name: string;
-  cellphone?: string;
-  email: string;
-  taxId?: string; // CPF or CNPJ
-}
-
-interface CreatePaymentBody {
-  frequency: "ONE_TIME";
-  methods: ["PIX"];
-  products: Product[]; // >=1
-  returnUrl: string; // has to be a valid url. URL to redirect if they click "Back" on the browser
-  completionUrl: string; // has to be a valid url. URL to redirect after the payment is completed
-  customerId?: string; // if customer is created
-  customer?: Customer; // if customer is not created
-}
-
-interface CreatePaymentSucessfulResponse {
-  data: {
-    id: string;
-    url: string;
-    amount: number;
-    status: "PENDING" | "EXPIRED" | "CANCELLED" | "PAID" | "REFUNDED";
-    devMode: boolean;
-    methods: string[];
-    products: {
-      id: string;
-      externalId: string;
-      quantity: number;
-    }[];
-    frequency: string;
-    nextBilling: string | null;
-    customer: {
-      id: string;
-      metadata: Customer;
-    } | null;
-  };
-  error: null;
-}
-
-interface CreatePaymentErrorResponse {
-  error: string;
-  message: string;
-  statusCode: number;
-  code: string;
-}
-
-type CreatePaymentResponse =
-  | CreatePaymentSucessfulResponse
-  | CreatePaymentErrorResponse;
 
 export const createPixPayment = action({
   args: {
@@ -110,6 +14,15 @@ export const createPixPayment = action({
     productId: v.id("products"),
   },
   handler: async (ctx, args) => {
+    const abacateApiKey = process.env.ABACATE_API_KEY;
+    if (!abacateApiKey) {
+      throw new Error("ABACATE_API_KEY environment variable is not set.");
+    }
+    const siteUrl = process.env.SITE_URL;
+    if (!siteUrl) {
+      throw new Error("SITE_URL environment variable is not set.");
+    }
+
     const { product, user } = await checkIfProductCanBePurchased(
       ctx,
       args.productId,
@@ -117,7 +30,8 @@ export const createPixPayment = action({
     );
 
     if (!user.email || !user.name) {
-      throw new Error("User data is missing");
+      // Consider adding more specific checks or default values if applicable
+      throw new Error("User data (name or email) is missing for payment.");
     }
 
     // Create a pending purchase record
@@ -127,118 +41,145 @@ export const createPixPayment = action({
       paymentMethod: "pix",
     });
 
-    const body: CreatePaymentBody = {
-      frequency: "ONE_TIME",
-      methods: ["PIX"],
-      products: [
-        {
-          externalId: purchaseId,
-          name: product.name,
-          description: product.description,
-          quantity: 1,
-          price: product.pixPriceInCents,
+    try {
+      const { paymentIntentId, paymentUrl } = await createAbacatePixPayment({
+        apiKey: abacateApiKey,
+        products: [
+          {
+            externalId: purchaseId,
+            name: product.name,
+            description: product.description,
+            quantity: 1,
+            price: product.pixPriceInCents,
+          },
+        ],
+        returnUrl: `${siteUrl}/${product.slug}?purchaseId=${purchaseId}`,
+        completionUrl: `${siteUrl}/checkout/success?purchaseId=${purchaseId}`,
+        customer: {
+          name: user.name,
+          cellphone: user.phone, // Ensure user.phone exists or handle undefined
+          email: user.email,
+          taxId: user.cpf, // Ensure user.cpf exists or handle undefined
         },
-      ],
-      returnUrl: `${process.env.SITE_URL}/${product.slug}?purchaseId=${purchaseId}`,
-      completionUrl: `${process.env.SITE_URL}/checkout/success?purchaseId=${purchaseId}`,
-      customer: {
-        name: user.name,
-        cellphone: user.phone,
-        email: user.email,
-        taxId: user.cpf,
-      },
-    };
-
-    const response = await fetch(endpoints.createPayment, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.ABACATE_API_KEY}`,
-      },
-      body: JSON.stringify(body),
-    });
-
-    const responseData: CreatePaymentResponse = await response.json();
-
-    if (responseData.error !== null) {
-      console.error({
-        error: responseData.error,
-        message: responseData.message,
-        statusCode: responseData.statusCode,
-        code: responseData.code,
       });
-      throw new Error(responseData.error);
+
+      // Update the purchase with the payment intent ID
+      await ctx.runMutation(internal.purchases.updatePaymentIntent, {
+        purchaseId,
+        paymentIntentId,
+      });
+
+      return paymentUrl;
+    } catch (error) {
+      console.error("Failed to create AbacatePay PIX payment:", error);
+      // Optionally, revert the pending purchase or mark it as failed
+      // await ctx.runMutation(internal.purchases.markAsFailed, { purchaseId });
+      throw new Error(
+        `Failed to initiate PIX payment: ${(error as Error).message}`
+      );
     }
-
-    const {
-      data: { url, id: paymentIntentId },
-    } = responseData;
-
-    // Update the purchase with the payment intent ID
-    await ctx.runMutation(internal.purchases.updatePaymentIntent, {
-      purchaseId,
-      paymentIntentId,
-    });
-
-    return url;
   },
 });
 
 export const fulfill = internalAction({
   args: {
-    payload: v.string(),
+    payload: v.string(), // Raw JSON string from the webhook
   },
   handler: async ({ runMutation, runQuery }, { payload }) => {
     try {
-      const webhookData = JSON.parse(payload) as PixWebhookResponse;
+      // Type assertion after parsing
+      const webhookData = JSON.parse(payload) as AbacatePayWebhookPayload;
 
-      // Only process paid events
+      // Verify event type
       if (webhookData.event !== "billing.paid") {
+        console.log(`Ignoring webhook event: ${webhookData.event}`);
         return { success: true };
+      }
+
+      // Validate essential data exists
+      if (!webhookData.data?.billing?.products) {
+        console.error(
+          "Invalid webhook payload: Missing billing or product data."
+        );
+        // Return success to prevent retries for fundamentally invalid data
+        return { success: true, error: "Invalid payload structure" };
       }
 
       const { billing } = webhookData.data;
 
+      // Check if status is PAID
+      if (billing.status !== "PAID") {
+        console.log(`Ignoring non-PAID billing status: ${billing.status}`);
+        return { success: true };
+      }
+
+      let allProductsProcessed = true;
+
       // Process each product in the billing
       for (const product of billing.products) {
+        // Explicitly cast externalId to Id<"purchases">
         const purchaseId = product.externalId as Id<"purchases">;
 
-        // Find the pending purchase for this product
-        const purchase = await runQuery(internal.purchases.get, {
-          id: purchaseId,
-        });
-
-        if (!purchase) {
-          console.error(`No pending purchase found for product ${purchaseId}`);
-          continue;
-        }
-
-        // Mark the purchase as completed
-        await runMutation(internal.purchases.markCompleted, {
-          purchaseId: purchase._id,
-        });
-
-        // If this is a credit purchase, add credits to the user's account
-        const productDetails = await runQuery(internal.products.get, {
-          id: purchase.productId,
-        });
-
-        if (
-          productDetails &&
-          productDetails.type === "credit" &&
-          productDetails.metadata?.creditAmount
-        ) {
-          await runMutation(internal.credits.add, {
-            userId: purchase.userId,
-            amount: productDetails.metadata.creditAmount,
+        try {
+          // Fetch the purchase record using the externalId
+          const purchase = await runQuery(internal.purchases.get, {
+            id: purchaseId,
           });
+
+          if (!purchase) {
+            console.error(
+              `No purchase found for externalId (purchaseId): ${purchaseId}`
+            );
+            allProductsProcessed = false;
+            continue; // Move to the next product
+          }
+
+          // Avoid reprocessing already completed purchases
+          if (purchase.status === "completed") {
+            console.log(`Purchase ${purchaseId} already completed. Skipping.`);
+            continue;
+          }
+
+          // Mark the purchase as completed
+          await runMutation(internal.purchases.markCompleted, {
+            purchaseId: purchase._id,
+          });
+          console.log(`Purchase ${purchaseId} marked as completed.`);
+
+          // Handle credits if applicable
+          const productDetails = await runQuery(internal.products.get, {
+            id: purchase.productId,
+          });
+
+          if (
+            productDetails &&
+            productDetails.type === "credit" &&
+            productDetails.metadata?.creditAmount
+          ) {
+            await runMutation(internal.credits.add, {
+              userId: purchase.userId,
+              amount: productDetails.metadata.creditAmount,
+            });
+            console.log(
+              `Added ${productDetails.metadata.creditAmount} credits to user ${purchase.userId}.`
+            );
+          }
+        } catch (productErr) {
+          console.error(
+            `Error processing product with externalId ${purchaseId}:`,
+            productErr
+          );
+          allProductsProcessed = false;
+          // Decide if you want to continue processing other products or stop
         }
       }
 
-      return { success: true };
+      // Return success based on whether all products were processed without error
+      return { success: allProductsProcessed };
     } catch (err) {
-      console.error("Error processing PIX webhook:", err);
-      return { success: false, error: (err as { message: string }).message };
+      console.error("Error processing PIX webhook payload:", err);
+      // Return failure for errors during parsing or initial validation
+      return { success: false, error: (err as Error).message };
     }
   },
 });
