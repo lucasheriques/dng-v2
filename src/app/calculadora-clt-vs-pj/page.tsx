@@ -45,7 +45,7 @@ export async function generateMetadata({
 
   const title = "Calculadora CLT vs. PJ | Dev na Gringa";
   const description =
-    "Simule e compare salários líquidos CLT e PJ com benefícios. Descubra a melhor opção para você.";
+    "Calculadora de salário líquido CLT vs PJ. Inclui todos os benefícios, como 13º salário e férias. Veja qual a melhor opção para você.";
 
   return {
     title: title,
