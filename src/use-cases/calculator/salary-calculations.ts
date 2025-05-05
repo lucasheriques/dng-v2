@@ -48,7 +48,10 @@ const PLR_IRRF_RANGES = [
   { max: Infinity, rate: 0.275, deduction: 3123.78 },
 ];
 
-function calculateINSS(salary: number): number {
+// Re-export these functions so they can be reused
+// export { calculateINSS, calculateIRRF } from "./salary-calculations";
+
+export function calculateINSS(salary: number): number {
   let inss = 0;
   let remainingSalary = salary;
   let previousMax = 0;
@@ -65,7 +68,7 @@ function calculateINSS(salary: number): number {
   return inss;
 }
 
-function calculateIRRF(baseIR: number): number {
+export function calculateIRRF(baseIR: number): number {
   const irRange = IRRF_RANGES.find((range) => baseIR <= range.max);
   return irRange ? baseIR * irRange.rate - irRange.deduction : 0;
 }
