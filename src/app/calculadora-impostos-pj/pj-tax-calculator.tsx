@@ -18,13 +18,8 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency, formatPercentage } from "@/lib/utils";
 import { calculatePjTaxes } from "@/use-cases/calculator/pj-tax-calculations";
-import { useEffect, useState } from "react";
-import {
-  defaultPjTaxFormData,
-  PjActivityType,
-  PjTaxCalculationResults,
-  PjTaxFormData,
-} from "./types";
+import { useState } from "react";
+import { defaultPjTaxFormData, PjActivityType, PjTaxFormData } from "./types";
 
 interface PjTaxCalculatorClientProps {
   initialData?: PjTaxFormData;
@@ -36,15 +31,9 @@ export function PjTaxCalculatorClient({
   const [formData, setFormData] = useState<PjTaxFormData>(
     initialData ?? defaultPjTaxFormData
   );
-  const [results, setResults] = useState<PjTaxCalculationResults | null>(null);
   const { toast } = useToast();
 
-  // Recalculate whenever formData changes
-  useEffect(() => {
-    const calculatedResults = calculatePjTaxes(formData);
-    setResults(calculatedResults);
-  }, [formData]);
-
+  const results = calculatePjTaxes(formData);
   const handleInputChange = (
     field: keyof PjTaxFormData,
     value: string | PjActivityType
