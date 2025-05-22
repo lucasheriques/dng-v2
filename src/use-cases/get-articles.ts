@@ -7,7 +7,10 @@ export function getArticles() {
 }
 
 export function getLastArticle() {
-  return ArticleList[0];
+  // sort by postDate descending
+  return ArticleList.sort(
+    (a, b) => new Date(b.postDate).getTime() - new Date(a.postDate).getTime()
+  )[0];
 }
 
 export function getMostPopularArticles() {
