@@ -3,7 +3,7 @@ import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
 import { env } from "@/env";
 import { Metadata } from "next";
-import { SalaryCalculatorClient } from "./salary-calculator";
+import { CltPjCalculator } from "./clt-pj-calculator";
 import {
   defaultFormData,
   reverseParamMap,
@@ -107,7 +107,7 @@ export default async function SalaryCalculatorPage({
 
   return (
     <PageWrapper>
-      <SalaryCalculatorClient initialData={initialData} />
+      <CltPjCalculator initialData={initialData} />
       <Comments slug="calculadora-clt-vs-pj" />
     </PageWrapper>
   );

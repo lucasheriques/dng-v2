@@ -46,7 +46,7 @@ const getParamValue = (
   return params.get(key) ?? defaultValue;
 };
 
-export function SalaryCalculatorClient({ initialData }: SalaryCalculatorProps) {
+export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
   const [formData, setFormData] = useState<CalculatorFormData>(
     initialData ?? defaultFormData
   );
