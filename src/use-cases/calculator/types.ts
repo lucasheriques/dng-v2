@@ -8,6 +8,7 @@ export type CLTCalculatorFormData = {
   yearsAtCompany: string;
   plr: string;
   otherCltExpenses: string;
+  alimony: string;
   dependentsCount: string;
 };
 

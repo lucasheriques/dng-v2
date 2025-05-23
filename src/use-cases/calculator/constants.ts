@@ -14,6 +14,7 @@ export const DEFAULT_CLT_FORM_DATA: CLTCalculatorFormData = {
   yearsAtCompany: "",
   plr: "",
   otherCltExpenses: "",
+  alimony: "",
   dependentsCount: "0",
 };
 
@@ -44,6 +45,7 @@ export const CLT_PARAMETERS_MAP: {
   yearsAtCompany: "yc",
   plr: "plr",
   otherCltExpenses: "oce",
+  alimony: "pa",
   dependentsCount: "dc",
 };
 

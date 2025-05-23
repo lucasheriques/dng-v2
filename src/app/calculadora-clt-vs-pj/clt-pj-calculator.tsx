@@ -3,13 +3,11 @@
 import Results from "@/app/calculadora-clt-vs-pj/components/results";
 import ResultsAccordion from "@/app/calculadora-clt-vs-pj/components/results-accordion";
 import {
-  DataForm,
   DataFormHeader,
   DataFormInput,
   DataFormRow,
 } from "@/components/data-forms";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { formatCurrency } from "@/lib/utils"; // Import formatCurrency
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import { CalculatorFormData } from "@/use-cases/calculator/types";
@@ -18,12 +16,14 @@ import dynamic from "next/dynamic";
 import { useCallback, useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
+import { CltDataForm } from "@/components/calculators/clt-data-form";
 import {
   formDataAtom,
   parseQueryParamsToFormData,
 } from "@/use-cases/calculator/client-state";
 import { useAtom } from "jotai";
 import { useResetAtom } from "jotai/react/utils";
+import { Building2 } from "lucide-react";
 
 const RecentComparisons = dynamic(
   () => import("@/app/calculadora-clt-vs-pj/components/recent-comparisons"),
@@ -167,173 +167,21 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
       />
 
       <div className="grid md:grid-cols-2 gap-8">
-        <DataForm>
-          <DataFormHeader>
-            <div className="flex justify-between items-center">
-              <span>CLT</span>
-              <div className="">
-                <div className="flex items-center gap-2">
-                  <label htmlFor="fgts-checkbox" className="text-sm">
-                    Incluir FGTS
-                  </label>
-                  <Checkbox
-                    id="fgts-checkbox"
-                    className="p-0"
-                    checked={formData.includeFGTS}
-                    onCheckedChange={handleFGTSChange}
-                  />
-                </div>
-              </div>
-            </div>
-          </DataFormHeader>
-          <DataFormHeader>Salário Base</DataFormHeader>
-          <DataFormRow
-            label="Salário Bruto Mensal"
-            inputId="gross-salary-input"
-          >
-            <DataFormInput
-              value={formData.grossSalary}
-              onChange={(v) =>
-                handleInputChange("grossSalary", typeof v === "string" ? v : "")
-              }
-              required
-              prefix="R$"
-              placeholder={
-                formData.pjGrossSalary === ""
-                  ? ""
-                  : `${formData.pjGrossSalary}. Clique para alterar.`
-              }
-              id="gross-salary-input"
-              autoFocus
-            />
-          </DataFormRow>
-
-          <DataFormHeader>Benefícios</DataFormHeader>
-          <DataFormRow
-            label="Vale Refeição/Alimentação"
-            inputId="meal-allowance-input"
-          >
-            <DataFormInput
-              value={formData.mealAllowance}
-              onChange={(v) =>
-                handleInputChange(
-                  "mealAllowance",
-                  typeof v === "string" ? v : ""
-                )
-              }
-              prefix="R$"
-              id="meal-allowance-input"
-            />
-          </DataFormRow>
-          <DataFormRow
-            label="Vale-Transporte"
-            inputId="transport-allowance-input"
-          >
-            <DataFormInput
-              value={formData.transportAllowance}
-              onChange={(v) =>
-                handleInputChange(
-                  "transportAllowance",
-                  typeof v === "string" ? v : ""
-                )
-              }
-              prefix="R$"
-              id="transport-allowance-input"
-            />
-          </DataFormRow>
-          <DataFormRow label="Plano de Saúde" inputId="health-insurance-input">
-            <DataFormInput
-              value={formData.healthInsurance}
-              onChange={(v) =>
-                handleInputChange(
-                  "healthInsurance",
-                  typeof v === "string" ? v : ""
-                )
-              }
-              prefix="R$"
-              id="health-insurance-input"
-            />
-          </DataFormRow>
-          <DataFormRow
-            label="PLR Anual"
-            tooltipContent="Participação nos Lucros e Resultados (valor bruto anual)"
-            inputId="plr-input"
-          >
-            <DataFormInput
-              value={formData.plr}
-              onChange={(v) =>
-                handleInputChange("plr", typeof v === "string" ? v : "")
-              }
-              prefix="R$"
-              id="plr-input"
-            />
-          </DataFormRow>
-          <DataFormRow
-            label="Outros Benefícios"
-            tooltipContent="Qualquer benefício não-taxável que você queira adicionar."
-            inputId="other-benefits-input"
-          >
-            <DataFormInput
-              value={formData.otherBenefits}
-              onChange={(v) =>
-                handleInputChange(
-                  "otherBenefits",
-                  typeof v === "string" ? v : ""
-                )
-              }
-              prefix="R$"
-              id="other-benefits-input"
-            />
-          </DataFormRow>
-          <DataFormHeader>Outros dados</DataFormHeader>
-          <DataFormRow
-            label="Outras despesas"
-            tooltipContent="Qualquer despesa mensal em folha de pagamento que você queira adicionar (ex: coparticipação plano de saúde, etc)."
-            inputId="other-clt-expenses-input"
-          >
-            <DataFormInput
-              value={formData.otherCltExpenses}
-              onChange={(v) =>
-                handleInputChange(
-                  "otherCltExpenses",
-                  typeof v === "string" ? v : ""
-                )
-              }
-              prefix="R$"
-              id="other-clt-expenses-input"
-            />
-          </DataFormRow>
-
-          <DataFormRow
-            label="Anos na empresa"
-            tooltipContent="Usado para calcular a multa rescisória em caso de demissão sem justa causa."
-            inputId="years-at-company-input"
-          >
-            <DataFormInput
-              value={formData.yearsAtCompany}
-              onChange={(v) =>
-                handleInputChange(
-                  "yearsAtCompany",
-                  typeof v === "string" ? v : ""
-                )
-              }
-              id="years-at-company-input"
-            />
-          </DataFormRow>
-
-          {results && (
-            <ResultsAccordion
-              results={results}
-              type="clt"
-              isExpanded={isDetailsExpanded}
-              onToggle={() => setIsDetailsExpanded(!isDetailsExpanded)}
-            />
-          )}
-        </DataForm>
+        <CltDataForm
+          initialData={initialData}
+          historyLocalStorageKey="calculator-clt-pj-history"
+          withResultsAccordion
+          onToggle={() => setIsDetailsExpanded(!isDetailsExpanded)}
+          isExpanded={isDetailsExpanded}
+        />
 
         <div className="border  rounded-lg overflow-hidden bg-slate-900/50">
-          <DataFormHeader>PJ</DataFormHeader>
-          <DataFormHeader>Salário Base</DataFormHeader>
+          <DataFormHeader>
+            <span className="flex items-center gap-2">
+              <Building2 className="size-5" />
+              Dados PJ
+            </span>
+          </DataFormHeader>
           <DataFormRow
             label="Salário Bruto Mensal"
             inputId="pj-gross-salary-input"

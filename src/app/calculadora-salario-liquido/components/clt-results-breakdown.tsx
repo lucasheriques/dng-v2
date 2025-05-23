@@ -33,7 +33,8 @@ export default function CltResultsBreakdown({
                 results.deductions.inss +
                   results.deductions.ir +
                   results.deductions.transportDeduction +
-                  results.deductions.otherCltExpenses
+                  results.deductions.otherCltExpenses +
+                  results.deductions.alimony
               )}
               )
             </AccordionTrigger>
@@ -61,10 +62,21 @@ export default function CltResultsBreakdown({
                     </span>
                   </div>
                 )}
+                {results.deductions.alimony > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-secondary-text">
+                      Pensão Alimentícia:
+                    </span>
+                    <span className="font-medium text-red-400">
+                      -{formatCurrency(results.deductions.alimony)}
+                    </span>
+                  </div>
+                )}
+
                 {results.deductions.otherCltExpenses > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-secondary-text">
-                      Outras Despesas:
+                      Outros Descontos:
                     </span>
                     <span className="font-medium text-red-400">
                       -{formatCurrency(results.deductions.otherCltExpenses)}

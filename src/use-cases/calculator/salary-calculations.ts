@@ -18,6 +18,7 @@ interface SalaryInput {
   yearsAtCompany?: number;
   plr?: number;
   otherCltExpenses?: number;
+  alimony?: number;
   dependentsCount?: number;
 }
 
@@ -96,14 +97,15 @@ export function calculateCLT(input: SalaryInput) {
     includeFGTS = true,
     yearsAtCompany = 0,
     otherCltExpenses = 0,
+    alimony = 0,
   } = input;
 
-  // Calculate INSS and IR for base salary
+  // Calculate INSS for base salary
   const baseINSS = calculateINSS(grossSalary);
-  const baseIR = calculateIRRF(
-    grossSalary - baseINSS,
-    input.dependentsCount || 0
-  );
+
+  // Alimony is deducted before IR calculation (tax deductible)
+  const taxableIncomeForIR = grossSalary - baseINSS - alimony;
+  const baseIR = calculateIRRF(taxableIncomeForIR, input.dependentsCount || 0);
 
   // Calculate transport deduction if applicable
   const transportDeduction = input.transportAllowance
@@ -112,7 +114,12 @@ export function calculateCLT(input: SalaryInput) {
 
   // Calculate net base salary
   const netSalary =
-    grossSalary - baseINSS - baseIR - transportDeduction - otherCltExpenses;
+    grossSalary -
+    baseINSS -
+    baseIR -
+    transportDeduction -
+    otherCltExpenses -
+    alimony;
 
   // Calculate FGTS including potential severance
   const monthlyFGTS = grossSalary * 0.08;
@@ -154,6 +161,7 @@ export function calculateCLT(input: SalaryInput) {
       transportDeduction,
       plrTax,
       otherCltExpenses: input.otherCltExpenses || 0,
+      alimony: input.alimony || 0,
     },
     benefits,
     detailedBenefits: {
@@ -281,6 +289,8 @@ export function calculateResults(
     yearsAtCompany: Number(formData.yearsAtCompany) || 0,
     plr: Number(formData.plr) || undefined,
     otherCltExpenses: Number(formData.otherCltExpenses) || 0,
+    alimony: Number(formData.alimony) || 0,
+    dependentsCount: Number(formData.dependentsCount) || 0,
   };
 
   const pjInput = {

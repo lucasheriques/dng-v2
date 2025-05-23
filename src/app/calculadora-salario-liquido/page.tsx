@@ -47,9 +47,10 @@ export async function generateMetadata({
     }
   }
 
-  const title = "Calculadora de Salário Líquido CLT 2024 | Dev na Gringa";
+  const title =
+    "Calculadora de Salário Líquido 2025: Calcule Grátis Online | INSS e IRRF";
   const description =
-    "Calcule seu salário líquido CLT com precisão. Inclui INSS, IRRF, vale-transporte, 13º salário, férias e todos os benefícios. Grátis e fácil de usar.";
+    "🧮 Calculadora de salário líquido GRÁTIS e atualizada 2025. Calcule seu salário líquido CLT descontando INSS, IRRF, vale-transporte e dependentes. Resultado instantâneo e preciso!";
 
   return {
     title: title,
@@ -77,15 +78,23 @@ export async function generateMetadata({
     },
     keywords: [
       "calculadora salário líquido",
+      "calculadora salario liquido",
+      "calcular salário líquido online",
+      "calculadora salario liquido 2025",
       "salário líquido CLT",
-      "calcular salário líquido",
-      "INSS",
-      "IRRF",
-      "imposto de renda",
+      "calcular salário líquido grátis",
+      "salário bruto x líquido",
+      "desconto INSS salário",
+      "desconto IRRF salário",
+      "imposto de renda na fonte",
+      "calculadora salário líquido gratuita",
       "13º salário",
-      "férias",
-      "vale transporte",
-      "CLT",
+      "férias proporcional",
+      "vale transporte desconto",
+      "CLT salário líquido",
+      "quanto vou receber líquido",
+      "tabela INSS 2025",
+      "tabela IRRF 2025",
     ],
   };
 }

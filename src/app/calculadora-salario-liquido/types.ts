@@ -10,5 +10,6 @@ export const defaultCltFormData: CLTCalculatorFormData = {
   yearsAtCompany: "",
   plr: "",
   otherCltExpenses: "",
+  alimony: "",
   dependentsCount: "0",
 };

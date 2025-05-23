@@ -28,6 +28,7 @@ function createFormData(
     taxableBenefits: "0",
     nonTaxableBenefits: "0",
     otherCltExpenses: "0",
+    alimony: "0",
     dependentsCount: "0",
     ...overrides,
   };
@@ -82,6 +83,37 @@ describe("calculateCLT", () => {
     expect(result.detailedBenefits.healthInsurance).toBe(300);
     expect(result.detailedBenefits.otherBenefits).toBe(200);
     expect(result.detailedBenefits.plrGross).toBe(5000);
+  });
+
+  it("should calculate CLT salary with alimony and other expenses", () => {
+    const input = {
+      grossSalary: 5000,
+      alimony: 800, // Should reduce IR calculation base
+      otherCltExpenses: 200, // Should reduce net salary
+      dependentsCount: 1,
+    };
+
+    const result = calculateCLT(input);
+
+    expect(result.grossSalary).toBe(5000);
+    expect(result.deductions.alimony).toBe(800);
+    expect(result.deductions.otherCltExpenses).toBe(200);
+
+    // With alimony, the taxable income for IR should be lower
+    // Gross: 5000, INSS: ~509.6, Taxable for IR: 5000 - 509.6 - 800 = 3690.4
+    // This should result in lower IR compared to without alimony
+    const resultWithoutAlimony = calculateCLT({
+      grossSalary: 5000,
+      dependentsCount: 1,
+    });
+    expect(result.deductions.ir).toBeLessThan(
+      resultWithoutAlimony.deductions.ir
+    );
+
+    // Net salary should account for all deductions
+    const expectedNet =
+      5000 - result.deductions.inss - result.deductions.ir - 800 - 200;
+    expect(result.netSalary).toBeCloseTo(expectedNet);
   });
 });
 
