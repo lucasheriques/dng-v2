@@ -9,7 +9,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
 import { calculateCLT } from "@/use-cases/calculator/salary-calculations";
 import { CLTCalculatorFormData } from "@/use-cases/calculator/types";
@@ -82,8 +81,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
     "calculator-clt-history",
     []
   );
-
-  const { toast } = useToast();
 
   const handleFGTSChange = (value: boolean) => {
     setFormData((prev) => ({

@@ -20,6 +20,7 @@ import {
   ChartLegendContent,
   ChartTooltip,
 } from "@/components/ui/chart";
+import { RetirementIncomeSection } from "@/components/ui/retirement-income-section";
 import { ShareButton } from "@/components/ui/share-button";
 import {
   TableHeader as ShadcnTableHeader,
@@ -30,7 +31,6 @@ import {
   TableHead,
 } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
 import dynamic from "next/dynamic";
@@ -101,8 +101,6 @@ const chartConfig = {
 export default function InvestmentCalculator({
   initialData,
 }: InvestmentCalculatorProps) {
-  const { toast } = useToast();
-
   // Initialize state using initialData or defaults
   const [initialDeposit, setInitialDeposit] = useState(
     initialData?.initialDeposit ?? defaultValues.initialDeposit
@@ -623,6 +621,9 @@ export default function InvestmentCalculator({
             </div>
           </div>
         </div>
+
+        {/* Retirement Income Calculations */}
+        <RetirementIncomeSection finalAmount={results.finalAmount} />
 
         {/* Second row: Total savings */}
       </div>

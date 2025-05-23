@@ -143,6 +143,10 @@ export default async function CalculadoraJurosCompostosPage({
           crescimento ao longo do tempo.
         </p>
         <p>Ajuste os valores e compartilhe os resultados!</p>
+        <p className="text-xs pt-4">
+          As informações nessa página são apenas informativas e não devem ser
+          consideradas como aconselhamento financeiro.
+        </p>
       </div>
       <Comments slug="calculadora-juros-compostos" />
     </PageWrapper>
