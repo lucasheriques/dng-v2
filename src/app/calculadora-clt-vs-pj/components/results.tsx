@@ -10,8 +10,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShareButton } from "@/components/ui/share-button";
 import {
   Table,
   TableBody,
@@ -28,12 +28,12 @@ import {
   findPJEquivalentForCLT,
 } from "@/use-cases/calculator/salary-calculations";
 import { CalculatorFormData } from "@/use-cases/calculator/types";
-import { CheckCircle, Share2 } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 interface ResultsProps {
   results: CalculationResults;
   formData: CalculatorFormData;
-  onShare: () => void;
+  onShare: () => Promise<boolean>;
 }
 
 export default function Results({ results, formData, onShare }: ResultsProps) {
@@ -105,14 +105,10 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
           <CardTitle className="flex items-center gap-2 text-lg font-semibold text-emerald-200">
             <CheckCircle size={20} /> Melhor opção: {betterOption}
           </CardTitle>
-          <Button
-            size="sm"
-            onClick={onShare}
+          <ShareButton
+            onShare={onShare}
             className="col-span-4 self-center hidden md:flex"
-          >
-            <Share2 className="size-4 mr-2" />
-            Compartilhar resultado
-          </Button>
+          />
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
@@ -145,14 +141,10 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
               </p>
             </div>
           </div>
-          <Button
-            size="sm"
-            onClick={onShare}
-            className="col-span-4 self-center flex md:hidden"
-          >
-            <Share2 className="size-4 mr-2" />
-            Compartilhar resultado
-          </Button>
+          <ShareButton
+            onShare={onShare}
+            className=" self-center flex md:hidden"
+          />
         </CardContent>
       </Card>
 

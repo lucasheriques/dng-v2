@@ -19,13 +19,14 @@ import {
   safeParseNumberString,
 } from "@/use-cases/calculator/utils";
 import NumberFlow from "@number-flow/react";
-import { ArrowRight, Banknote, Calculator, Share2 } from "lucide-react";
+import { ArrowRight, Banknote, Calculator } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import CltResultsBreakdown from "./components/clt-results-breakdown";
 
 import { BorderBeam } from "@/components/ui/border-beam";
+import { ShareButton } from "@/components/ui/share-button";
 import { formDataAtom } from "@/use-cases/calculator/client-state";
 import {
   DEFAULT_CLT_FORM_DATA,
@@ -123,20 +124,12 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
     const url = new URL(window.location.pathname, window.location.origin);
     url.search = paramString;
     window.history.replaceState({}, "", url.toString());
-
     try {
       await navigator.clipboard.writeText(url.toString());
-      toast({
-        title: "Link de compartilhamento copiado!",
-        description:
-          "O link com a sua simulação foi copiado para a área de transferência.",
-      });
+      return true;
     } catch (err) {
       console.error("Failed to copy URL: ", err);
-      toast({
-        title: "Erro ao copiar link",
-        description: "Por favor, tente copiar manualmente.",
-      });
+      return false;
     }
   };
 
@@ -466,10 +459,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                     </div>
                   </div>
 
-                  <Button onClick={handleShare} className="w-full">
-                    <Share2 className="size-4 mr-2" />
-                    Compartilhar resultado
-                  </Button>
+                  <ShareButton onShare={handleShare} className="min-w-full" />
                 </CardContent>
                 <CltResultsBreakdown results={results} />
               </Card>

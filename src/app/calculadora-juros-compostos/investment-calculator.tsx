@@ -13,7 +13,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import {
   ChartConfig,
   ChartContainer,
@@ -21,6 +20,7 @@ import {
   ChartLegendContent,
   ChartTooltip,
 } from "@/components/ui/chart";
+import { ShareButton } from "@/components/ui/share-button";
 import {
   TableHeader as ShadcnTableHeader,
   TableRow as ShadcnTableRow,
@@ -33,7 +33,6 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
-import { Copy } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
@@ -174,7 +173,7 @@ export default function InvestmentCalculator({
   };
 
   // Share function
-  const handleShare = () => {
+  const handleShare = async () => {
     const params = new URLSearchParams();
 
     // Use short keys for parameters
@@ -211,23 +210,13 @@ export default function InvestmentCalculator({
       setHistory(newHistory);
     }
 
-    navigator.clipboard
-      .writeText(url.toString())
-      .then(() => {
-        toast({
-          title: "Link de compartilhamento copiado!",
-          description:
-            "O link com a sua simulação foi copiado para a área de transferência.",
-        });
-      })
-      .catch((err) => {
-        console.error("Failed to copy URL: ", err);
-        toast({
-          variant: "destructive",
-          title: "Falha ao copiar o link.",
-          description: "Ocorreu um erro ao tentar copiar o link.",
-        });
-      });
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      return true;
+    } catch (err) {
+      console.error("Failed to copy URL: ", err);
+      return false;
+    }
   };
 
   // Function to load state from history
@@ -630,14 +619,7 @@ export default function InvestmentCalculator({
                   data-testvalue={results.finalAmount}
                 />
               </div>
-              <Button
-                variant="outline"
-                onClick={handleShare}
-                className="self-end"
-              >
-                <Copy className="w-4 h-4 mr-1" />
-                Compartilhar resultado
-              </Button>
+              <ShareButton onShare={handleShare} className="self-end" />
             </div>
           </div>
         </div>

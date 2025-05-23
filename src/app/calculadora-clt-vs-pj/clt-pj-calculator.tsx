@@ -10,7 +10,6 @@ import {
 } from "@/components/data-forms";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils"; // Import formatCurrency
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import { CalculatorFormData } from "@/use-cases/calculator/types";
@@ -85,8 +84,6 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
     setFormData(newFormData);
   };
 
-  const { toast } = useToast();
-
   const handleShare = async () => {
     const paramString = buildUrlParameters(formData).toString();
     const url = new URL(window.location.pathname, window.location.origin);
@@ -103,17 +100,10 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
 
     try {
       await navigator.clipboard.writeText(url.toString());
-      toast({
-        title: "Link de compartilhamento copiado!",
-        description:
-          "O link com a sua simulação foi copiado para a área de transferência.",
-      });
+      return true;
     } catch (err) {
       console.error("Failed to copy URL: ", err);
-      toast({
-        title: "Erro ao copiar link",
-        description: "Por favor, tente copiar manualmente.",
-      });
+      return false;
     }
   };
 
