@@ -7,12 +7,9 @@ import {
 } from "@/components/data-forms";
 import { Checkbox } from "@/components/ui/checkbox";
 import { formatCurrency } from "@/lib/utils";
-import { CalculationResults } from "@/use-cases/calculator/salary-calculations";
 import { DotIcon } from "lucide-react";
-import { useState } from "react";
 
 interface InvestmentConfigProps {
-  results: CalculationResults;
   cltInvestmentRate: string;
   pjInvestmentRate: string;
   interestRate: string;
@@ -21,10 +18,13 @@ interface InvestmentConfigProps {
   onInterestRateChange: (value: string) => void;
   years: string;
   onYearsChange: (value: string) => void;
+  onlyInvestNetSalaryForClt: boolean;
+  setOnlyInvestNetSalaryForClt: (value: boolean) => void;
+  pjMonthlyTotal: number;
+  cltMonthlyTotal: number;
 }
 
 export function InvestmentConfig({
-  results,
   cltInvestmentRate,
   pjInvestmentRate,
   interestRate,
@@ -33,14 +33,11 @@ export function InvestmentConfig({
   onInterestRateChange,
   years,
   onYearsChange,
+  pjMonthlyTotal,
+  cltMonthlyTotal,
+  onlyInvestNetSalaryForClt,
+  setOnlyInvestNetSalaryForClt,
 }: InvestmentConfigProps) {
-  const [onlyInvestNetSalaryForClt, setOnlyInvestNetSalaryForClt] =
-    useState(false);
-
-  const pjMonthlyTotal = results.pj.total;
-  const cltMonthlyTotal = onlyInvestNetSalaryForClt
-    ? results.clt.netSalary
-    : results.clt.total;
   const cltInvestment = (cltMonthlyTotal * Number(cltInvestmentRate)) / 100;
   const pjInvestment = (pjMonthlyTotal * Number(pjInvestmentRate)) / 100;
 

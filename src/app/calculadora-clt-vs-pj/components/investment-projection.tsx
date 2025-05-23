@@ -20,16 +20,22 @@ interface InvestmentProjectionProps {
 }
 
 export function InvestmentProjection({ results }: InvestmentProjectionProps) {
+  const [onlyInvestNetSalaryForClt, setOnlyInvestNetSalaryForClt] =
+    useState(true);
   const [cltInvestmentRate, setCltInvestmentRate] = useState("20");
   const [pjInvestmentRate, setPjInvestmentRate] = useState("20");
   const [interestRate, setInterestRate] = useState(String(SELIC_RATE));
   const [years, setYears] = useState(String("30"));
 
+  const pjMonthlyTotal = results.pj.total;
+  const cltMonthlyTotal = onlyInvestNetSalaryForClt
+    ? results.clt.netSalary
+    : results.clt.total;
+
   const monthlyRate = Math.pow(1 + Number(interestRate) / 100, 1 / 12) - 1;
   const cltMonthlyInvestment =
-    (results.clt.total * Number(cltInvestmentRate)) / 100;
-  const pjMonthlyInvestment =
-    (results.pj.total * Number(pjInvestmentRate)) / 100;
+    (cltMonthlyTotal * Number(cltInvestmentRate)) / 100;
+  const pjMonthlyInvestment = (pjMonthlyTotal * Number(pjInvestmentRate)) / 100;
 
   const chartData = Array.from({ length: Number(years) * 12 }, (_, month) => {
     const cltPatrimony =
@@ -61,7 +67,10 @@ export function InvestmentProjection({ results }: InvestmentProjectionProps) {
     <>
       <div className="grid lg:grid-cols-2 gap-4">
         <InvestmentConfig
-          results={results}
+          pjMonthlyTotal={pjMonthlyTotal}
+          cltMonthlyTotal={cltMonthlyTotal}
+          onlyInvestNetSalaryForClt={onlyInvestNetSalaryForClt}
+          setOnlyInvestNetSalaryForClt={setOnlyInvestNetSalaryForClt}
           cltInvestmentRate={cltInvestmentRate}
           pjInvestmentRate={pjInvestmentRate}
           interestRate={interestRate}
