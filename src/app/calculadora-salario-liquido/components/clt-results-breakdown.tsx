@@ -17,7 +17,7 @@ export default function CltResultsBreakdown({
   results,
 }: CltResultsBreakdownProps) {
   return (
-    <Card>
+    <Card className="border rounded-none bg-accent border-none">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <Info className="size-4" />

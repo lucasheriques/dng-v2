@@ -45,6 +45,25 @@ interface CltSalaryCalculatorProps {
   initialData?: CLTCalculatorFormData;
 }
 
+const calculateResults = (formData: CLTCalculatorFormData) => {
+  if (!formData.grossSalary || Number(formData.grossSalary) <= 0) {
+    return null;
+  }
+
+  return calculateCLT({
+    grossSalary: Number(formData.grossSalary) || 0,
+    mealAllowance: Number(formData.mealAllowance) || undefined,
+    transportAllowance: Number(formData.transportAllowance) || undefined,
+    healthInsurance: Number(formData.healthInsurance) || undefined,
+    otherBenefits: Number(formData.otherBenefits) || undefined,
+    includeFGTS: formData.includeFGTS,
+    yearsAtCompany: Number(formData.yearsAtCompany) || 0,
+    plr: Number(formData.plr) || undefined,
+    otherCltExpenses: Number(formData.otherCltExpenses) || 0,
+    dependentsCount: Number(formData.dependentsCount) || 0,
+  });
+};
+
 export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
   const [formData, setFormData] = useState<CLTCalculatorFormData>(
     initialData ?? DEFAULT_CLT_FORM_DATA
@@ -74,25 +93,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
   );
 
   const { toast } = useToast();
-
-  const calculateResults = useCallback((formData: CLTCalculatorFormData) => {
-    if (!formData.grossSalary || Number(formData.grossSalary) <= 0) {
-      return null;
-    }
-
-    return calculateCLT({
-      grossSalary: Number(formData.grossSalary) || 0,
-      mealAllowance: Number(formData.mealAllowance) || undefined,
-      transportAllowance: Number(formData.transportAllowance) || undefined,
-      healthInsurance: Number(formData.healthInsurance) || undefined,
-      otherBenefits: Number(formData.otherBenefits) || undefined,
-      includeFGTS: formData.includeFGTS,
-      yearsAtCompany: Number(formData.yearsAtCompany) || 0,
-      plr: Number(formData.plr) || undefined,
-      otherCltExpenses: Number(formData.otherCltExpenses) || 0,
-      dependentsCount: Number(formData.dependentsCount) || 0,
-    });
-  }, []);
 
   const handleFGTSChange = (value: boolean) => {
     const newFormData = {
@@ -199,11 +199,14 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
   const renderHistoryItem = useCallback((paramString: string) => {
     const params = new URLSearchParams(paramString);
     const grossSalary = params.get("gs") || "0";
-    const includeFGTS = params.get("fgts") === "1";
+    const formData: CLTCalculatorFormData = {
+      ...DEFAULT_CLT_FORM_DATA,
+      grossSalary: grossSalary,
+    };
 
     return {
-      title: `Salário: ${formatCurrency(Number(grossSalary))}`,
-      subtitle: `FGTS: ${includeFGTS ? "Incluído" : "Não incluído"}`,
+      title: `Bruto: ${formatCurrency(Number(grossSalary))}`,
+      subtitle: `Líquido: ${formatCurrency(Number(calculateResults(formData)?.netSalary))}`,
     };
   }, []);
 
@@ -281,7 +284,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                   )
                 }
                 prefix="R$"
-                placeholder="Ex: 5000"
                 id="gross-salary-input"
                 autoFocus
               />
@@ -300,7 +302,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                     typeof v === "string" ? v : ""
                   )
                 }
-                placeholder="0"
                 id="dependents-input"
               />
             </DataFormRow>
@@ -319,7 +320,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                   )
                 }
                 prefix="R$"
-                placeholder="Ex: 600"
                 id="meal-allowance-input"
               />
             </DataFormRow>
@@ -338,7 +338,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                   )
                 }
                 prefix="R$"
-                placeholder="Ex: 200"
                 id="transport-allowance-input"
               />
             </DataFormRow>
@@ -356,7 +355,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                   )
                 }
                 prefix="R$"
-                placeholder="Ex: 300"
                 id="health-insurance-input"
               />
             </DataFormRow>
@@ -372,7 +370,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                   handleInputChange("plr", typeof v === "string" ? v : "")
                 }
                 prefix="R$"
-                placeholder="Ex: 5000"
                 id="plr-input"
               />
             </DataFormRow>
@@ -391,7 +388,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                   )
                 }
                 prefix="R$"
-                placeholder="Ex: 150"
                 id="other-benefits-input"
               />
             </DataFormRow>
@@ -411,7 +407,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                   )
                 }
                 prefix="R$"
-                placeholder="Ex: 50"
                 id="other-expenses-input"
               />
             </DataFormRow>
@@ -429,7 +424,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                     typeof v === "string" ? v : ""
                   )
                 }
-                placeholder="Ex: 2"
                 id="years-input"
               />
             </DataFormRow>
@@ -492,15 +486,12 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                     </div>
                   </div>
 
-                  <Button
-                    onClick={handleShare}
-                    className="w-full"
-                    variant="outline"
-                  >
+                  <Button onClick={handleShare} className="w-full">
                     <Share2 className="size-4 mr-2" />
                     Compartilhar Resultado
                   </Button>
                 </CardContent>
+                <CltResultsBreakdown results={results} />
               </Card>
 
               {/* CTA Card */}
@@ -513,16 +504,17 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                     <p className="text-sm text-secondary-text">
                       Veja qual regime trabalhista é mais vantajoso para você
                     </p>
-                    <Button onClick={handleGoToCLT} className="min-w-full">
+                    <Button
+                      onClick={handleGoToCLT}
+                      variant="outline"
+                      className="min-w-full"
+                    >
                       Comparar CLT vs PJ
                       <ArrowRight className="size-4 ml-2" />
                     </Button>
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Detailed Breakdown */}
-              <CltResultsBreakdown results={results} />
             </>
           )}
 
