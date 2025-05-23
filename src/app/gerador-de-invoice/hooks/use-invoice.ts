@@ -12,6 +12,8 @@ import {
   StoredInvoice,
 } from "../types";
 
+const PRODUCTION_API_URL = "https://tools.lucasfaria.dev/v1";
+
 const EMPTY_INVOICE = {
   companyLogo: "",
   invoiceNumber: "",
@@ -250,7 +252,7 @@ export function useInvoice() {
         paymentMethods: rest.paymentMethods,
       };
 
-      const request = await fetch("http://localhost:4000/v1/invoices", {
+      const request = await fetch(`${PRODUCTION_API_URL}/invoices`, {
         method: "POST",
         body: JSON.stringify(payload),
       });
