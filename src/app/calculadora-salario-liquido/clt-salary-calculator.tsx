@@ -482,7 +482,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                       Quer comparar CLT vs PJ?
                     </h3>
                     <p className="text-sm text-secondary-text">
-                      Veja qual regime trabalhista é mais vantajoso para você
+                      Veja qual é mais vantajoso para você
                     </p>
                     <Button
                       onClick={handleGoToCLT}
@@ -499,13 +499,13 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
           )}
 
           {!results && (
-            <Card className="border border-dashed border-border">
+            <Card className="border border-dashed bg-accent/50">
               <CardContent className="p-8 text-center space-y-3">
                 <Calculator className="size-8 mx-auto text-muted-foreground" />
-                <h3 className="font-medium text-muted-foreground">
+                <h3 className="font-medium text-secondary-text">
                   Insira seu salário bruto
                 </h3>
-                <p className="text-sm text-secondary-text">
+                <p className="text-sm text-tertiary-text">
                   Digite o valor do seu salário bruto para ver o cálculo
                 </p>
               </CardContent>
