@@ -34,7 +34,7 @@ const CommandDialog = ({ children, ...props }: DialogProps) => {
     <Dialog {...props}>
       <DialogPortal>
         <DialogOverlay className="fixed inset-0 bg-slate-900/30 z-50 backdrop-blur-xs" />
-        <DialogContent className="overflow-hidden p-0 shadow-2xl shadow-primary/10 max-w-[95%] sm:max-w-lg border border-white/10">
+        <DialogContent className="overflow-hidden p-0 shadow-2xl shadow-primary/10 max-w-[95%] sm:max-w-lg border border-white/10 top-[10%] sm:top-[50%] translate-y-[-10%] sm:translate-y-[-50%]">
           <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
             {children}
           </Command>

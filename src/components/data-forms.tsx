@@ -117,6 +117,34 @@ interface TableInputProps {
   className?: string;
 }
 
+export function DataFormInputContainer({
+  children,
+  className,
+  prefix,
+  suffix,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  prefix?: string;
+  suffix?: string;
+}) {
+  return (
+    <div className={cn("relative flex items-center w-full", className)}>
+      {prefix && (
+        <span className="absolute left-2 text-tertiary-text pointer-events-none">
+          {prefix}
+        </span>
+      )}
+      {children}
+      {suffix && (
+        <span className="absolute right-2 text-tertiary-text pointer-events-none">
+          {suffix}
+        </span>
+      )}
+    </div>
+  );
+}
+
 export function DataFormInput({
   value,
   onChange,

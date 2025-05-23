@@ -7,6 +7,7 @@ import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
+  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -25,6 +26,25 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import ArticleList from "@/lib/article-list.json";
 import { searchAtom } from "@/lib/atoms";
 import { useAtom } from "jotai";
+
+// Function to normalize strings for accent-insensitive search
+const normalizeString = (str: string): string => {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+};
+
+// Custom filter function for accent and case insensitive search
+const customFilter = (value: string, search: string): number => {
+  const normalizedValue = normalizeString(value);
+  const normalizedSearch = normalizeString(search);
+
+  if (normalizedValue.includes(normalizedSearch)) {
+    return 1;
+  }
+  return 0;
+};
 
 export function Search({ size = "icon" }: { size?: "icon" | "default" }) {
   const router = useRouter();
@@ -70,75 +90,82 @@ export function Search({ size = "icon" }: { size?: "icon" | "default" }) {
         <VisuallyHidden.Root>
           <DialogTitle>Pesquise por um conteúdo ou ferramenta</DialogTitle>
         </VisuallyHidden.Root>
-        <CommandInput placeholder="Pesquise por um conteúdo ou ferramenta" />
-        <CommandList>
-          <CommandEmpty>Nenhum resultado encontrado.</CommandEmpty>
-          <CommandGroup heading="Ferramentas">
-            {Object.values(TOOLS).map((item) => (
+        <Command filter={customFilter}>
+          <CommandInput placeholder="Pesquise por um conteúdo ou ferramenta" />
+          <CommandList>
+            <CommandEmpty>Nenhum resultado encontrado.</CommandEmpty>
+            <CommandGroup heading="Ferramentas">
+              {Object.values(TOOLS).map((item) => (
+                <CommandItem
+                  key={item.href}
+                  value={item.title}
+                  onSelect={() => {
+                    handleClose();
+                    router.push(item.href);
+                  }}
+                >
+                  <item.icon />
+                  <span>{item.title}</span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+            <CommandGroup heading="Recursos da mentoria">
+              {Object.values(MENTORSHIP_LINKS).map((item) => (
+                <CommandItem
+                  key={item.href}
+                  value={item.title}
+                  onSelect={() => {
+                    handleClose();
+                    router.push(item.href);
+                  }}
+                >
+                  <item.icon />
+                  <span>{item.title}</span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+            <CommandGroup heading="Links">
+              {Object.values(SOCIAL_LINKS).map((item) => (
+                <CommandItem
+                  key={item.href}
+                  value={item.title}
+                  onSelect={() => {
+                    handleClose();
+                    router.push(item.href);
+                  }}
+                >
+                  <item.icon />
+                  <span>{item.title}</span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+            <CommandGroup heading="Artigos">
               <CommandItem
-                key={item.href}
+                value="Como virar um dev na gringa (compilado de artigos)"
                 onSelect={() => {
                   handleClose();
-                  router.push(item.href);
+                  router.push("/como-virar-um-dev-na-gringa");
                 }}
               >
-                <item.icon />
-                <span>{item.title}</span>
+                <Star />
+                Como virar um dev na gringa (compilado de artigos)
               </CommandItem>
-            ))}
-          </CommandGroup>
-          <CommandGroup heading="Recursos da mentoria">
-            {Object.values(MENTORSHIP_LINKS).map((item) => (
-              <CommandItem
-                key={item.href}
-                onSelect={() => {
-                  handleClose();
-                  router.push(item.href);
-                }}
-              >
-                <item.icon />
-                <span>{item.title}</span>
-              </CommandItem>
-            ))}
-          </CommandGroup>
-          <CommandGroup heading="Links">
-            {Object.values(SOCIAL_LINKS).map((item) => (
-              <CommandItem
-                key={item.href}
-                onSelect={() => {
-                  handleClose();
-                  router.push(item.href);
-                }}
-              >
-                <item.icon />
-                <span>{item.title}</span>
-              </CommandItem>
-            ))}
-          </CommandGroup>
-          <CommandGroup heading="Artigos">
-            <CommandItem
-              onSelect={() => {
-                handleClose();
-                router.push("/como-virar-um-dev-na-gringa");
-              }}
-            >
-              <Star />
-              Como virar um dev na gringa (compilado de artigos)
-            </CommandItem>
-            {ArticleList.map((item) => (
-              <CommandItem
-                key={item.slug}
-                onSelect={() => {
-                  handleClose();
-                  router.push(`${SOCIALS.newsletter}/p/${item.slug}`);
-                }}
-              >
-                <Newspaper />
-                <span className="truncate">{item.title}</span>
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </CommandList>
+              {ArticleList.map((item) => (
+                <CommandItem
+                  key={item.slug}
+                  value={item.title}
+                  onSelect={() => {
+                    handleClose();
+                    router.push(`${SOCIALS.newsletter}/p/${item.slug}`);
+                  }}
+                >
+                  <Newspaper />
+                  <span className="truncate">{item.title}</span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
       </CommandDialog>
     </>
   );

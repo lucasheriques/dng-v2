@@ -101,14 +101,14 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
       </Table>
 
       <Card className="dark:bg-emerald-900/30 dark:text-emerald-200 dark:border-emerald-800">
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader className="flex flex-row items-center justify-center md:justify-between">
           <CardTitle className="flex items-center gap-2 text-lg font-semibold text-emerald-200">
             <CheckCircle size={20} /> Melhor opção: {betterOption}
           </CardTitle>
           <Button
             size="sm"
             onClick={onShare}
-            className="col-span-4 self-center"
+            className="col-span-4 self-center hidden md:flex"
           >
             <Share2 className="size-4 mr-2" />
             Compartilhar resultado
@@ -144,7 +144,15 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
                 )}
               </p>
             </div>
-          </div>{" "}
+          </div>
+          <Button
+            size="sm"
+            onClick={onShare}
+            className="col-span-4 self-center flex md:hidden"
+          >
+            <Share2 className="size-4 mr-2" />
+            Compartilhar resultado
+          </Button>
         </CardContent>
       </Card>
 

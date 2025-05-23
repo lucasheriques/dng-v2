@@ -5,12 +5,14 @@ import {
   DataFormInput,
   DataFormRow,
 } from "@/components/data-forms";
+import { Checkbox } from "@/components/ui/checkbox";
 import { formatCurrency } from "@/lib/utils";
+import { CalculationResults } from "@/use-cases/calculator/salary-calculations";
 import { DotIcon } from "lucide-react";
+import { useState } from "react";
 
 interface InvestmentConfigProps {
-  cltMonthlyTotal: number;
-  pjMonthlyTotal: number;
+  results: CalculationResults;
   cltInvestmentRate: string;
   pjInvestmentRate: string;
   interestRate: string;
@@ -22,8 +24,7 @@ interface InvestmentConfigProps {
 }
 
 export function InvestmentConfig({
-  cltMonthlyTotal,
-  pjMonthlyTotal,
+  results,
   cltInvestmentRate,
   pjInvestmentRate,
   interestRate,
@@ -33,6 +34,13 @@ export function InvestmentConfig({
   years,
   onYearsChange,
 }: InvestmentConfigProps) {
+  const [onlyInvestNetSalaryForClt, setOnlyInvestNetSalaryForClt] =
+    useState(false);
+
+  const pjMonthlyTotal = results.pj.total;
+  const cltMonthlyTotal = onlyInvestNetSalaryForClt
+    ? results.clt.netSalary
+    : results.clt.total;
   const cltInvestment = (cltMonthlyTotal * Number(cltInvestmentRate)) / 100;
   const pjInvestment = (pjMonthlyTotal * Number(pjInvestmentRate)) / 100;
 
@@ -76,15 +84,32 @@ export function InvestmentConfig({
         <DataFormInput value={years} onChange={onYearsChange} />
       </DataFormRow>
 
-      <DataFormHeader>Valor Mensal Investido</DataFormHeader>
+      <DataFormHeader className="flex justify-between items-center">
+        <span className="flex items-center gap-2">Valor mensal</span>
+        <div className="flex items-center gap-2">
+          <label
+            htmlFor="clt-investment-checkbox"
+            className="text-xs md:text-sm text-tertiary-text"
+          >
+            Considerar apenas o salário líquido mensal (CLT)
+          </label>
+          <Checkbox
+            id="clt-investment-checkbox"
+            checked={onlyInvestNetSalaryForClt}
+            onCheckedChange={(value) =>
+              setOnlyInvestNetSalaryForClt(value as boolean)
+            }
+          />
+        </div>
+      </DataFormHeader>
       <DataFormInfoRow
         label="CLT"
         value={
-          <div className="flex items-center justify-end">
+          <div className="flex md:items-center flex-col md:flex-row justify-end">
             <span className="text-emerald-400 font-semibold">
               {formatCurrency(cltInvestment)}
             </span>
-            <DotIcon className="size-6" />
+            <DotIcon className="size-6 hidden md:block" />
             <span className="text-tertiary-text">
               Sobram {formatCurrency(cltMonthlyTotal - cltInvestment)}
             </span>
@@ -95,11 +120,11 @@ export function InvestmentConfig({
         label="PJ"
         className="lg:last:border-b"
         value={
-          <div className="flex items-center justify-end">
+          <div className="flex md:items-center flex-col md:flex-row justify-end">
             <span className="text-emerald-400 font-semibold">
               {formatCurrency(pjInvestment)}
             </span>
-            <DotIcon className="size-6" />
+            <DotIcon className="size-6 hidden md:block" />
             <span className="text-tertiary-text">
               Sobram {formatCurrency(pjMonthlyTotal - pjInvestment)}
             </span>

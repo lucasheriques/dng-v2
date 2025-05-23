@@ -25,6 +25,7 @@ import { useCallback, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import CltResultsBreakdown from "./components/clt-results-breakdown";
 
+import { BorderBeam } from "@/components/ui/border-beam";
 import { formDataAtom } from "@/use-cases/calculator/client-state";
 import {
   DEFAULT_CLT_FORM_DATA,
@@ -409,11 +410,12 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
         </div>
 
         {/* Results Section */}
-        <div className="space-y-4">
+        <div>
           {results && (
             <>
               {/* Main Result Card */}
-              <Card className="border-2 border-primary/20 bg-gradient-to-br from-slate-900 to-slate-950">
+              <Card className="relative bg-gradient-to-br from-slate-900 to-slate-950">
+                <BorderBeam />
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2">
                     <Banknote className="size-5" />
@@ -466,7 +468,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
 
                   <Button onClick={handleShare} className="w-full">
                     <Share2 className="size-4 mr-2" />
-                    Compartilhar Resultado
+                    Compartilhar resultado
                   </Button>
                 </CardContent>
                 <CltResultsBreakdown results={results} />

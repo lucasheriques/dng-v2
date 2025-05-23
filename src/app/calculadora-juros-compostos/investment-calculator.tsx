@@ -636,7 +636,7 @@ export default function InvestmentCalculator({
                 className="self-end"
               >
                 <Copy className="w-4 h-4 mr-1" />
-                Compartilhar resultados
+                Compartilhar resultado
               </Button>
             </div>
           </div>

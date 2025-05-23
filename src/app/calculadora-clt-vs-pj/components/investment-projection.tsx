@@ -61,8 +61,7 @@ export function InvestmentProjection({ results }: InvestmentProjectionProps) {
     <>
       <div className="grid lg:grid-cols-2 gap-4">
         <InvestmentConfig
-          cltMonthlyTotal={results.clt.total}
-          pjMonthlyTotal={results.pj.total}
+          results={results}
           cltInvestmentRate={cltInvestmentRate}
           pjInvestmentRate={pjInvestmentRate}
           interestRate={interestRate}
