@@ -2,6 +2,7 @@
 
 import Results from "@/app/calculadora-clt-vs-pj/components/results";
 import ResultsAccordion from "@/app/calculadora-clt-vs-pj/components/results-accordion";
+import { CalculationResults } from "@/app/calculadora-clt-vs-pj/types";
 import {
   DataForm,
   DataFormHeader,
@@ -13,18 +14,20 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils"; // Import formatCurrency
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
+import { CalculatorFormData } from "@/use-cases/calculator/types";
+import {
+  buildUrlParameters,
+  safeParseBoolean,
+  safeParseNumberString,
+} from "@/use-cases/calculator/utils";
 import dynamic from "next/dynamic";
 import { useCallback, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
+
 import {
-  CalculationResults,
-  CalculatorFormData,
-  defaultFormData,
-  paramMap,
-  reverseParamMap,
-  safeParseBoolean,
-  safeParseNumberString,
-} from "./types";
+  DEFAULT_FORM_DATA,
+  REVERSE_PARAM_MAP,
+} from "@/use-cases/calculator/constants";
 
 const RecentComparisons = dynamic(
   () => import("@/app/calculadora-clt-vs-pj/components/recent-comparisons"),
@@ -48,7 +51,7 @@ const getParamValue = (
 
 export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
   const [formData, setFormData] = useState<CalculatorFormData>(
-    initialData ?? defaultFormData
+    initialData ?? DEFAULT_FORM_DATA
   );
 
   const [results, setResults] = useState<CalculationResults | null>(
@@ -87,26 +90,7 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
   const { toast } = useToast();
 
   const handleShare = async () => {
-    const params = new URLSearchParams();
-
-    // Iterate over formData and add non-default values to params
-    for (const key in formData) {
-      const formKey = key as keyof CalculatorFormData;
-      const shortKey = paramMap[formKey];
-      const value = formData[formKey];
-      const defaultValue = defaultFormData[formKey];
-
-      if (shortKey && value !== defaultValue) {
-        if (typeof value === "boolean") {
-          params.set(shortKey, value ? "1" : "0");
-        } else if (value !== "") {
-          // Only add non-empty strings
-          params.set(shortKey, String(value));
-        }
-      }
-    }
-
-    const paramString = params.toString();
+    const paramString = buildUrlParameters(formData).toString();
     const url = new URL(window.location.pathname, window.location.origin);
     url.search = paramString;
 
@@ -136,7 +120,7 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
   };
 
   const handleClear = () => {
-    setFormData(defaultFormData);
+    setFormData(DEFAULT_FORM_DATA);
     setResults(null);
     // Remove query params and update URL
     const url = new URL(window.location.pathname, window.location.origin); // Use pathname and origin
@@ -147,10 +131,10 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
   // Re-add handleLoadHistory - takes the param string
   const handleLoadHistory = (paramString: string) => {
     const searchParams = new URLSearchParams(paramString);
-    const loadedData: CalculatorFormData = { ...defaultFormData };
+    const loadedData: CalculatorFormData = { ...DEFAULT_FORM_DATA };
 
-    for (const shortKey in reverseParamMap) {
-      const formKey = reverseParamMap[shortKey];
+    for (const shortKey in REVERSE_PARAM_MAP) {
+      const formKey = REVERSE_PARAM_MAP[shortKey];
       const value = searchParams.get(shortKey);
 
       if (value !== null) {
@@ -158,13 +142,13 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
           // Use imported helper
           loadedData.includeFGTS = safeParseBoolean(
             value,
-            defaultFormData.includeFGTS
+            DEFAULT_FORM_DATA.includeFGTS
           );
         } else {
           // Use imported helper
           const stringValue = safeParseNumberString(
             value,
-            defaultFormData[formKey] as string
+            DEFAULT_FORM_DATA[formKey] as string
           );
           loadedData[formKey] = stringValue;
         }

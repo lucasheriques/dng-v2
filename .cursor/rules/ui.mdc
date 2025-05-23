@@ -8,5 +8,4 @@ UI:
 - for animations, use motion and rombo (tailwind plugin)
 - use only snake-case files for components (test-component.tsx for TestComponent)
 - Do not use RAW tailwind colors like text-gray-700. Use the CSS variables defined in the globals.css file, like text-primary, text-main-text, etc.
-
-Styling:
+- do not use margins for spacing between elements. Always use separators on the parent element with grid/flex positioning and the gap property with Tailwind.

@@ -9,6 +9,7 @@ import {
   Calculator,
   Calendar,
   ChartNoAxesCombined,
+  DollarSign,
   FileText,
   History as HistoryIcon,
   Mail,
@@ -124,6 +125,11 @@ export const TOOLS = {
     title: "Calculadora de Juros Compostos",
     href: "/calculadora-juros-compostos",
     icon: ChartNoAxesCombined,
+  },
+  salaryCalculator: {
+    title: "Calculadora de Salário Líquido",
+    href: "/calculadora-salario-liquido",
+    icon: DollarSign,
   },
 };
 

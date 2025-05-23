@@ -1,7 +1,12 @@
-import {
-  CalculationResults,
-  CalculatorFormData,
-} from "@/app/calculadora-clt-vs-pj/types";
+import { CalculatorFormData } from "./types";
+
+export type CLTResults = ReturnType<typeof calculateCLT>;
+export type PJResults = ReturnType<typeof calculatePJ>;
+
+export type CalculationResults = {
+  clt: CLTResults;
+  pj: PJResults;
+};
 
 interface SalaryInput {
   grossSalary: number;
@@ -13,6 +18,7 @@ interface SalaryInput {
   yearsAtCompany?: number;
   plr?: number;
   otherCltExpenses?: number;
+  dependentsCount?: number;
 }
 
 interface PJInput {
@@ -25,11 +31,13 @@ interface PJInput {
   nonTaxableBenefits?: number;
 }
 
+// Updated Brazilian tax brackets for 2025
+
 const INSS_RANGES = [
-  { max: 1412.0, rate: 0.075 },
-  { max: 2666.68, rate: 0.09 },
-  { max: 4000.03, rate: 0.12 },
-  { max: 7786.02, rate: 0.14 },
+  { max: 1518.0, rate: 0.075 },
+  { max: 2793.88, rate: 0.09 },
+  { max: 4190.83, rate: 0.12 },
+  { max: 8157.41, rate: 0.14 },
 ];
 
 const IRRF_RANGES = [
@@ -48,9 +56,6 @@ const PLR_IRRF_RANGES = [
   { max: Infinity, rate: 0.275, deduction: 3123.78 },
 ];
 
-// Re-export these functions so they can be reused
-// export { calculateINSS, calculateIRRF } from "./salary-calculations";
-
 export function calculateINSS(salary: number): number {
   let inss = 0;
   let remainingSalary = salary;
@@ -68,9 +73,16 @@ export function calculateINSS(salary: number): number {
   return inss;
 }
 
-export function calculateIRRF(baseIR: number): number {
-  const irRange = IRRF_RANGES.find((range) => baseIR <= range.max);
-  return irRange ? baseIR * irRange.rate - irRange.deduction : 0;
+export function calculateIRRF(
+  baseIR: number,
+  dependentsCount: number = 0
+): number {
+  const DEPENDENT_DEDUCTION = 189.59;
+  const dependentDeduction = dependentsCount * DEPENDENT_DEDUCTION;
+  const adjustedBaseIR = Math.max(0, baseIR - dependentDeduction);
+
+  const irRange = IRRF_RANGES.find((range) => adjustedBaseIR <= range.max);
+  return irRange ? adjustedBaseIR * irRange.rate - irRange.deduction : 0;
 }
 
 function calculatePLRTax(plrAmount: number): number {
@@ -88,7 +100,10 @@ export function calculateCLT(input: SalaryInput) {
 
   // Calculate INSS and IR for base salary
   const baseINSS = calculateINSS(grossSalary);
-  const baseIR = calculateIRRF(grossSalary - baseINSS);
+  const baseIR = calculateIRRF(
+    grossSalary - baseINSS,
+    input.dependentsCount || 0
+  );
 
   // Calculate transport deduction if applicable
   const transportDeduction = input.transportAllowance

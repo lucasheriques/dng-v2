@@ -2,16 +2,16 @@ import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
 import { env } from "@/env";
 import {
-  DEFAULT_FORM_DATA,
-  REVERSE_PARAM_MAP,
+  DEFAULT_CLT_FORM_DATA,
+  REVERSE_CLT_PARAM_MAP,
 } from "@/use-cases/calculator/constants";
-import { CalculatorFormData } from "@/use-cases/calculator/types";
+import { CLTCalculatorFormData } from "@/use-cases/calculator/types";
 import {
   safeParseBoolean,
   safeParseNumberString,
 } from "@/use-cases/calculator/utils";
 import { Metadata } from "next";
-import { CltPjCalculator } from "./clt-pj-calculator";
+import { CltSalaryCalculator } from "./clt-salary-calculator";
 
 export async function generateMetadata({
   searchParams: params,
@@ -20,12 +20,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const searchParams = await params;
   const baseUrl = env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const ogUrl = new URL("/api/og/clt-vs-pj", baseUrl);
+  const ogUrl = new URL("/api/og/clt-salary", baseUrl);
 
-  for (const shortKey in REVERSE_PARAM_MAP) {
-    const formKey = REVERSE_PARAM_MAP[shortKey];
+  // Add URL parameters for OG image generation
+  for (const shortKey in REVERSE_CLT_PARAM_MAP) {
+    const formKey = REVERSE_CLT_PARAM_MAP[shortKey];
     const value = searchParams[shortKey];
-    const defaultValue = DEFAULT_FORM_DATA[formKey];
+    const defaultValue = DEFAULT_CLT_FORM_DATA[formKey];
 
     if (value !== undefined) {
       if (formKey === "includeFGTS") {
@@ -45,9 +46,9 @@ export async function generateMetadata({
     }
   }
 
-  const title = "Calculadora CLT vs. PJ | Dev na Gringa";
+  const title = "Calculadora de Salário Líquido CLT 2024 | Dev na Gringa";
   const description =
-    "Calculadora de salário líquido CLT vs PJ. Inclui todos os benefícios, como 13º salário e férias. Veja qual a melhor opção para você.";
+    "Calcule seu salário líquido CLT com precisão. Inclui INSS, IRRF, vale-transporte, 13º salário, férias e todos os benefícios. Grátis e fácil de usar.";
 
   return {
     title: title,
@@ -60,12 +61,12 @@ export async function generateMetadata({
           url: ogUrl.toString(),
           width: 1200,
           height: 630,
-          alt: "Comparativo de Salário CLT vs PJ",
+          alt: "Calculadora de Salário Líquido CLT",
         },
       ],
       locale: "pt_BR",
       type: "website",
-      url: `${baseUrl}/calculadora-clt-vs-pj`,
+      url: `${baseUrl}/calculadora-salario-liquido`,
     },
     twitter: {
       card: "summary_large_image",
@@ -73,6 +74,18 @@ export async function generateMetadata({
       description: description,
       images: [ogUrl.toString()],
     },
+    keywords: [
+      "calculadora salário líquido",
+      "salário líquido CLT",
+      "calcular salário líquido",
+      "INSS",
+      "IRRF",
+      "imposto de renda",
+      "13º salário",
+      "férias",
+      "vale transporte",
+      "CLT",
+    ],
   };
 }
 
@@ -81,24 +94,24 @@ export default async function SalaryCalculatorPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const initialData: CalculatorFormData = { ...DEFAULT_FORM_DATA };
+  const initialData: CLTCalculatorFormData = { ...DEFAULT_CLT_FORM_DATA };
 
   const params = await searchParams;
 
-  for (const shortKey in REVERSE_PARAM_MAP) {
-    const formKey = REVERSE_PARAM_MAP[shortKey];
+  for (const shortKey in REVERSE_CLT_PARAM_MAP) {
+    const formKey = REVERSE_CLT_PARAM_MAP[shortKey];
     const value = params[shortKey];
 
     if (value !== undefined) {
       if (formKey === "includeFGTS") {
         initialData[formKey] = safeParseBoolean(
           value,
-          DEFAULT_FORM_DATA[formKey]
+          DEFAULT_CLT_FORM_DATA[formKey]
         );
       } else {
         const stringValue = safeParseNumberString(
           value,
-          DEFAULT_FORM_DATA[formKey] as string
+          DEFAULT_CLT_FORM_DATA[formKey] as string
         );
         if (stringValue !== "") {
           initialData[formKey] = stringValue;
@@ -109,8 +122,8 @@ export default async function SalaryCalculatorPage({
 
   return (
     <PageWrapper>
-      <CltPjCalculator initialData={initialData} />
-      <Comments slug="calculadora-clt-vs-pj" />
+      <CltSalaryCalculator initialData={initialData} />
+      <Comments slug="calculadora-salario-liquido" />
     </PageWrapper>
   );
 }
