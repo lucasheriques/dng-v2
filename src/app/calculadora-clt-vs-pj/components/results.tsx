@@ -23,11 +23,12 @@ import {
 import { formatCurrency } from "@/lib/utils";
 import {
   calculateEmployerCost,
+  CalculationResults,
   findCLTEquivalentForPJ,
   findPJEquivalentForCLT,
 } from "@/use-cases/calculator/salary-calculations";
+import { CalculatorFormData } from "@/use-cases/calculator/types";
 import { CheckCircle, Share2 } from "lucide-react";
-import { CalculationResults, CalculatorFormData } from "../types";
 
 interface ResultsProps {
   results: CalculationResults;

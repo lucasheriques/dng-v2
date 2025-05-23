@@ -42,8 +42,22 @@ describe("calculateCLT", () => {
 
     expect(result.grossSalary).toBe(5000);
     expect(result.deductions.inss).toBeCloseTo(509.6);
-    expect(result.deductions.ir).toBeCloseTo(334.85);
-    expect(result.netSalary).toBeCloseTo(4155.55);
+    expect(result.deductions.ir).toBeCloseTo(347.57);
+    expect(result.netSalary).toBeCloseTo(4142.83);
+  });
+
+  it("should calculate basic CLT salary without benefits", () => {
+    const input = {
+      grossSalary: 10000,
+      includeFGTS: true,
+    };
+
+    const result = calculateCLT(input);
+
+    expect(result.grossSalary).toBe(10000);
+    expect(result.deductions.inss).toBeCloseTo(951.63);
+    expect(result.deductions.ir).toBeCloseTo(1592.3);
+    expect(result.netSalary).toBeCloseTo(7456.07);
   });
 
   it("should calculate CLT salary with all benefits", () => {
