@@ -1,4 +1,5 @@
 export interface Invoice {
+  id?: string;
   companyLogo: string;
   invoiceNumber: string;
   invoiceDate: string;

@@ -1,4 +1,4 @@
-import { addMonths, format } from "date-fns";
+import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
@@ -15,8 +15,8 @@ import {
 const EMPTY_INVOICE = {
   companyLogo: "",
   invoiceNumber: "",
-  invoiceDate: format(new Date(), "yyyy-MM-dd"),
-  dueDate: format(addMonths(new Date(), 1), "yyyy-MM-dd"),
+  invoiceDate: dayjs().format("YYYY-MM-DD"),
+  dueDate: dayjs().add(1, "month").format("YYYY-MM-DD"),
   vendorInfo: {
     name: "",
     streetAddress: "",
@@ -208,6 +208,7 @@ export function useInvoice() {
 
     try {
       const { companyLogo, invoiceDate, dueDate, ...rest } = formData;
+      console.log({ formData });
 
       // Format all price values with currency symbol
       const formattedItems = rest.items.map((item) => ({
@@ -239,8 +240,8 @@ export function useInvoice() {
           companyLogo !== ""
             ? companyLogo
             : `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${rest.vendorInfo.name}&rounded=true&size=16`,
-        invoiceDate: format(new Date(invoiceDate), "MMM d, yyyy"),
-        dueDate: format(new Date(dueDate), "MMM d, yyyy"),
+        invoiceDate: dayjs(invoiceDate).locale("en").format("MMM D, YYYY"),
+        dueDate: dayjs(dueDate).locale("en").format("MMM D, YYYY"),
         items: formattedItems,
         total: formattedTotal,
         invoiceNumber: rest.invoiceNumber,
@@ -249,7 +250,7 @@ export function useInvoice() {
         paymentMethods: rest.paymentMethods,
       };
 
-      const request = await fetch("https://tools.lucasfaria.dev/v1/invoices", {
+      const request = await fetch("http://localhost:4000/v1/invoices", {
         method: "POST",
         body: JSON.stringify(payload),
       });

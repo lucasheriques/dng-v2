@@ -91,6 +91,7 @@ const InvoiceHistory = dynamic(() => import("./components/invoice-history"), {
 export default function InvoiceGenerator() {
   const invoiceRef = useRef<HTMLFormElement>(null);
   const [historyHeight, setHistoryHeight] = useState("auto");
+  const [isLoadingFromHistory, setIsLoadingFromHistory] = useState(false);
 
   useEffect(() => {
     const updateHeight = () => {
@@ -159,7 +160,10 @@ export default function InvoiceGenerator() {
       {/* Invoice Form */}
       <form
         onSubmit={handleSubmit}
-        className="lg:col-span-9 space-y-4 lg:space-y-8 bg-slate-900 rounded-xl border border-slate-800 p-4 max-w-full"
+        className={cn(
+          "lg:col-span-9 space-y-4 lg:space-y-8 bg-slate-900 rounded-xl border border-slate-800 p-4 max-w-full transition-all duration-300 motion-preset-blur-right-sm"
+        )}
+        key={formData.id}
         ref={invoiceRef}
       >
         {/* Header Section */}

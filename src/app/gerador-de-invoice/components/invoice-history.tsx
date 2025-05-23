@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { format } from "date-fns";
+import dayjs from "dayjs";
 import { Search, Trash2, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
@@ -20,7 +20,7 @@ function InvoiceHistoryCard({
   setCurrency,
 }: InvoiceHistoryCardProps) {
   const formattedDate = invoice.invoiceDate
-    ? format(new Date(invoice.invoiceDate), "MMM d, yyyy")
+    ? dayjs(invoice.invoiceDate).format("MMM DD, YYYY")
     : "No date";
 
   return (
