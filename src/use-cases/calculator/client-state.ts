@@ -10,8 +10,9 @@ import {
 import { atomWithReset } from "jotai/utils";
 
 // Combined form data atom (for CLT vs PJ calculator)
-export const formDataAtom =
-  atomWithReset<CalculatorFormData>(DEFAULT_FORM_DATA);
+export const formDataAtom = atomWithReset<
+  CalculatorFormData & { isTouched: boolean }
+>({ ...DEFAULT_FORM_DATA, isTouched: false });
 
 // Utility function to parse query parameters into CalculatorFormData
 export function parseQueryParamsToFormData(

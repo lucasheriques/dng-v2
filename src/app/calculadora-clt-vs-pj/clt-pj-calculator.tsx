@@ -1,7 +1,6 @@
 "use client";
 
 import Results from "@/app/calculadora-clt-vs-pj/components/results";
-import ResultsAccordion from "@/app/calculadora-clt-vs-pj/components/results-accordion";
 import {
   DataFormHeader,
   DataFormInput,
@@ -9,20 +8,13 @@ import {
 } from "@/components/data-forms";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils"; // Import formatCurrency
-import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import { CalculatorFormData } from "@/use-cases/calculator/types";
-import { buildUrlParameters } from "@/use-cases/calculator/utils";
 import dynamic from "next/dynamic";
-import { useCallback, useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
+import { useCallback } from "react";
 
 import { CltDataForm } from "@/components/calculators/clt-data-form";
-import {
-  formDataAtom,
-  parseQueryParamsToFormData,
-} from "@/use-cases/calculator/client-state";
-import { useAtom } from "jotai";
-import { useResetAtom } from "jotai/react/utils";
+import ResultsAccordion from "@/components/calculators/results-accordion";
+import { useCalculatorForm } from "@/use-cases/calculator/use-calculator-form";
 import { Building2 } from "lucide-react";
 
 const RecentComparisons = dynamic(
@@ -46,69 +38,20 @@ const getParamValue = (
 };
 
 export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
-  const [formData, setFormData] = useAtom(formDataAtom);
-  const resetFormData = useResetAtom(formDataAtom);
-  const [isDetailsExpanded, setIsDetailsExpanded] = useState(true);
-
-  const results = calculateResults(formData);
-
-  // Use localStorage to store an array of parameter strings
-  const [history, setHistory] = useLocalStorage<string[]>(
-    "calculator-clt-pj-history",
-    []
-  );
-
-  const handleInputChange = (
-    field: keyof CalculatorFormData,
-    value: string
-  ) => {
-    const newFormData = {
-      ...formData,
-      [field]: value,
-    };
-
-    setFormData(newFormData);
-  };
-
-  const handleShare = async () => {
-    const paramString = buildUrlParameters(formData).toString();
-    const url = new URL(window.location.pathname, window.location.origin);
-    url.search = paramString;
-
-    // Update history in localStorage
-    const newHistory = [
-      paramString,
-      ...history.filter((h) => h !== paramString), // Remove duplicates
-    ].slice(0, 7); // Keep last 7 entries
-    setHistory(newHistory);
-
-    window.history.replaceState({}, "", url.toString());
-
-    try {
-      await navigator.clipboard.writeText(url.toString());
-      return true;
-    } catch (err) {
-      console.error("Failed to copy URL: ", err);
-      return false;
-    }
-  };
-
-  const handleClear = () => {
-    resetFormData();
-    // Remove query params and update URL
-    const url = new URL(window.location.pathname, window.location.origin); // Use pathname and origin
-    url.search = ""; // Clear search params
-    window.history.replaceState({}, "", url.toString());
-  };
-
-  // Re-add handleLoadHistory - takes the param string
-  const handleLoadHistory = (paramString: string) => {
-    const searchParams = new URLSearchParams(paramString);
-    setFormData(parseQueryParamsToFormData(searchParams));
-    const url = new URL(window.location.pathname, window.location.origin);
-    url.search = paramString;
-    window.history.replaceState({}, "", url.toString());
-  };
+  const {
+    handleLoadHistory,
+    history,
+    formData,
+    handleInputChange,
+    handleShare,
+    handleClear,
+    results,
+    isDetailsExpanded,
+    setIsDetailsExpanded,
+  } = useCalculatorForm({
+    localStorageKey: "calculator-clt-pj-history",
+    initialData,
+  });
 
   // Function to render history items for Salary Calculator
   const renderSalaryHistoryItem = useCallback((paramString: string) => {
@@ -157,8 +100,6 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
           initialData={initialData}
           historyLocalStorageKey="calculator-clt-pj-history"
           withResultsAccordion
-          onToggle={() => setIsDetailsExpanded(!isDetailsExpanded)}
-          isExpanded={isDetailsExpanded}
         />
 
         <div className="border  rounded-lg overflow-hidden bg-slate-900/50">

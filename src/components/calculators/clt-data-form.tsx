@@ -11,7 +11,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CalculatorFormData } from "@/use-cases/calculator/types";
 import { useCalculatorForm } from "@/use-cases/calculator/use-calculator-form";
 import { BriefcaseBusiness } from "lucide-react";
-import { useEffect } from "react";
 
 interface Props {
   initialData?: Partial<CalculatorFormData>;
@@ -19,36 +18,22 @@ interface Props {
   withResultsAccordion?: boolean;
 }
 
-interface PropsWithAccordion extends Props {
-  withResultsAccordion: true;
-  onToggle: () => void;
-  isExpanded: boolean;
-}
-
-function isPropsWithAccordion(
-  props: Props | PropsWithAccordion
-): props is PropsWithAccordion {
-  return props.withResultsAccordion === true;
-}
-
-export function CltDataForm(props: Props | PropsWithAccordion) {
-  const { initialData, historyLocalStorageKey } = props;
+export function CltDataForm({
+  withResultsAccordion,
+  initialData,
+  historyLocalStorageKey,
+}: Props) {
   const {
     formData,
-    setFormData,
     handleInputChange,
     handleFGTSChange,
     results,
-  } = useCalculatorForm({ localStorageKey: historyLocalStorageKey });
-
-  useEffect(() => {
-    if (initialData) {
-      setFormData({
-        ...formData,
-        ...initialData,
-      });
-    }
-  }, [initialData]);
+    isDetailsExpanded,
+    setIsDetailsExpanded,
+  } = useCalculatorForm({
+    localStorageKey: historyLocalStorageKey,
+    initialData,
+  });
 
   return (
     <DataForm>
@@ -218,12 +203,12 @@ export function CltDataForm(props: Props | PropsWithAccordion) {
         />
       </DataFormRow>
 
-      {isPropsWithAccordion(props) && results && (
+      {withResultsAccordion && results && (
         <ResultsAccordion
           results={results}
           type="clt"
-          isExpanded={props.isExpanded}
-          onToggle={props.onToggle}
+          isExpanded={isDetailsExpanded}
+          onToggle={() => setIsDetailsExpanded(!isDetailsExpanded)}
         />
       )}
     </DataForm>
