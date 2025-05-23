@@ -13,7 +13,7 @@ import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import { CalculatorFormData } from "@/use-cases/calculator/types";
 import { buildUrlParameters } from "@/use-cases/calculator/utils";
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 import { CltDataForm } from "@/components/calculators/clt-data-form";
@@ -50,12 +50,6 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
   const resetFormData = useResetAtom(formDataAtom);
   const [isDetailsExpanded, setIsDetailsExpanded] = useState(true);
 
-  useEffect(() => {
-    if (Object.keys(initialData).length > 0) {
-      setFormData({ ...formData, ...initialData });
-    }
-  }, [initialData]);
-
   const results = calculateResults(formData);
 
   // Use localStorage to store an array of parameter strings
@@ -63,14 +57,6 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
     "calculator-clt-pj-history",
     []
   );
-
-  const handleFGTSChange = (value: boolean) => {
-    const newFormData = {
-      ...formData,
-      includeFGTS: value,
-    };
-    setFormData(newFormData);
-  };
 
   const handleInputChange = (
     field: keyof CalculatorFormData,
