@@ -91,7 +91,6 @@ const InvoiceHistory = dynamic(() => import("./components/invoice-history"), {
 export default function InvoiceGenerator() {
   const invoiceRef = useRef<HTMLFormElement>(null);
   const [historyHeight, setHistoryHeight] = useState("auto");
-  const [isLoadingFromHistory, setIsLoadingFromHistory] = useState(false);
 
   useEffect(() => {
     const updateHeight = () => {
