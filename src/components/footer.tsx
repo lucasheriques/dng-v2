@@ -1,19 +1,15 @@
 import { SubscribeButton } from "@/components/newsletter-button";
-import { SOCIAL_LINKS, SOCIALS } from "@/lib/constants";
+import { SOCIAL_LINKS, SOCIALS, TOOLS } from "@/lib/constants";
 import { getMostPopularArticles } from "@/use-cases/get-articles";
 import Image from "next/image";
 import Link from "next/link";
 import FooterHeroImage from "../../public/footer.webp";
 
 const tools = [
-  {
-    name: "Calculadora de Salário Líquido CLT vs PJ",
-    href: "/calculadora-clt-vs-pj",
-  },
-  {
-    name: "Gerador de Invoice",
-    href: "/gerador-de-invoice",
-  },
+  ...Object.values(TOOLS).map((tool) => ({
+    name: tool.title,
+    href: tool.href,
+  })),
   { name: "Newsletter", href: SOCIALS.newsletter },
 ];
 
