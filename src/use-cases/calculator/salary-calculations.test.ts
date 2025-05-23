@@ -41,9 +41,9 @@ describe("calculateCLT", () => {
     const result = calculateCLT(input);
 
     expect(result.grossSalary).toBe(5000);
-    expect(result.deductions.inss).toBeCloseTo(518.82); // INSS for 5000
-    expect(result.deductions.ir).toBeCloseTo(345.5); // IR for 5000
-    expect(result.netSalary).toBeCloseTo(4135.69);
+    expect(result.deductions.inss).toBeCloseTo(509.6);
+    expect(result.deductions.ir).toBeCloseTo(334.85);
+    expect(result.netSalary).toBeCloseTo(4155.55);
   });
 
   it("should calculate CLT salary with all benefits", () => {

@@ -17,9 +17,8 @@ export function CalculatorLinks() {
           <Link
             href={calculator.href}
             className={cn(
-              pathname === calculator.href &&
-                "text-primary border-primary transition-none!",
-              "border-b-1 hover:border-b-2"
+              pathname === calculator.href && "text-primary border-primary",
+              "border-b-1 hover:border-b-2 transition-all"
             )}
           >
             {calculator.title}

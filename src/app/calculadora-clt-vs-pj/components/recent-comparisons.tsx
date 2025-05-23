@@ -19,7 +19,7 @@ export default function RecentComparisons({
   onLoadHistory,
   renderHistoryItem,
   containerClassName,
-  maxItems = 3,
+  maxItems = 6,
 }: RecentComparisonsProps) {
   if (!historyItems || historyItems.length === 0) return null;
 
@@ -28,7 +28,7 @@ export default function RecentComparisons({
       <p className="text-sm text-secondary-text">Comparações recentes:</p>
       <div
         className={cn(
-          "grid grid-cols-1 md:grid-cols-3 gap-2",
+          "grid grid-cols-2 md:grid-cols-6 gap-2",
           containerClassName
         )}
       >

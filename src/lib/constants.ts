@@ -121,15 +121,15 @@ export const TOOLS = {
     href: "/gerador-de-invoice",
     icon: Receipt,
   },
-  investmentCalculator: {
-    title: "Calculadora de Juros Compostos",
-    href: "/calculadora-juros-compostos",
-    icon: ChartNoAxesCombined,
-  },
   salaryCalculator: {
     title: "Calculadora de Salário Líquido",
     href: "/calculadora-salario-liquido",
     icon: DollarSign,
+  },
+  investmentCalculator: {
+    title: "Calculadora de Juros Compostos",
+    href: "/calculadora-juros-compostos",
+    icon: ChartNoAxesCombined,
   },
 };
 

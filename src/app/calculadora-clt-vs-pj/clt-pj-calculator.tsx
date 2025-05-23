@@ -96,7 +96,7 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
     const newHistory = [
       paramString,
       ...history.filter((h) => h !== paramString), // Remove duplicates
-    ].slice(0, 5); // Keep last 5 entries
+    ].slice(0, 7); // Keep last 7 entries
     setHistory(newHistory);
 
     window.history.replaceState({}, "", url.toString());

@@ -113,8 +113,8 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
   };
 
   const handleGoToCLT = () => {
-    const paramString = getParamsAndSaveToHistory();
-    router.push(`/calculadora-clt-vs-pj?${paramString}`);
+    getParamsAndSaveToHistory();
+    router.push(`/calculadora-clt-vs-pj`);
   };
 
   const handleShare = async () => {
@@ -194,16 +194,12 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
   }, []);
 
   return (
-    <div className="grid gap-6">
+    <>
       <div className="flex md:items-center justify-between md:flex-row flex-col gap-2 md:gap-4">
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-highlight-text">
+          <h1 className="text-2xl md:text-3xl font-bold text-highlight-text">
             Calculadora de Salário Líquido CLT
           </h1>
-          <p className="text-lg text-secondary-text">
-            Calcule quanto você receberá mensalmente com todos os descontos e
-            benefícios incluídos
-          </p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -516,6 +512,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
