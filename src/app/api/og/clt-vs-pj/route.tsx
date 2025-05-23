@@ -1,6 +1,7 @@
-import { CalculatorFormData } from "@/app/calculadora-clt-vs-pj/types";
 import { formatCurrency } from "@/lib/utils";
+import { DEFAULT_FORM_DATA } from "@/use-cases/calculator/constants";
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
+import { CalculatorFormData } from "@/use-cases/calculator/types";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 import {
@@ -13,26 +14,6 @@ import {
 } from "../commonStyles"; // Import shared styles
 
 export const runtime = "edge";
-
-// Default values matching the calculator component
-const defaultFormData: CalculatorFormData = {
-  grossSalary: "",
-  pjGrossSalary: "",
-  mealAllowance: "",
-  transportAllowance: "",
-  healthInsurance: "",
-  otherBenefits: "",
-  includeFGTS: true,
-  yearsAtCompany: "",
-  accountingFee: "189",
-  inssContribution: String(1412 * 0.11), // Or fetch dynamically
-  taxRate: "10",
-  otherExpenses: "",
-  taxableBenefits: "",
-  nonTaxableBenefits: "",
-  plr: "",
-  otherCltExpenses: "",
-};
 
 // Mapping from formData keys to URL short keys (same as in client component)
 const paramMap: { [K in keyof CalculatorFormData]?: string } = {
@@ -85,19 +66,19 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
 
     // Parse parameters into formData, falling back to defaults
-    const formData: CalculatorFormData = { ...defaultFormData };
+    const formData: CalculatorFormData = { ...DEFAULT_FORM_DATA };
     for (const shortKey in reverseParamMap) {
       const formKey = reverseParamMap[shortKey];
       const value = searchParams.get(shortKey); // Use .get()
 
       // Important: Don't skip if value is null/undefined, let defaults handle it
       if (formKey === "includeFGTS") {
-        formData[formKey] = safeParseBoolean(value, defaultFormData[formKey]);
+        formData[formKey] = safeParseBoolean(value, DEFAULT_FORM_DATA[formKey]);
       } else {
         // Use default if value is null or empty string (for non-boolean fields)
         formData[formKey] = safeParseString(
           value,
-          defaultFormData[formKey] as string
+          DEFAULT_FORM_DATA[formKey] as string
         );
       }
     }

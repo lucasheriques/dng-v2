@@ -4,6 +4,7 @@ import { BottomSearchFab } from "@/components/bottom-search-fab";
 import PostHogPageView from "@/components/posthog-page-view";
 import { Toaster } from "@/components/ui/toaster";
 import { env } from "@/env";
+import { AtomProvider } from "@/use-cases/calculator/atom-providers";
 import { ConvexAuthNextjsProvider } from "@convex-dev/auth/nextjs";
 import { ConvexQueryCacheProvider } from "convex-helpers/react/cache/provider";
 import { ConvexReactClient } from "convex/react";
@@ -40,7 +41,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <ConvexAuthNextjsProvider client={convex}>
           <ConvexQueryCacheProvider>
             <NuqsAdapter>
-              <BalancerProvider>{children}</BalancerProvider>
+              <AtomProvider>
+                <BalancerProvider>{children}</BalancerProvider>
+              </AtomProvider>
             </NuqsAdapter>
           </ConvexQueryCacheProvider>
         </ConvexAuthNextjsProvider>

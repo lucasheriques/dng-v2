@@ -1,4 +1,5 @@
 import InvestmentCalculator from "@/app/calculadora-juros-compostos/investment-calculator";
+import { CalculatorLinks } from "@/components/calculator-links";
 import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
 import { Metadata } from "next";
@@ -128,17 +129,15 @@ export default async function CalculadoraJurosCompostosPage({
   }
 
   return (
-    <PageWrapper className="flex flex-col gap-2 md:gap-4">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl md:text-4xl font-bold">
-          Calculadora de Juros Compostos
-        </h1>{" "}
-        {/* Responsive heading */}
-      </div>
+    <PageWrapper>
+      <CalculatorLinks />
+      <h1 className="text-3xl md:text-3xl font-bold">
+        Calculadora de Juros Compostos
+      </h1>{" "}
       {/* Pass potentially partial initialData combined with defaults in the client component */}
       <InvestmentCalculator initialData={initialData} />
       {/* Added explanatory text */}
-      <div className="mt-8 text-center text-slate-400 text-sm">
+      <div className="text-center text-slate-400 text-sm">
         <p>
           Use esta calculadora para simular seus investimentos e visualizar o
           crescimento ao longo do tempo.

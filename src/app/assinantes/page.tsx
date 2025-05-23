@@ -23,7 +23,7 @@ export default async function AssinantesPage() {
   );
 
   return (
-    <PageWrapper className="gap-4 flex flex-col">
+    <PageWrapper>
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold">Área do Assinante</h1>
         <Button asChild size="lg" variant="link" className="px-0">

@@ -11,10 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
-import {
-  calculateCLT,
-  CLTResults,
-} from "@/use-cases/calculator/salary-calculations";
+import { calculateCLT } from "@/use-cases/calculator/salary-calculations";
 import { CLTCalculatorFormData } from "@/use-cases/calculator/types";
 import {
   buildUrlParameters,
@@ -24,14 +21,17 @@ import {
 import NumberFlow from "@number-flow/react";
 import { ArrowRight, Banknote, Calculator, Share2 } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import CltResultsBreakdown from "./components/clt-results-breakdown";
 
+import { formDataAtom } from "@/use-cases/calculator/client-state";
 import {
   DEFAULT_CLT_FORM_DATA,
   REVERSE_CLT_PARAM_MAP,
 } from "@/use-cases/calculator/constants";
+import { useAtom } from "jotai";
+import { useResetAtom } from "jotai/utils";
 import { useRouter } from "next/navigation";
 
 const RecentComparisons = dynamic(
@@ -42,7 +42,7 @@ const RecentComparisons = dynamic(
 );
 
 interface CltSalaryCalculatorProps {
-  initialData?: CLTCalculatorFormData;
+  initialData?: Partial<CLTCalculatorFormData>;
 }
 
 const calculateResults = (formData: CLTCalculatorFormData) => {
@@ -65,27 +65,16 @@ const calculateResults = (formData: CLTCalculatorFormData) => {
 };
 
 export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
-  const [formData, setFormData] = useState<CLTCalculatorFormData>(
-    initialData ?? DEFAULT_CLT_FORM_DATA
-  );
+  const [formData, setFormData] = useAtom(formDataAtom);
+  const resetFormData = useResetAtom(formDataAtom);
+  const results = calculateResults(formData);
 
-  const [results, setResults] = useState<CLTResults | null>(() => {
-    if (initialData && initialData.grossSalary) {
-      return calculateCLT({
-        grossSalary: Number(initialData.grossSalary) || 0,
-        mealAllowance: Number(initialData.mealAllowance) || undefined,
-        transportAllowance: Number(initialData.transportAllowance) || undefined,
-        healthInsurance: Number(initialData.healthInsurance) || undefined,
-        otherBenefits: Number(initialData.otherBenefits) || undefined,
-        includeFGTS: initialData.includeFGTS,
-        yearsAtCompany: Number(initialData.yearsAtCompany) || 0,
-        plr: Number(initialData.plr) || undefined,
-        otherCltExpenses: Number(initialData.otherCltExpenses) || 0,
-        dependentsCount: Number(initialData.dependentsCount) || 0,
-      });
+  // Initialize atom with data from props or URL params
+  useEffect(() => {
+    if (initialData) {
+      setFormData({ ...formData, ...initialData });
     }
-    return null;
-  });
+  }, [initialData]);
 
   const [history, setHistory] = useLocalStorage<string[]>(
     "calculator-clt-history",
@@ -95,25 +84,20 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
   const { toast } = useToast();
 
   const handleFGTSChange = (value: boolean) => {
-    const newFormData = {
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       includeFGTS: value,
-    };
-    setFormData(newFormData);
-    setResults(calculateResults(newFormData));
+    }));
   };
 
   const handleInputChange = (
     field: keyof CLTCalculatorFormData,
     value: string
   ) => {
-    const newFormData = {
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [field]: value,
-    };
-
-    setFormData(newFormData);
-    setResults(calculateResults(newFormData));
+    }));
   };
 
   const router = useRouter();
@@ -156,8 +140,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
   };
 
   const handleClear = () => {
-    setFormData(DEFAULT_CLT_FORM_DATA);
-    setResults(null);
+    resetFormData();
     const url = new URL(window.location.pathname, window.location.origin);
     url.search = "";
     window.history.replaceState({}, "", url.toString());
@@ -187,9 +170,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
       }
     }
 
-    setFormData(loadedData);
-    const calculated = calculateResults(loadedData);
-    setResults(calculated);
+    setFormData({ ...formData, ...loadedData });
 
     const url = new URL(window.location.pathname, window.location.origin);
     url.search = paramString;
@@ -199,14 +180,16 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
   const renderHistoryItem = useCallback((paramString: string) => {
     const params = new URLSearchParams(paramString);
     const grossSalary = params.get("gs") || "0";
-    const formData: CLTCalculatorFormData = {
+    const testFormData: CLTCalculatorFormData = {
       ...DEFAULT_CLT_FORM_DATA,
       grossSalary: grossSalary,
     };
 
+    const testResults = calculateResults(testFormData);
+
     return {
       title: `Bruto: ${formatCurrency(Number(grossSalary))}`,
-      subtitle: `Líquido: ${formatCurrency(Number(calculateResults(formData)?.netSalary))}`,
+      subtitle: `Líquido: ${formatCurrency(testResults?.netSalary || 0)}`,
     };
   }, []);
 
@@ -214,7 +197,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
     <div className="grid gap-6">
       <div className="flex md:items-center justify-between md:flex-row flex-col gap-2 md:gap-4">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold text-highlight-text">
+          <h1 className="text-3xl font-bold text-highlight-text">
             Calculadora de Salário Líquido CLT
           </h1>
           <p className="text-lg text-secondary-text">
@@ -453,7 +436,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                           trailingZeroDisplay: "stripIfInteger",
                         }}
                         data-testid="final-amount"
-                        data-testvalue={results.total}
+                        data-testvalue={results.netSalary}
                       />
                     </div>
                     <p className="text-sm text-secondary-text mt-1">

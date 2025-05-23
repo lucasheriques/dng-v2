@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function InvoicePage() {
   return (
-    <PageWrapper className="space-y-8">
+    <PageWrapper>
       <h1 className="text-3xl font-bold">Gerador de Invoice</h1>
       <InvoiceGenerator />
       <Comments slug="gerador-de-invoice" />

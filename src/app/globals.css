@@ -235,7 +235,7 @@
 
 @layer base {
   a {
-    @apply focus:outline-primary/70 focus:outline-2 focus:outline-offset-2 transition-all duration-300;
+    @apply transition-colors duration-300;
   }
 
   [type="date"]::-webkit-calendar-picker-indicator {

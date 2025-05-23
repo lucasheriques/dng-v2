@@ -21,7 +21,7 @@ export default async function Discussions({
   );
 
   return (
-    <PageWrapper className="flex gap-4">
+    <PageWrapper>
       <div className="flex-1">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Discussões</h1>

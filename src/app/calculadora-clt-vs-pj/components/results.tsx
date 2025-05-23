@@ -100,16 +100,20 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
       </Table>
 
       <Card className="dark:bg-emerald-900/30 dark:text-emerald-200 dark:border-emerald-800">
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
+        <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-lg font-semibold text-emerald-200">
             <CheckCircle size={20} /> Melhor opção: {betterOption}
           </CardTitle>
-          <Button variant="ghost" size="sm" onClick={onShare}>
+          <Button
+            size="sm"
+            onClick={onShare}
+            className="col-span-4 self-center"
+          >
             <Share2 className="size-4 mr-2" />
-            Compartilhar
+            Compartilhar resultado
           </Button>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-4">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
             <div>
               <p className="text-xs text-emerald-50">Diferença mensal</p>
@@ -139,7 +143,7 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
                 )}
               </p>
             </div>
-          </div>
+          </div>{" "}
         </CardContent>
       </Card>
 

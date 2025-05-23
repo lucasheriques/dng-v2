@@ -1,3 +1,4 @@
+import { CalculatorLinks } from "@/components/calculator-links";
 import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
 import { env } from "@/env";
@@ -94,7 +95,7 @@ export default async function SalaryCalculatorPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const initialData: CLTCalculatorFormData = { ...DEFAULT_CLT_FORM_DATA };
+  const initialData: Partial<CLTCalculatorFormData> = {};
 
   const params = await searchParams;
 
@@ -122,6 +123,7 @@ export default async function SalaryCalculatorPage({
 
   return (
     <PageWrapper>
+      <CalculatorLinks />
       <CltSalaryCalculator initialData={initialData} />
       <Comments slug="calculadora-salario-liquido" />
     </PageWrapper>

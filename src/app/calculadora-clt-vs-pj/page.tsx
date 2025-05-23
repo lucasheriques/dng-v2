@@ -1,3 +1,4 @@
+import { CalculatorLinks } from "@/components/calculator-links";
 import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
 import { env } from "@/env";
@@ -81,7 +82,7 @@ export default async function SalaryCalculatorPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const initialData: CalculatorFormData = { ...DEFAULT_FORM_DATA };
+  const initialData: Partial<CalculatorFormData> = {};
 
   const params = await searchParams;
 
@@ -109,6 +110,7 @@ export default async function SalaryCalculatorPage({
 
   return (
     <PageWrapper>
+      <CalculatorLinks />
       <CltPjCalculator initialData={initialData} />
       <Comments slug="calculadora-clt-vs-pj" />
     </PageWrapper>
