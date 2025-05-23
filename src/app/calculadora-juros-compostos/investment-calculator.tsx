@@ -283,6 +283,7 @@ export default function InvestmentCalculator({
         historyItems={history}
         onLoadHistory={handleLoadHistory}
         renderHistoryItem={renderInvestmentHistoryItem}
+        maxItems={3}
       />
 
       <DataForm>

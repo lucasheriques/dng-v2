@@ -222,7 +222,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
         historyItems={history}
         onLoadHistory={handleLoadHistory}
         renderHistoryItem={renderHistoryItem}
-        containerClassName="grid-cols-2 md:grid-cols-6"
         maxItems={6}
       />
 

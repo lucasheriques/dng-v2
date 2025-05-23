@@ -11,14 +11,13 @@ interface RecentComparisonsProps {
     subtitle: string;
   };
   containerClassName?: string;
-  maxItems?: number;
+  maxItems?: 3 | 6;
 }
 
 export default function RecentComparisons({
   historyItems,
   onLoadHistory,
   renderHistoryItem,
-  containerClassName,
   maxItems = 6,
 }: RecentComparisonsProps) {
   if (!historyItems || historyItems.length === 0) return null;
@@ -28,8 +27,9 @@ export default function RecentComparisons({
       <p className="text-sm text-secondary-text">Comparações recentes:</p>
       <div
         className={cn(
-          "grid grid-cols-2 md:grid-cols-6 gap-2",
-          containerClassName
+          "grid gap-2",
+          maxItems === 3 && "grid-cols-1 md:grid-cols-3",
+          maxItems === 6 && "grid-cols-2 md:grid-cols-6"
         )}
       >
         {historyItems.slice(0, maxItems).map((paramString) => {

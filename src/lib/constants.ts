@@ -112,7 +112,7 @@ export const SUBSCRIBE_LINK =
 
 export const TOOLS = {
   cltVsPjCalculator: {
-    title: "Calculadora Salário CLT vs PJ",
+    title: "Calculadora CLT vs PJ",
     href: "/calculadora-clt-vs-pj",
     icon: Calculator,
   },
