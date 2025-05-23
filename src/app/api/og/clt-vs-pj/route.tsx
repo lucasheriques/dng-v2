@@ -1,17 +1,10 @@
+import { colors, detailLabelStyle, OGContainer } from "@/lib/og-components";
 import { formatCurrency } from "@/lib/utils";
 import { DEFAULT_FORM_DATA } from "@/use-cases/calculator/constants";
 import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import { CalculatorFormData } from "@/use-cases/calculator/types";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
-import {
-  baseContainerStyle,
-  colors,
-  detailLabelStyle,
-  footerStyle,
-  headerStyle,
-  logoContainerStyle,
-} from "../commonStyles"; // Import shared styles
 
 export const runtime = "edge";
 
@@ -106,24 +99,7 @@ export async function GET(req: NextRequest) {
 
     return new ImageResponse(
       (
-        <div style={baseContainerStyle}>
-          {/* Logo */}
-          <div style={logoContainerStyle}>
-            <img
-              src="http://localhost:3000/logo-v2-no-bg-compressed-small.png" // Replace with your actual logo URL
-              alt="nagringa.dev logo"
-              height="128" // Adjust size as needed
-              width="128" // Adjust size as needed
-              style={{ objectFit: "contain" }} // Ensure logo scales nicely
-            />
-          </div>
-
-          {/* Header */}
-          <div style={headerStyle}>
-            <span>⚖️</span> {/* Scales emoji */}
-            <span>Comparativo CLT vs. PJ</span>
-          </div>
-
+        <OGContainer title="Comparativo CLT vs. PJ" emoji="⚖️">
           {/* Main Comparison Area */}
           <div
             style={{
@@ -293,14 +269,7 @@ export async function GET(req: NextRequest) {
               {/* Use non-breaking space */}
             </span>
           </div>
-
-          {/* Signature/Branding */}
-          <div
-            style={footerStyle} // Use shared style
-          >
-            www.nagringa.dev
-          </div>
-        </div>
+        </OGContainer>
       ),
       {
         width: imageWidth,

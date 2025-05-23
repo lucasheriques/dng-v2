@@ -1,4 +1,4 @@
-import { CalculatorFormData } from "@/app/calculadora-clt-vs-pj/types";
+import { CalculatorFormData } from "@/use-cases/calculator/types";
 import { describe, expect, it } from "vitest";
 import {
   calculateCLT,
@@ -27,6 +27,8 @@ function createFormData(
     otherExpenses: "0",
     taxableBenefits: "0",
     nonTaxableBenefits: "0",
+    otherCltExpenses: "0",
+    dependentsCount: "0",
     ...overrides,
   };
 }

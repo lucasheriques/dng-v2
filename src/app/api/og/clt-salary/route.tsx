@@ -1,3 +1,4 @@
+import { colors, detailLabelStyle, OGContainer } from "@/lib/og-components";
 import { formatCurrency } from "@/lib/utils";
 import { calculateCLT } from "@/use-cases/calculator/salary-calculations";
 import { ImageResponse } from "next/og";
@@ -20,160 +21,121 @@ export async function GET(request: Request) {
 
   return new ImageResponse(
     (
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#0f172a",
-          background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
-          fontFamily: "Inter, sans-serif",
-        }}
-      >
-        {/* Header */}
+      <OGContainer title="Calculadora Salário Líquido CLT" emoji="💰">
+        {/* Main Comparison Area */}
         <div
           style={{
             display: "flex",
+            flexGrow: 1,
+            justifyContent: "space-around",
             alignItems: "center",
-            marginBottom: "40px",
+            gap: "40px",
+            padding: "20px 0",
+            borderBottom: `1px solid ${colors.border}`,
+            marginBottom: "30px",
           }}
         >
-          <h1
-            style={{
-              fontSize: "48px",
-              fontWeight: "bold",
-              color: "#60a5fa",
-              margin: 0,
-            }}
-          >
-            Calculadora Salário Líquido CLT
-          </h1>
-        </div>
-
-        {/* Main Content */}
-        <div
-          style={{
-            display: "flex",
-            gap: "60px",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            maxWidth: "1000px",
-          }}
-        >
-          {/* Input */}
+          {/* Gross Salary Section */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              backgroundColor: "#1e293b",
-              padding: "40px",
-              borderRadius: "16px",
-              border: "2px solid #374151",
-              minWidth: "300px",
             }}
           >
-            <div
-              style={{
-                fontSize: "20px",
-                color: "#9ca3af",
-                marginBottom: "16px",
-              }}
-            >
-              Salário Bruto
-            </div>
-            <div
-              style={{
-                fontSize: "36px",
-                fontWeight: "bold",
-                color: "#f3f4f6",
-              }}
-            >
-              {formatCurrency(Number(grossSalary))}
-            </div>
+            <span style={{ fontSize: "28px", color: colors.textSecondary }}>
+              Salário Bruto 💼
+            </span>
+            {/* Dependents info */}
             {dependentsCount > 0 && (
               <div
                 style={{
-                  fontSize: "16px",
-                  color: "#9ca3af",
-                  marginTop: "8px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: "10px",
                 }}
               >
-                {dependentsCount} dependente{dependentsCount > 1 ? "s" : ""}
+                <span style={detailLabelStyle}>
+                  {dependentsCount} dependente{dependentsCount > 1 ? "s" : ""}
+                </span>
               </div>
             )}
+            {/* Gross Amount */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                marginTop: "15px",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "60px",
+                  fontWeight: "bold",
+                  color: colors.textPrimary,
+                }}
+              >
+                {formatCurrency(Number(grossSalary), "BRL")}
+              </span>
+            </div>
           </div>
 
-          {/* Arrow */}
-          <div
-            style={{
-              fontSize: "48px",
-              color: "#60a5fa",
-            }}
-          >
-            →
-          </div>
-
-          {/* Result */}
+          {/* Net Salary Section */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              backgroundColor: "#1e293b",
-              padding: "40px",
-              borderRadius: "16px",
-              border: "2px solid #10b981",
-              minWidth: "300px",
             }}
           >
+            <span style={{ fontSize: "28px", color: colors.textSecondary }}>
+              Salário Líquido 💳
+            </span>
             <div
               style={{
-                fontSize: "20px",
-                color: "#9ca3af",
-                marginBottom: "16px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                marginTop: "15px",
               }}
             >
-              Salário Líquido
-            </div>
-            <div
-              style={{
-                fontSize: "36px",
-                fontWeight: "bold",
-                color: "#10b981",
-              }}
-            >
-              {formatCurrency(result.total)}
-            </div>
-            <div
-              style={{
-                fontSize: "16px",
-                color: "#9ca3af",
-                marginTop: "8px",
-                textAlign: "center",
-              }}
-            >
-              FGTS: {includeFGTS ? "Incluído" : "Não incluído"}
+              <span
+                style={{
+                  fontSize: "60px",
+                  fontWeight: "bold",
+                  color: colors.textPrimary,
+                }}
+              >
+                {formatCurrency(result.total, "BRL")}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Footer */}
+        {/* Key Deductions Summary */}
         <div
           style={{
-            marginTop: "40px",
-            fontSize: "18px",
-            color: "#9ca3af",
-            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "auto",
+            gap: "8px",
+            fontSize: "26px",
+            color: colors.textSecondary,
           }}
         >
-          Dev na Gringa • Cálculo com INSS, IRRF e benefícios
+          Descontos:
+          <span style={{ color: colors.accentRose, fontWeight: "bold" }}>
+            INSS {formatCurrency(result.deductions.inss, "BRL")}
+          </span>
+          {" • "}
+          <span style={{ color: colors.accentRose, fontWeight: "bold" }}>
+            IR {formatCurrency(result.deductions.ir, "BRL")}
+          </span>
         </div>
-      </div>
+      </OGContainer>
     ),
     {
       width: 1200,
