@@ -137,14 +137,6 @@ export default function CltResultsBreakdown({
                     </span>
                   </div>
                 )}
-                {results.detailedBenefits?.plrNet > 0 && (
-                  <div className="flex justify-between text-sm">
-                    <span className="text-secondary-text">PLR (mensal):</span>
-                    <span className="font-medium text-green-400">
-                      +{formatCurrency(results.detailedBenefits.plrNet / 12)}
-                    </span>
-                  </div>
-                )}
               </div>
             </AccordionContent>
           </AccordionItem>

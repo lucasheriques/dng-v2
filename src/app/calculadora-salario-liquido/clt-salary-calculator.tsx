@@ -17,22 +17,22 @@ import {
 } from "@/use-cases/calculator/salary-calculations";
 import { CLTCalculatorFormData } from "@/use-cases/calculator/types";
 import {
+  buildUrlParameters,
   safeParseBoolean,
   safeParseNumberString,
 } from "@/use-cases/calculator/utils";
 import NumberFlow from "@number-flow/react";
 import { ArrowRight, Banknote, Calculator, Share2 } from "lucide-react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useCallback, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import CltResultsBreakdown from "./components/clt-results-breakdown";
 
 import {
   DEFAULT_CLT_FORM_DATA,
-  PARAMETERS_MAP,
   REVERSE_CLT_PARAM_MAP,
 } from "@/use-cases/calculator/constants";
+import { useRouter } from "next/navigation";
 
 const RecentComparisons = dynamic(
   () => import("@/app/calculadora-clt-vs-pj/components/recent-comparisons"),
@@ -116,34 +116,27 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
     setResults(calculateResults(newFormData));
   };
 
-  const handleShare = async () => {
-    const params = new URLSearchParams();
+  const router = useRouter();
 
-    for (const key in formData) {
-      const formKey = key as keyof CLTCalculatorFormData;
-      const shortKey = PARAMETERS_MAP[formKey];
-      const value = formData[formKey];
-      const defaultValue = DEFAULT_CLT_FORM_DATA[formKey];
-
-      if (shortKey && value !== defaultValue) {
-        if (typeof value === "boolean") {
-          params.set(shortKey, value ? "1" : "0");
-        } else if (value !== "") {
-          params.set(shortKey, String(value));
-        }
-      }
-    }
-
-    const paramString = params.toString();
-    const url = new URL(window.location.pathname, window.location.origin);
-    url.search = paramString;
-
+  const getParamsAndSaveToHistory = () => {
+    const paramString = buildUrlParameters(formData).toString();
     const newHistory = [
       paramString,
       ...history.filter((h) => h !== paramString),
-    ].slice(0, 5);
+    ].slice(0, 6);
     setHistory(newHistory);
+    return paramString;
+  };
 
+  const handleGoToCLT = () => {
+    const paramString = getParamsAndSaveToHistory();
+    router.push(`/calculadora-clt-vs-pj?${paramString}`);
+  };
+
+  const handleShare = async () => {
+    const paramString = getParamsAndSaveToHistory();
+    const url = new URL(window.location.pathname, window.location.origin);
+    url.search = paramString;
     window.history.replaceState({}, "", url.toString());
 
     try {
@@ -247,6 +240,8 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
         historyItems={history}
         onLoadHistory={handleLoadHistory}
         renderHistoryItem={renderHistoryItem}
+        containerClassName="grid-cols-2 md:grid-cols-6"
+        maxItems={6}
       />
 
       <div className="grid lg:grid-cols-3 gap-6">
@@ -518,15 +513,10 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                     <p className="text-sm text-secondary-text">
                       Veja qual regime trabalhista é mais vantajoso para você
                     </p>
-                    <Link
-                      href={`/calculadora-clt-vs-pj?gs=${formData.grossSalary}`}
-                      className="block"
-                    >
-                      <Button variant="default" className="w-full">
-                        Comparar CLT vs PJ
-                        <ArrowRight className="size-4 ml-2" />
-                      </Button>
-                    </Link>
+                    <Button onClick={handleGoToCLT} className="min-w-full">
+                      Comparar CLT vs PJ
+                      <ArrowRight className="size-4 ml-2" />
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
