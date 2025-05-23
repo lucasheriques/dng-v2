@@ -1,16 +1,9 @@
 import { calculateInvestmentResults } from "@/app/calculadora-juros-compostos/lib";
 import { InvestmentCalculatorData } from "@/app/calculadora-juros-compostos/types";
+import { colors, detailLabelStyle, OGContainer } from "@/lib/og-components"; // Corrected import path
 import { formatCurrency } from "@/lib/utils";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
-import {
-  baseContainerStyle,
-  colors,
-  detailLabelStyle,
-  footerStyle,
-  headerStyle,
-  logoContainerStyle,
-} from "../commonStyles"; // Corrected import path
 
 export const runtime = "edge";
 
@@ -70,24 +63,7 @@ export async function GET(req: NextRequest) {
 
     return new ImageResponse(
       (
-        <div style={baseContainerStyle}>
-          {/* Logo */}
-          <div style={logoContainerStyle}>
-            <img
-              src="https://www.nagringa.dev/logo-v2-no-bg-compressed-small.png" // Replace with your actual logo URL
-              alt="nagringa.dev logo"
-              height="128" // Adjust size as needed
-              width="128" // Adjust size as needed
-              style={{ objectFit: "contain" }} // Ensure logo scales nicely
-            />
-          </div>
-
-          {/* Header */}
-          <div style={headerStyle}>
-            <span>📈</span>
-            <span>Simulação de Juros Compostos</span>
-          </div>
-
+        <OGContainer title="Simulação de Juros Compostos" emoji="📈">
           <div
             style={{
               display: "flex",
@@ -237,13 +213,7 @@ export async function GET(req: NextRequest) {
               </span>
             </div>
           </div>
-
-          <div
-            style={footerStyle} // Use shared style
-          >
-            www.nagringa.dev
-          </div>
-        </div>
+        </OGContainer>
       ),
       {
         width: imageWidth,
