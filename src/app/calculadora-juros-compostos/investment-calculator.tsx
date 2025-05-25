@@ -1,6 +1,7 @@
 "use client";
 
 import { calculateInvestmentResults } from "@/app/calculadora-juros-compostos/lib";
+import { CalculatorsPageHeader } from "@/components/calculators/calculators-page-header";
 import {
   DataForm,
   DataFormHeader,
@@ -50,7 +51,7 @@ const RecentComparisons = dynamic(
 
 // Default values (can be moved or duplicated if compression.ts is removed)
 const defaultValues: InvestmentCalculatorData = {
-  initialDeposit: 10000,
+  initialDeposit: 0,
   monthlyContribution: 1000,
   period: 10,
   periodType: "years",
@@ -264,8 +265,8 @@ export default function InvestmentCalculator({
   }, []);
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* Add Recent Comparisons Section */}
+    <>
+      <CalculatorsPageHeader title="Calculadora de Juros Compostos" />
       <RecentComparisons
         historyItems={history}
         onLoadHistory={handleLoadHistory}
@@ -679,6 +680,6 @@ export default function InvestmentCalculator({
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </div>
+    </>
   );
 }

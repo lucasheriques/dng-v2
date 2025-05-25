@@ -15,6 +15,7 @@ import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import CltResultsBreakdown from "./components/clt-results-breakdown";
 
+import { CalculatorsPageHeader } from "@/components/calculators/calculators-page-header";
 import { CltDataForm } from "@/components/calculators/clt-data-form";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { ShareButton } from "@/components/ui/share-button";
@@ -123,28 +124,10 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
 
   return (
     <>
-      <div className="flex md:items-center justify-between md:flex-row flex-col gap-2 md:gap-4">
-        <div className="space-y-2">
-          <h1 className="text-2xl md:text-3xl font-bold text-highlight-text">
-            Calculadora de Salário Líquido CLT
-          </h1>
-        </div>
-        <div className="flex gap-2">
-          <Button
-            variant="default"
-            onClick={() => {
-              const hyvorTalkContainer =
-                document.querySelector("#hyvor-comments");
-              hyvorTalkContainer?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Deixar feedback
-          </Button>
-          <Button variant="ghost" onClick={handleClear}>
-            Limpar valores
-          </Button>
-        </div>
-      </div>
+      <CalculatorsPageHeader
+        title="Calculadora de Salário Líquido CLT"
+        handleClear={handleClear}
+      />
 
       <RecentComparisons
         historyItems={history}
@@ -153,9 +136,9 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
         maxItems={6}
       />
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4">
         {/* Form Section */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 md:col-span-1">
           <CltDataForm
             initialData={initialData}
             historyLocalStorageKey="calculator-clt-history"
@@ -226,7 +209,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
               </Card>
 
               {/* CTA Card */}
-              <Card className="border border-accent/20 bg-accent/5">
+              <Card className="border-none bg-transparent">
                 <CardContent className="p-4">
                   <div className="text-center space-y-3">
                     <h3 className="font-semibold text-highlight-text">

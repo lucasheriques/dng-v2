@@ -28,8 +28,8 @@ export default function RecentComparisons({
       <div
         className={cn(
           "grid gap-2",
-          maxItems === 3 && "grid-cols-1 md:grid-cols-3",
-          maxItems === 6 && "grid-cols-2 md:grid-cols-6"
+          maxItems === 3 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+          maxItems === 6 && "grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
         )}
       >
         {historyItems.slice(0, maxItems).map((paramString) => {

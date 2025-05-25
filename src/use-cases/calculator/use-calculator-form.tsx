@@ -2,7 +2,7 @@ import { calculateResults } from "@/use-cases/calculator/salary-calculations";
 import { CalculatorFormData } from "@/use-cases/calculator/types";
 import { buildUrlParameters } from "@/use-cases/calculator/utils";
 import { atom, useAtom } from "jotai";
-import { useResetAtom } from "jotai/utils";
+import { atomWithStorage } from "jotai/utils";
 import { useCallback, useEffect, useMemo } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
@@ -14,11 +14,13 @@ import {
   safeParseBoolean,
   safeParseNumberString,
 } from "@/use-cases/calculator/utils";
-import { atomWithReset } from "jotai/utils";
 
 // Combined form data atom (for CLT vs PJ calculator)
-const formDataAtom = atomWithReset<CalculatorFormData & { isTouched: boolean }>(
-  { ...DEFAULT_FORM_DATA, isTouched: false }
+const formDataAtom = atomWithStorage<CalculatorFormData>(
+  "calculator-form-data",
+  {
+    ...DEFAULT_FORM_DATA,
+  }
 );
 
 const detailsExpandedAtom = atom(false);
@@ -61,13 +63,12 @@ export function useCalculatorForm({ localStorageKey, initialData = {} }: Args) {
   const [formData, setFormData] = useAtom(formDataAtom);
   const [isDetailsExpanded, setIsDetailsExpanded] =
     useAtom(detailsExpandedAtom);
-  const resetFormData = useResetAtom(formDataAtom);
 
   useEffect(() => {
-    if (Object.keys(initialData).length > 0 && !formData.isTouched) {
+    if (Object.keys(initialData).length > 0) {
       setFormData({ ...formData, ...initialData });
     }
-  }, [initialData, formData.isTouched]);
+  }, [initialData]);
 
   const results = useMemo(() => {
     return calculateResults(formData);
@@ -90,7 +91,6 @@ export function useCalculatorForm({ localStorageKey, initialData = {} }: Args) {
       setFormData((prev) => ({
         ...prev,
         includeFGTS: value,
-        isTouched: true,
       }));
     },
     [setFormData]
@@ -101,7 +101,6 @@ export function useCalculatorForm({ localStorageKey, initialData = {} }: Args) {
       setFormData((prev) => ({
         ...prev,
         [field]: value,
-        isTouched: true,
       }));
     },
     [setFormData]
@@ -122,18 +121,17 @@ export function useCalculatorForm({ localStorageKey, initialData = {} }: Args) {
   }, [getParamsAndSaveToHistory]);
 
   const handleClear = useCallback(() => {
-    resetFormData();
+    setFormData(DEFAULT_FORM_DATA);
     const url = new URL(window.location.pathname, window.location.origin);
     url.search = "";
     window.history.replaceState({}, "", url.toString());
-  }, [resetFormData]);
+  }, [setFormData]);
 
   const handleLoadHistory = useCallback(
     (paramString: string) => {
       const searchParams = new URLSearchParams(paramString);
       setFormData({
         ...parseQueryParamsToFormData(searchParams),
-        isTouched: true,
       });
       const url = new URL(window.location.pathname, window.location.origin);
       url.search = paramString;

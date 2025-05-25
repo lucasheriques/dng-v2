@@ -6,12 +6,12 @@ import {
   DataFormInput,
   DataFormRow,
 } from "@/components/data-forms";
-import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils"; // Import formatCurrency
 import { CalculatorFormData } from "@/use-cases/calculator/types";
 import dynamic from "next/dynamic";
 import { useCallback } from "react";
 
+import { CalculatorsPageHeader } from "@/components/calculators/calculators-page-header";
 import { CltDataForm } from "@/components/calculators/clt-data-form";
 import ResultsAccordion from "@/components/calculators/results-accordion";
 import { useCalculatorForm } from "@/use-cases/calculator/use-calculator-form";
@@ -65,29 +65,11 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
   }, []);
 
   return (
-    <div className="grid gap-4">
-      <div className="flex md:items-center justify-between md:flex-row flex-col gap-2 md:gap-4">
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-highlight-text">
-            Calculadora CLT vs. PJ
-          </h1>
-        </div>
-        <div className="flex gap-2">
-          <Button
-            variant="default"
-            onClick={() => {
-              const hyvorTalkContainer =
-                document.querySelector("#hyvor-comments");
-              hyvorTalkContainer?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Deixar feedback
-          </Button>
-          <Button variant="ghost" onClick={handleClear}>
-            Limpar valores
-          </Button>
-        </div>
-      </div>
+    <>
+      <CalculatorsPageHeader
+        title="Calculadora CLT vs. PJ"
+        handleClear={handleClear}
+      />
 
       <RecentComparisons
         historyItems={history}
@@ -246,6 +228,6 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
       {results && (
         <Results results={results} formData={formData} onShare={handleShare} />
       )}
-    </div>
+    </>
   );
 }

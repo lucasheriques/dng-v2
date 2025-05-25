@@ -14,7 +14,7 @@ const tools = [
 ];
 
 export function Footer() {
-  const popularArticles = getMostPopularArticles().slice(0, 5);
+  const popularArticles = getMostPopularArticles().slice(0, 8);
 
   return (
     <footer className="relative">
@@ -121,14 +121,6 @@ export function Footer() {
               >
                 <span className="sr-only">{SOCIAL_LINKS.linkedin.title}</span>
                 <SOCIAL_LINKS.linkedin.icon className="h-6 w-6" />
-              </a>
-              <a
-                key={SOCIAL_LINKS.instagram.href}
-                href={SOCIAL_LINKS.instagram.href}
-                className=" hover:text-primary"
-              >
-                <span className="sr-only">{SOCIAL_LINKS.instagram.title}</span>
-                <SOCIAL_LINKS.instagram.icon className="h-6 w-6" />
               </a>
             </div>
           </div>

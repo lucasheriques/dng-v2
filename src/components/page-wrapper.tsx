@@ -9,10 +9,7 @@ export function PageWrapper({
 }) {
   return (
     <div
-      className={cn(
-        "container py-4 md:py-8 flex flex-col gap-2 md:gap-4",
-        className
-      )}
+      className={cn("container py-4 md:py-8 flex flex-col gap-4", className)}
     >
       {children}
     </div>
