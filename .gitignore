@@ -10,6 +10,8 @@
 !.yarn/releases
 !.yarn/versions
 
+/offline-content
+
 # testing
 /coverage
 
