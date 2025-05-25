@@ -4,6 +4,8 @@ import {
   PJCalculatorFormData,
 } from "@/use-cases/calculator/types";
 
+const MIN_WAGE = 1518;
+
 export const DEFAULT_CLT_FORM_DATA: CLTCalculatorFormData = {
   grossSalary: "",
   mealAllowance: "",
@@ -20,9 +22,9 @@ export const DEFAULT_CLT_FORM_DATA: CLTCalculatorFormData = {
 
 export const DEFAULT_PJ_FORM_DATA: PJCalculatorFormData = {
   pjGrossSalary: "",
-  accountingFee: "",
-  inssContribution: "",
-  taxRate: "",
+  accountingFee: "189",
+  inssContribution: String(MIN_WAGE * 0.11), // Consider making this dynamic based on current min wage
+  taxRate: "10",
   otherExpenses: "",
   taxableBenefits: "",
   nonTaxableBenefits: "",
