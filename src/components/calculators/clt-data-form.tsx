@@ -159,7 +159,7 @@ export function CltDataForm({
       <DataFormRow
         label="Outros Descontos"
         tooltipContent="Outros descontos mensais em folha (ex: empréstimos, convênios, coparticipação plano de saúde)"
-        inputId="other-expenses-input"
+        inputId="other-clt-expenses-input"
       >
         <DataFormInput
           value={formData.otherCltExpenses}
@@ -170,7 +170,7 @@ export function CltDataForm({
             )
           }
           prefix="R$"
-          id="other-expenses-input"
+          id="other-clt-expenses-input"
         />
       </DataFormRow>
 
