@@ -174,6 +174,11 @@ export function DataFormInput({
     onChange(e.target.value);
   };
 
+  const handleWheel = (e: React.WheelEvent<HTMLInputElement>) => {
+    // Blur the input to prevent scroll from changing the value
+    e.currentTarget.blur();
+  };
+
   return (
     <div className="relative flex items-center w-full">
       {prefix && (
@@ -187,6 +192,7 @@ export function DataFormInput({
         value={value}
         onChange={handleChange}
         onPaste={handlePaste}
+        onWheel={handleWheel}
         className={cn(
           "w-full bg-transparent p-2 focus-visible:ring-offset-0 border-none rounded",
           prefix ? "pl-8" : "pl-2",
