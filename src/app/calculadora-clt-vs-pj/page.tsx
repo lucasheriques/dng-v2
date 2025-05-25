@@ -19,7 +19,7 @@ export async function generateMetadata({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
   const searchParams = await params;
-  const baseUrl = env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const baseUrl = env.NEXT_PUBLIC_BASE_URL;
   const ogUrl = new URL("/api/og/clt-vs-pj", baseUrl);
 
   for (const shortKey in REVERSE_PARAM_MAP) {

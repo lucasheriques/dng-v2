@@ -1,3 +1,7 @@
 {
-  "ignoreCommand": "bash scripts/simple-deploy-check.sh"
+  "git": {
+    "deploymentEnabled": {
+      "*": false
+    }
+  }
 }

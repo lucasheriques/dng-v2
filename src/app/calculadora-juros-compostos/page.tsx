@@ -1,6 +1,7 @@
 import InvestmentCalculator from "@/app/calculadora-juros-compostos/investment-calculator";
 import Comments from "@/components/comments";
 import { PageWrapper } from "@/components/page-wrapper";
+import { env } from "@/env";
 import { Metadata } from "next";
 import { InvestmentCalculatorData } from "./types";
 
@@ -20,7 +21,7 @@ export async function generateMetadata({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
   const searchParams = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"; // Fallback for local dev
+  const baseUrl = env.NEXT_PUBLIC_BASE_URL;
   const ogUrl = new URL("/api/og/investment", baseUrl);
 
   // Append parameters only if they differ from defaults, matching the client-side logic

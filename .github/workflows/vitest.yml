@@ -1,8 +1,13 @@
-name: Test
-on: [push, pull_request]
+name: Vitest CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  test:
+  run-tests:
+    name: Run Vitest tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
