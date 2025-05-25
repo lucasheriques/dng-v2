@@ -83,7 +83,7 @@ export function calculateIRRF(
   const adjustedBaseIR = Math.max(0, baseIR - dependentDeduction);
 
   const irRange = IRRF_RANGES.find((range) => adjustedBaseIR <= range.max);
-  return irRange ? 0 : 0;
+  return irRange ? adjustedBaseIR * irRange.rate - irRange.deduction : 0;
 }
 
 function calculatePLRTax(plrAmount: number): number {
