@@ -73,7 +73,7 @@ export default async function Hero() {
       <div>
         <h1 className="font-bold text-3xl md:text-4xl">
           <Balancer>
-            <AnimatedText text="O melhor conteúdo" />
+            <AnimatedText text="O melhor  de tods conteúdo" />
             <br />
             <AnimatedText
               text="para devs ambiciosos"
