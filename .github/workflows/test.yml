@@ -1,4 +1,4 @@
-name: Test and Block Deploy
+name: Test
 on: [push, pull_request]
 
 jobs:
@@ -22,6 +22,3 @@ jobs:
 
       - name: Run tests
         run: pnpm test:ci
-
-      - name: Deploy to Vercel
-        run: curl -X POST ${{ secrets.DEPLOY_HOOK_URL }}
