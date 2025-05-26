@@ -106,11 +106,11 @@ export default function ResultsAccordion({
                 )}
                 type="addition"
               />
-              {results.clt.detailedBenefits.plrGross > 0 && (
+              {results.clt.detailedBenefits.plrNet > 0 && (
                 <DataFormInfoRow
                   label="PLR (proporcional)"
                   value={formatCurrency(
-                    results.clt.detailedBenefits.plrGross / 12
+                    results.clt.detailedBenefits.plrNet / 12
                   )}
                   type="addition"
                 />

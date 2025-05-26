@@ -10,7 +10,7 @@ import {
   safeParseNumberString,
 } from "@/use-cases/calculator/utils";
 import NumberFlow from "@number-flow/react";
-import { ArrowRight, Banknote, Calculator } from "lucide-react";
+import { ArrowRight, Banknote, Calculator, Info } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import CltResultsBreakdown from "./components/clt-results-breakdown";
@@ -18,6 +18,7 @@ import CltResultsBreakdown from "./components/clt-results-breakdown";
 import { CalculatorsPageHeader } from "@/components/calculators/calculators-page-header";
 import { CltDataForm } from "@/components/calculators/clt-data-form";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { ResponsiveTooltip } from "@/components/ui/responsive-tooltip";
 import { ShareButton } from "@/components/ui/share-button";
 import {
   DEFAULT_CLT_FORM_DATA,
@@ -65,8 +66,8 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
     getParamsAndSaveToHistory,
     history,
     handleShare,
+    results,
   } = useCalculatorForm({ localStorageKey: "calculator-clt-history" });
-  const results = calculateResults(formData);
 
   const router = useRouter();
 
@@ -150,7 +151,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
           {results && (
             <>
               {/* Main Result Card */}
-              <Card className="relative bg-gradient-to-br from-slate-900 to-slate-950">
+              <Card className="relative bg-gradient-to-br from-slate-900 to-slate-950 overflow-hidden">
                 <BorderBeam />
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2">
@@ -162,14 +163,14 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                   <div className="text-center">
                     <div className="text-4xl font-bold text-primary">
                       <NumberFlow
-                        value={results.netSalary}
+                        value={results.clt.netSalary}
                         format={{
                           style: "currency",
                           currency: "BRL",
                           trailingZeroDisplay: "stripIfInteger",
                         }}
                         data-testid="final-amount"
-                        data-testvalue={results.netSalary}
+                        data-testvalue={results.clt.netSalary}
                       />
                     </div>
                     <p className="text-sm text-secondary-text mt-1">
@@ -183,29 +184,46 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                         Salário Bruto:
                       </span>
                       <span className="font-medium">
-                        {formatCurrency(results.grossSalary)}
+                        {formatCurrency(results.clt.grossSalary)}
                       </span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-secondary-text">
-                        Total Descontos:
-                      </span>
+                      <span className="text-secondary-text">Descontos:</span>
                       <span className="font-medium text-red-400">
                         -
                         {formatCurrency(
-                          results.deductions.inss +
-                            results.deductions.ir +
-                            results.deductions.transportDeduction +
-                            results.deductions.otherCltExpenses +
-                            results.deductions.alimony
+                          results.clt.deductions.inss +
+                            results.clt.deductions.ir +
+                            results.clt.deductions.transportDeduction +
+                            results.clt.deductions.otherCltExpenses +
+                            results.clt.deductions.alimony
                         )}
+                      </span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-secondary-text flex items-center gap-1">
+                        <ResponsiveTooltip
+                          trigger={
+                            <>
+                              <Info size={16} />
+                              Total com benefícios:
+                            </>
+                          }
+                        >
+                          Inclui 13º salário, 33% férias,{" "}
+                          {results?.clt.includeFGTS ? "FGTS" : ""} e todos os
+                          outros adicionados
+                        </ResponsiveTooltip>
+                      </span>
+                      <span className="font-medium text-emerald-400">
+                        {formatCurrency(results.clt.total)}
                       </span>
                     </div>
                   </div>
 
                   <ShareButton onShare={handleShare} className="min-w-full" />
                 </CardContent>
-                <CltResultsBreakdown results={results} />
+                <CltResultsBreakdown results={results.clt} />
               </Card>
 
               {/* CTA Card */}

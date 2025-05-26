@@ -1,19 +1,8 @@
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { ResponsiveTooltip } from "@/components/ui/responsive-tooltip";
 import { cn } from "@/lib/utils";
 import { Info } from "lucide-react";
 import React from "react";
-import Balancer from "react-wrap-balancer";
 
 export function DataForm({
   children,
@@ -78,26 +67,9 @@ export function DataFormRow<T extends React.ElementType = "label">({
       >
         {label}
         {tooltipContent && (
-          <>
-            <TooltipProvider delayDuration={100}>
-              <Tooltip>
-                <TooltipTrigger className="hidden lg:block">
-                  <Info size={16} />
-                </TooltipTrigger>
-                <TooltipContent className="max-w-[250px]">
-                  <Balancer>{tooltipContent}</Balancer>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <Popover>
-              <PopoverTrigger className="block lg:hidden">
-                <Info size={16} />
-              </PopoverTrigger>
-              <PopoverContent className="text-sm">
-                {tooltipContent}
-              </PopoverContent>
-            </Popover>
-          </>
+          <ResponsiveTooltip trigger={<Info size={16} />}>
+            {tooltipContent}
+          </ResponsiveTooltip>
         )}
       </Component>
       <div>{children}</div>

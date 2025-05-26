@@ -150,7 +150,9 @@ export function calculateCLT(input: SalaryInput) {
     (input.healthInsurance || 0) +
     (input.otherBenefits || 0) +
     (includeFGTS ? totalMonthlyFGTS : 0) +
-    monthlyPlr;
+    monthlyPlr +
+    netThirteenth +
+    netVacation;
 
   return {
     grossSalary,
@@ -178,7 +180,7 @@ export function calculateCLT(input: SalaryInput) {
       plrGross: input.plr || 0,
       plrNet: netPlr,
     },
-    total: netSalary + benefits + netThirteenth + netVacation,
+    total: netSalary + benefits,
     includeFGTS: includeFGTS,
   };
 }

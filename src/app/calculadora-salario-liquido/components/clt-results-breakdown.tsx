@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { CLTResults } from "@/use-cases/calculator/salary-calculations";
 import { Info } from "lucide-react";
 
@@ -42,13 +42,13 @@ export default function CltResultsBreakdown({
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-secondary-text">INSS:</span>
-                  <span className="font-medium text-red-400">
+                  <span className="font-medium text-rose-300">
                     -{formatCurrency(results.deductions.inss)}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-secondary-text">Imposto de Renda:</span>
-                  <span className="font-medium text-red-400">
+                  <span className="font-medium text-rose-300">
                     -{formatCurrency(results.deductions.ir)}
                   </span>
                 </div>
@@ -57,7 +57,7 @@ export default function CltResultsBreakdown({
                     <span className="text-secondary-text">
                       Vale-Transporte:
                     </span>
-                    <span className="font-medium text-red-400">
+                    <span className="font-medium text-rose-300">
                       -{formatCurrency(results.deductions.transportDeduction)}
                     </span>
                   </div>
@@ -67,7 +67,7 @@ export default function CltResultsBreakdown({
                     <span className="text-secondary-text">
                       Pensão Alimentícia:
                     </span>
-                    <span className="font-medium text-red-400">
+                    <span className="font-medium text-rose-300">
                       -{formatCurrency(results.deductions.alimony)}
                     </span>
                   </div>
@@ -78,7 +78,7 @@ export default function CltResultsBreakdown({
                     <span className="text-secondary-text">
                       Outros Descontos:
                     </span>
-                    <span className="font-medium text-red-400">
+                    <span className="font-medium text-rose-300">
                       -{formatCurrency(results.deductions.otherCltExpenses)}
                     </span>
                   </div>
@@ -86,7 +86,7 @@ export default function CltResultsBreakdown({
                 {results.deductions.plrTax > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-secondary-text">Imposto PLR:</span>
-                    <span className="font-medium text-red-400">
+                    <span className="font-medium text-rose-300">
                       -{formatCurrency(results.deductions.plrTax)}
                     </span>
                   </div>
@@ -101,10 +101,21 @@ export default function CltResultsBreakdown({
             </AccordionTrigger>
             <AccordionContent>
               <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-secondary-text">
+                    13º salário (proporcional):
+                  </span>
+                  <span className="font-medium text-green-300">
+                    +
+                    {formatCurrency(
+                      results.detailedBenefits?.thirteenthSalary || 0
+                    )}
+                  </span>
+                </div>
                 {results.detailedBenefits?.mealAllowance > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-secondary-text">Vale Refeição:</span>
-                    <span className="font-medium text-green-400">
+                    <span className="font-medium text-green-300">
                       +{formatCurrency(results.detailedBenefits.mealAllowance)}
                     </span>
                   </div>
@@ -114,7 +125,7 @@ export default function CltResultsBreakdown({
                     <span className="text-secondary-text">
                       Vale Transporte:
                     </span>
-                    <span className="font-medium text-green-400">
+                    <span className="font-medium text-green-300">
                       +
                       {formatCurrency(
                         results.detailedBenefits.transportAllowance
@@ -125,7 +136,7 @@ export default function CltResultsBreakdown({
                 {results.detailedBenefits?.healthInsurance > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-secondary-text">Plano de Saúde:</span>
-                    <span className="font-medium text-green-400">
+                    <span className="font-medium text-green-300">
                       +
                       {formatCurrency(results.detailedBenefits.healthInsurance)}
                     </span>
@@ -136,16 +147,33 @@ export default function CltResultsBreakdown({
                     <span className="text-secondary-text">
                       Outros Benefícios:
                     </span>
-                    <span className="font-medium text-green-400">
+                    <span className="font-medium text-green-300">
                       +{formatCurrency(results.detailedBenefits.otherBenefits)}
                     </span>
                   </div>
                 )}
-                {results.includeFGTS && results.detailedBenefits?.fgts > 0 && (
+                {results.detailedBenefits?.plrNet > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-secondary-text">PLR:</span>
+                    <span className="font-medium text-green-300">
+                      +{formatCurrency(results.detailedBenefits.plrNet / 12)}
+                    </span>
+                  </div>
+                )}
+
+                {results.detailedBenefits?.fgts > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-secondary-text">FGTS (mensal):</span>
-                    <span className="font-medium text-green-400">
-                      +{formatCurrency(results.detailedBenefits.fgts)}
+                    <span
+                      className={cn(
+                        "font-medium",
+                        results.includeFGTS
+                          ? "text-green-300"
+                          : "text-secondary-text"
+                      )}
+                    >
+                      {results.includeFGTS ? "+" : ""}
+                      {formatCurrency(results.detailedBenefits.fgts)}
                     </span>
                   </div>
                 )}
@@ -163,20 +191,32 @@ export default function CltResultsBreakdown({
                   <span className="text-secondary-text">
                     13º Salário Líquido:
                   </span>
-                  <span className="font-medium text-blue-400">
+                  <span className="font-medium text-blue-300">
                     {formatCurrency(
                       (results.detailedBenefits?.thirteenthSalary || 0) * 12
                     )}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-secondary-text">Férias + 1/3:</span>
-                  <span className="font-medium text-blue-400">
+                  <span className="text-secondary-text">
+                    1/3 Bônus de Férias:
+                  </span>
+                  <span className="font-medium text-blue-300">
                     {formatCurrency(
                       (results.detailedBenefits?.vacationBonus || 0) * 12
                     )}
                   </span>
                 </div>
+                {results.detailedBenefits?.plrNet > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-secondary-text">
+                      PLR Líquido Anual:
+                    </span>
+                    <span className="font-medium text-blue-300">
+                      {formatCurrency(results.detailedBenefits.plrNet)}
+                    </span>
+                  </div>
+                )}
                 {results.detailedBenefits?.severance > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-secondary-text">
@@ -184,16 +224,6 @@ export default function CltResultsBreakdown({
                     </span>
                     <span className="font-medium text-yellow-400">
                       {formatCurrency(results.detailedBenefits.severance)}
-                    </span>
-                  </div>
-                )}
-                {results.detailedBenefits?.plrNet > 0 && (
-                  <div className="flex justify-between text-sm">
-                    <span className="text-secondary-text">
-                      PLR Líquido Anual:
-                    </span>
-                    <span className="font-medium text-blue-400">
-                      {formatCurrency(results.detailedBenefits.plrNet)}
                     </span>
                   </div>
                 )}
