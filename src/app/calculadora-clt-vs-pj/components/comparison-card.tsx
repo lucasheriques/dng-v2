@@ -4,8 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { CalculationResults } from "@/use-cases/calculator/salary-calculations";
 import Link from "next/link";
-import { CalculationResults } from "../types";
 import { InvestmentProjection } from "./investment-projection";
 
 interface ComparisonCardProps {

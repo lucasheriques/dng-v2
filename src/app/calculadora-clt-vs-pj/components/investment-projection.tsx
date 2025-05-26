@@ -3,8 +3,8 @@
 import { DataForm, DataFormHeader } from "@/components/data-forms";
 import { SELIC_RATE } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
+import { CalculationResults } from "@/use-cases/calculator/salary-calculations";
 import { useState } from "react";
-import { CalculationResults } from "../types";
 import { InvestmentConfig } from "./investment-config";
 import { MilestoneChart, formatTime } from "./milestone-chart";
 
