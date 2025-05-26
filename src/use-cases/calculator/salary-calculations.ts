@@ -42,11 +42,11 @@ const INSS_RANGES = [
 ];
 
 const IRRF_RANGES = [
-  { max: 2259.2, rate: 0, deduction: 0 },
-  { max: 2826.65, rate: 0.075, deduction: 169.44 },
-  { max: 3751.05, rate: 0.15, deduction: 381.44 },
-  { max: 4664.68, rate: 0.225, deduction: 662.77 },
-  { max: Infinity, rate: 0.275, deduction: 896.0 },
+  { max: 2428.8, rate: 0, deduction: 0 },
+  { max: 2826.65, rate: 0.075, deduction: 182.16 },
+  { max: 3751.05, rate: 0.15, deduction: 394.16 },
+  { max: 4664.68, rate: 0.225, deduction: 675.49 },
+  { max: Infinity, rate: 0.275, deduction: 908.73 },
 ];
 
 const PLR_IRRF_RANGES = [
