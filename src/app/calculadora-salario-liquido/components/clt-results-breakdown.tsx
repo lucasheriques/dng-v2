@@ -4,10 +4,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn, formatCurrency } from "@/lib/utils";
 import { CLTResults } from "@/use-cases/calculator/salary-calculations";
 import { Info } from "lucide-react";
+import Link from "next/link";
 
 interface CltResultsBreakdownProps {
   results: CLTResults;
@@ -231,6 +233,12 @@ export default function CltResultsBreakdown({
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+
+        <Link href="/calculadora-clt-vs-pj#clt-pj-comparison">
+          <Button variant="outline" className="min-w-full">
+            Ver comparação com PJ
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   );

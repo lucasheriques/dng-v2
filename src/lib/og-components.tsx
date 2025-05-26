@@ -70,7 +70,7 @@ export function OGLogo() {
       }}
     >
       <img
-        src="http://localhost:3000/logo-v2-no-bg-compressed-small.png"
+        src="https://www.nagringa.dev/logo-v2-no-bg-compressed-small.png"
         alt="nagringa.dev logo"
         height="128"
         width="128"

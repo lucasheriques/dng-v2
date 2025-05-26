@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { formatCurrency } from "@/lib/utils";
-import { CalculationResults } from "../types";
+import { CalculationResults } from "@/use-cases/calculator/salary-calculations";
 
 export default function ResultsAccordion({
   results,

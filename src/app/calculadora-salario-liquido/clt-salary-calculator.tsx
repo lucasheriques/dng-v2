@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
 import { calculateCLT } from "@/use-cases/calculator/salary-calculations";
@@ -10,13 +9,14 @@ import {
   safeParseNumberString,
 } from "@/use-cases/calculator/utils";
 import NumberFlow from "@number-flow/react";
-import { ArrowRight, Banknote, Calculator, Info } from "lucide-react";
+import { Banknote, Calculator, Info } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import CltResultsBreakdown from "./components/clt-results-breakdown";
 
 import { CalculatorsPageHeader } from "@/components/calculators/calculators-page-header";
 import { CltDataForm } from "@/components/calculators/clt-data-form";
+import { CltEmployerCost } from "@/components/calculators/clt-employer-cost";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { ResponsiveTooltip } from "@/components/ui/responsive-tooltip";
 import { ShareButton } from "@/components/ui/share-button";
@@ -25,7 +25,6 @@ import {
   REVERSE_CLT_PARAM_MAP,
 } from "@/use-cases/calculator/constants";
 import { useCalculatorForm } from "@/use-cases/calculator/use-calculator-form";
-import { useRouter } from "next/navigation";
 
 const RecentComparisons = dynamic(
   () => import("@/app/calculadora-clt-vs-pj/components/recent-comparisons"),
@@ -59,22 +58,8 @@ const calculateResults = (formData: CLTCalculatorFormData) => {
 };
 
 export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
-  const {
-    formData,
-    setFormData,
-    handleClear,
-    getParamsAndSaveToHistory,
-    history,
-    handleShare,
-    results,
-  } = useCalculatorForm({ localStorageKey: "calculator-clt-history" });
-
-  const router = useRouter();
-
-  const handleGoToCLT = () => {
-    getParamsAndSaveToHistory();
-    router.push(`/calculadora-clt-vs-pj`);
-  };
+  const { formData, setFormData, handleClear, history, handleShare, results } =
+    useCalculatorForm({ localStorageKey: "calculator-clt-history" });
 
   const handleLoadHistory = (paramString: string) => {
     const searchParams = new URLSearchParams(paramString);
@@ -227,26 +212,6 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
               </Card>
 
               {/* CTA Card */}
-              <Card className="border-none bg-transparent">
-                <CardContent className="p-4">
-                  <div className="text-center space-y-3">
-                    <h3 className="font-semibold text-highlight-text">
-                      Quer comparar CLT vs PJ?
-                    </h3>
-                    <p className="text-sm text-secondary-text">
-                      Veja qual é mais vantajoso para você
-                    </p>
-                    <Button
-                      onClick={handleGoToCLT}
-                      variant="outline"
-                      className="min-w-full"
-                    >
-                      Comparar CLT vs PJ
-                      <ArrowRight className="size-4 ml-2" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
             </>
           )}
 
@@ -265,6 +230,10 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
           )}
         </div>
       </div>
+
+      {results && (
+        <CltEmployerCost results={results} withPJComparison={false} />
+      )}
     </>
   );
 }

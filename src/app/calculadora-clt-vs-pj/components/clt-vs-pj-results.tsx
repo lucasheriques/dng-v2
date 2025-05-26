@@ -36,7 +36,11 @@ interface ResultsProps {
   onShare: () => Promise<boolean>;
 }
 
-export default function Results({ results, formData, onShare }: ResultsProps) {
+export default function CltPjResults({
+  results,
+  formData,
+  onShare,
+}: ResultsProps) {
   const monthlyDifference = results.pj.total - results.clt.total;
   const yearlyDifference = monthlyDifference * 12;
   const betterOption = monthlyDifference > 0 ? "PJ" : "CLT";
@@ -54,7 +58,7 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
   const pjToCLTEquivalent = findCLTEquivalentForPJ(results.pj.total, formData);
 
   return (
-    <div className="space-y-4 relative w-full overflow-auto">
+    <div className="space-y-4 scroll-mt-20" id="clt-pj-comparison">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">Comparação CLT vs PJ</h2>
       </div>
@@ -288,8 +292,22 @@ export default function Results({ results, formData, onShare }: ResultsProps) {
               )}
               <DataFormInfoRow
                 label="Total mensal"
-                value={formatCurrency(employerCost.monthlyCosts.total)}
-                className="font-semibold text-accent-secondary"
+                value={
+                  <>
+                    <span>
+                      {formatCurrency(employerCost.monthlyCosts.total)}
+                    </span>
+                    <span className="text-tertiary-text text-xs">
+                      {(
+                        employerCost.monthlyCosts.total /
+                        results.clt.grossSalary
+                      ).toFixed(2)}
+                      x o salário base (
+                      {formatCurrency(results.clt.grossSalary)})
+                    </span>
+                  </>
+                }
+                className="font-semibold text-accent-secondary flex flex-col items-end gap-1"
               />
 
               <DataFormHeader>

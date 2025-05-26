@@ -1,6 +1,6 @@
 "use client";
 
-import Results from "@/app/calculadora-clt-vs-pj/components/results";
+import CltPjResults from "@/app/calculadora-clt-vs-pj/components/clt-vs-pj-results";
 import {
   DataFormHeader,
   DataFormInput,
@@ -226,7 +226,11 @@ export function CltPjCalculator({ initialData }: SalaryCalculatorProps) {
       </div>
 
       {results && (
-        <Results results={results} formData={formData} onShare={handleShare} />
+        <CltPjResults
+          results={results}
+          formData={formData}
+          onShare={handleShare}
+        />
       )}
     </>
   );

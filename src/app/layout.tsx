@@ -38,7 +38,7 @@ export default function RootLayout({
         </head>
         <body
           className={cn(
-            "font-sans antialiased selection:bg-teal-500 selection:text-slate-950 bg-background dark:text-main-text",
+            "font-sans antialiased selection:bg-teal-500 selection:text-slate-950 bg-background dark:text-main-text scroll-pb-24",
             inter.variable
           )}
         >
