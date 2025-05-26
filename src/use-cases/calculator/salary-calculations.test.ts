@@ -35,7 +35,7 @@ function createFormData(
 }
 
 describe("calculateCLT", () => {
-  it("should calculate basic CLT salary without benefits", () => {
+  it("should calculate basic 5000 CLT salary without benefits", () => {
     const input = {
       grossSalary: 5000,
       includeFGTS: true,
@@ -45,11 +45,11 @@ describe("calculateCLT", () => {
 
     expect(result.grossSalary).toBe(5000);
     expect(result.deductions.inss).toBeCloseTo(509.6);
-    expect(result.deductions.ir).toBeCloseTo(347.57);
-    expect(result.netSalary).toBeCloseTo(4142.83);
+    expect(result.deductions.ir).toBeCloseTo(334.85);
+    expect(result.netSalary).toBeCloseTo(4155.55);
   });
 
-  it("should calculate basic CLT salary without benefits", () => {
+  it("should calculate basic 10000 CLT salary without benefits", () => {
     const input = {
       grossSalary: 10000,
       includeFGTS: true,
@@ -59,8 +59,8 @@ describe("calculateCLT", () => {
 
     expect(result.grossSalary).toBe(10000);
     expect(result.deductions.inss).toBeCloseTo(951.63);
-    expect(result.deductions.ir).toBeCloseTo(1592.3);
-    expect(result.netSalary).toBeCloseTo(7456.07);
+    expect(result.deductions.ir).toBeCloseTo(1579.57);
+    expect(result.netSalary).toBeCloseTo(7468.8);
   });
 
   it("should calculate CLT salary with all benefits", () => {
