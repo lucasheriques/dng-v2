@@ -2,6 +2,54 @@
 
 The central hub for the Dev na Gringa community - helping Brazilian developers build international careers in tech.
 
+## Getting Started
+
+### Prerequisites
+
+1. Node.js 22+ (check `.nvmrc` for the exact version)
+2. A [Convex](https://www.convex.dev/) account (free tier available) - only needed if working with convex-related features like auth and others
+3. npm or pnpm (we use pnpm)
+
+### Setting Up the Development Environment
+
+1. Install dependencies:
+
+```bash
+pnpm install
+```
+
+2. [Optional] Set up Convex (if you plan on working in features that use it):
+
+   - Create a free account at [Convex](https://www.convex.dev/)
+   - Create a new project in the Convex dashboard
+   - Copy your deployment URL from the dashboard
+   - Duplicate the example `.env` into a `.env.local` file in the root directory
+   - Add the CONVEX_DEPLOYMENT and NEXT_PUBLIC_CONVEX_URL to the `.env.local` file
+
+3. [Optional] Set up PostHog (if you plan on working in features that use it):
+
+   - Create a free account at [PostHog](https://posthog.com/)
+   - Create a new project in the PostHog dashboard
+   - Copy your project ID from the dashboard
+   - Duplicate the example `.env` into a `.env.local` file in the root directory
+   - Add the NEXT_PUBLIC_POSTHOG_KEY, NEXT_PUBLIC_POSTHOG_HOST to the `.env.local` file
+
+4. Run both the Next.js development server and Convex development server:
+
+```bash
+# In one terminal, start the Convex dev server if you set it up
+pnpm convex dev
+
+# In another terminal, start the Next.js dev server
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Note that, if you don't set up PostHog/Convex, expect some errors to pop up on the console.
+
+But if you are mainly gonna be working on the tools, there's no need fror that.
+
 ## About the Project
 
 Dev na Gringa is a platform dedicated to empowering Brazilian developers to build successful international careers. Our community provides mentorship, exclusive content, and tools to help developers navigate the global tech market.
@@ -45,69 +93,6 @@ Dev na Gringa is a platform dedicated to empowering Brazilian developers to buil
 ### Deployment
 
 - [Vercel](https://vercel.com/) - Deployment platform. It's deployed by [this GitHub Action](./.github/workflows/test.yml) after building and successfully running the tests.
-
-## Getting Started
-
-### Prerequisites
-
-1. Node.js 22+ (check `.nvmrc` for the exact version)
-2. A [Convex](https://www.convex.dev/) account (free tier available)
-3. npm or pnpm (we use pnpm)
-
-### Setting Up the Development Environment
-
-1. Install dependencies:
-
-```bash
-pnpm install
-```
-
-2. Create a `.env.local` file in the root directory with:
-
-```
-NEXT_PUBLIC_BASE_URL=http://localhost:3000
-
-# create yours in PostHog. not needed for local dev, only think that will happen is that posthog features won't work
-NEXT_PUBLIC_POSTHOG_KEY=your-posthog-key
-NEXT_PUBLIC_POSTHOG_HOST=your-posthog-host
-NEXT_PUBLIC_POSTHOG_UI_HOST=your-posthog-url
-
-# create your project in Convex - it has a generous free plan. only needed if working with convex-related features like auth and others
-CONVEX_DEPLOYMENT=your-convex-deployment
-NEXT_PUBLIC_CONVEX_URL=https://yours.convex.url
-
-# used for my script to fetch my articles. no need at all, and I'll probably be the only one using it.
-SUBSTACK_AUTH_COOKIE=
-```
-
-Only the `NEXT_PUBLIC_BASE_URL` is required.
-
-3. [Optional] Set up Convex (if you plan on working in features that use it):
-
-   - Create a free account at [Convex](https://www.convex.dev/)
-   - Create a new project in the Convex dashboard
-   - Copy your deployment URL from the dashboard
-   - Create a `.env.local` file in the root directory with:
-
-   ```env
-   NEXT_PUBLIC_CONVEX_URL=your_deployment_url_here
-   ```
-
-4. Run both the Next.js development server and Convex development server:
-
-```bash
-# In one terminal, start the Convex dev server if you set it up
-pnpm convex dev
-
-# In another terminal, start the Next.js dev server
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-Note that, if you don't set up PostHog/Convex, expect some errors to pop up on the console.
-
-But if you are mainly gonna be working on the tools, there's no need fror that.
 
 ## Learn More
 
