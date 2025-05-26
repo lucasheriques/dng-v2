@@ -62,7 +62,27 @@ Dev na Gringa is a platform dedicated to empowering Brazilian developers to buil
 pnpm install
 ```
 
-2. Set up Convex:
+2. Create a `.env.local` file in the root directory with:
+
+```
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# create yours in PostHog. not needed for local dev, only think that will happen is that posthog features won't work
+NEXT_PUBLIC_POSTHOG_KEY=your-posthog-key
+NEXT_PUBLIC_POSTHOG_HOST=your-posthog-host
+NEXT_PUBLIC_POSTHOG_UI_HOST=your-posthog-url
+
+# create your project in Convex - it has a generous free plan. only needed if working with convex-related features like auth and others
+CONVEX_DEPLOYMENT=your-convex-deployment
+NEXT_PUBLIC_CONVEX_URL=https://yours.convex.url
+
+# used for my script to fetch my articles. no need at all, and I'll probably be the only one using it.
+SUBSTACK_AUTH_COOKIE=
+```
+
+Only the `NEXT_PUBLIC_BASE_URL` is required.
+
+3. [Optional] Set up Convex (if you plan on working in features that use it):
 
    - Create a free account at [Convex](https://www.convex.dev/)
    - Create a new project in the Convex dashboard
@@ -73,10 +93,10 @@ pnpm install
    NEXT_PUBLIC_CONVEX_URL=your_deployment_url_here
    ```
 
-3. Run both the Next.js development server and Convex development server:
+4. Run both the Next.js development server and Convex development server:
 
 ```bash
-# In one terminal, start the Convex dev server
+# In one terminal, start the Convex dev server if you set it up
 pnpm convex dev
 
 # In another terminal, start the Next.js dev server
@@ -85,9 +105,9 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Note that, if you don't set up PostHog/Convex, expect some errors to pop up on the console.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+But if you are mainly gonna be working on the tools, there's no need fror that.
 
 ## Learn More
 
@@ -102,10 +122,3 @@ To learn more about the technologies used in this project:
 ## Contributing
 
 We welcome contributions to improve the Dev na Gringa platform. Please feel free to submit issues and pull requests.
-
-## License
-
-This project is licensed under multiple licenses:
-
-- All third-party components are licensed under their original licenses
-- All other content is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
