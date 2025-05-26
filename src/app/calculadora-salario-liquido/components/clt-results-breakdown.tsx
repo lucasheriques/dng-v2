@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ResponsiveTooltip } from "@/components/ui/responsive-tooltip";
 import { cn, formatCurrency } from "@/lib/utils";
 import { CLTResults } from "@/use-cases/calculator/salary-calculations";
 import { Info } from "lucide-react";
@@ -45,13 +46,31 @@ export default function CltResultsBreakdown({
                 <div className="flex justify-between text-sm">
                   <span className="text-secondary-text">INSS:</span>
                   <span className="font-medium text-rose-300">
-                    -{formatCurrency(results.deductions.inss)}
+                    <ResponsiveTooltip
+                      trigger={`-${formatCurrency(results.deductions.inss)}`}
+                      duration={300}
+                    >
+                      {(
+                        (results.deductions.inss / results.grossSalary) *
+                        100
+                      ).toFixed(2)}
+                      % do seu salário bruto
+                    </ResponsiveTooltip>
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-secondary-text">Imposto de Renda:</span>
                   <span className="font-medium text-rose-300">
-                    -{formatCurrency(results.deductions.ir)}
+                    <ResponsiveTooltip
+                      trigger={`-${formatCurrency(results.deductions.ir)}`}
+                      duration={300}
+                    >
+                      {(
+                        (results.deductions.ir / results.grossSalary) *
+                        100
+                      ).toFixed(2)}
+                      % do seu salário bruto
+                    </ResponsiveTooltip>
                   </span>
                 </div>
                 {results.deductions.transportDeduction > 0 && (

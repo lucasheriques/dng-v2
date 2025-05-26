@@ -26,6 +26,7 @@ import {
   REVERSE_CLT_PARAM_MAP,
 } from "@/use-cases/calculator/constants";
 import { useCalculatorForm } from "@/use-cases/calculator/use-calculator-form";
+import Balancer from "react-wrap-balancer";
 
 const RecentComparisons = dynamic(
   () => import("@/app/calculadora-clt-vs-pj/components/recent-comparisons"),
@@ -160,7 +161,14 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
                       />
                     </div>
                     <p className="text-sm text-secondary-text mt-1">
-                      Valor que você recebe mensalmente
+                      <Balancer>
+                        Valor que você recebe mensalmente (
+                        {(
+                          (results.clt.netSalary / results.clt.grossSalary) *
+                          100
+                        ).toFixed(2)}
+                        % do salário bruto)
+                      </Balancer>
                     </p>
                   </div>
 
