@@ -23,6 +23,7 @@ export function CltEmployerCost({ results, withPJComparison = true }: Props) {
     <ExpandableCard
       title="Custos para o empregador"
       icon={<Building2 className="size-5 text-primary" />}
+      defaultOpen
     >
       <div className="space-y-4">
         <p className="text-secondary-text">
