@@ -41,12 +41,30 @@ const INSS_RANGES = [
   { max: 8157.41, rate: 0.14 },
 ];
 
-const IRRF_RANGES = [
-  { max: 2428.8, rate: 0, deduction: 0 },
-  { max: 2826.65, rate: 0.075, deduction: 182.16 },
-  { max: 3751.05, rate: 0.15, deduction: 394.16 },
-  { max: 4664.68, rate: 0.225, deduction: 675.49 },
-  { max: Infinity, rate: 0.275, deduction: 908.73 },
+export const IRRF_RANGES = [
+  { max: 2428.8, rate: 0, deduction: 0, label: "Isento", color: "emerald" },
+  {
+    max: 2826.65,
+    rate: 0.075,
+    deduction: 182.16,
+    label: "7,5%",
+    color: "blue",
+  },
+  { max: 3751.05, rate: 0.15, deduction: 394.16, label: "15%", color: "amber" },
+  {
+    max: 4664.68,
+    rate: 0.225,
+    deduction: 675.49,
+    label: "22,5%",
+    color: "orange",
+  },
+  {
+    max: Infinity,
+    rate: 0.275,
+    deduction: 908.73,
+    label: "27,5%",
+    color: "red",
+  },
 ];
 
 const PLR_IRRF_RANGES = [

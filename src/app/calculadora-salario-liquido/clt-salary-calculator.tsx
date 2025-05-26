@@ -13,6 +13,7 @@ import { Banknote, Calculator, Info } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import CltResultsBreakdown from "./components/clt-results-breakdown";
+import { IrpfEducationCard } from "./components/irpf-education-card";
 
 import { CalculatorsPageHeader } from "@/components/calculators/calculators-page-header";
 import { CltDataForm } from "@/components/calculators/clt-data-form";
@@ -233,6 +234,16 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
 
       {results && (
         <CltEmployerCost results={results} withPJComparison={false} />
+      )}
+
+      {results && (
+        <IrpfEducationCard
+          grossSalary={results.clt.grossSalary}
+          inssDeduction={results.clt.deductions.inss}
+          alimony={results.clt.deductions.alimony}
+          dependentsCount={Number(formData.dependentsCount) || 0}
+          finalIrpf={results.clt.deductions.ir}
+        />
       )}
     </>
   );
