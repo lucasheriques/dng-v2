@@ -1,9 +1,13 @@
 "use client";
 
-import { ResponsiveTooltip } from "@/components/ui/responsive-tooltip";
+import {
+  ColorTheme,
+  FancyCard,
+  FancyCardFooter,
+  FancyCardTitle,
+} from "@/components/ui/fancy-card";
 import { formatCurrency } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
-import { Info } from "lucide-react";
 
 interface RetirementIncomeCardProps {
   title: string;
@@ -11,7 +15,7 @@ interface RetirementIncomeCardProps {
   finalAmount: number;
   tooltipContent: string;
   duration: string;
-  colorTheme: "emerald" | "blue";
+  colorTheme: ColorTheme;
 }
 
 export function RetirementIncomeCard({
@@ -27,67 +31,39 @@ export function RetirementIncomeCard({
 
   const themeClasses = {
     emerald: {
-      background: "bg-gradient-to-br from-emerald-500/10 to-emerald-600/5",
-      border: "border-emerald-500/20",
-      icon: "text-emerald-400",
-      title: "text-emerald-100",
       amount: "text-emerald-100",
-      borderTop: "border-emerald-500/20",
-      dot: "bg-emerald-400",
     },
     blue: {
-      background: "bg-gradient-to-br from-blue-500/10 to-blue-600/5",
-      border: "border-blue-500/20",
-      icon: "text-blue-400",
-      title: "text-blue-100",
       amount: "text-blue-100",
-      borderTop: "border-blue-500/20",
-      dot: "bg-blue-400",
     },
   };
 
   const theme = themeClasses[colorTheme];
 
   return (
-    <div
-      className={`relative rounded-lg ${theme.background} border ${theme.border} p-6`}
-    >
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 justify-between">
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${theme.dot}`}></div>
-            <h3 className={`font-semibold text-lg ${theme.title}`}>{title}</h3>
-          </div>
-          <ResponsiveTooltip
-            trigger={<Info className={`w-5 h-5 ${theme.icon} cursor-help`} />}
-          >
-            {tooltipContent}
-          </ResponsiveTooltip>
-        </div>
+    <FancyCard colorTheme={colorTheme}>
+      <FancyCardTitle title={title} tooltip={tooltipContent} />
 
-        <div className="space-y-3">
-          <div>
-            <p className="text-sm text-tertiary-text mb-1">Renda mensal</p>
-            <p className={`text-3xl font-bold ${theme.amount}`}>
-              <NumberFlow
-                value={monthlyIncome}
-                format={{
-                  style: "currency",
-                  currency: "BRL",
-                  trailingZeroDisplay: "stripIfInteger",
-                }}
-              />
-            </p>
-          </div>
-
-          <div className={`pt-3 border-t ${theme.borderTop}`}>
-            <p className="text-sm text-tertiary-text">
-              Renda anual: {formatCurrency(annualIncome, "BRL")}
-            </p>
-            <p className="text-xs text-tertiary-text mt-1">{duration}</p>
-          </div>
-        </div>
+      <div>
+        <p className="text-sm text-tertiary-text mb-1">Renda mensal</p>
+        <p className={`text-3xl font-bold ${theme.amount}`}>
+          <NumberFlow
+            value={monthlyIncome}
+            format={{
+              style: "currency",
+              currency: "BRL",
+              trailingZeroDisplay: "stripIfInteger",
+            }}
+          />
+        </p>
       </div>
-    </div>
+
+      <FancyCardFooter>
+        <p className="text-sm text-tertiary-text">
+          Renda anual: {formatCurrency(annualIncome, "BRL")}
+        </p>
+        <p className="text-xs text-tertiary-text mt-1">{duration}</p>
+      </FancyCardFooter>
+    </FancyCard>
   );
 }
