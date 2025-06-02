@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { ArticleCard } from "@/components/article-card";
-import { ExpandableCard } from "@/components/expandable-card";
+import { DialogCard } from "@/components/dialog-card";
 import { MentorshipSection } from "@/components/mentorship-section";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -70,7 +70,7 @@ const data = (articles: Article[]): TimelineEntry[] => [
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ExpandableCard
+          <DialogCard
             title="Mentoria individual"
             summary="Essa mentoria com o Lucas foi um achado viu. O cara é uma
                     referência técnica gigante e uma fonte de energia para quem
@@ -122,7 +122,7 @@ const data = (articles: Article[]): TimelineEntry[] => [
               </Link>
             }
           />
-          <ExpandableCard
+          <DialogCard
             title="Mentoria em grupo"
             summary="Meu campo de visão era bem restrito, mas os artigos e mentorias do Lucas me ajudaram a expandi-lo, tanto em aspectos técnicos quanto em questões sociais e de comunicação."
             fullContent={
@@ -186,7 +186,7 @@ const data = (articles: Article[]): TimelineEntry[] => [
               </Link>
             }
           />
-          <ExpandableCard
+          <DialogCard
             title="Mentoria em grupo"
             summary="[...] encontrei um post do Lucas sobre o seu blog Dev
                   na Gringa. Como estava atrás de informação, fui ler as
@@ -264,7 +264,7 @@ const data = (articles: Article[]): TimelineEntry[] => [
               </Link>
             }
           />
-          <ExpandableCard
+          <DialogCard
             title="Mentoria em grupo"
             summary="Sou profundamente grato ao Lucas por criar um espaço tão autêntico e por ser um mentor que acredita no potencial de cada membro. E também à comunidade, que perpetua esse legado ao compartilhar suas experiências e apoiar uns aos outros. Juntos, estamos construindo algo grande."
             fullContent={
@@ -348,7 +348,7 @@ const data = (articles: Article[]): TimelineEntry[] => [
               </Link>
             }
           />
-          <ExpandableCard
+          <DialogCard
             title="Mentoria individual"
             summary={
               <>
@@ -483,7 +483,9 @@ const TimelineCircle = ({
       <m.div
         className="h-6 w-6 rounded-full border-2 border-neutral-200/40 dark:border-neutral-700/40 flex items-center justify-center"
         style={{
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           scale: circleScale as any,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           background: circleTransform as any,
           boxShadow: "0 0 10px rgba(59, 130, 246, 0.3)",
         }}
@@ -556,7 +558,9 @@ const Timeline = ({ articles }: { articles: Article[] }) => {
         >
           <m.div
             style={{
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               height: heightTransform as any,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               opacity: opacityTransform as any,
             }}
             className="absolute inset-x-0 top-0  w-[2px] bg-linear-to-t from-accent-secondary via-blue-500 to-transparent from-0% via-10% rounded-full"

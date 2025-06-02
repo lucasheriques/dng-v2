@@ -22,7 +22,7 @@ interface ExpandableCardProps {
   footer?: React.ReactNode;
 }
 
-export function ExpandableCard({
+export function DialogCard({
   title,
   summary,
   fullContent,
