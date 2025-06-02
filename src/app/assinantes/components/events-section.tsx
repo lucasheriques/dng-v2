@@ -78,8 +78,8 @@ export async function EventsSection() {
                 key={event.id}
                 href={
                   event.isPast
-                    ? event.link || "#"
-                    : event.meetLink || event.link || "#"
+                    ? (event.link ?? "#")
+                    : (event.meetLink ?? event.link ?? "#")
                 }
                 variant="outline"
                 size="sm"

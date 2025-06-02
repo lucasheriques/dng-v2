@@ -483,9 +483,9 @@ const TimelineCircle = ({
       <m.div
         className="h-6 w-6 rounded-full border-2 border-neutral-200/40 dark:border-neutral-700/40 flex items-center justify-center"
         style={{
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+           
           scale: circleScale as any,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+           
           background: circleTransform as any,
           boxShadow: "0 0 10px rgba(59, 130, 246, 0.3)",
         }}
@@ -558,9 +558,9 @@ const Timeline = ({ articles }: { articles: Article[] }) => {
         >
           <m.div
             style={{
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+               
               height: heightTransform as any,
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+               
               opacity: opacityTransform as any,
             }}
             className="absolute inset-x-0 top-0  w-[2px] bg-linear-to-t from-accent-secondary via-blue-500 to-transparent from-0% via-10% rounded-full"

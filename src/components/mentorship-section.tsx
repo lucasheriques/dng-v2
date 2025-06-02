@@ -45,7 +45,7 @@ const mentorshipItems = [
             <a
               href="https://mentoria.nagringa.dev"
               target="_blank"
-              className="underline"
+              className="underline" rel="noreferrer"
             >
               mentoria.nagringa.dev
             </a>
@@ -61,7 +61,7 @@ const mentorshipItems = [
           <a
             href={`${SOCIALS.newsletter}/subscribe?ref=nagringa.dev`}
             className="underline"
-            target="_blank"
+            target="_blank" rel="noreferrer"
           >
             assinantes pagos da newsletter.
           </a>
@@ -106,7 +106,7 @@ const mentorshipItems = [
           <a
             href="https://cal.com/lucasfaria/mentoria"
             className="underline"
-            target="_blank"
+            target="_blank" rel="noreferrer"
           >
             marque por aqui.
           </a>{" "}
@@ -114,7 +114,7 @@ const mentorshipItems = [
           <a
             href={`${SOCIALS.newsletter}/subscribe?ref=nagringa.dev`}
             className="underline"
-            target="_blank"
+            target="_blank" rel="noreferrer"
           >
             assine o plano na newsletter.
           </a>
@@ -152,7 +152,7 @@ const mentorshipItems = [
           <a
             href="https://newsletter.nagringa.dev/p/como-definir-boas-metas-para-a-sua"
             className="underline"
-            target="_blank"
+            target="_blank" rel="noreferrer"
           >
             esse artigo
           </a>{" "}

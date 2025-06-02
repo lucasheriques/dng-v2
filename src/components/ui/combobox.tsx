@@ -13,7 +13,7 @@ import {
 import { Check, ChevronsUpDown, PlusCircle } from "lucide-react";
 import * as React from "react";
 
-export interface ComboboxOption {
+export interface IComboboxOption {
   value: string;
   label: string;
 }
@@ -21,7 +21,7 @@ export interface ComboboxOption {
 export interface ComboboxProps {
   value: string;
   onValueChange: (value: string) => void;
-  options: ComboboxOption[];
+  options: IComboboxOption[];
   placeholder?: string;
   emptyText?: string;
   className?: string;

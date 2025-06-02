@@ -123,7 +123,7 @@ export function calculateCLT(input: SalaryInput) {
 
   // Alimony is deducted before IR calculation (tax deductible)
   const taxableIncomeForIR = grossSalary - baseINSS - alimony;
-  const baseIR = calculateIRRF(taxableIncomeForIR, input.dependentsCount || 0);
+  const baseIR = calculateIRRF(taxableIncomeForIR, input.dependentsCount ?? 0);
 
   // Calculate transport deduction if applicable
   const transportDeduction = input.transportAllowance
@@ -163,10 +163,10 @@ export function calculateCLT(input: SalaryInput) {
   const monthlyPlr = netPlr / 12; // Distribute PLR over 12 months for comparison
 
   const benefits =
-    (input.mealAllowance || 0) +
-    (input.transportAllowance || 0) +
-    (input.healthInsurance || 0) +
-    (input.otherBenefits || 0) +
+    (input.mealAllowance ?? 0) +
+    (input.transportAllowance ?? 0) +
+    (input.healthInsurance ?? 0) +
+    (input.otherBenefits ?? 0) +
     (includeFGTS ? totalMonthlyFGTS : 0) +
     monthlyPlr +
     netThirteenth +
@@ -180,22 +180,22 @@ export function calculateCLT(input: SalaryInput) {
       ir: baseIR,
       transportDeduction,
       plrTax,
-      otherCltExpenses: input.otherCltExpenses || 0,
-      alimony: input.alimony || 0,
+      otherCltExpenses: input.otherCltExpenses ?? 0,
+      alimony: input.alimony ?? 0,
     },
     benefits,
     detailedBenefits: {
-      mealAllowance: input.mealAllowance || 0,
-      transportAllowance: input.transportAllowance || 0,
+      mealAllowance: input.mealAllowance ?? 0,
+      transportAllowance: input.transportAllowance ?? 0,
       transportDeduction,
-      healthInsurance: input.healthInsurance || 0,
-      otherBenefits: input.otherBenefits || 0,
+      healthInsurance: input.healthInsurance ?? 0,
+      otherBenefits: input.otherBenefits ?? 0,
       fgts: totalMonthlyFGTS,
       thirteenthSalary: netThirteenth,
       vacationBonus: netVacation,
       severance: potentialSeverance,
       potentialMonthlySeverance: monthlySeveranceValue,
-      plrGross: input.plr || 0,
+      plrGross: input.plr ?? 0,
       plrNet: netPlr,
     },
     total: netSalary + benefits,

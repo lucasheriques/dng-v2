@@ -210,8 +210,6 @@ export function useInvoice() {
 
     try {
       const { companyLogo, invoiceDate, dueDate, ...rest } = formData;
-      console.log({ formData });
-
       // Format all price values with currency symbol
       const formattedItems = rest.items.map((item) => ({
         description: item.description || "Software Development",
@@ -261,7 +259,7 @@ export function useInvoice() {
       const url = URL.createObjectURL(pdf);
       window.open(url, "_blank");
     } catch (error) {
-      console.error("Failed to generate invoice:", error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }

@@ -16,7 +16,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
   const { title, description, canonical_url, views } = article;
 
   return (
-    <a href={canonical_url} target="_blank" className="ring-none outline-none">
+    <a href={canonical_url} target="_blank" className="ring-none outline-none" rel="noreferrer">
       <Card className="p-0 max-w-sm shadow-none border-none">
         <MagicCard
           gradientTo="var(--accent-secondary)"

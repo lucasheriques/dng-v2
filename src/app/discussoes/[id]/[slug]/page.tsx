@@ -19,7 +19,7 @@ export async function generateMetadata({
   return {
     title: post?.title ? `${post.title} | Dev na Gringa` : "Dev na Gringa",
     description:
-      post?.content?.slice(0, 160) || "Uma discussão na Dev na Gringa",
+      post?.content?.slice(0, 160) ?? "Uma discussão na Dev na Gringa",
   };
 }
 

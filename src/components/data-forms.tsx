@@ -53,7 +53,7 @@ export function DataFormRow<T extends React.ElementType = "label">({
   tooltipContent?: string;
   inputId?: string;
 } & Omit<React.ComponentPropsWithoutRef<T>, "as">) {
-  const Component = as || "label";
+  const Component = as ?? "label";
   const labelProps = Component === "label" ? { htmlFor: inputId } : {};
 
   return (

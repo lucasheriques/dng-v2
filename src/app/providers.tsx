@@ -21,7 +21,7 @@ const loadFeatures = import("../components/framer-features").then(
 // Convex won't work without a valid URL, so we need to provide a default one
 // In practice it means Convex will not load without setting it up but that's ok
 const convex = new ConvexReactClient(
-  env.NEXT_PUBLIC_CONVEX_URL || "https://yours.convex.url"
+  env.NEXT_PUBLIC_CONVEX_URL ?? "https://yours.convex.url"
 );
 
 export function Providers({ children }: { children: React.ReactNode }) {

@@ -229,9 +229,9 @@ class SubstackApiClient {
     authCookie: string;
   }) {
     this.baseUrl = options.baseUrl;
-    this.batchSize = options.batchSize || 50;
-    this.maxRetries = options.maxRetries || 3;
-    this.retryDelayMs = options.retryDelayMs || 1000;
+    this.batchSize = options.batchSize ?? 50;
+    this.maxRetries = options.maxRetries ?? 3;
+    this.retryDelayMs = options.retryDelayMs ?? 1000;
     this.authCookie = options.authCookie;
 
     if (!this.authCookie) {
@@ -255,7 +255,7 @@ class SubstackApiClient {
       headers: {
         "Content-Type": "application/json",
         Cookie: this.authCookie,
-        ...(options?.headers || {}),
+        ...(options?.headers ?? {}),
       },
     };
 

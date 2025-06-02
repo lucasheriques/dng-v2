@@ -155,7 +155,7 @@ export default function InvestmentCalculator({
   // Calculate results using useMemo based on debounced inputs
   const results = useMemo(() => {
     return calculateInvestmentResults(debouncedInputs);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [debouncedInputs]);
 
   // Destructure percentages directly from results

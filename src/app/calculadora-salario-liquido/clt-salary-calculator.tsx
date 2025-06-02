@@ -96,7 +96,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
 
   const renderHistoryItem = useCallback((paramString: string) => {
     const params = new URLSearchParams(paramString);
-    const grossSalary = params.get("gs") || "0";
+    const grossSalary = params.get("gs") ?? "0";
     const testFormData: CLTCalculatorFormData = {
       ...DEFAULT_CLT_FORM_DATA,
       grossSalary: grossSalary,
@@ -106,7 +106,7 @@ export function CltSalaryCalculator({ initialData }: CltSalaryCalculatorProps) {
 
     return {
       title: `Bruto: ${formatCurrency(Number(grossSalary))}`,
-      subtitle: `Líquido: ${formatCurrency(testResults?.netSalary || 0)}`,
+      subtitle: `Líquido: ${formatCurrency(testResults?.netSalary ?? 0)}`,
     };
   }, []);
 

@@ -5,7 +5,7 @@ import Balancer from "react-wrap-balancer";
 
 export default async function GeneralHeaderBanner() {
   const headerList = await headers();
-  const pathname = headerList.get("x-pathname") || "";
+  const pathname = headerList.get("x-pathname") ?? "";
 
   if (pathname.includes("/guias")) {
     return null;

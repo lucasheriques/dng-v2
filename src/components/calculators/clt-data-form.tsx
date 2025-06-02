@@ -64,6 +64,11 @@ export function CltDataForm({
           prefix="R$"
           id="gross-salary-input"
           autoFocus
+          placeholder={
+            formData.pjGrossSalary === ""
+              ? ""
+              : `${formData.pjGrossSalary}. Clique para alterar.`
+          }
         />
       </DataFormRow>
 

@@ -8,9 +8,9 @@ export const runtime = "edge";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  const grossSalary = searchParams.get("gs") || "5000";
+  const grossSalary = searchParams.get("gs") ?? "5000";
   const includeFGTS = searchParams.get("fgts") === "1";
-  const dependentsCount = Number(searchParams.get("dc")) || 0;
+  const dependentsCount = Number(searchParams.get("dc") ?? 0);
 
   // Calculate the result for display
   const result = calculateCLT({
