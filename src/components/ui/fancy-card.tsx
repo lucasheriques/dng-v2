@@ -136,27 +136,8 @@ interface FancyCardTitleProps
 }
 
 const FancyCardTitle = React.forwardRef<HTMLDivElement, FancyCardTitleProps>(
-  (
-    { className, title, icon, tooltip, children, titleClassName, ...props },
-    ref
-  ) => {
+  ({ className, title, icon, tooltip, titleClassName, ...props }, ref) => {
     const { theme } = useFancyCardContext();
-
-    const renderRightContent = () => {
-      if (tooltip) {
-        return (
-          <ResponsiveTooltip
-            trigger={<Info className={`w-5 h-5 ${theme.icon} cursor-help`} />}
-          >
-            {tooltip}
-          </ResponsiveTooltip>
-        );
-      }
-      if (icon || children) {
-        return <div className={theme.icon}>{icon || children}</div>;
-      }
-      return null;
-    };
 
     return (
       <div
@@ -165,7 +146,11 @@ const FancyCardTitle = React.forwardRef<HTMLDivElement, FancyCardTitleProps>(
         {...props}
       >
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${theme.dot}`} />
+          {icon ? (
+            <div className={theme.icon}>{icon}</div>
+          ) : (
+            <div className={`w-2 h-2 rounded-full ${theme.dot}`} />
+          )}
           <h3
             className={cn(
               `font-semibold text-lg ${theme.title}`,
@@ -175,7 +160,13 @@ const FancyCardTitle = React.forwardRef<HTMLDivElement, FancyCardTitleProps>(
             {title}
           </h3>
         </div>
-        {renderRightContent()}
+        {tooltip && (
+          <ResponsiveTooltip
+            trigger={<Info className={`w-5 h-5 ${theme.icon} cursor-help`} />}
+          >
+            {tooltip}
+          </ResponsiveTooltip>
+        )}
       </div>
     );
   }

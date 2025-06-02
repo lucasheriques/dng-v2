@@ -4,17 +4,13 @@ import {
   DataFormHeader,
   DataFormInfoRow,
 } from "@/components/data-forms";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExpandableCard } from "@/components/ui/expandable-card";
-import { ShareButton } from "@/components/ui/share-button";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+  FancyCard,
+  FancyCardFooter,
+  FancyCardTitle,
+} from "@/components/ui/fancy-card";
+import { ShareButton } from "@/components/ui/share-button";
 import { formatCurrency } from "@/lib/utils";
 import {
   calculateEmployerCost,
@@ -58,94 +54,113 @@ export default function CltPjResults({
         <h2 className="text-2xl font-bold">Comparação CLT vs PJ</h2>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Regime</TableHead>
-            <TableHead className="text-right w-[250px]">
-              Salário Líquido Mensal
-            </TableHead>
-            <TableHead className="text-right w-[250px]">
-              Salário Líquido Anual
-            </TableHead>
-            <TableHead className="text-right w-[250px]">Equivalente</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell className="">CLT</TableCell>
-            <TableCell className="text-right w-[250px]">
-              {formatCurrency(results.clt.total)}
-            </TableCell>
-            <TableCell className="text-right w-[250px]">
-              {formatCurrency(results.clt.total * 12)}
-            </TableCell>
-            <TableCell className="text-right w-[250px] ">
-              Valor PJ: {formatCurrency(cltToPJEquivalent)}
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className="">PJ</TableCell>
-            <TableCell className="text-right w-[250px]">
-              {formatCurrency(results.pj.total)}
-            </TableCell>
-            <TableCell className="text-right w-[250px]">
-              {formatCurrency(results.pj.total * 12)}
-            </TableCell>
-            <TableCell className="text-right w-[250px] ">
-              Valor CLT: {formatCurrency(pjToCLTEquivalent)}
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-
-      <Card className="dark:bg-emerald-900/30 dark:text-emerald-200 dark:border-emerald-800">
-        <CardHeader className="flex flex-row items-center justify-center md:justify-between">
-          <CardTitle className="flex items-center gap-2 text-lg font-semibold text-emerald-200">
-            <CheckCircle size={20} /> Melhor opção: {betterOption}
-          </CardTitle>
-          <ShareButton
-            onShare={onShare}
-            className="col-span-4 self-center hidden md:flex"
-          />
-        </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <FancyCard colorTheme="blue">
+          <FancyCardTitle title="CLT" />
+          <div className="flex flex-col gap-3">
             <div>
-              <p className="text-xs text-emerald-50">Diferença mensal</p>
-              <p className="text-lg font-medium text-primary">
-                {formatCurrency(Math.abs(monthlyDifference))}
+              <p className="text-xs text-secondary-text">
+                Salário Líquido + Benefícios
+              </p>
+              <p className="text-2xl font-bold text-primary">
+                {formatCurrency(results.clt.total)}
               </p>
             </div>
             <div>
-              <p className="text-xs text-emerald-50">Diferença anual</p>
-              <p className="text-lg font-medium text-primary">
-                {formatCurrency(Math.abs(yearlyDifference))}
+              <p className="text-xs text-secondary-text">
+                Total Anual (Líquido + Benefícios)
+              </p>
+              <p className="text-lg font-semibold text-main-text">
+                {formatCurrency(results.clt.total * 12)}
               </p>
             </div>
-            <div>
-              <p className="text-xs text-emerald-50">Aumento relativo</p>
-              <p className="text-lg font-medium text-primary">
-                {relativeIncrease.toFixed(1)}%
+            <FancyCardFooter>
+              <p className="text-xs text-secondary-text">
+                Para ter a mesma renda como PJ
               </p>
-            </div>
-            <div>
-              <p className="text-xs text-emerald-50">
-                Equivalente {betterOption === "PJ" ? "CLT" : "PJ"}
+              <p className="text-lg font-semibold text-blue-400">
+                {formatCurrency(cltToPJEquivalent)}
               </p>
-              <p className="text-lg font-medium text-primary">
-                {formatCurrency(
-                  betterOption === "PJ" ? pjToCLTEquivalent : cltToPJEquivalent
-                )}
+              <p className="text-xs text-tertiary-text">
+                faturamento mensal necessário
               </p>
-            </div>
+            </FancyCardFooter>
           </div>
-          <ShareButton
-            onShare={onShare}
-            className=" self-center flex md:hidden"
-          />
-        </CardContent>
-      </Card>
+        </FancyCard>
+
+        <FancyCard colorTheme="purple">
+          <FancyCardTitle title="PJ" />
+          <div className="flex flex-col gap-3">
+            <div>
+              <p className="text-xs text-secondary-text">
+                Renda Líquida Mensal
+              </p>
+              <p className="text-2xl font-bold text-primary">
+                {formatCurrency(results.pj.total)}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs text-secondary-text">Renda Líquida Anual</p>
+              <p className="text-lg font-semibold text-main-text">
+                {formatCurrency(results.pj.total * 12)}
+              </p>
+            </div>
+            <FancyCardFooter>
+              <p className="text-xs text-secondary-text">
+                Para ter a mesma renda como CLT
+              </p>
+              <p className="text-lg font-semibold text-purple-400">
+                {formatCurrency(pjToCLTEquivalent)}
+              </p>
+              <p className="text-xs text-tertiary-text">
+                salário bruto mensal necessário
+              </p>
+            </FancyCardFooter>
+          </div>
+        </FancyCard>
+      </div>
+
+      <FancyCard colorTheme="emerald">
+        <FancyCardTitle
+          title={`Melhor opção: ${betterOption}`}
+          icon={<CheckCircle size={16} />}
+        />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
+          <div>
+            <p className="text-xs text-secondary-text">Diferença mensal</p>
+            <p className="text-lg font-medium text-primary">
+              {formatCurrency(Math.abs(monthlyDifference))}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-secondary-text">Diferença anual</p>
+            <p className="text-lg font-medium text-primary">
+              {formatCurrency(Math.abs(yearlyDifference))}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-secondary-text">Aumento relativo</p>
+            <p className="text-lg font-medium text-primary">
+              {relativeIncrease.toFixed(1)}%
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-secondary-text">
+              Equivalente {betterOption === "PJ" ? "CLT" : "PJ"}
+            </p>
+            <p className="text-lg font-medium text-primary">
+              {formatCurrency(
+                betterOption === "PJ" ? pjToCLTEquivalent : cltToPJEquivalent
+              )}
+            </p>
+          </div>
+        </div>
+        <FancyCardFooter>
+          <div className="flex justify-center">
+            <ShareButton onShare={onShare} className="self-center" />
+          </div>
+        </FancyCardFooter>
+      </FancyCard>
 
       <ExpandableCard
         title="Custos para o empregador"
