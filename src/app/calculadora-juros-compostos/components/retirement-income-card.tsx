@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ColorTheme,
   FancyCard,
   FancyCardFooter,
   FancyCardTitle,
@@ -15,7 +14,7 @@ interface RetirementIncomeCardProps {
   finalAmount: number;
   tooltipContent: string;
   duration: string;
-  colorTheme: ColorTheme;
+  colorTheme: "emerald" | "blue";
 }
 
 export function RetirementIncomeCard({

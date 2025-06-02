@@ -1,5 +1,6 @@
 "use client";
 
+import { RetirementIncomeSection } from "@/app/calculadora-juros-compostos/components/retirement-income-section";
 import { calculateInvestmentResults } from "@/app/calculadora-juros-compostos/lib";
 import { CalculatorsPageHeader } from "@/components/calculators/calculators-page-header";
 import {
@@ -21,7 +22,6 @@ import {
   ChartLegendContent,
   ChartTooltip,
 } from "@/components/ui/chart";
-import { RetirementIncomeSection } from "@/components/ui/retirement-income-section";
 import { ShareButton } from "@/components/ui/share-button";
 import {
   TableHeader as ShadcnTableHeader,
