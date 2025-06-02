@@ -3,7 +3,15 @@ import { cn } from "@/lib/utils";
 import { Info } from "lucide-react";
 import * as React from "react";
 
-type ColorTheme = "emerald" | "blue" | "purple" | "pink" | "amber" | "indigo";
+type ColorTheme =
+  | "emerald"
+  | "blue"
+  | "purple"
+  | "pink"
+  | "amber"
+  | "indigo"
+  | "orange"
+  | "red";
 
 const themeClasses = {
   emerald: {
@@ -53,6 +61,22 @@ const themeClasses = {
     title: "text-indigo-100",
     borderTop: "border-indigo-500/20",
     dot: "bg-indigo-400",
+  },
+  orange: {
+    background: "bg-gradient-to-br from-orange-500/10 to-orange-600/5",
+    border: "border-orange-500/20",
+    icon: "text-orange-400",
+    title: "text-orange-100",
+    borderTop: "border-orange-500/20",
+    dot: "bg-orange-400",
+  },
+  red: {
+    background: "bg-gradient-to-br from-red-500/10 to-red-600/5",
+    border: "border-red-500/20",
+    icon: "text-red-400",
+    title: "text-red-100",
+    borderTop: "border-red-500/20",
+    dot: "bg-red-400",
   },
 } as const;
 
@@ -108,10 +132,14 @@ interface FancyCardTitleProps
   title: React.ReactNode;
   icon?: React.ReactNode;
   tooltip?: string;
+  titleClassName?: string;
 }
 
 const FancyCardTitle = React.forwardRef<HTMLDivElement, FancyCardTitleProps>(
-  ({ className, title, icon, tooltip, children, ...props }, ref) => {
+  (
+    { className, title, icon, tooltip, children, titleClassName, ...props },
+    ref
+  ) => {
     const { theme } = useFancyCardContext();
 
     const renderRightContent = () => {
@@ -138,7 +166,14 @@ const FancyCardTitle = React.forwardRef<HTMLDivElement, FancyCardTitleProps>(
       >
         <div className="flex items-center gap-2">
           <div className={`w-2 h-2 rounded-full ${theme.dot}`} />
-          <h3 className={`font-semibold text-lg ${theme.title}`}>{title}</h3>
+          <h3
+            className={cn(
+              `font-semibold text-lg ${theme.title}`,
+              titleClassName
+            )}
+          >
+            {title}
+          </h3>
         </div>
         {renderRightContent()}
       </div>

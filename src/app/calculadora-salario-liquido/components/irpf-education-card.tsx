@@ -1,7 +1,12 @@
 "use client";
 
 import { ExpandableCard } from "@/components/ui/expandable-card";
-import { formatCurrency } from "@/lib/utils";
+import {
+  ColorTheme,
+  FancyCard,
+  FancyCardTitle,
+} from "@/components/ui/fancy-card";
+import { cn, formatCurrency } from "@/lib/utils";
 import { IRRF_RANGES } from "@/use-cases/calculator/salary-calculations";
 import NumberFlow from "@number-flow/react";
 import { DollarSign, Landmark, TrendingUp } from "lucide-react";
@@ -67,32 +72,22 @@ export function IrpfEducationCard({
 
   const colorClasses = {
     emerald: {
-      bg: "bg-emerald-500/10",
-      border: "border-emerald-500/30",
       text: "text-emerald-400",
       dot: "bg-emerald-400",
     },
     blue: {
-      bg: "bg-blue-500/10",
-      border: "border-blue-500/30",
       text: "text-blue-400",
       dot: "bg-blue-400",
     },
     amber: {
-      bg: "bg-amber-500/10",
-      border: "border-amber-500/30",
       text: "text-amber-400",
       dot: "bg-amber-400",
     },
     orange: {
-      bg: "bg-orange-500/10",
-      border: "border-orange-500/30",
       text: "text-orange-400",
       dot: "bg-orange-400",
     },
     red: {
-      bg: "bg-red-500/10",
-      border: "border-red-500/30",
       text: "text-red-400",
       dot: "bg-red-400",
     },
@@ -236,83 +231,83 @@ export function IrpfEducationCard({
                   (bracket.amountInBracket / adjustedBase) * 100;
 
                 return (
-                  <div
+                  <FancyCard
                     key={index}
-                    className={`rounded-lg p-3 lg:p-4 border ${theme.bg} ${theme.border}`}
+                    colorTheme={bracket.color as ColorTheme}
+                    className="p-3 lg:p-4 gap-2"
                   >
-                    {/* Header - always visible */}
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <div
-                          className={`w-2 h-2 rounded-full ${theme.dot}`}
-                        ></div>
-                        <span className="text-xs md:text-sm lg:font-medium text-main-text">
+                    <FancyCardTitle
+                      title={
+                        <>
                           {bracket.label}
-                          <span className="hidden sm:inline">
+                          <span className="inline">
                             {" "}
                             - {formatCurrency(bracket.min)} a{" "}
                             {bracket.max === Infinity
                               ? "acima"
                               : formatCurrency(bracket.max)}
                           </span>
-                        </span>
-                      </div>
+                        </>
+                      }
+                      className={cn("text-xs md:text-sm")}
+                    >
                       <span
                         className={`text-xs md:text-sm lg:font-bold ${theme.text}`}
                       >
                         {formatCurrency(bracket.amountInBracket)}
                       </span>
+                    </FancyCardTitle>
+
+                    <div>
+                      <div className="block sm:hidden mb-2">
+                        <span className="text-xs md:text-sm text-tertiary-text">
+                          {formatCurrency(bracket.min)} a{" "}
+                          {bracket.max === Infinity
+                            ? "acima"
+                            : formatCurrency(bracket.max)}
+                        </span>
+                      </div>
+
+                      {bracket.amountInBracket > 0 && (
+                        <>
+                          {/* Progress bar */}
+                          <div className="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div
+                              className={`h-2 rounded-full ${theme.dot}`}
+                              style={{
+                                width: `${Math.min(percentage, 100)}%`,
+                              }}
+                            />
+                          </div>
+
+                          {/* Calculation details - hidden on mobile */}
+                          <div className="hidden sm:flex justify-between text-xs md:text-sm">
+                            <span className="text-tertiary-text">
+                              {bracket.rate > 0
+                                ? `${bracket.amountInBracket.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} × ${(bracket.rate * 100).toFixed(1)}%`
+                                : "Isento de imposto"}
+                            </span>
+                            <span className={`font-medium ${theme.text}`}>
+                              {bracket.rate > 0
+                                ? `= ${formatCurrency(bracket.taxOnBracket)}`
+                                : "R$ 0,00"}
+                            </span>
+                          </div>
+
+                          {/* Mobile: Simple result */}
+                          <div className="block sm:hidden text-center">
+                            <span
+                              className={`text-xs md:text-sm font-medium ${theme.text}`}
+                            >
+                              {bracket.rate > 0
+                                ? `Imposto: ${formatCurrency(bracket.taxOnBracket)}`
+                                : "Isento"}
+                            </span>
+                          </div>
+                        </>
+                      )}
                     </div>
-
-                    {/* Mobile: Simple range display */}
-                    <div className="block sm:hidden mb-2">
-                      <span className="text-xs md:text-sm text-tertiary-text">
-                        {formatCurrency(bracket.min)} a{" "}
-                        {bracket.max === Infinity
-                          ? "acima"
-                          : formatCurrency(bracket.max)}
-                      </span>
-                    </div>
-
-                    {bracket.amountInBracket > 0 && (
-                      <>
-                        {/* Progress bar */}
-                        <div className="w-full bg-slate-700 rounded-full h-2 mb-2">
-                          <div
-                            className={`h-2 rounded-full ${theme.dot}`}
-                            style={{
-                              width: `${Math.min(percentage, 100)}%`,
-                            }}
-                          ></div>
-                        </div>
-
-                        {/* Calculation details - hidden on mobile */}
-                        <div className="hidden sm:flex justify-between text-xs md:text-sm">
-                          <span className="text-tertiary-text">
-                            {bracket.rate > 0
-                              ? `${bracket.amountInBracket.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} × ${(bracket.rate * 100).toFixed(1)}%`
-                              : "Isento de imposto"}
-                          </span>
-                          <span className={`font-medium ${theme.text}`}>
-                            {bracket.rate > 0
-                              ? `= ${formatCurrency(bracket.taxOnBracket)}`
-                              : "R$ 0,00"}
-                          </span>
-                        </div>
-
-                        {/* Mobile: Simple result */}
-                        <div className="block sm:hidden text-center">
-                          <span
-                            className={`text-xs md:text-sm font-medium ${theme.text}`}
-                          >
-                            {bracket.rate > 0
-                              ? `Imposto: ${formatCurrency(bracket.taxOnBracket)}`
-                              : "Isento"}
-                          </span>
-                        </div>
-                      </>
-                    )}
-                  </div>
+                  </FancyCard>
                 );
               })}
             </div>
