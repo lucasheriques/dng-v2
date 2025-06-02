@@ -1,19 +1,9 @@
 "use client";
 
+import { ResponsiveTooltip } from "@/components/ui/responsive-tooltip";
 import { formatCurrency } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
 import { Info } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../../components/ui/popover";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../../../components/ui/tooltip";
 
 interface RetirementIncomeCardProps {
   title: string;
@@ -62,33 +52,17 @@ export function RetirementIncomeCard({
     <div
       className={`relative rounded-lg ${theme.background} border ${theme.border} p-6`}
     >
-      <div className="absolute top-4 right-4">
-        <>
-          <TooltipProvider delayDuration={100}>
-            <Tooltip>
-              <TooltipTrigger className="hidden lg:block">
-                <Info className={`w-5 h-5 ${theme.icon} cursor-help`} />
-              </TooltipTrigger>
-              <TooltipContent className="max-w-[250px]">
-                {tooltipContent}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <Popover>
-            <PopoverTrigger className="block lg:hidden">
-              <Info className={`w-5 h-5 ${theme.icon} cursor-help`} />
-            </PopoverTrigger>
-            <PopoverContent className="text-sm">
-              {tooltipContent}
-            </PopoverContent>
-          </Popover>
-        </>
-      </div>
-
       <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${theme.dot}`}></div>
-          <h3 className={`font-semibold text-lg ${theme.title}`}>{title}</h3>
+        <div className="flex items-center gap-2 justify-between">
+          <div className="flex items-center gap-2">
+            <div className={`w-2 h-2 rounded-full ${theme.dot}`}></div>
+            <h3 className={`font-semibold text-lg ${theme.title}`}>{title}</h3>
+          </div>
+          <ResponsiveTooltip
+            trigger={<Info className={`w-5 h-5 ${theme.icon} cursor-help`} />}
+          >
+            {tooltipContent}
+          </ResponsiveTooltip>
         </div>
 
         <div className="space-y-3">
