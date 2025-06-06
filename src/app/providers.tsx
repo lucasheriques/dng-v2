@@ -37,6 +37,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       person_profiles: "identified_only",
       capture_pageview: false, // Disable automatic pageview capture, as we capture manually
       disable_session_recording: isDev,
+      capture_exceptions: true,
       debug: isDev,
     };
 

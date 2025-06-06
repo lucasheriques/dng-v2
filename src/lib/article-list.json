@@ -31,7 +31,7 @@
     "postDate": "2025-04-23T16:32:41.886Z",
     "title": "Guia 2025: Como virar um Dev na Gringa",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73ea39c5-f255-44a2-b079-a0261fe112fd_1024x1024.png",
-    "views": 4614,
+    "views": 4626,
     "description": "Tudo que você precisa saber para conquistar oportunidades de trabalho em empresas internacionais.",
     "canonical_url": "https://newsletter.nagringa.dev/p/guia-2025-como-virar-um-dev-na-gringa",
     "postTags": [
@@ -50,7 +50,7 @@
     "postDate": "2025-04-02T18:40:05.780Z",
     "title": "A dura realidade das entrevistas para engenheiros de software em 2025",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F48a93622-cd7d-413a-9646-dade068fae93_2291x1665.png",
-    "views": 3301,
+    "views": 3302,
     "description": "O que mudou com a chegada de ferramentas especializadas para ajudar a ter vantagens em processos seletivos?",
     "canonical_url": "https://newsletter.nagringa.dev/p/realidade-das-entrevistas-em-2025",
     "postTags": [
@@ -76,7 +76,7 @@
     "postDate": "2025-03-23T15:19:01.898Z",
     "title": "O processo seletivo para vagas de Engenharia no PostHog",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F750e0229-b133-4db8-bff2-933d0b80cae1_10579x3017.png",
-    "views": 3076,
+    "views": 3078,
     "description": "Tudo o que você precisa saber caso queira se tornar um engenheiro de produto aqui no PostHog.",
     "canonical_url": "https://newsletter.nagringa.dev/p/processo-seletivo-posthog",
     "postTags": [
@@ -109,7 +109,7 @@
     "postDate": "2024-10-01T22:00:58.314Z",
     "title": "O processo seletivo para vagas de engenharia de software na Brex",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd50f9bc7-dcf2-4689-865a-da975a6255c3_2126x799.png",
-    "views": 2867,
+    "views": 2881,
     "description": "Todas as etapas do processo seletivo para vagas de engenharia de software na Brex, o que esperar em cada uma delas, e como se preparar.",
     "canonical_url": "https://newsletter.nagringa.dev/p/processo-seletivo-vagas-engenharia-de-software-na-brex",
     "postTags": [
@@ -135,7 +135,7 @@
     "postDate": "2024-10-14T13:03:25.914Z",
     "title": "Por que trabalhar na Brex",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcefc7411-08d2-4c46-8ce4-1fb430bd4484_910x855.png",
-    "views": 2847,
+    "views": 2849,
     "description": "A Brex é uma fintech fundada por dois brasileiros em 2017. Venha descobrir os meus principais motivos para trabalhar aqui.",
     "canonical_url": "https://newsletter.nagringa.dev/p/por-que-trabalhar-na-brex",
     "postTags": [
@@ -146,6 +146,58 @@
         "slug": "brex",
         "hidden": false
       },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
+  },
+  {
+    "id": 164857469,
+    "slug": "como-usar-ia-pra-acelerar-o-desenvolvimento-de-software",
+    "postDate": "2025-05-31T13:01:51.982Z",
+    "title": "Como usar IA pra acelerar o desenvolvimento de software",
+    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8cf308bb-2795-4a43-9a0c-a64560b7b883_2450x659.png",
+    "views": 2724,
+    "description": "LLMs são a ferramenta que mais aumentou minha produtividade desde o lançamento do Cursor. Hoje, explico todos os casos onde são relevantes pra mim e como exatamente faço para usá-las.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-usar-ia-pra-acelerar-o-desenvolvimento-de-software",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "803cc23f-2985-46d5-93a9-d1164c5856c9",
+        "publication_id": 2617704,
+        "name": "Inteligência Artificial",
+        "slug": "inteligencia-artificial",
+        "hidden": false
+      },
+      {
+        "id": "c4d6009f-82ce-4460-9e6b-14581af0e324",
+        "publication_id": 2617704,
+        "name": "Produtividade",
+        "slug": "produtividade",
+        "hidden": false
+      }
+    ]
+  },
+  {
+    "id": 164140384,
+    "slug": "o-seu-trabalho-nao-fala-por-voce",
+    "postDate": "2025-05-22T13:01:44.220Z",
+    "title": "O seu trabalho não fala por você",
+    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73edee54-b196-4543-bbff-f14a5caaf27c_755x658.png",
+    "views": 2578,
+    "description": "Fazer um excelente trabalho é só metade da equação. A outra metade pode determinar se você será promovido ou incluído no próximo layoff.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/o-seu-trabalho-nao-fala-por-voce",
+    "postTags": [
       {
         "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
         "publication_id": 2617704,
@@ -179,25 +231,6 @@
         "slug": "dev-na-gringa",
         "hidden": false
       },
-      {
-        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
-        "publication_id": 2617704,
-        "name": "Carreira",
-        "slug": "carreira",
-        "hidden": false
-      }
-    ]
-  },
-  {
-    "id": 164140384,
-    "slug": "o-seu-trabalho-nao-fala-por-voce",
-    "postDate": "2025-05-22T13:01:44.220Z",
-    "title": "O seu trabalho não fala por você",
-    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73edee54-b196-4543-bbff-f14a5caaf27c_755x658.png",
-    "views": 2456,
-    "description": "Fazer um excelente trabalho é só metade da equação. A outra metade pode determinar se você será promovido ou incluído no próximo layoff.",
-    "canonical_url": "https://newsletter.nagringa.dev/p/o-seu-trabalho-nao-fala-por-voce",
-    "postTags": [
       {
         "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
         "publication_id": 2617704,
@@ -303,7 +336,7 @@
     "postDate": "2024-06-23T19:07:50.673Z",
     "title": "18 dicas para se destacar como engenheiro de software",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe301354e-7e8c-4866-a8df-c47f13184d45_996x792.png",
-    "views": 2271,
+    "views": 2275,
     "description": "Tudo que eu venho aplicado desde que entrei comecei meu novo emprego 1 ano atrás.",
     "canonical_url": "https://newsletter.nagringa.dev/p/18-dicas-para-se-destacar-na-carreira",
     "postTags": [
@@ -329,7 +362,7 @@
     "postDate": "2025-05-08T13:03:13.976Z",
     "title": "Além do Código: O que Faz um Dev Realmente Excepcional",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6cb3517-9eaf-4ff6-94e0-7eacbcbfb999_1411x744.png",
-    "views": 2204,
+    "views": 2249,
     "description": "O que realmente separa profissionais comuns dos verdadeiros talentos na engenharia de software.",
     "canonical_url": "https://newsletter.nagringa.dev/p/o-que-faz-um-dev-excepcional",
     "postTags": [
@@ -355,7 +388,7 @@
     "postDate": "2025-04-17T13:17:52.848Z",
     "title": "Tempo é seu Recurso Mais Valioso: Um Guia para Engenheiros de Software",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdad4ce6e-0778-4af7-b605-93fd567edc9f_1172x485.png",
-    "views": 2186,
+    "views": 2189,
     "description": "Técnicas práticas para engenheiros equilibrarem responsabilidades crescentes sem perder produtividade",
     "canonical_url": "https://newsletter.nagringa.dev/p/tempo-e-seu-recurso-mais-valioso",
     "postTags": [
@@ -393,7 +426,7 @@
     "postDate": "2024-12-02T21:24:05.440Z",
     "title": "Processos seletivos e ofertas que recebi na gringa desde 2020",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1933927b-c3f7-475d-9fde-83ab50ec07bb_2610x2616.png",
-    "views": 2126,
+    "views": 2138,
     "description": "Como eu consegui vagas, como foram os processos seletivos, e quais ofertas eu recebi ou não recebi. E o que eu aprendi com cada processo.",
     "canonical_url": "https://newsletter.nagringa.dev/p/processos-seletivos-e-ofertas-de-vagas-na-gringa",
     "postTags": [
@@ -419,7 +452,7 @@
     "postDate": "2025-05-02T13:02:10.356Z",
     "title": "Como fazer transição de carreira para TI",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb837feb-0b0d-4e25-a191-492e676a9869_1404x838.png",
-    "views": 2106,
+    "views": 2119,
     "description": "Estratégias reais para quem não pode largar tudo para estudar.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-fazer-transicao-de-carreira-para-ti",
     "postTags": [
@@ -471,7 +504,7 @@
     "postDate": "2025-03-31T21:56:55.312Z",
     "title": "Por que trabalhar no PostHog",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a6f71c8-9325-4cf9-b87d-9bf567209638_2733x1252.png",
-    "views": 1922,
+    "views": 1924,
     "description": "Como é trabalhar em uma empresa onde engenheiros definem o roadmap e falam com clientes? Veja por dentro a cultura única do PostHog.",
     "canonical_url": "https://newsletter.nagringa.dev/p/por-que-trabalhar-no-posthog",
     "postTags": [
@@ -480,6 +513,32 @@
         "publication_id": 2617704,
         "name": "Dev na Gringa",
         "slug": "dev-na-gringa",
+        "hidden": false
+      },
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
+        "hidden": false
+      }
+    ]
+  },
+  {
+    "id": 151551951,
+    "slug": "como-nao-ser-um-dev-de-tutoriais",
+    "postDate": "2024-11-12T13:58:07.388Z",
+    "title": "Como não ser um dev de tutoriais e aprender de verdade",
+    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F465bc8a4-9c30-4ec2-99e6-b891039fa904_1449x865.png",
+    "views": 1911,
+    "description": "Tutoriais e cursos são bons meios de aprendizado. Mas estão longe de ser o suficiente pra você ser um bom engenheiro de software.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/como-nao-ser-um-dev-de-tutoriais",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
         "hidden": false
       },
       {
@@ -518,32 +577,6 @@
     ]
   },
   {
-    "id": 151551951,
-    "slug": "como-nao-ser-um-dev-de-tutoriais",
-    "postDate": "2024-11-12T13:58:07.388Z",
-    "title": "Como não ser um dev de tutoriais e aprender de verdade",
-    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F465bc8a4-9c30-4ec2-99e6-b891039fa904_1449x865.png",
-    "views": 1908,
-    "description": "Tutoriais e cursos são bons meios de aprendizado. Mas estão longe de ser o suficiente pra você ser um bom engenheiro de software.",
-    "canonical_url": "https://newsletter.nagringa.dev/p/como-nao-ser-um-dev-de-tutoriais",
-    "postTags": [
-      {
-        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
-        "publication_id": 2617704,
-        "name": "Engenharia de Software",
-        "slug": "engenharia-de-software",
-        "hidden": false
-      },
-      {
-        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
-        "publication_id": 2617704,
-        "name": "Carreira",
-        "slug": "carreira",
-        "hidden": false
-      }
-    ]
-  },
-  {
     "id": 154126864,
     "slug": "minhas-ferramentas-de-produtividade",
     "postDate": "2025-01-04T13:02:40.661Z",
@@ -558,6 +591,32 @@
         "publication_id": 2617704,
         "name": "Produtividade",
         "slug": "produtividade",
+        "hidden": false
+      }
+    ]
+  },
+  {
+    "id": 163719276,
+    "slug": "um-ano-de-dev-na-gringa",
+    "postDate": "2025-05-16T16:39:50.538Z",
+    "title": "O Que Aprendi em 366 Dias Escrevendo para Devs Brasileiros",
+    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff27a3f12-5176-4558-ba34-c8356efa32d6_1179x1166.png",
+    "views": 1746,
+    "description": "Como criar impacto, mentorar efetivamente e gerenciar seu tempo. Aprendizados de um ano documentando minha jornada internacional.",
+    "canonical_url": "https://newsletter.nagringa.dev/p/um-ano-de-dev-na-gringa",
+    "postTags": [
+      {
+        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
+        "publication_id": 2617704,
+        "name": "Engenharia de Software",
+        "slug": "engenharia-de-software",
+        "hidden": false
+      },
+      {
+        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
+        "publication_id": 2617704,
+        "name": "Dev na Gringa",
+        "slug": "dev-na-gringa",
         "hidden": false
       }
     ]
@@ -582,38 +641,12 @@
     ]
   },
   {
-    "id": 163719276,
-    "slug": "um-ano-de-dev-na-gringa",
-    "postDate": "2025-05-16T16:39:50.538Z",
-    "title": "O Que Aprendi em 366 Dias Escrevendo para Devs Brasileiros",
-    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff27a3f12-5176-4558-ba34-c8356efa32d6_1179x1166.png",
-    "views": 1713,
-    "description": "Como criar impacto, mentorar efetivamente e gerenciar seu tempo. Aprendizados de um ano documentando minha jornada internacional.",
-    "canonical_url": "https://newsletter.nagringa.dev/p/um-ano-de-dev-na-gringa",
-    "postTags": [
-      {
-        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
-        "publication_id": 2617704,
-        "name": "Engenharia de Software",
-        "slug": "engenharia-de-software",
-        "hidden": false
-      },
-      {
-        "id": "60dbac95-b53c-45e8-b199-04cbf2a442ab",
-        "publication_id": 2617704,
-        "name": "Dev na Gringa",
-        "slug": "dev-na-gringa",
-        "hidden": false
-      }
-    ]
-  },
-  {
     "id": 146847859,
     "slug": "dev-na-gringa-contratacao-impostos-hardware",
     "postDate": "2024-07-21T14:44:51.515Z",
     "title": "Dev na Gringa: contratação, impostos, hardware e começando do zero.",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F15d80138-fe09-41c9-9d25-190b246e92df_1600x579.png",
-    "views": 1669,
+    "views": 1676,
     "description": "Como foi a questão burocrática no meu trabalho pra fora desde 2020. E o que eu faria se estivesse começando do zero.",
     "canonical_url": "https://newsletter.nagringa.dev/p/dev-na-gringa-contratacao-impostos-hardware",
     "postTags": [
@@ -639,7 +672,7 @@
     "postDate": "2025-02-04T12:29:11.826Z",
     "title": "Lições de onboarding: 4 dicas que aprendi na minha semana presencial na PostHog",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ab0573c-a262-4bd9-82a6-67740d64ebdf_2912x1632.png",
-    "views": 1620,
+    "views": 1621,
     "description": "O que eu aprendi ao trabalhar 1 semana no escritório, especialmente sobre compartilhar conhecimento. E mais algumas novidades também.",
     "canonical_url": "https://newsletter.nagringa.dev/p/dicas-que-aprendi-no-meu-onboarding-na-posthog",
     "postTags": [
@@ -684,7 +717,7 @@
     "postDate": "2024-11-25T13:01:06.113Z",
     "title": "Como fazer um excelente onboarding em empresas de tecnologia",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F944b2361-4d1b-492b-a958-3d057d2e8c76_1299x940.png",
-    "views": 1583,
+    "views": 1586,
     "description": "Onboarding é o processo que todo novo funcionário faz ao entrar numa empresa. Aprenda como se destacar desde cedo, especialmente como engenheiro de software.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-fazer-um-excelente-onboarding",
     "postTags": [
@@ -755,7 +788,7 @@
     "postDate": "2024-09-17T12:41:53.119Z",
     "title": "O meu template para brag documents",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25cf8c29-cd5d-4418-a0de-724880165691_854x507.png",
-    "views": 1272,
+    "views": 1284,
     "description": "O brag document auxilia com que você se lembre do seu progresso ao longo dos meses, e saiba como impactou na empresa. Ele é essencial para criar um bom pacote de promoção.",
     "canonical_url": "https://newsletter.nagringa.dev/p/o-meu-template-para-brag-documents",
     "postTags": [
@@ -845,7 +878,7 @@
     "postDate": "2024-05-26T15:00:48.806Z",
     "title": "Dev na Gringa: Processos Seletivos e Onde Estudar Para Eles",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9a5f48d-f6d7-423a-95ef-fa70a42aea18_1021x915.png",
-    "views": 1135,
+    "views": 1136,
     "description": "Um resumo sobre as principais etapas em processos seletivos para engenheiros de software. Incluindo devs na gringa.",
     "canonical_url": "https://newsletter.nagringa.dev/p/dev-na-gringa-processos-seletivos",
     "postTags": [
@@ -864,7 +897,7 @@
     "postDate": "2024-11-06T12:27:21.205Z",
     "title": "Designing Data-Intensive Applications: Capítulo 1",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfa711af-3352-46ed-b20b-cd61a927efe5_1086x959.png",
-    "views": 1115,
+    "views": 1122,
     "description": "Os sistemas de software hoje em dia são mais",
     "canonical_url": "https://newsletter.nagringa.dev/p/ddia-capitulo-1",
     "postTags": [
@@ -911,6 +944,25 @@
         "publication_id": 2617704,
         "name": "System Design",
         "slug": "system-design",
+        "hidden": false
+      }
+    ]
+  },
+  {
+    "id": 165360666,
+    "slug": "startups-vs-scaleups-vs-big-techs",
+    "postDate": "2025-06-06T18:21:22.905Z",
+    "title": "Startups vs Scaleups vs Big Techs: minhas percepções",
+    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c6a7e78-a888-4f4f-be6f-e8d4c2c914b2_2048x2048.png",
+    "views": 930,
+    "description": "Trabalhei em empresas de diferentes tamanhos nos últimos 9 anos de carreira. O que cada uma tem de diferente?",
+    "canonical_url": "https://newsletter.nagringa.dev/p/startups-vs-scaleups-vs-big-techs",
+    "postTags": [
+      {
+        "id": "b09d9317-13f5-4af3-8a25-917f86f9184f",
+        "publication_id": 2617704,
+        "name": "Carreira",
+        "slug": "carreira",
         "hidden": false
       }
     ]
@@ -978,7 +1030,7 @@
     "postDate": "2024-09-22T16:57:31.762Z",
     "title": "Dicas para ir bem em entrevistas de live coding",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F522626b1-339f-4fc1-b1af-521a59d7263a_1360x503.png",
-    "views": 684,
+    "views": 687,
     "description": "Já participei de live coding como entrevistador e entrevistado. Hoje, vou falar todos os passos que uso para ter um bom desempenho nessas entrevistas.",
     "canonical_url": "https://newsletter.nagringa.dev/p/dicas-para-entrevistas-de-live-coding",
     "postTags": [
@@ -999,45 +1051,12 @@
     ]
   },
   {
-    "id": 164857469,
-    "slug": "como-usar-ia-pra-acelerar-o-desenvolvimento-de-software",
-    "postDate": "2025-05-31T13:01:51.982Z",
-    "title": "Como usar IA pra acelerar o desenvolvimento de software",
-    "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8cf308bb-2795-4a43-9a0c-a64560b7b883_2450x659.png",
-    "views": 642,
-    "description": "LLMs são a ferramenta que mais aumentou minha produtividade desde o lançamento do Cursor. Hoje, explico todos os casos onde são relevantes pra mim e como exatamente faço para usá-las.",
-    "canonical_url": "https://newsletter.nagringa.dev/p/como-usar-ia-pra-acelerar-o-desenvolvimento-de-software",
-    "postTags": [
-      {
-        "id": "059ddb87-5467-4192-ba97-c27d7cfdc529",
-        "publication_id": 2617704,
-        "name": "Engenharia de Software",
-        "slug": "engenharia-de-software",
-        "hidden": false
-      },
-      {
-        "id": "803cc23f-2985-46d5-93a9-d1164c5856c9",
-        "publication_id": 2617704,
-        "name": "Inteligência Artificial",
-        "slug": "inteligencia-artificial",
-        "hidden": false
-      },
-      {
-        "id": "c4d6009f-82ce-4460-9e6b-14581af0e324",
-        "publication_id": 2617704,
-        "name": "Produtividade",
-        "slug": "produtividade",
-        "hidden": false
-      }
-    ]
-  },
-  {
     "id": 147149700,
     "slug": "como-funciona-a-mentoria",
     "postDate": "2024-07-30T13:00:37.390Z",
     "title": "Como funciona a mentoria do Dev na Gringa",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffe0a039c-b404-4b76-bc23-04be5695783e_1200x883.png",
-    "views": 524,
+    "views": 525,
     "description": "Confira também: a motivação para criar essa newsletter. Dicas para fazer o melhor uso do seu tempo em qualquer mentoria.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-funciona-a-mentoria",
     "postTags": [
@@ -1082,7 +1101,7 @@
     "postDate": "2024-08-04T14:01:33.799Z",
     "title": "Como liderar projetos e reuniões como engenheiro de software",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb97225b4-f03e-4fd9-9813-03b6eb9f5d2c_1032x643.png",
-    "views": 402,
+    "views": 404,
     "description": "Uma das principais habilidades para engenheiros de software. Especialmente os que buscam uma promoção para sênior+.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-liderar-projetos-e-reunioes",
     "postTags": [
@@ -1108,7 +1127,7 @@
     "postDate": "2024-08-13T13:01:38.858Z",
     "title": "O melhor jeito de aprender qualquer habilidade rapidamente",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6981e09c-1e23-496e-9b43-7e3d7cf021d5_1600x1043.png",
-    "views": 391,
+    "views": 392,
     "description": "Aprendendo em público.",
     "canonical_url": "https://newsletter.nagringa.dev/p/melhor-jeito-de-aprender-qualquer-habilidade-rapidamente",
     "postTags": [
@@ -1127,7 +1146,7 @@
     "postDate": "2024-06-30T15:30:56.161Z",
     "title": "Quanto tempo de experiência para se candidatar pra uma vaga internacional? ",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F098fc2d4-a05f-4da6-abd6-eb456f511df9_1396x864.png",
-    "views": 326,
+    "views": 327,
     "description": "E uma pequena surpresa para comemorar nossa marca de 100 assinantes!",
     "canonical_url": "https://newsletter.nagringa.dev/p/experiencia-necessaria-para-vagas-internacionais",
     "postTags": [
@@ -1153,7 +1172,7 @@
     "postDate": "2024-07-09T13:02:43.040Z",
     "title": "Como ter sorte",
     "coverImage": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F498499a4-efd9-414e-b419-cfa46be1a2b8_1185x878.png",
-    "views": 303,
+    "views": 304,
     "description": "É possível aumentar nossa chance em ter sorte? Vamos descobrir.",
     "canonical_url": "https://newsletter.nagringa.dev/p/como-ter-mais-sorte",
     "postTags": [
@@ -1269,7 +1288,7 @@
     "postDate": "2024-10-31T18:55:28.886Z",
     "title": "🎁 Recursos para assinantes pagos",
     "coverImage": null,
-    "views": 179,
+    "views": 181,
     "description": "Aqui você vai encontrar todos os recursos disponíveis para você como assinante.Se você ainda não fez o upgrade, faça para ter acesso aos templates, mentorias e toda a comunidade.",
     "canonical_url": "https://newsletter.nagringa.dev/p/recursos-para-assinantes-pagos",
     "postTags": []
