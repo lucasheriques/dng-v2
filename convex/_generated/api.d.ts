@@ -31,6 +31,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+
 /**
  * A utility for referencing Convex functions in your app's API.
  *
@@ -107,7 +108,7 @@ export declare const components: {
       removeAll: FunctionReference<
         "mutation",
         "internal",
-        { before?: number; name?: string },
+        { batchSize?: number; before?: number; name?: string },
         null
       >;
     };
