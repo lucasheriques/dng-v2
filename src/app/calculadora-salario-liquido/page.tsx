@@ -46,10 +46,9 @@ export async function generateMetadata({
     }
   }
 
-  const title =
-    "Calculadora de Salário Líquido 2025: Calcule Grátis Online | INSS e IRRF";
+  const title = "Calculadora de Salário Líquido CLT 2025";
   const description =
-    "🧮 Calculadora de salário líquido GRÁTIS e atualizada 2025. Calcule seu salário líquido CLT descontando INSS, IRRF, vale-transporte e dependentes. Resultado instantâneo e preciso!";
+    "Calcule o salário líquido CLT a partir dos descontos no salário bruto do INSS, Imposto de Renda e dependentes. Atualizado para 2025.";
 
   return {
     title: title,
